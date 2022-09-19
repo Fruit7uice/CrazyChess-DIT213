@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="" />
+    <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assets/Black_King.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assets/Black_Knight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assets/Black_Pawn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assets/Black_Queen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assets/Black_Rook.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assets/White_Bishop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assets/White_King.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assets/White_Knight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assets/White_Pawn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assets/White_Queen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Assets/White_Rook.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,15 +36,25 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2EyuejUqIXB6vADk83AlTghNNPm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/Assets" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/Assets" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -42,6 +65,8 @@
       <option name="presentableId" value="Default" />
       <updated>1663575098831</updated>
       <workItem from="1663575100201" duration="1271000" />
+      <workItem from="1663580244922" duration="211000" />
+      <workItem from="1663580476951" duration="186000" />
     </task>
     <servers />
   </component>
