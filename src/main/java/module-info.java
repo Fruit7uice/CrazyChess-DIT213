@@ -2,7 +2,8 @@ module MVC {
     requires javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
-    exports MVC.Snap;
+    exports MVC.Menu;
+    exports MVC.controller;
 
 
 }
