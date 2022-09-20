@@ -5,20 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/snap/SnapToGridApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/snap/SnapToGridController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/SnapToGrid.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/snap/SnapToGridApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/snap/SnapToGridApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/snap/SnapToGridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/snap/SnapToGridController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GUIRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/view/GUIRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/SnapToGrid.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/SnapToGrid.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +36,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="openjdk-17" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="2EyoSt3AXtW1YlbcIm0O6iNdN0y" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -49,10 +53,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -61,7 +65,7 @@
       <recent name="D:\Documents\GitHub\CrazyChess-DIT213\src\main\java\MVC\snap" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SnapToGridApp">
+  <component name="RunManager">
     <configuration name="SnapToGridApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MVC.snap.SnapToGridApp" />
       <module name="CrazyChess-DIT213" />
@@ -91,7 +95,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.SnapToGridApp" />
-        <item itemvalue="Application.SnapToGridApp (1)" />
       </list>
     </recent_temporary>
   </component>

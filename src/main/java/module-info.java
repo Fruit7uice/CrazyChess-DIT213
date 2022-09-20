@@ -4,6 +4,7 @@ module MVC {
     requires javafx.controls;
     requires javafx.fxml;
     exports MVC.snap;
+    opens MVC.snap;
 
 
 }

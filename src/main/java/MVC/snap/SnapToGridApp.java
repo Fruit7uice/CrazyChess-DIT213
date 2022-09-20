@@ -1,6 +1,7 @@
 package MVC.snap;
 
 import javafx.application.Application;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +14,7 @@ public class SnapToGridApp extends Application {
     public void start(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            BorderPane root =
+            GridPane root =
                     FXMLLoader.load(getClass().getResource("/SnapToGrid.fxml"));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
