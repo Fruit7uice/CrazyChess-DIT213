@@ -62,7 +62,7 @@ public class SnapToGridController {
     private void initializePieces(int row){
         for (int col = 0; col < columns; col++) {
             Circle c = new Circle();
-            c.setFill(Color.GREEN);
+            c.setFill(Color.GREEN); //TODO make color "Color.TRANSPARENT" when everything is working as intended
             double radius = tileSize / 10.0;
             Piece p = new Piece(row, col, radius, c);
             pieces.add(p);
