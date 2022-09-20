@@ -1,6 +1,9 @@
-module view {
+module MVC {
+
     requires javafx.graphics;
     requires javafx.controls;
-    exports view;
+    requires javafx.fxml;
+    exports MVC.snap;
+
 
 }

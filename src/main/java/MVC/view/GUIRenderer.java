@@ -1,4 +1,4 @@
-package view;
+package MVC.view;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
