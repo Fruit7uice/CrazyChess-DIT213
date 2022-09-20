@@ -1,6 +1,5 @@
-module view {
+module MVC {
     requires javafx.graphics;
     requires javafx.controls;
-    exports view;
-
+    exports MVC.view;
 }
