@@ -1,23 +1,19 @@
 package MVC.view;
 
 import javafx.application.Application;
-import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
 import java.io.File;
-import java.net.URL;
-import java.util.Objects;
 
-public class TestGUI extends Application {
+public class SettingsMenuGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            URL url = new File("src/main/resources/TestGUI.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
+            AnchorPane root = FXMLLoader.load(new File("src/main/resources/SettingsMenuGUI.fxml").toURI().toURL());
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
             root.requestFocus();

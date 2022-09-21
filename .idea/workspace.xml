@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/SettingsMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/view/TestGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/TestGUI.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GUIRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/view/GUIRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/view/TestGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/view/SettingsMenuGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/TestGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/SettingsMenuGUI.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +60,7 @@
       <recent name="MVC" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TestGUI">
+  <component name="RunManager" selected="Application.SettingsMenuGUI">
     <configuration name="GUIRenderer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MVC.view.GUIRenderer" />
       <module name="CrazyChess-DIT213" />
@@ -82,8 +74,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MVC.view.TestGUI" />
+    <configuration name="SettingsMenuGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MVC.view.SettingsMenuGUI" />
       <module name="CrazyChess-DIT213" />
       <extension name="coverage">
         <pattern>
@@ -97,7 +89,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestGUI" />
+        <item itemvalue="Application.SettingsMenuGUI" />
         <item itemvalue="Application.GUIRenderer" />
       </list>
     </recent_temporary>
