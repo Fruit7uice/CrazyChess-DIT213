@@ -5,14 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/MenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/font.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/src/main/resources/chessBackground.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Snap/SnapToGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Menu/mainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test2.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assets/Black_Bishop.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PieceImages/Black_Bishop.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assets/Black_King.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PieceImages/Black_King.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assets/Black_Knight.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PieceImages/Black_Knight.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assets/Black_Pawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PieceImages/Black_Pawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assets/Black_Queen.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PieceImages/Black_Queen.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assets/Black_Rook.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PieceImages/Black_Rook.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assets/White_Bishop.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PieceImages/White_Bishop.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assets/White_King.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PieceImages/White_King.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assets/White_Knight.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PieceImages/White_Knight.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assets/White_Pawn.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PieceImages/White_Pawn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assets/White_Queen.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PieceImages/White_Queen.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assets/White_Rook.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PieceImages/White_Rook.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Menu/mainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Menu/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/src/main/resources/chessBackground.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MenuImages/chessBackground.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,11 +63,25 @@
       <recent name="$PROJECT_DIR$/src/main/java/Assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/MenuImages" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/src/main/resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.mainMenu">
+  <component name="RunManager" selected="Application.MainMenu">
+    <configuration name="MainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MVC.Menu.MainMenu" />
+      <module name="CrazyChess-DIT213" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MVC.Menu.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SnapToGrid" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MVC.controller.Snap.SnapToGrid" />
       <module name="CrazyChess-DIT213" />
@@ -85,23 +108,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="mainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MVC.Menu.mainMenu" />
-      <module name="CrazyChess-DIT213" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="MVC.Menu.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.mainMenu" />
-        <item itemvalue="Application.SnapToGrid (1)" />
+        <item itemvalue="Application.MainMenu" />
         <item itemvalue="Application.SnapToGrid" />
       </list>
     </recent_temporary>

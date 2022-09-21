@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="400.0" fitWidth="612.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@src/main/resources/chessBackground.jpeg" />
+            <Image url="@MenuImages/chessBackground.jpeg" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffedd4b3" height="400.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />

@@ -9,12 +9,12 @@ import javafx.scene.Scene;
 
 import java.util.Objects;
 
-public class mainMenu extends Application {
+public class MainMenu extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
             AnchorPane root =
-             FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/test2.fxml")));
+             FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainMenu.fxml")));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
             root.requestFocus();
