@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/King.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Knight.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Pawn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Queen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Rook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/King.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Pawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Queen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Rook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1663575098831</updated>
       <workItem from="1663575100201" duration="1271000" />
-      <workItem from="1663854402054" duration="296000" />
+      <workItem from="1663854402054" duration="1113000" />
     </task>
     <servers />
   </component>

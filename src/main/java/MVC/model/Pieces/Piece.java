@@ -1,6 +1,6 @@
 package MVC.model.Pieces;
 
-public class Piece {
+public abstract class Piece {
 
     public int xPos;
     public int yPos;
@@ -26,7 +26,7 @@ public class Piece {
         return type;
     }
 
-    public void move(){
+    void move(){
 
     }
 }
