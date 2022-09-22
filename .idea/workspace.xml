@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/resources/DummyFile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/DummyFile.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/King.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Pawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Queen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Rook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -29,6 +33,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectId" id="2F7sL8FriSni35Orvl6cvsib5nY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -58,6 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1663575098831</updated>
       <workItem from="1663575100201" duration="1271000" />
+      <workItem from="1663854402054" duration="3031000" />
     </task>
     <servers />
   </component>
