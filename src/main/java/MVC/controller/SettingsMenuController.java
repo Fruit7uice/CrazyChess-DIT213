@@ -1,17 +1,29 @@
 package MVC.controller;
-
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
+import java.util.Objects;
 
 public class SettingsMenuController {
-    public void backToMenu(ActionEvent e){
-        System.out.println("menu");
-        //TODO make something happen
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    public void backToMenu(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainMenu.fxml")));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
-    public void restartGame(ActionEvent e){
+    public void restartGame(ActionEvent event){
         System.out.println("restart");
         //TODO make something happen
     }
-    public void closeSettingsMenu(ActionEvent e){
+    public void closeSettingsMenu(ActionEvent event){
         System.out.println("close");
         //TODO make something happen
     }
