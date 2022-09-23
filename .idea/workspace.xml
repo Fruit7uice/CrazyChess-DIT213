@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/application/Grid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/application/GridHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Images/chess-dog-justin-paget.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-    </list>
+    <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
