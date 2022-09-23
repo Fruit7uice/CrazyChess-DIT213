@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/SettingsMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/SettingsMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" afterDir="false" />
@@ -34,6 +36,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectId" id="2EyuejUqIXB6vADk83AlTghNNPm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectId" id="2EypmCmgKatdVMqrwmv6mdERzPM" />
   <component name="ProjectId" id="2F7sL8FriSni35Orvl6cvsib5nY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -41,6 +47,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/java/Assets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/MenuImages" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/src/main/resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.MainMenu">
+    <configuration name="MainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MVC.view.MainMenu" />
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -81,6 +108,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SnapToGrid" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MVC.controller.Snap.SnapToGrid" />
+      <module name="CrazyChess-DIT213" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MVC.controller.Snap.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SnapToGrid" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MVC.Snap.SnapToGrid" />
+      <module name="CrazyChess-DIT213" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MVC.Menu.*" />
     <configuration name="SettingsMenuGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MVC.view.SettingsMenuGUI" />
       <module name="CrazyChess-DIT213" />
@@ -96,6 +142,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainMenu" />
+        <item itemvalue="Application.SnapToGrid" />
+      </list>
+    </recent_temporary>
+  </component>
         <item itemvalue="Application.SettingsMenuGUI" />
         <item itemvalue="Application.GUIRenderer" />
       </list>
@@ -115,7 +166,12 @@
       <option name="presentableId" value="Default" />
       <updated>1663575098831</updated>
       <workItem from="1663575100201" duration="1271000" />
-      <workItem from="1663854402054" duration="3031000" />
+      <workItem from="1663580244922" duration="211000" />
+      <workItem from="1663580476951" duration="2629000" />
+      <workItem from="1663595733193" duration="543000" />
+      <workItem from="1663596299962" duration="1771000" />
+      <workItem from="1663660371232" duration="555000" />
+      <workItem from="1663854402054" duration="3031000" /> 
     </task>
     <servers />
   </component>
