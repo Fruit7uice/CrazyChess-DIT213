@@ -1,5 +1,5 @@
 
-package MVC.Menu;
+package MVC.view;
 
 import javafx.application.Application;
 import javafx.scene.layout.AnchorPane;
