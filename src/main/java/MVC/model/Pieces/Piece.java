@@ -1,6 +1,6 @@
 package MVC.model.Pieces;
 
-public abstract class Piece {
+public class Piece {
 
     public int xPos;
     public int yPos;

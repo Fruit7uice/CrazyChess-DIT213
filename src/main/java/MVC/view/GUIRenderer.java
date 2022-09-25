@@ -1,8 +1,11 @@
 package MVC.view;
 
+import MVC.model.Pieces.Piece;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class GUIRenderer extends Application {
@@ -25,4 +28,15 @@ public class GUIRenderer extends Application {
     }
 }
 
-
+/*
+try {
+            AnchorPane root =
+             FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainMenu.fxml")));
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+            root.requestFocus();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+ */
