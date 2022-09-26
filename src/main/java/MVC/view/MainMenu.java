@@ -2,6 +2,7 @@
 package MVC.view;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,7 @@ public class MainMenu extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            AnchorPane root =
+            Parent root =
              FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainMenu.fxml")));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
