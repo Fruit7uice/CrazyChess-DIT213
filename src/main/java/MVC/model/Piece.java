@@ -1,5 +1,7 @@
 package MVC.model;
 
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -8,7 +10,7 @@ public class Piece {
     private double x;
     private double y;
     private double radius;
-    private Circle c;
+    public Circle c;
 
     public Piece(double x, double y, double radius, Circle c) {
         this.x = x;
@@ -31,5 +33,9 @@ public class Piece {
 
     public void draw(){
         c.setRadius(radius);
+    }
+
+    public Dragboard StartDragAndDrop(TransferMode[] any) {
+        return null;
     }
 }

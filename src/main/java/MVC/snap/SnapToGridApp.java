@@ -11,10 +11,10 @@ import java.util.Objects;
 
 public class SnapToGridApp extends Application {
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
         try {
             FXMLLoader loader = new FXMLLoader();
-            GridPane root =
+            BorderPane root =
                     FXMLLoader.load(getClass().getResource("/SnapToGrid.fxml"));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();

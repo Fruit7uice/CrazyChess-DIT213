@@ -1,24 +1,35 @@
 package MVC.model;
 
-import javafx.scene.Node;
+import MVC.snap.BoardController;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 
 public class Tile extends Rectangle {
 
-    private int xPos;
-    private int yPos;
-    private double height;
-    private double width;
+    private Piece piece;
     private Color c;
-    /*private Rectangle r;*/
 
+
+    public boolean hasPiece(){
+        return piece != null;
+    }
+
+    public Piece getPiece(){
+        return piece;
+    }
+
+    public void setPiece(Piece piece){
+        this.piece = piece;
+    }
 
     public Tile(int x, int y, Color c){
-        this.xPos = x;
-        this.yPos = y;
-        this.c = c;
+        setWidth(BoardController.tileSize);
+        setHeight(BoardController.tileSize);
+
+        relocate(x * BoardController.tileSize, y * BoardController.tileSize);
+
+        setFill(c);
     }
 
 }
