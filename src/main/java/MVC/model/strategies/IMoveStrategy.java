@@ -1,4 +1,4 @@
-package model;
+package MVC.model.strategies;
 
 /**
  * Interface for strategies of movements
