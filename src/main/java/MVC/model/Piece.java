@@ -4,38 +4,45 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import static MVC.snap.BoardController.tileSize;
 
-public class Piece {
+public class Piece extends Rectangle {
 
-    private double x;
-    private double y;
-    private double radius;
-    public Circle c;
+    private double oldX, oldY;
+    public PieceType type;
 
-    public Piece(double x, double y, double radius, Circle c) {
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-        this.c = c;
+
+    public Piece(PieceType type, double x, double y) {
+        this.type = type;
+
+        setHeight(tileSize);
+        setWidth(tileSize);
+        setFill(Color.GREEN); //TODO make transparent when done.
+        relocate(x * tileSize, y * tileSize);
+
     }
 
-    public void setY(double y){
-        this.y = y;
+    public PieceType getType(){
+        return this.type;
     }
 
-    public void setX(double x){
-        this.x = x;
+    public void move(double x, double y) {
+        oldX = x * tileSize;
+        oldY = y * tileSize;
+        this.relocate(oldX, oldY);
+
     }
 
-    public void setColor(Color color){
-        c.setFill(color);
+    public void abortMove(){
+        relocate(oldX, oldY);
     }
 
-    public void draw(){
-        c.setRadius(radius);
-    }
+    public void draw(double x, double y) {
+        setWidth(tileSize);
+        setHeight(tileSize);
+        relocate(x / tileSize, y / tileSize);
 
-    public Dragboard StartDragAndDrop(TransferMode[] any) {
-        return null;
+
     }
 }

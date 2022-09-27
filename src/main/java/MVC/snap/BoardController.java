@@ -1,37 +1,41 @@
 package MVC.snap;
 
 import MVC.model.Piece;
+import MVC.model.PieceType;
 import MVC.model.Tile;
 import javafx.application.Application;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.input.*;
-import javafx.scene.layout.GridPane;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.event.EventDispatcher;
 import javafx.scene.*;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
+import static MVC.model.PieceType.*;
 
 public class BoardController extends Application {
 
     @FXML
     Pane pane;
 
+    PieceType[] wTypeList = {WROOK,WKNIGHT,WBISHOP,WQUEEN,WKING,WBISHOP,WKNIGHT,WROOK,WPAWN,WPAWN,WPAWN,WPAWN,WPAWN,WPAWN,WPAWN,WPAWN};
+    PieceType[] bTypeList = {BROOK,BKNIGHT,BBISHOP,BQUEEN,BKING,BBISHOP,BKNIGHT,BROOK,BPAWN,BPAWN,BPAWN,BPAWN,BPAWN,BPAWN,BPAWN,BPAWN};
+
+
     public static final int tileSize = 100;
     public static final int rows = 8;
     public static final int columns = 8;
+    private MoveHandler movehandler;
+    private Tile[][] board = new Tile[rows][columns];
+
+
 
      Group tileGroup = new Group();
      Group pieceGroup = new Group();
 
+
      private Parent createContent() {
+         movehandler = new MoveHandler(this);
          Pane root = new Pane();
          root.setPrefSize(rows * tileSize, columns * tileSize);
          root.getChildren().addAll(tileGroup, pieceGroup);
@@ -40,15 +44,26 @@ public class BoardController extends Application {
              for (int x = 0; x < columns; x++) {
                  Tile tile;
                  if ((x + y) % 2 == 0) {
-                     tile = new Tile(x, y, Color.BLACK);
+                     tile = new Tile(x, y, Color.rgb(248, 226, 184));
                  } else {
-                     tile = new Tile(x, y, Color.WHITE);
+                     tile = new Tile(x, y, Color.rgb(65, 47, 44));
                  }
+                 tile.setOnDragOver(event -> movehandler.dragOver(event, tile));
+                 board[x][y] = tile;
                  tileGroup.getChildren().add(tile);
 
 
              }
          }
+             for(int i = 0; i < 2; i++){
+                 initializePieces(i, bTypeList);
+             }
+             for (int i = rows-1; i > rows-3; i--){
+                 initializePieces(i, wTypeList);
+             }
+
+
+
          return root;
      }
 
@@ -64,26 +79,11 @@ public class BoardController extends Application {
         launch(args);
     }
 
-
-
-    @FXML
-    public void initializeBoard(){
-
-
-
-
-
-
-
-    }
-
-
-
  /*   for(int i = 0; i < 2; i++){
-        initializePieces(i);
+        initializePieces(i, bTypeList);
     }
     for (int i = rows-1; i > rows-3; i--){
-        initializePieces(i);
+        initializePieces(i, wTypeList);
     }
 
     }*/
@@ -94,23 +94,18 @@ public class BoardController extends Application {
      * Puts a piece on each tile on the given row
      * @param row the given row for the function
      */
-    private void initializePieces(int row){
+    private void initializePieces(int row, PieceType[] typelist){
+        int index = 0;
         for (int col = 0; col < columns; col++) {
-            Circle c = new Circle();
-            c.setFill(Color.GREEN); //TODO make color "Color.TRANSPARENT" when everything is working as intended
-            double radius = tileSize / 10.0;
-            Piece p = new Piece(row, col, radius, c);
+            Piece p = new Piece(typelist[index], col, row);
+            index++;
+            pieceGroup.getChildren().add(p);
 
+            p.setOnMousePressed(event -> movehandler.pressed(event, p));
+            p.setOnDragDetected(event -> movehandler.dragDetected(event, p));
+            p.setOnDragDone(event -> movehandler.dragComplete(event, p));
+            p.setOnMouseReleased(event -> movehandler.released(event, p));
 
-            c.setOnMousePressed(event -> EventHandler.pressed(event, p));
-            c.setOnDragDetected(event -> EventHandler.dragDetected(event, p));
-            c.setOnDragDone(event -> EventHandler.dragComplete(event, p));
-            c.setOnMouseReleased(event -> EventHandler.released(event, p));
-
-
-            GridPane.setHalignment(c, HPos.CENTER);
-
-            p.draw();
         }
 
     }

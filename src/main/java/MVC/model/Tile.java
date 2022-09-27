@@ -4,6 +4,8 @@ import MVC.snap.BoardController;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import static MVC.snap.BoardController.tileSize;
+
 
 public class Tile extends Rectangle {
 
@@ -24,10 +26,10 @@ public class Tile extends Rectangle {
     }
 
     public Tile(int x, int y, Color c){
-        setWidth(BoardController.tileSize);
-        setHeight(BoardController.tileSize);
+        setWidth(tileSize);
+        setHeight(tileSize);
 
-        relocate(x * BoardController.tileSize, y * BoardController.tileSize);
+        relocate(x * tileSize, y * tileSize);
 
         setFill(c);
     }
