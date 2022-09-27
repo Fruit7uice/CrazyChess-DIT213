@@ -26,7 +26,7 @@ public class MoveHandler {
 
     public void dragDetected(MouseEvent event, Piece p) {
         //TODO make piece follow mouse
-        
+
 
 
     }
