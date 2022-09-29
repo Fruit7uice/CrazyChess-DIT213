@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="Changes to Piece and SnapToGridController, eventhandler created, needs functions, board drawn, pieces drawn (as circles) on board">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/PieceType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/PieceType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/snap/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/snap/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/snap/EventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/snap/MoveHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/snap/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/BoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/snap/MoveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/MoveHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/snap/SnapToGridApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/view/GUIRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/view/GUIRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/SnapToGrid.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +48,7 @@
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
-        <option name="jdkForImporter" value="openjdk-17" />
+        <option name="jdkForImporter" value="18" />
       </MavenImportingSettings>
     </option>
   </component>
@@ -63,18 +69,37 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\David\Documents\GitHub\CrazyChess-DIT213\src\main\java\MVC" />
       <recent name="D:\Documents\GitHub\CrazyChess-DIT213\src\main\resources" />
       <recent name="D:\Documents\GitHub\CrazyChess-DIT213\src\main" />
       <recent name="D:\Documents\GitHub\CrazyChess-DIT213\src\main\java\MVC\snap" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="MVC.controller" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.BoardController">
     <configuration name="BoardController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MVC.snap.BoardController" />
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-19" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="MVC.controller.BoardController" />
       <module name="CrazyChess-DIT213" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="MVC.snap.*" />
+          <option name="PATTERN" value="MVC.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SnapToGridApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MVC.snap.SnapToGridApp" />
+      <module name="CrazyChess-DIT213" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MVC.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -95,19 +120,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SnapToGridApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MVC.snap.SnapToGridApp" />
-      <module name="CrazyChess-DIT213" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="MVC.snap.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <list>
+      <item itemvalue="Application.BoardController" />
+      <item itemvalue="Application.SnapToGridApp" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.BoardController" />
@@ -161,9 +177,9 @@
           <option name="timeStamp" value="1" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/MVC/snap/MoveHandler.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/MVC/controller/MoveHandler.java</url>
           <line>26</line>
-          <properties class="MVC.snap.MoveHandler" method="dragDetected">
+          <properties class="MVC.MoveHandler">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="4" />

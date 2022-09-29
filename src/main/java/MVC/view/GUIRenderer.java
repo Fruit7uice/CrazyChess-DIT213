@@ -5,20 +5,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class GUIRenderer extends Application {
+public class GUIRenderer {
 
-
-    // ****** A TEST PROGRAM TO MAKE SURE IT WORKS ******
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("My First JavaFX App");
-
-        Label label = new Label("Hello World, JavaFX !");
-        Scene scene = new Scene(label, 400, 200);
-        primaryStage.setScene(scene);
-
-        primaryStage.show();
-    }
+/*
+    public void drawTile(Tile tile, int x, int y, Color c, int size){
+        tile.setWidth(size);
+        tile.setHeight(size);
+        tile.setFill(c);
+        tile.relocate(x * size, y * size);
+    }*/
 
     public static void main(String[] args) {
         Application.launch(args);

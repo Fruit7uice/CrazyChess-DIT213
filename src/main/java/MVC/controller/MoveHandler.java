@@ -1,13 +1,12 @@
-package MVC.snap;
+package MVC.controller;
 
-import MVC.model.Board;
+import MVC.controller.BoardController;
 import MVC.model.Piece;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.input.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.*;
 import javafx.scene.shape.Rectangle;
-import static MVC.snap.BoardController.tileSize;
+import static MVC.controller.BoardController.tileSize;
 
 public class MoveHandler {
 
@@ -21,12 +20,15 @@ public class MoveHandler {
     }
 
     public void pressed(MouseEvent event, Piece p) {
-
+        p.setFill(Color.PINK);
     }
 
     public void dragDetected(MouseEvent event, Piece p) {
         //TODO make piece follow mouse
-
+        double x = event.getX();
+        double y = event.getY();
+        p.move(x, y);
+        controller.drawPiece(p, x, y);
 
 
     }
@@ -46,7 +48,7 @@ public class MoveHandler {
         int newY = (int) Math.floor(event.getSceneY() / tileSize);
         if(tryMove(p, newX, newY)) {
             p.move(newX, newY);
-            p.setFill(Color.BLUE);
+            p.setFill(Color.BLUE); // TODO remove this
             event.consume();
         }else{
             p.abortMove();
@@ -75,4 +77,5 @@ public class MoveHandler {
 
         }
     }
+
 }

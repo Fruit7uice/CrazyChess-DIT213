@@ -1,11 +1,8 @@
 package MVC.model;
 
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import static MVC.snap.BoardController.tileSize;
+import static MVC.controller.BoardController.tileSize;
 
 public class Piece extends Rectangle {
 
@@ -41,7 +38,7 @@ public class Piece extends Rectangle {
     public void draw(double x, double y) {
         setWidth(tileSize);
         setHeight(tileSize);
-        relocate(x / tileSize, y / tileSize);
+        relocate(x - tileSize/2, y - tileSize/2);
 
 
     }

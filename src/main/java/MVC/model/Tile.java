@@ -1,10 +1,9 @@
 package MVC.model;
 
-import MVC.snap.BoardController;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import static MVC.snap.BoardController.tileSize;
+import static MVC.controller.BoardController.tileSize;
 
 
 public class Tile extends Rectangle {

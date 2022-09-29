@@ -1,4 +1,4 @@
-package MVC.controller;
+package MVC.model;
 
 public class Game {
 
