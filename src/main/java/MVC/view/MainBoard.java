@@ -7,19 +7,24 @@ import java.util.ArrayList;
 public class MainBoard {
     public static void main(String[] args) {
 
+        BoardGUI gui = new BoardGUI();
+        gui.startGUI();
 
-        Board board = new Board(new ArrayList<>());  // New Board(logic)
-        BoardGUI gui = new BoardGUI(); // New GUI // assign model var in gui
-        BoardController controller = new BoardController(); // New Controller with connection to Gui
-        controller.board = board;
-        controller.boardGUI = gui;
+        //Board board = new Board(gui);
 
-        gui.initializeCriticalVar(board, controller); // assigns controller and model in gui.
+        //BoardController controller = new BoardController(gui, board);
 
 
+        //board.addObserver(gui);
 
-        System.out.println(gui.boardController);
-        gui.startGUI(); // Start
+        //board.notify(gui);
+
+
+
+        //controller.board = board;
+        //controller.boardGUI = gui;
+
+
         // initialize Chess board tiles
         // initialize chess pieces.
 

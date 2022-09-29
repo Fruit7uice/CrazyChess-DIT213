@@ -5,103 +5,117 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 
-
-public class BoardGUI extends Application {
+public class BoardGUI extends Application implements Observer {
     public static int WINDOW_WIDTH = 800;
     public static int WINDOW_HEIGHT = 800;
 
-    public static int BOARD_SIZE = 800;
+    private Pane boardPane;
+    private BoardController controller;
 
-    private int squareSize = BOARD_SIZE/8;
-    public Pane boardPane;
+    private Tile[][] boardLayout = new Tile[8][8];
 
-    public Board board;
-    public BoardController boardController;
+    private DummyPiece[][] pieceLayout;
 
-    public ArrayList<DummyPiece> pieces;
 
-    public void initializeBoardGrid(){
-        // Create grid with rectangles:
-        int counter = 0;
-        Color dark = Color.rgb(65, 47, 44);  //Lighter Color
-        Color light = Color.rgb(248, 226, 184); // Darker Color
+    public void startGUI(){ launch(); }
 
-        for (int i = 0; i < WINDOW_WIDTH; i += (WINDOW_WIDTH/8)) {
-            counter++;
-            for (int j = 0; j < WINDOW_HEIGHT; j += (WINDOW_HEIGHT/8)) {
-                counter++;
-                Rectangle rect = new Rectangle(i, j, squareSize, squareSize);
-                Color tile  = (counter % 2 == 0)? light: dark;
-                rect.setFill(tile);
-                rect.setStroke(dark);
-                boardPane.getChildren().add(rect);
+    @Override
+    public void start(Stage stage) throws Exception {
+        this.controller = new BoardController(this);
+        System.out.println(boardLayout);
+        System.out.println("Start controller: " + controller);
+        //initializeVariables(); // 1. Initializes a pane
+        this.boardPane = new Pane();
+        initBoard(); // Adds Tile layout to pane
+        initPieces(); // Adds Pieces layout to pane
+        drawBoard(); // Draws the board layout Graphically
+        drawPieces(); // Draws the piece layout Graphically
+        stage.setTitle("CrazyChess");
+
+        Scene scene = new Scene(boardPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void setController(BoardController controller) {
+        this.controller = controller;
+    }
+
+    private void initBoard() {
+        //Loops through the matrix and adds all tiles to pane
+        Tile[][] layout = controller.board.getCurrentBoardLayout();
+
+        for (int i = 0; i < layout.length; i++) {
+            for (int j = 0; j < layout[i].length; j++) {
+                //System.out.println("Tile: " + layout[i][j]);
+                boardPane.getChildren().add(layout[i][j]); //Adds tile at i and j
             }
         }
-        // -------------------------------------
     }
 
+    private void initPieces() {
+        //Loops through the matrix and adds all tiles to pane
+        DummyPiece[][] layout = pieceLayout;
 
-    public void startGUI(){
-        Application.launch();
+        for (int i = 0; i < layout.length; i++) {
+            for (int j = 0; j < layout[i].length; j++) {
+                //System.out.println("Tile: " + layout[i][j]);
+                if (layout[i][j] != null){
+                    boardPane.getChildren().add(layout[i][j].rect); //Adds tile at i and j
+                }
+
+            }
+        }
     }
 
+    private void drawPieces() {
+        //------INITIALIZE DUMMY PIECE ---------
+        for (int i = 0; i < pieceLayout.length; i++) {
+            for (int j = 0; j < pieceLayout[i].length; j++) {
+                DummyPiece dp = pieceLayout[i][j];
+                if (dp != null){
+                    drawPiece(dp);
+                    System.out.println("Drawing pieces.");
+                }
 
-
-    private void initializeVariables() {
-        this.boardPane = new Pane();
-        this.pieces = new ArrayList<>();
-        //boardController = new BoardController();
-        //System.out.println("Controller has been initialized");
-        //System.out.println(boardController);
-
+            }
+        }
+        //--------------------------------------
     }
+
+    private void drawBoard() {
+        //Board board = new Board();
+        //Tile[][] boardLayout = board.getCurrentBoardLayout();
+        System.out.println("Drawing board...");
+        for (int i = 0; i < boardLayout.length; i++) {
+            for (int j = 0; j < boardLayout[i].length; j++) {
+                Tile tile = boardLayout[i][j];
+                tile.setFill(tile.getColor());
+                tile.setStroke(Color.BLACK);
+                tile.setX(tile.getX());
+                tile.setY(tile.getY());
+            }
+        }
+    }
+
 
     public void drawPiece(DummyPiece p){
+        p.rect.setFill(Color.GREEN);
         p.rect.setWidth(p.width);
         p.rect.setHeight(p.height);
         p.rect.setX(p.x);
         p.rect.setY(p.y);
     }
 
-
     @Override
-    public void start(Stage stage) throws Exception {
-        initializeVariables();
-        initializeBoardGrid();
-
-        stage.setTitle("CrazyChess");
-
-        //------INITIALIZE DUMMY PIECE ---------
-
-        for (int i = 0; i < 2; i++) {
-            Rectangle rect = new Rectangle();
-            rect.setFill(Color.GREEN);
-            int x = squareSize * i;
-            int y = squareSize * i;
-            DummyPiece dp = new DummyPiece(x, y, rect, squareSize, squareSize);
-            pieces.add(dp);
-            // Adding mouse event functionality
-            rect.setOnMousePressed(event -> new BoardController().pressed(event, dp));
-            rect.setOnMouseDragged(event -> new BoardController().dragged(event, dp));
-            rect.setOnMouseReleased(event -> new BoardController().released(event, dp));
-
-            boardPane.getChildren().add(rect);
-            drawPiece(dp);
-        }
-        //--------------------------------------
-        Scene scene = new Scene(boardPane, WINDOW_WIDTH, WINDOW_HEIGHT);
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
-    public void initializeCriticalVar(Board board, BoardController controller) {
-        this.board = board;
-        this.boardController = controller;
+    public void update(Tile[][] boardState, DummyPiece[][] pieceLayout) {
+        //Board board = new Board();
+        this.boardLayout = boardState;
+        this.pieceLayout = pieceLayout;
+        drawBoard();
+        drawPieces();
     }
 }

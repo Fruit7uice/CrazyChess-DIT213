@@ -1,19 +1,22 @@
 package MVC.model.Pieces;
 
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+
+import java.net.URL;
 
 public class DummyPiece {
     public double x;
     public double y;
 
-
     public Rectangle rect;
+    public Image image;
     public int width;
     public int height;
 
     public double offset = width/2;
 
-    public DummyPiece(int x, int y, Rectangle rect, int width, int height) {
+    public DummyPiece(int x, int y, int width, int height,  Rectangle rect) {
         this.x = x;
         this.y = y;
         this.rect = rect;
