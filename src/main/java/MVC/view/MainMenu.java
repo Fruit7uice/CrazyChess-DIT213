@@ -4,6 +4,7 @@ package MVC.view;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +20,7 @@ public class MainMenu extends Application {
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
             root.requestFocus();
+            
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
