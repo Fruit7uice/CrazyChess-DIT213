@@ -35,7 +35,7 @@ public class BoardController {
     public void released(MouseEvent event, DummyPiece dp){
         System.out.println(dp.getX());
         snapToGrid(event, dp);
-        dp.rect.setFill(Color.GREEN);
+        new BoardGUI().drawPiece(dp);
     }
 
     public void snapToGrid(MouseEvent event, DummyPiece dp){
@@ -46,10 +46,7 @@ public class BoardController {
         dp.setY(newY*100);
         dp.rect.setFill(Color.GREEN);
         System.out.println(dp.getX());
-        new BoardGUI().drawPiece(dp);
     }
 
-    public void initController() {
 
-    }
 }
