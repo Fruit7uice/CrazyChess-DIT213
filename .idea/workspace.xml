@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="Changes to Piece and SnapToGridController, eventhandler created, needs functions, board drawn, pieces drawn (as circles) on board">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/MoveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/MoveHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/view/GUIRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/view/GUIRenderer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

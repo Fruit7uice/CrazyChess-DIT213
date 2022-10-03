@@ -29,12 +29,11 @@ public class Tile extends Rectangle {
     }
 
     public Tile(int x, int y, Color c){
-        setWidth(tileSize);
+        setWidth(tileSize);//TODO move these three to a draw class
         setHeight(tileSize);
+        setFill(c);
 
         relocate(x * tileSize, y * tileSize);
-
-        setFill(c);
     }
 
 }

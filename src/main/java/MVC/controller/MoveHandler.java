@@ -22,8 +22,8 @@ public class MoveHandler {
     public void pressed(MouseEvent event, Piece p) {
         p.setFill(Color.PINK);
         System.out.println(p.getType().toString());
-        initX = (int) Math.floor(event.getSceneX());
-        initY = (int) Math.floor(event.getSceneY());
+        initX = (int) Math.floor(event.getSceneX() / tileSize);
+        initY = (int) Math.floor(event.getSceneY() / tileSize);
     }
 
     public void dragDetected(MouseEvent event, Piece p) {
