@@ -51,12 +51,16 @@ public class BoardController extends Application {
                  tileGroup.getChildren().add(tile);
              }
          }
-             for(int i = 0; i < 2; i++){
-                 initializePieces(i, bTypeList);
-             }
-             for (int i = rows-1; i > rows-3; i--){
-                 initializePieces(i, wTypeList);
-             }
+
+         // Place major black pieces
+         initializePieces(0, bTypeList, 0);
+         // Place black pawns
+         initializePieces(1, bTypeList, 8);
+         // Place major white pieces
+         initializePieces(rows-1, wTypeList, 0);
+         // Place white pawns
+         initializePieces(rows-2, wTypeList, 8);
+
          return root;
      }
 
@@ -76,12 +80,13 @@ public class BoardController extends Application {
      * Puts a piece on each tile on the given row
      * @param row the given row for the function
      */
-    private void initializePieces(int row, PieceType[] typelist){
-        int index = 0;
+    private void initializePieces(int row, PieceType[] typelist, int index){
+
         for (int col = 0; col < columns; col++) {
             Piece p = new Piece(typelist[index], col, row);
             index++;
             pieceGroup.getChildren().add(p);
+            board[row][col].setPiece(p);
 
             p.setOnMousePressed(event -> movehandler.pressed(event, p));
             p.setOnMouseDragged(event -> movehandler.dragDetected(event, p));
@@ -95,5 +100,14 @@ public class BoardController extends Application {
     // TODO move this function to a draw class?
     public void drawPiece(Piece p, double x, double y) {
         p.draw(x, y);
+    }
+
+    public void setPiece(Piece p, int x,int y){
+        board[x][y].setPiece(p);
+
+    }
+
+    public void removePiece(int x, int y){
+        board[x][y].removePiece();
     }
 }

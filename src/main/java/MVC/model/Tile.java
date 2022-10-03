@@ -24,6 +24,10 @@ public class Tile extends Rectangle {
         this.piece = piece;
     }
 
+    public void removePiece(){
+        this.piece = null;
+    }
+
     public Tile(int x, int y, Color c){
         setWidth(tileSize);
         setHeight(tileSize);

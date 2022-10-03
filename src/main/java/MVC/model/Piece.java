@@ -7,11 +7,14 @@ import static MVC.controller.BoardController.tileSize;
 public class Piece extends Rectangle {
 
     private double oldX, oldY;
+    private double xIndex, yIndex;
     public PieceType type;
 
 
     public Piece(PieceType type, double x, double y) {
         this.type = type;
+        this.xIndex = x;
+        this.yIndex = y;
 
         setHeight(tileSize);
         setWidth(tileSize);
@@ -28,7 +31,17 @@ public class Piece extends Rectangle {
         oldX = x * tileSize;
         oldY = y * tileSize;
         this.relocate(oldX, oldY);
+        xIndex = x / tileSize;
+        yIndex = y / tileSize;
 
+    }
+
+    public double getxIndex(){
+        return xIndex;
+    }
+
+    public double getyIndex(){
+        return yIndex;
     }
 
     public void abortMove(){

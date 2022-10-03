@@ -21,12 +21,15 @@ public class MoveHandler {
 
     public void pressed(MouseEvent event, Piece p) {
         p.setFill(Color.PINK);
+        System.out.println(p.getType().toString());
+        initX = (int) Math.floor(event.getSceneX());
+        initY = (int) Math.floor(event.getSceneY());
     }
 
     public void dragDetected(MouseEvent event, Piece p) {
         //TODO make piece follow mouse
-        double x = event.getX();
-        double y = event.getY();
+        double x = event.getSceneX();
+        double y = event.getSceneY();
         p.move(x, y);
         controller.drawPiece(p, x, y);
 
@@ -36,6 +39,7 @@ public class MoveHandler {
     public void released(MouseEvent event, Piece p) {
             snapToGrid(event, p);
             event.consume();
+
     }
 
     private static boolean tryMove(Piece p, double x,double y) {
@@ -48,7 +52,9 @@ public class MoveHandler {
         int newY = (int) Math.floor(event.getSceneY() / tileSize);
         if(tryMove(p, newX, newY)) {
             p.move(newX, newY);
-            p.setFill(Color.BLUE); // TODO remove this
+            p.setFill(Color.BLUE);
+            controller.setPiece(p, newX, newY);
+            controller.removePiece(initX, initY);// TODO remove this
             event.consume();
         }else{
             p.abortMove();
