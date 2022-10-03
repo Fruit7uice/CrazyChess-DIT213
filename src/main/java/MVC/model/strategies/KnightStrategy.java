@@ -1,5 +1,9 @@
 package MVC.model.strategies;
 
+/**
+ * Movement strategy for the piece knight.
+ * @author Joel Leiditz Thorsson
+ */
 public class KnightStrategy implements IMoveStrategy {
 
     @Override

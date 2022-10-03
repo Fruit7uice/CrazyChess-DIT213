@@ -1,5 +1,12 @@
 package MVC.model.strategies;
 
+/**
+ * Movement strategy for the piece pawn. The boolean hasMoved might
+ * be moved to another class later. Before it has been moved the pawn
+ * is able to move two tiles forward
+ *
+ * @author Joel Leiditz Thorsson
+ */
 public class PawnStrategy implements IMoveStrategy{
     private boolean hasMoved = false; // not finished, move logic to another class
 
