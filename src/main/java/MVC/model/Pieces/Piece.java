@@ -1,5 +1,7 @@
 package MVC.model.Pieces;
 
+import MVC.model.DummyTile;
+
 public abstract class Piece {
     public int xPos;
     public int yPos;
@@ -33,6 +35,10 @@ public abstract class Piece {
     public String getType() {
         return type;
     }
+    public abstract boolean legalMove(int newX, int newY);
+    public abstract boolean isOccupied(DummyTile dummyTile);
+    public abstract boolean isOccupiedByEnemy(DummyTile dummyTile); // implement here instead of in subclasses?
+    public abstract void killEnemyPiece (); // implement here instead of in subclasses?
 
     public boolean isPlayer1() {
         return isPlayer1;

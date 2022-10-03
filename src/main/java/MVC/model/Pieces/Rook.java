@@ -13,8 +13,8 @@ public class Rook extends Piece{
     }
 
     /**
-     * method for retriving the type of the piece
-     * @return
+     * method for retrieving the type of the piece
+     * @return the type of the piece
      */
     @Override
     public String getType(){
@@ -23,8 +23,8 @@ public class Rook extends Piece{
 
     /**
      * updates the position of a piece
-     * @param newX
-     * @param newY
+     * @param newX the desired x position
+     * @param newY the desired y position
      */
     @Override
     public void move(int newX, int newY){
@@ -33,9 +33,16 @@ public class Rook extends Piece{
             yPos = newY;
         }
     }
+
+    /**
+     * returns a boolean if a move is legal or not
+     * @param newX the desired x position
+     * @param newY the desired y position
+     * @return returns a boolean if a move is legal or not
+     */
     public boolean legalMove(int newX, int newY){
         if (newX != xPos || newY != yPos){// checks if we have tried to move
-            if (horizontalStrategy.move(xPos, yPos, newX, newY) ^ horizontalStrategy.move(xPos, yPos, newX, newY)) { //makes sure the strategy allows uss to move
+            if (horizontalStrategy.move(xPos, yPos, newX, newY) ^ verticalStrategy.move(xPos, yPos, newX, newY)) { //makes sure the strategy allows uss to move
                 if (!isOccupied(dummyTile)){ //is the tile not occupied
                     return true;
                 } else { // tile is occupied
@@ -53,19 +60,26 @@ public class Rook extends Piece{
         return false;
     }
 
+    /**
+     * @param dummyTile the tile that the piece wants to move to
+     * @return returns a boolean if a tile is occupied or not
+     */
     public boolean isOccupied(DummyTile dummyTile){
-           if(dummyTile.getIsOccupied()){
-               return true;
-           }
-           return false;
-        }
+        return dummyTile.getIsOccupied();
+    }
+
+    /**
+     * @param dummyTile the tile that the piece wants to move to
+     * @return returns a boolean if the piece on a tile is occupied by an enemy to this piece
+     */
     public boolean isOccupiedByEnemy(DummyTile dummyTile){
         boolean piecePlayer1 = dummyTile.getIsPlayer1();
-        if(piecePlayer1 == this.isPlayer1()){
-            return false;
-        }
-        return true;
+        return piecePlayer1 != this.isPlayer1();
     }
+
+    /**
+     * removes an enemy piece from the board when it's killed
+     */
     public void killEnemyPiece (){
 
     }
