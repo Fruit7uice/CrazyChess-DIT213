@@ -28,11 +28,7 @@ public class Tile extends Rectangle {
         this.piece = null;
     }
 
-    public Tile(int x, int y, Color c){
-        setWidth(tileSize);//TODO move these three to a draw class
-        setHeight(tileSize);
-        setFill(c);
-
+    public Tile(int x, int y){
         relocate(x * tileSize, y * tileSize);
     }
 

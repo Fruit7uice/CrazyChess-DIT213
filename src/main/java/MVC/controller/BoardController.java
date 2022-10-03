@@ -3,6 +3,7 @@ package MVC.controller;
 import MVC.model.Piece;
 import MVC.model.PieceType;
 import MVC.model.Tile;
+import MVC.view.GUIRenderer;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
@@ -26,7 +27,10 @@ public class BoardController extends Application {
     public static final int columns = 8;
     public static final int boardHeight = rows * tileSize;
     public static final int boardWidth = columns * tileSize;
+    private Color darkTile = Color.rgb(248, 226, 184);
+    private Color lightTile = Color.rgb(65, 47, 44);
     private MoveHandler movehandler;
+    private GUIRenderer gui;
     private Tile[][] board = new Tile[rows][columns];
 
      Group tileGroup = new Group();
@@ -34,6 +38,7 @@ public class BoardController extends Application {
 
      private Parent createContent() {
          movehandler = new MoveHandler(this);
+         gui = new GUIRenderer(this);
          Pane root = new Pane();
          root.setMaxSize(boardWidth, boardHeight);
          root.getChildren().addAll(tileGroup, pieceGroup);
@@ -42,10 +47,11 @@ public class BoardController extends Application {
              for (int x = 0; x < columns; x++) {
                  Tile tile;
                  if ((x + y) % 2 == 0) {
-                     tile = new Tile(x, y, Color.rgb(248, 226, 184));
-
+                     tile = new Tile(x, y);
+                     gui.drawTile(tile, x, y, darkTile);
                  } else {
-                     tile = new Tile(x, y, Color.rgb(65, 47, 44));
+                     tile = new Tile(x, y);
+                     gui.drawTile(tile, x, y, lightTile);
                  }
                  board[x][y] = tile;
                  tileGroup.getChildren().add(tile);
@@ -82,7 +88,7 @@ public class BoardController extends Application {
      */
     private void initializePieces(int row, PieceType[] typelist, int index){
 
-        for (int col = 0; col < columns; col++) {
+        for (int col = 0; col < columns; col++) { //TODO rewrite to implement factory method
             Piece p = new Piece(typelist[index], col, row);
             index++;
             pieceGroup.getChildren().add(p);
@@ -97,9 +103,9 @@ public class BoardController extends Application {
 
     }
 
-    // TODO move this function to a draw class?
-    public void drawPiece(Piece p, double x, double y) {
-        p.draw(x, y);
+
+    public void movePiece(Piece p, double x, double y) {
+        gui.movePiece(p, x, y);
     }
 
     public void setPiece(Piece p, int x,int y){

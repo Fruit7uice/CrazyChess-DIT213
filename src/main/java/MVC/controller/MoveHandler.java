@@ -31,7 +31,7 @@ public class MoveHandler {
         double x = event.getSceneX();
         double y = event.getSceneY();
         p.move(x, y);
-        controller.drawPiece(p, x, y);
+        controller.movePiece(p, x, y);
 
 
     }

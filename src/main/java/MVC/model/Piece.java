@@ -48,11 +48,5 @@ public class Piece extends Rectangle {
         relocate(oldX, oldY);
     }
 
-    public void draw(double x, double y) {
-        setWidth(tileSize);
-        setHeight(tileSize);
-        relocate(x - tileSize/2, y - tileSize/2);
 
-
-    }
 }
