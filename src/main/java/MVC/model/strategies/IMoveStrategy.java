@@ -7,5 +7,5 @@ package MVC.model.strategies;
 public interface IMoveStrategy {
 
 
-    public void move(int startX, int startY, int endX, int end);
+    public boolean move(int startX, int startY, int newX, int newY);
 }

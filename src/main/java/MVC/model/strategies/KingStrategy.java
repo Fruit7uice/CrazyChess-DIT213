@@ -14,17 +14,18 @@ public class KingStrategy implements IMoveStrategy {
      * @param endY Ending y-coordinate on the board
      */
 
-    @Override
-    public void move(int startX, int startY, int endX, int endY) {
+
+    public boolean move(int startX, int startY, int endX, int endY) {
         if (Math.abs(startX - endX) == 1 && (startY == endY)) {
-            startX = endX;
+            return true;
         }
         else if(Math.abs(startY - endY) == 1 && (startX == endX)){
-            startY = endY;
+            return true;
             }
         else if((Math.abs(startX - endX) == 1) && (Math.abs(startY - endY) == 1)) {
-            startX = endX;
-            startY = endY;
+            return true;
+        }else{
+            return false;
         }
     }
 }

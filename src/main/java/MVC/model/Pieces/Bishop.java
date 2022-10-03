@@ -18,17 +18,13 @@ public class Bishop extends Piece{
             case isOccupied of
                 tileType = getType.tile.desiredMove();
 
-                if this.type == tileType{
+                if this.type == tile.pieceType{
                     then can't move here
                     }
                     else(this.type) == opposingColour{
-                        kill;
-                        diagonalStrategy;
+                        capture;
+                        diagonalStrategy; // kolla strategi
                     }.
-
-
-
-
 
          */
 
