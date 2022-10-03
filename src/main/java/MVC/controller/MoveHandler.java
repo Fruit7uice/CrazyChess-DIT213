@@ -27,7 +27,6 @@ public class MoveHandler {
     }
 
     public void dragDetected(MouseEvent event, Piece p) {
-        //TODO make piece follow mouse
         double x = event.getSceneX();
         double y = event.getSceneY();
         p.move(x, y);
@@ -42,8 +41,15 @@ public class MoveHandler {
 
     }
 
-    private static boolean tryMove(Piece p, double x,double y) {
-        // TODO implement checks for the different piece types, and collision return true if move is legal, otherwise return false
+    // TODO implement checks for the different piece types, and collision return true if move is legal, otherwise return false
+    private boolean tryMove(Piece p, int x, int y) {
+        if(controller.collisionDetection(x, y)){
+            if(p.player1 != controller.board[x][y].getPieceColor()){
+                //TODO implement capture method
+            }
+            return false;
+        }
+
         return true;
     }
 
@@ -57,7 +63,7 @@ public class MoveHandler {
             controller.removePiece(initX, initY);// TODO remove this
             event.consume();
         }else{
-            p.abortMove();
+            p.move(initX, initY);
             event.consume();
         }
 

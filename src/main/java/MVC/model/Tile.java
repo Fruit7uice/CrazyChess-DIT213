@@ -20,6 +20,10 @@ public class Tile extends Rectangle {
         return piece;
     }
 
+    public boolean getPieceColor(){
+        return piece.player1;
+    }
+
     public void setPiece(Piece piece){
         this.piece = piece;
     }

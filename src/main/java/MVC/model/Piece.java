@@ -9,6 +9,7 @@ public class Piece extends Rectangle {
     private double oldX, oldY;
     private double xIndex, yIndex;
     public PieceType type;
+    public boolean player1;
 
 
     public Piece(PieceType type, double x, double y) {
@@ -16,10 +17,7 @@ public class Piece extends Rectangle {
         this.xIndex = x;
         this.yIndex = y;
 
-        setHeight(tileSize);
-        setWidth(tileSize);
-        setFill(Color.GREEN); //TODO make transparent when done.
-        relocate(x * tileSize, y * tileSize);
+
 
     }
 

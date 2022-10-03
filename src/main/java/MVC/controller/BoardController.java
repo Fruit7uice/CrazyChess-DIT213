@@ -31,7 +31,7 @@ public class BoardController extends Application {
     private Color lightTile = Color.rgb(65, 47, 44);
     private MoveHandler movehandler;
     private GUIRenderer gui;
-    private Tile[][] board = new Tile[rows][columns];
+    public Tile[][] board = new Tile[rows][columns];
 
      Group tileGroup = new Group();
      Group pieceGroup = new Group();
@@ -93,6 +93,7 @@ public class BoardController extends Application {
             index++;
             pieceGroup.getChildren().add(p);
             board[row][col].setPiece(p);
+            gui.drawPiece(p, col, row);
 
             p.setOnMousePressed(event -> movehandler.pressed(event, p));
             p.setOnMouseDragged(event -> movehandler.dragDetected(event, p));
@@ -111,6 +112,9 @@ public class BoardController extends Application {
     public void setPiece(Piece p, int x,int y){
         board[x][y].setPiece(p);
 
+    }
+     boolean collisionDetection(int x, int y){
+        return board[x][y].hasPiece();
     }
 
     public void removePiece(int x, int y){
