@@ -19,22 +19,22 @@ public class Board implements Observable{
     private Color light = Color.rgb(248, 226, 184); // Darker Color
 
     private DummyPiece[][] pieceLayout = new DummyPiece[8][8];
-    private Tile[][] board = new Tile[8][8];
+    private Tile[][] tiles = new Tile[8][8];
 
     public Board(List<Observer> observers){
         initPieceLayout(pieceLayout);
-        initBoardTiles(board);
+        initBoardTiles(tiles);
         notifyAll(observers);
     }
 
     public Board(Observer observer){
         initPieceLayout(pieceLayout);
-        initBoardTiles(board);
+        initBoardTiles(tiles);
         notify(observer);
     }
     public Board() {
         initPieceLayout(pieceLayout);
-        initBoardTiles(board);
+        initBoardTiles(tiles);
     }
 
     private void initBoardTiles(Tile[][] tiles){
@@ -77,10 +77,10 @@ public class Board implements Observable{
     }
 
     public Tile[][] getCurrentBoardLayout() {
-        Tile[][] layoutCopy = new Tile[board.length][board.length];
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                layoutCopy[i][j] = board[i][j];
+        Tile[][] layoutCopy = new Tile[tiles.length][tiles.length];
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                layoutCopy[i][j] = tiles[i][j];
             }
         }
         return layoutCopy;
@@ -111,13 +111,13 @@ public class Board implements Observable{
 
     @Override
     public void notify(Observer observer) {
-        observer.update(board, pieceLayout);
+        observer.update(tiles, pieceLayout);
     }
 
     @Override
     public void notifyAll(List<Observer> observers) {
         for (Observer observer : observers) {
-            observer.update(board, pieceLayout);
+            observer.update(tiles, pieceLayout);
         }
     }
 
