@@ -1,6 +1,5 @@
 package MVC.model.Pieces;
 
-import MVC.model.DummyTile;
 import MVC.model.strategies.HorizontalStrategy;
 import MVC.model.strategies.VerticalStrategy;
 /**

@@ -1,6 +1,5 @@
 package MVC.model.Pieces;
 
-import MVC.model.DummyTile;
 import MVC.model.strategies.KnightStrategy;
 
 public class Knight extends Piece{

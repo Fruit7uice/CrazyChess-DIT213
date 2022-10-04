@@ -1,7 +1,5 @@
 package MVC.model.Pieces;
 
-import MVC.model.Board;
-import MVC.model.DummyTile;
 public abstract class Piece {
     public int xPos;
     public int yPos;
