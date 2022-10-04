@@ -16,6 +16,14 @@ import java.io.IOException;
 import java.util.EventObject;
 import java.util.Objects;
 
+/**
+ * @author Johannes Höher
+ * Class that holds the methods that corresponds to the buttons in the main-manu
+ * Each button corresponds to an action-event.
+ */
+
+
+
 public class MenuController {
 
 
