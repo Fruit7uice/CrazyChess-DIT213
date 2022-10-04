@@ -2,7 +2,7 @@ package MVC.model;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import static MVC.controller.BoardController.tileSize;
+import static MVC.controller.Chess.tileSize;
 
 public class Piece extends Rectangle {
 

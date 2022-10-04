@@ -5,15 +5,13 @@ import MVC.model.PieceType;
 import MVC.model.Tile;
 import javafx.application.Application;
 import javafx.fxml.FXML;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.*;
 import javafx.stage.Stage;
 import static MVC.model.PieceType.*;
 
-public class BoardController extends Application {
+public class Chess extends Application {
 
     @FXML
     Pane pane;
@@ -27,7 +25,7 @@ public class BoardController extends Application {
     public static final int boardHeight = rows * tileSize;
     public static final int boardWidth = columns * tileSize;
     private MoveHandler movehandler;
-    private Tile[][] board = new Tile[rows][columns];
+    private Tile[][] tiles = new Tile[rows][columns];
 
      Group tileGroup = new Group();
      Group pieceGroup = new Group();
@@ -47,7 +45,7 @@ public class BoardController extends Application {
                  } else {
                      tile = new Tile(x, y, Color.rgb(65, 47, 44));
                  }
-                 board[x][y] = tile;
+                 tiles[x][y] = tile;
                  tileGroup.getChildren().add(tile);
              }
          }

@@ -1,21 +1,19 @@
 package MVC.controller;
 
-import MVC.controller.BoardController;
 import MVC.model.Piece;
 import javafx.scene.input.*;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.*;
 import javafx.scene.shape.Rectangle;
-import static MVC.controller.BoardController.tileSize;
+import static MVC.controller.Chess.tileSize;
 
 public class MoveHandler {
 
 
     private int initX;
     private int initY;
-    private BoardController controller;
+    private Chess controller;
 
-    public MoveHandler(BoardController controller){
+    public MoveHandler(Chess controller){
         this.controller = controller;
     }
 
