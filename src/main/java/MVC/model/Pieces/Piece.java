@@ -12,7 +12,7 @@ public abstract class Piece {
     private String type;
     private boolean isPlayer1;
 
-    public Piece(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String typen, boolean isPlayer1){
+    public Piece(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayer1){
         this.xPos = xPos;
         this.yPos = yPos;
         this.width = width;
@@ -32,9 +32,7 @@ public abstract class Piece {
         return secondImagePath;
     }
 
-    public String getType() {
-        return type;
-    }
+    public abstract String getType();
     public abstract boolean legalMove(int newX, int newY);
 
     public boolean isPlayer1() {
