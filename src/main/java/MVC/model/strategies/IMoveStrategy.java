@@ -5,5 +5,7 @@ package MVC.model.strategies;
  * @author Joel Leiditz Thorsson
  */
 public interface IMoveStrategy {
-    public void move();
+
+
+    public boolean move(int startX, int startY, int newX, int newY);
 }
