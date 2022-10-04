@@ -1,5 +1,7 @@
 package MVC.model.strategies;
-
+/**
+ * @author Johannes Höher
+ */
 public class KingStrategy implements IMoveStrategy {
 
     // Question??
@@ -13,7 +15,6 @@ public class KingStrategy implements IMoveStrategy {
      * @param endX Ending x-coordinate on the board
      * @param endY Ending y-coordinate on the board
      */
-
 
     public boolean move(int startX, int startY, int endX, int endY) {
         if (Math.abs(startX - endX) == 1 && (startY == endY)) {

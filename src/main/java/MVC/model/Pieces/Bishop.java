@@ -3,6 +3,10 @@ package MVC.model.Pieces;
 import MVC.model.DummyTile;
 import MVC.model.strategies.DiagonalStrategy;
 
+/**
+ * @author Alva Johansson
+ */
+
 public class Bishop extends Piece{
     DummyTile dummyTile;
     DiagonalStrategy diagonalyStrategy;
@@ -33,14 +37,15 @@ public class Bishop extends Piece{
      * @param newX the desired x position
      * @param newY the desired y position
      * @return returns a boolean if a move is legal or not
+     * @author Alva Johansson
      */
-    public boolean legalMove(int newX, int newY){
+    public boolean legalMove(int newX, int newY, Piece[][] board){
         if (newX != xPos || newY != yPos){// checks if we have tried to move
             if (diagonalyStrategy.move(xPos, yPos, newX, newY)) { //makes sure the strategy allows uss to move
-                if (!isOccupied(dummyTile)){ //is the tile not occupied
+                if (!isOccupied(newX, newY, board)){ //is the tile not occupied
                     return true;
                 } else { // tile is occupied
-                    if (isOccupiedByEnemy(dummyTile)) { //is the piece my enemy?
+                    if (isOccupiedByEnemy(newX, newY, board)) { //is the piece my enemy?
                         killEnemyPiece();
                         return true;
                     } else {
