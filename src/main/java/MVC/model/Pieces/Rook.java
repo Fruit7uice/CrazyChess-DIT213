@@ -59,31 +59,4 @@ public class Rook extends Piece{
         }
         return false;
     }
-
-    /**
-     * @param dummyTile the tile that the piece wants to move to
-     * @return returns a boolean if a tile is occupied or not
-     */
-    public boolean isOccupied(DummyTile dummyTile){
-        return dummyTile.getIsOccupied();
-    }
-
-    /**
-     * @param dummyTile the tile that the piece wants to move to
-     * @return returns a boolean if the piece on a tile is occupied by an enemy to this piece
-     */
-    public boolean isOccupiedByEnemy(DummyTile dummyTile){
-        boolean piecePlayer1 = dummyTile.getIsPlayer1();
-        return piecePlayer1 != this.isPlayer1();
-    }
-
-    /**
-     * removes an enemy piece from the board when it's killed
-     */
-    public void killEnemyPiece (){
-
-    }
-
-
-
 }
