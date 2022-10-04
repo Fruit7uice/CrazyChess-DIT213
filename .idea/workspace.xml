@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="Changes to Piece and SnapToGridController, eventhandler created, needs functions, board drawn, pieces drawn (as circles) on board">
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/Chess.java" afterDir="false" />
+    <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="Commit to merge">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/MoveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/MoveHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Board.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" afterDir="false" />
     </list>
@@ -71,11 +71,11 @@
       <recent name="MVC.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Chess">
-    <configuration name="Chess" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-19" />
+  <component name="RunManager" selected="Application.BoardController">
+    <configuration name="BoardController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-18" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="MVC.controller.Chess" />
+      <option name="MAIN_CLASS_NAME" value="MVC.controller.BoardController" />
       <module name="CrazyChess-DIT213" />
       <extension name="coverage">
         <pattern>
@@ -114,12 +114,12 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.BoardController" />
       <item itemvalue="Application.SnapToGridApp" />
-      <item itemvalue="Application.Chess" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Chess" />
+        <item itemvalue="Application.BoardController" />
         <item itemvalue="Application.SnapToGridApp" />
       </list>
     </recent_temporary>
@@ -140,7 +140,19 @@
       <option name="presentableId" value="LOCAL−00001" />
       <updated>1663681262808</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL−00002" summary="Commit to merge">
+      <created>1664785741727</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1664785741727</updated>
+    </task>
+    <task id="LOCAL−00003" summary="Commit to merge">
+      <created>1664787643727</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1664787643727</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,7 +172,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes to Piece and SnapToGridController, eventhandler created, needs functions, board drawn, pieces drawn (as circles) on board" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes to Piece and SnapToGridController, eventhandler created, needs functions, board drawn, pieces drawn (as circles) on board" />
+    <MESSAGE value="Commit to merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit to merge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -169,14 +182,6 @@
           <properties class="java.lang.IllegalAccessException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/MVC/controller/MoveHandler.java</url>
-          <line>24</line>
-          <properties class="MVC.controller.MoveHandler">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

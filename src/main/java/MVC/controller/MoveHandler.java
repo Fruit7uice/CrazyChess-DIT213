@@ -19,14 +19,16 @@ public class MoveHandler {
 
     public void pressed(MouseEvent event, Piece p) {
         p.setFill(Color.PINK);
+        System.out.println(p.getType().toString());
+        initX = (int) Math.floor(event.getSceneX() / tileSize);
+        initY = (int) Math.floor(event.getSceneY() / tileSize);
     }
 
     public void dragDetected(MouseEvent event, Piece p) {
-        //TODO make piece follow mouse
-        double x = event.getX();
-        double y = event.getY();
+        double x = event.getSceneX();
+        double y = event.getSceneY();
         p.move(x, y);
-        controller.drawPiece(p, x, y);
+        controller.movePiece(p, x, y);
 
 
     }
@@ -34,10 +36,18 @@ public class MoveHandler {
     public void released(MouseEvent event, Piece p) {
             snapToGrid(event, p);
             event.consume();
+
     }
 
-    private static boolean tryMove(Piece p, double x,double y) {
-        // TODO implement checks for the different piece types, and collision return true if move is legal, otherwise return false
+    // TODO implement checks for the different piece types, and collision return true if move is legal, otherwise return false
+    private boolean tryMove(Piece p, int x, int y) {
+        if(controller.collisionDetection(x, y)){
+            if(p.player1 != controller.board[x][y].getPieceColor()){
+                //TODO implement capture method
+            }
+            return false;
+        }
+
         return true;
     }
 
@@ -46,10 +56,12 @@ public class MoveHandler {
         int newY = (int) Math.floor(event.getSceneY() / tileSize);
         if(tryMove(p, newX, newY)) {
             p.move(newX, newY);
-            p.setFill(Color.BLUE); // TODO remove this
+            p.setFill(Color.BLUE);
+            controller.setPiece(p, newX, newY);
+            controller.removePiece(initX, initY);// TODO remove this
             event.consume();
         }else{
-            p.abortMove();
+            p.move(initX, initY);
             event.consume();
         }
 

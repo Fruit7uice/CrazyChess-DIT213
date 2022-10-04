@@ -3,15 +3,18 @@ package MVC.controller;
 import MVC.model.Piece;
 import MVC.model.PieceType;
 import MVC.model.Tile;
+import MVC.view.GUIRenderer;
 import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.*;
 import javafx.stage.Stage;
 import static MVC.model.PieceType.*;
 
-public class Chess extends Application {
+public class BoardController extends Application {
 
     @FXML
     Pane pane;
@@ -24,14 +27,18 @@ public class Chess extends Application {
     public static final int columns = 8;
     public static final int boardHeight = rows * tileSize;
     public static final int boardWidth = columns * tileSize;
+    private Color darkTile = Color.rgb(248, 226, 184);
+    private Color lightTile = Color.rgb(65, 47, 44);
     private MoveHandler movehandler;
-    private Tile[][] tiles = new Tile[rows][columns];
+    private GUIRenderer gui;
+    public Tile[][] board = new Tile[rows][columns];
 
      Group tileGroup = new Group();
      Group pieceGroup = new Group();
 
      private Parent createContent() {
          movehandler = new MoveHandler(this);
+         gui = new GUIRenderer(this);
          Pane root = new Pane();
          root.setMaxSize(boardWidth, boardHeight);
          root.getChildren().addAll(tileGroup, pieceGroup);
@@ -40,21 +47,26 @@ public class Chess extends Application {
              for (int x = 0; x < columns; x++) {
                  Tile tile;
                  if ((x + y) % 2 == 0) {
-                     tile = new Tile(x, y, Color.rgb(248, 226, 184));
-
+                     tile = new Tile(x, y);
+                     gui.drawTile(tile, x, y, darkTile);
                  } else {
-                     tile = new Tile(x, y, Color.rgb(65, 47, 44));
+                     tile = new Tile(x, y);
+                     gui.drawTile(tile, x, y, lightTile);
                  }
-                 tiles[x][y] = tile;
+                 board[x][y] = tile;
                  tileGroup.getChildren().add(tile);
              }
          }
-             for(int i = 0; i < 2; i++){
-                 initializePieces(i, bTypeList);
-             }
-             for (int i = rows-1; i > rows-3; i--){
-                 initializePieces(i, wTypeList);
-             }
+
+         // Place major black pieces
+         initializePieces(0, bTypeList, 0);
+         // Place black pawns
+         initializePieces(1, bTypeList, 8);
+         // Place major white pieces
+         initializePieces(rows-1, wTypeList, 0);
+         // Place white pawns
+         initializePieces(rows-2, wTypeList, 8);
+
          return root;
      }
 
@@ -74,12 +86,14 @@ public class Chess extends Application {
      * Puts a piece on each tile on the given row
      * @param row the given row for the function
      */
-    private void initializePieces(int row, PieceType[] typelist){
-        int index = 0;
-        for (int col = 0; col < columns; col++) {
+    private void initializePieces(int row, PieceType[] typelist, int index){
+
+        for (int col = 0; col < columns; col++) { //TODO rewrite to implement factory method
             Piece p = new Piece(typelist[index], col, row);
             index++;
             pieceGroup.getChildren().add(p);
+            board[row][col].setPiece(p);
+            gui.drawPiece(p, col, row);
 
             p.setOnMousePressed(event -> movehandler.pressed(event, p));
             p.setOnMouseDragged(event -> movehandler.dragDetected(event, p));
@@ -90,8 +104,20 @@ public class Chess extends Application {
 
     }
 
-    // TODO move this function to a draw class?
-    public void drawPiece(Piece p, double x, double y) {
-        p.draw(x, y);
+
+    public void movePiece(Piece p, double x, double y) {
+        gui.movePiece(p, x, y);
+    }
+
+    public void setPiece(Piece p, int x,int y){
+        board[x][y].setPiece(p);
+
+    }
+     boolean collisionDetection(int x, int y){
+        return board[x][y].hasPiece();
+    }
+
+    public void removePiece(int x, int y){
+        board[x][y].removePiece();
     }
 }

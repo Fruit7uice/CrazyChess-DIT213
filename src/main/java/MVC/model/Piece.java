@@ -7,16 +7,17 @@ import static MVC.controller.Chess.tileSize;
 public class Piece extends Rectangle {
 
     private double oldX, oldY;
+    private double xIndex, yIndex;
     public PieceType type;
+    public boolean player1;
 
 
     public Piece(PieceType type, double x, double y) {
         this.type = type;
+        this.xIndex = x;
+        this.yIndex = y;
 
-        setHeight(tileSize);
-        setWidth(tileSize);
-        setFill(Color.GREEN); //TODO make transparent when done.
-        relocate(x * tileSize, y * tileSize);
+
 
     }
 
@@ -28,18 +29,22 @@ public class Piece extends Rectangle {
         oldX = x * tileSize;
         oldY = y * tileSize;
         this.relocate(oldX, oldY);
+        xIndex = x / tileSize;
+        yIndex = y / tileSize;
 
+    }
+
+    public double getxIndex(){
+        return xIndex;
+    }
+
+    public double getyIndex(){
+        return yIndex;
     }
 
     public void abortMove(){
         relocate(oldX, oldY);
     }
 
-    public void draw(double x, double y) {
-        setWidth(tileSize);
-        setHeight(tileSize);
-        relocate(x - tileSize/2, y - tileSize/2);
 
-
-    }
 }
