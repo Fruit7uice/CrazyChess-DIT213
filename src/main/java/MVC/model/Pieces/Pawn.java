@@ -1,6 +1,5 @@
 package MVC.model.Pieces;
 
-import MVC.model.DummyTile;
 import MVC.model.strategies.PawnStrategy;
 
 public class Pawn extends Piece{

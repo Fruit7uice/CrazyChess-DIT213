@@ -2,7 +2,6 @@ package MVC.model.Pieces;
 
 public class MoveHandler {
     /**
-     *
      * @param newX the desired x position
      * @param newY the desired y position
      * @param board the board that contains the pieces
