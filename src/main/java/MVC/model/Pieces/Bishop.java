@@ -1,11 +1,11 @@
 package MVC.model.Pieces;
 
 import MVC.model.DummyTile;
-import MVC.model.strategies.DiagonalyStrategy;
+import MVC.model.strategies.DiagonalStrategy;
 
 public class Bishop extends Piece{
     DummyTile dummyTile;
-    DiagonalyStrategy diagonalyStrategy;
+    DiagonalStrategy diagonalyStrategy;
     public Bishop(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayer1) {
         super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayer1);
     }

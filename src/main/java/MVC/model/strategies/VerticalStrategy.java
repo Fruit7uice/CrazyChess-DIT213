@@ -1,20 +1,11 @@
 package MVC.model.strategies;
 
 public class VerticalStrategy implements IMoveStrategy{
-    int xPos;
-    int yPos;
-    @Override
-    public boolean move(int startX, int startY, int endX, int endY) {
-        if(Math.abs(startY - endY) > 0){
+    public boolean move(int startX, int startY, int newX, int newY) {
+        if ((Math.abs(startY - newY) > 0) && (startX == newX)) {
             return true;
+        } else {
+            return false;
         }
-        return false;
-    }
-    public int getyPos() {
-        return yPos;
-    }
-
-    public int getxPos() {
-        return xPos;
     }
 }
