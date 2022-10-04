@@ -9,7 +9,4 @@ public class HorizontalStrategy implements IMoveStrategy {
             return false;
             }
         }
-
-
-
 }

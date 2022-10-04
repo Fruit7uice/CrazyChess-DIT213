@@ -1,5 +1,4 @@
 package MVC.model.strategies;
-
 public class DiagonalStrategy implements IMoveStrategy {
 
     public boolean move(int startX, int startY, int newX, int newY ) {
@@ -8,7 +7,5 @@ public class DiagonalStrategy implements IMoveStrategy {
         }else{
             return false;
         }
-
     }
-
 }
