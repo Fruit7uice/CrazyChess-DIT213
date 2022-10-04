@@ -22,10 +22,9 @@ public class BoardGUI implements Observer {
             for (int j = 0; j < pieceLayout[i].length; j++) {
                 DummyPiece dp = pieceLayout[i][j];
                 if (dp != null){
-                    drawPiece(dp);
+                    drawPiece(dp, Color.GREEN);
                     System.out.println("Drawing pieces.");
                 }
-
             }
         }
         //--------------------------------------
@@ -47,12 +46,13 @@ public class BoardGUI implements Observer {
     }
 
 
-    public void drawPiece(DummyPiece p){
-        p.rect.setFill(Color.GREEN);
+    public void drawPiece(DummyPiece p, Color color){
+        p.rect.setFill(color);
         p.rect.setWidth(p.width);
         p.rect.setHeight(p.height);
         p.rect.setX(p.x);
         p.rect.setY(p.y);
+
     }
 
     @Override

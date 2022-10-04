@@ -22,20 +22,21 @@ public class BoardController {
     }
 
     public void pressed(MouseEvent event, DummyPiece dp){
-        dp.rect.setFill(Color.RED);
+
+        new BoardGUI().drawPiece(dp, Color.GRAY);
     }
 
     public void dragged(MouseEvent event, DummyPiece dp){
         dp.setX(event.getX()-(Board.tileSize/2));
         dp.setY(event.getY()-(Board.tileSize/2));
-        new BoardGUI().drawPiece(dp);
+        new BoardGUI().drawPiece(dp, Color.AQUA);
 
     }
 
     public void released(MouseEvent event, DummyPiece dp){
         System.out.println(dp.getX());
         snapToGrid(event, dp);
-        new BoardGUI().drawPiece(dp);
+        new BoardGUI().drawPiece(dp, Color.GREEN);
     }
 
     public void snapToGrid(MouseEvent event, DummyPiece dp){

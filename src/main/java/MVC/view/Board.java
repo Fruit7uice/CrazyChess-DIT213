@@ -18,36 +18,23 @@ public class Board implements Observable{
     private Color dark = Color.rgb(65, 47, 44);  //Lighter Color
     private Color light = Color.rgb(248, 226, 184); // Darker Color
 
-
-    private static String[][] NormalPieceLayout =
-            {
-                    {"BR", "BKn", "BB", "BQ", "BK", "BB", "BKn", "BR" },
-                    {"BP", "BP", "BP", "BP", "BP", "BP", "BP", "BP"},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                    {"WP", "WP", "WP", "WP", "WP", "WP", "WP", "WP"},
-                    {"WR", "WKn", "WB", "WQ", "WK", "WB", "WKn", "WR"}
-            };
-
     private DummyPiece[][] pieceLayout = new DummyPiece[8][8];
-    private Tile[][] initTileLayout = new Tile[8][8];
+    private Tile[][] board = new Tile[8][8];
 
     public Board(List<Observer> observers){
         initPieceLayout(pieceLayout);
-        initBoardTiles(initTileLayout);
+        initBoardTiles(board);
         notifyAll(observers);
     }
 
     public Board(Observer observer){
         initPieceLayout(pieceLayout);
-        initBoardTiles(initTileLayout);
+        initBoardTiles(board);
         notify(observer);
     }
     public Board() {
         initPieceLayout(pieceLayout);
-        initBoardTiles(initTileLayout);
+        initBoardTiles(board);
     }
 
     private void initBoardTiles(Tile[][] tiles){
@@ -90,10 +77,10 @@ public class Board implements Observable{
     }
 
     public Tile[][] getCurrentBoardLayout() {
-        Tile[][] layoutCopy = new Tile[initTileLayout.length][initTileLayout.length];
-        for (int i = 0; i < initTileLayout.length; i++) {
-            for (int j = 0; j < initTileLayout[i].length; j++) {
-                layoutCopy[i][j] = initTileLayout[i][j];
+        Tile[][] layoutCopy = new Tile[board.length][board.length];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                layoutCopy[i][j] = board[i][j];
             }
         }
         return layoutCopy;
@@ -124,13 +111,13 @@ public class Board implements Observable{
 
     @Override
     public void notify(Observer observer) {
-        observer.update(initTileLayout, pieceLayout);
+        observer.update(board, pieceLayout);
     }
 
     @Override
     public void notifyAll(List<Observer> observers) {
         for (Observer observer : observers) {
-            observer.update(initTileLayout, pieceLayout);
+            observer.update(board, pieceLayout);
         }
     }
 
