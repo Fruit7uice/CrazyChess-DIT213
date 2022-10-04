@@ -1,7 +1,7 @@
 package MVC.view;
 
-import MVC.model.Pieces.DummyPiece;
+import MVC.model.Pieces.Piece;
 
 public interface Observer {
-    void update(Tile[][] boardState, DummyPiece[][] pieces);
+    void update(Tile[][] boardState, Piece[][] pieces);
 }

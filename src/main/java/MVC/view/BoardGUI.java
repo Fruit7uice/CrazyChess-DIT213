@@ -1,11 +1,8 @@
 package MVC.view;
 
 import MVC.model.Pieces.DummyPiece;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import MVC.model.Pieces.Piece;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 
 public class BoardGUI implements Observer {
@@ -14,21 +11,7 @@ public class BoardGUI implements Observer {
 
     Tile[][] boardLayout = new Tile[8][8];
 
-    DummyPiece[][] pieceLayout;
-
-    void drawPieces() {
-        //------INITIALIZE DUMMY PIECE ---------
-        for (int i = 0; i < pieceLayout.length; i++) {
-            for (int j = 0; j < pieceLayout[i].length; j++) {
-                DummyPiece dp = pieceLayout[i][j];
-                if (dp != null){
-                    drawPiece(dp, Color.GREEN);
-                    System.out.println("Drawing pieces.");
-                }
-            }
-        }
-        //--------------------------------------
-    }
+    Piece[][] pieceLayout;
 
     void drawBoard() {
         //Board board = new Board();
@@ -45,22 +28,44 @@ public class BoardGUI implements Observer {
         }
     }
 
+    void drawPieces() {
+        for (int i = 0; i < pieceLayout.length; i++) {
+            for (int j = 0; j < pieceLayout[i].length; j++) {
+                Piece p = pieceLayout[i][j];
+                if (p != null){
+                    drawPiece(p, Color.GREEN);
+                    System.out.println("Drawing pieces at: x-" + p.xPos + " y-" + p.yPos);
+                }
+            }
+        }
+    }
 
-    public void drawPiece(DummyPiece p, Color color){
-        p.rect.setFill(color);
-        p.rect.setWidth(p.width);
-        p.rect.setHeight(p.height);
-        p.rect.setX(p.x);
-        p.rect.setY(p.y);
-
+    public void drawPiece(Piece piece, Color color){
+        piece.rect.setFill(color);
+        piece.rect.setWidth(piece.width);
+        piece.rect.setHeight(piece.height);
+        piece.rect.setX(piece.xPos * Board.tileSize);
+        piece.rect.setY(piece.yPos * Board.tileSize);
+        //printMatrix();
     }
 
     @Override
-    public void update(Tile[][] boardState, DummyPiece[][] pieceLayout) {
+    public void update(Tile[][] boardState, Piece[][] pieceLayout) {
         //Board board = new Board();
         this.boardLayout = boardState;
         this.pieceLayout = pieceLayout;
         drawBoard();
         drawPieces();
+    }
+
+    void printMatrix(){
+
+        for (int i = 0; i < pieceLayout.length; i++) {
+            System.out.println("\n {");
+            for (int j = 0; j < pieceLayout[i].length; j++) {
+                System.out.println(pieceLayout[i][j] + ", ");
+            }
+            System.out.println("}");
+        }
     }
 }

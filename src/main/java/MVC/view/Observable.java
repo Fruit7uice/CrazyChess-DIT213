@@ -8,5 +8,5 @@ public interface Observable {
 
     void notify(Observer observer);
 
-    void notifyAll(List<Observer> observers);
+    void notifyAllObservers();
 }

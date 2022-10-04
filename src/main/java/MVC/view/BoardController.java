@@ -1,6 +1,6 @@
 package MVC.view;
 
-import MVC.model.Pieces.DummyPiece;
+import MVC.model.Pieces.Piece;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -21,33 +21,43 @@ public class BoardController {
     public BoardController() {
     }
 
-    public void pressed(MouseEvent event, DummyPiece dp){
+    public void pressed(MouseEvent event, Piece p){
+        BoardGUI gui = new BoardGUI();
 
-        new BoardGUI().drawPiece(dp, Color.GRAY);
+        gui.drawPiece(p, Color.GRAY);
     }
 
-    public void dragged(MouseEvent event, DummyPiece dp){
-        dp.setX(event.getX()-(Board.tileSize/2));
-        dp.setY(event.getY()-(Board.tileSize/2));
-        new BoardGUI().drawPiece(dp, Color.AQUA);
+    public void dragged(MouseEvent event, Piece piece){
+
+        int newX = (int) Math.floor(event.getX());
+        int newY = (int) Math.floor(event.getY());
+        piece.xPos = newX;
+        piece.yPos = newY;
+        BoardGUI gui = new BoardGUI();
+        gui.drawPiece(piece, Color.AQUA);
 
     }
 
-    public void released(MouseEvent event, DummyPiece dp){
-        System.out.println(dp.getX());
-        snapToGrid(event, dp);
-        new BoardGUI().drawPiece(dp, Color.GREEN);
+    public void released(MouseEvent event, Piece piece){
+        System.out.println(piece.xPos);
+        System.out.println(piece.yPos);
+        snapToGrid(event, piece);
+        BoardGUI gui = new BoardGUI();
+        gui.drawPiece(piece, Color.GREEN);
     }
 
-    public void snapToGrid(MouseEvent event, DummyPiece dp){
-        int newX = (int) Math.floor(event.getX() / 100);
-        int newY = (int) Math.floor(event.getY() / 100);
+    public void snapToGrid(MouseEvent event, Piece piece){
+        int newX = (int) Math.floor(event.getX() / Board.tileSize);
+        int newY = (int) Math.floor(event.getY() / Board.tileSize);
 
-        dp.setX(newX*100);
-        dp.setY(newY*100);
-        dp.rect.setFill(Color.GREEN);
-        System.out.println(dp.getX());
+        piece.xPos = (newX);
+        piece.yPos = (newY);
+        piece.rect.setFill(Color.GREEN);
+        System.out.println(piece.xPos);
+        System.out.println(piece.yPos);
     }
+
+
 
 
 }
