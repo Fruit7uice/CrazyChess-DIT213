@@ -8,32 +8,31 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MVC.controller.MenuController">
-   <children>
-      <ImageView fitHeight="400.0" fitWidth="612.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@MenuImages/chessBackground.jpeg" />
-         </image>
-      </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffedd4b3" height="400.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b6363" height="223.0" layoutX="200.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-      <Button layoutX="241.0" layoutY="105.0" mnemonicParsing="false" onAction="#startCrazy" prefHeight="36.0" prefWidth="125.0" text="Start Crazy">
-         <font>
-            <Font name="Kelly Slab" size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="241.0" layoutY="167.0" mnemonicParsing="false" onAction="#startClassic" prefHeight="36.0" prefWidth="125.0" text="Start Classic">
-         <font>
-            <Font name="Kelly Slab" size="18.0" />
-         </font></Button>
-      <Button layoutX="241.0" layoutY="231.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="125.0" text="Exit Game">
-         <font>
-            <Font name="Kelly Slab" size="18.0" />
-         </font></Button>
-      <Text layoutX="205.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crazy Chess">
-         <font>
-            <Font name="Kelly Slab" size="36.0" />
-         </font>
-      </Text>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFEED3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MVC.controller.MenuController">
+   <ImageView fitHeight="429.0" fitWidth="735.0" layoutX="-34.0" layoutY="-15.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/photo-1588412079929-790b9f593d8e.jpeg" />
+      </image>
+   </ImageView>
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b6363" height="223.0" layoutX="200.0" layoutY="95.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+   <Button layoutX="241.0" layoutY="130.0" mnemonicParsing="false" onAction="#startCrazy" prefHeight="36.0" prefWidth="125.0" text="Start Crazy" textFill="#564233">
+      <font>
+         <Font name="Kelly Slab" size="18.0" />
+      </font>
+   </Button>
+   <Button layoutX="241.0" layoutY="189.0" mnemonicParsing="false" onAction="#startClassic" prefHeight="36.0" prefWidth="125.0" text="Start Classic" textFill="#564233">
+      <font>
+         <Font name="Kelly Slab" size="18.0" />
+      </font>
+   </Button>
+   <Button layoutX="241.0" layoutY="247.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="125.0" text="Exit Game" textFill="#564233">
+      <font>
+         <Font name="Kelly Slab" size="18.0" />
+      </font>
+   </Button>
+   <Text fill="#564233" layoutX="205.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crazy Chess">
+      <font>
+         <Font name="Kelly Slab" size="36.0" />
+      </font>
+   </Text>
 </AnchorPane>
