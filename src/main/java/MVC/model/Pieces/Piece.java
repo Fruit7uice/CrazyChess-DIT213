@@ -8,6 +8,7 @@ public abstract class Piece {
     public int yPos;
     public int width;
     public int height;
+    public int[][] listOfLegalMoves;
     public Rectangle rect;
     private String firstImagePath;
     private String secondImagePath;
@@ -44,9 +45,4 @@ public abstract class Piece {
     public boolean isPlayerOne() {
         return isPlayerOne;
     }
-
-    void move(int newX, int newY) {
-
-    }
-
 }
