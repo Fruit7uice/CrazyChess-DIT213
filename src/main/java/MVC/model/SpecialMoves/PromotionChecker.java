@@ -17,9 +17,9 @@ public class PromotionChecker {
     // kanske byta namn om denna kallas på ofta?
     // kanske skapa pjäsen med factory istället senare
     public void promotion(Piece p) {
-        if (p instanceof Pawn && tryPromotion(p)) {
+        if (p.getType() == "Pawn" && tryPromotion(p)) {
             Queen queen = new Queen(p.xPos, p.yPos, p.width, p.height,
-                                    "vit dama", "svart dama", "Queen");
+                                    "vit dama", "svart dama", "Queen", true);
         }
     }
 }

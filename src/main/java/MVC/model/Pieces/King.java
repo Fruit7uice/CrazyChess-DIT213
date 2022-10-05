@@ -4,7 +4,8 @@ import MVC.model.strategies.KingStrategy;
 
 public class King extends Piece{
     private KingStrategy kingStrategy;
-    public King(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, Boolean isPlayerOne) {
+
+    public King(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne) {
         super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayerOne);
     }
 

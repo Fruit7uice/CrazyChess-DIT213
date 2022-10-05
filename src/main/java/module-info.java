@@ -4,4 +4,5 @@ module MVC {
     requires javafx.fxml;
     exports MVC.controller;
     exports MVC.view;
+    exports MVC.model;
 }

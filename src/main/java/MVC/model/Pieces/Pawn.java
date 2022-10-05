@@ -8,8 +8,6 @@ public class Pawn extends Piece{
         super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayerOne);
     }
 
-
-
     /**
      * returns a boolean if a move is legal or not
      * @param newX the desired x position
