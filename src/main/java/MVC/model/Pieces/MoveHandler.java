@@ -58,8 +58,8 @@ public class MoveHandler {
      * @return true if the position on the board is occupied by an enemy piece
      */
     public boolean isOccupiedByEnemy(int newX, int newY, Piece[][] board, Piece piece){
-        boolean piecePlayer1 = board[newX][newY].isPlayer1();
-        return piecePlayer1 != piece.isPlayer1();
+        boolean piecePlayer1 = board[newX][newY].isPlayerOne();
+        return piecePlayer1 != piece.isPlayerOne();
     }
 
     /**

@@ -28,8 +28,4 @@ public class Queen extends Piece{
         }
         return false;
     }
-
-    public Queen(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne) {
-        super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayerOne);
-    }
 }

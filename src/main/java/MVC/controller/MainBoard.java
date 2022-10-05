@@ -29,9 +29,6 @@ public class MainBoard extends Application {
         this.board = new Board(pieces);
         this.controller = new BoardController(gui, board);
         board.initMouseEventForPiece(pieces, controller);
-
-
-
         board.addObserver(gui);
         //board.notifyAllObservers();
     }

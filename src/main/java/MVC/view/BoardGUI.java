@@ -58,6 +58,7 @@ public class BoardGUI implements Observer {
         piece.rect.setHeight(piece.height);
         piece.rect.setX(x);
         piece.rect.setY(y);
+        System.out.println("Draws piece at coords: X" + x + " and Y" + y);
         //printMatrix();
     }
 
