@@ -1,6 +1,6 @@
 package MVC.model;
 
-import MVC.model.Pieces.DummyPiece;
+
 import MVC.model.Pieces.Piece;
 import MVC.controller.BoardController;
 import MVC.view.BoardGUI;
