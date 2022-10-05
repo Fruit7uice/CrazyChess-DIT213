@@ -22,19 +22,16 @@ public class BoardController {
     }
 
     public void pressed(MouseEvent event, Piece p){
-        BoardGUI gui = new BoardGUI();
-
-        gui.drawPiece(p, Color.GRAY);
+        boardGUI.drawPieces();
+        boardGUI.drawPieceInPlace(p, Color.GRAY);
     }
 
     public void dragged(MouseEvent event, Piece piece){
 
-        int newX = (int) Math.floor(event.getX());
-        int newY = (int) Math.floor(event.getY());
-        piece.xPos = newX;
-        piece.yPos = newY;
-        BoardGUI gui = new BoardGUI();
-        gui.drawPiece(piece, Color.AQUA);
+        int newX = (int) (event.getX() - (Board.tileSize/2));
+        int newY = (int) (event.getY() - (Board.tileSize/2));
+        System.out.println("X: " + newX + " Y: " + newY);
+        boardGUI.drawPiece(piece, Color.AQUA, newX, newY);
 
     }
 
@@ -42,8 +39,7 @@ public class BoardController {
         System.out.println(piece.xPos);
         System.out.println(piece.yPos);
         snapToGrid(event, piece);
-        BoardGUI gui = new BoardGUI();
-        gui.drawPiece(piece, Color.GREEN);
+        boardGUI.drawPieceInPlace(piece, Color.GREEN);
     }
 
     public void snapToGrid(MouseEvent event, Piece piece){

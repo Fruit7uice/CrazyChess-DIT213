@@ -54,4 +54,6 @@ public abstract class Piece {
     void move(){
 
     }
+
+
 }

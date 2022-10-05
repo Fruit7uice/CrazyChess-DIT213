@@ -1,6 +1,5 @@
 package MVC.view;
 
-import MVC.model.Pieces.DummyPiece;
 import MVC.model.Pieces.Piece;
 import javafx.scene.paint.Color;
 
@@ -33,19 +32,28 @@ public class BoardGUI implements Observer {
             for (int j = 0; j < pieceLayout[i].length; j++) {
                 Piece p = pieceLayout[i][j];
                 if (p != null){
-                    drawPiece(p, Color.GREEN);
+                    drawPieceInPlace(p, Color.GREEN);
                     System.out.println("Drawing pieces at: x-" + p.xPos + " y-" + p.yPos);
                 }
             }
         }
     }
 
-    public void drawPiece(Piece piece, Color color){
+    public void drawPieceInPlace(Piece piece, Color color){
         piece.rect.setFill(color);
         piece.rect.setWidth(piece.width);
         piece.rect.setHeight(piece.height);
         piece.rect.setX(piece.xPos * Board.tileSize);
         piece.rect.setY(piece.yPos * Board.tileSize);
+        //printMatrix();
+    }
+
+    public void drawPiece(Piece piece, Color color, int x, int y){
+        piece.rect.setFill(color);
+        piece.rect.setWidth(piece.width);
+        piece.rect.setHeight(piece.height);
+        piece.rect.setX(x);
+        piece.rect.setY(y);
         //printMatrix();
     }
 
