@@ -3,7 +3,6 @@ package MVC.model;
 
 import MVC.model.Pieces.Piece;
 import MVC.controller.BoardController;
-import MVC.view.BoardGUI;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -67,7 +66,7 @@ public class Board implements Observable {
                     Rectangle rectangle = pieceLayout[i][j].rect;
                     rectangle.setOnMouseClicked(event -> ctrl.pressed(event, piece));
                     rectangle.setOnMouseDragged(event -> ctrl.dragged(event, piece));
-                    rectangle.setOnMouseReleased(event -> ctrl.released(event, piece));
+                    rectangle.setOnMouseReleased(event -> ctrl.dragReleased(event, piece));
 
                 } else if (i > 5) {
                     Piece piece = pieceLayout[i][j];
@@ -75,7 +74,7 @@ public class Board implements Observable {
                     Rectangle rectangle = pieceLayout[i][j].rect;
                     rectangle.setOnMouseClicked(event -> ctrl.pressed(event, piece));
                     rectangle.setOnMouseDragged(event -> ctrl.dragged(event, piece));
-                    rectangle.setOnMouseReleased(event -> ctrl.released(event, piece));
+                    rectangle.setOnMouseReleased(event -> ctrl.dragReleased(event, piece));
                 }
             }
         }
@@ -107,6 +106,14 @@ public class Board implements Observable {
 
     public Color getLightColor() {
         return light;
+    }
+
+    public void updateGameLayout(Piece piece, int newX, int newY){
+        int oldX = piece.xPos;
+        int oldY = piece.yPos;
+        Piece tmp = pieceLayout[oldY][oldX];
+        pieceLayout[newY][newX] = tmp;
+        pieceLayout[oldY][oldX] = null;
     }
 
     @Override

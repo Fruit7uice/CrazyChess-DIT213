@@ -71,14 +71,5 @@ public class BoardGUI implements Observer {
         drawPieces();
     }
 
-    void printMatrix(){
 
-        for (int i = 0; i < pieceLayout.length; i++) {
-            System.out.println("\n {");
-            for (int j = 0; j < pieceLayout[i].length; j++) {
-                System.out.println(pieceLayout[i][j] + ", ");
-            }
-            System.out.println("}");
-        }
-    }
 }
