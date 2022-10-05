@@ -5,6 +5,7 @@ public abstract class Piece {
     public int yPos;
     public int width;
     public int height;
+    public int[][] listOfLegalMoves;
     private String firstImagePath;
     private String secondImagePath;
     private String type;
@@ -35,9 +36,5 @@ public abstract class Piece {
 
     public boolean isPlayer1() {
         return isPlayer1;
-    }
-
-    void move(int newX, int newY){
-
     }
 }
