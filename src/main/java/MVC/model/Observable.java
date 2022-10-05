@@ -1,6 +1,4 @@
-package MVC.view;
-
-import java.util.List;
+package MVC.model;
 
 public interface Observable {
 

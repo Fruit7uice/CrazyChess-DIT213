@@ -1,13 +1,13 @@
-package MVC.view;
+package MVC.controller;
 
-import MVC.model.Pieces.DummyPiece;
+import MVC.model.Board;
 import MVC.model.Pieces.Piece;
+import MVC.view.BoardGUI;
+import MVC.model.PieceLayoutFactory;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 public class MainBoard extends Application {
     public static int WINDOW_WIDTH = 800;

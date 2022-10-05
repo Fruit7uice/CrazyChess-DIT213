@@ -1,5 +1,6 @@
-package MVC.view;
+package MVC.model;
 
+import MVC.model.PieceFactory;
 import MVC.model.Pieces.Piece;
 
 import java.util.ArrayList;

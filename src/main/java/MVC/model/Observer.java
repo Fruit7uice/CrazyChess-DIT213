@@ -1,4 +1,4 @@
-package MVC.view;
+package MVC.model;
 
 import MVC.model.Pieces.Piece;
 

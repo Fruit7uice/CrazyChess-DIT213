@@ -1,6 +1,8 @@
-package MVC.view;
+package MVC.controller;
 
+import MVC.model.Board;
 import MVC.model.Pieces.Piece;
+import MVC.view.BoardGUI;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 

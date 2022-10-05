@@ -1,6 +1,10 @@
 package MVC.view;
 
+import MVC.controller.BoardController;
+import MVC.model.Board;
+import MVC.model.Observer;
 import MVC.model.Pieces.Piece;
+import MVC.model.Tile;
 import javafx.scene.paint.Color;
 
 
@@ -8,11 +12,11 @@ public class BoardGUI implements Observer {
 
     private BoardController controller;
 
-    Tile[][] boardLayout = new Tile[8][8];
+    public Tile[][] boardLayout = new Tile[8][8];
 
-    Piece[][] pieceLayout;
+    public Piece[][] pieceLayout;
 
-    void drawBoard() {
+    public void drawBoard() {
         //Board board = new Board();
         //Tile[][] boardLayout = board.getCurrentBoardLayout();
         System.out.println("Drawing board...");
@@ -27,7 +31,7 @@ public class BoardGUI implements Observer {
         }
     }
 
-    void drawPieces() {
+    public void drawPieces() {
         for (int i = 0; i < pieceLayout.length; i++) {
             for (int j = 0; j < pieceLayout[i].length; j++) {
                 Piece p = pieceLayout[i][j];
