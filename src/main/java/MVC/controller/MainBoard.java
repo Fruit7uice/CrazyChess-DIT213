@@ -13,7 +13,6 @@ public class MainBoard extends Application {
     public static int WINDOW_WIDTH = 800;
     public static int WINDOW_HEIGHT = 800;
 
-
     Board board;
     BoardController controller;
     BoardGUI gui;
@@ -54,6 +53,7 @@ public class MainBoard extends Application {
         stage.setTitle("CrazyChess");
 
         Scene scene = new Scene(boardPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+        stage.setFullScreen(false);
         stage.setScene(scene);
         stage.show();
     }

@@ -37,66 +37,25 @@ public class Board implements Observable {
         observers.add(observer);
         notify(observer);
     }
-    public Board() {
-        //initPieceLayout(pieceLayout);
-        initBoardTiles();
-    }
     public Board(Piece[][] pieceLayout) {
         //initPieceLayout(pieceLayout);
         this.pieceLayout = pieceLayout;
         initBoardTiles();
     }
-    public Board(BoardGUI gui, Piece[][] pieceLayout) {
-        this.pieceLayout = pieceLayout;
-        this.observers.add(gui);
-        initBoardTiles();
-    }
 
     public void initBoardTiles(){
-        // MUST CALL INITPIECELAYOUT() TO MAKE TILES CONTAIN PIECES
         int counter = 0;
-        //DummyPiece[][] piecesLayout = dummyPieceLayout;
         //Create grid and add pieces
         for (int i = 0; i < tiles.length; i++) {
             counter++;
             for (int j = 0; j < tiles[i].length; j++) {
                 counter++;
                 Color color  = (counter % 2 == 0)? light : dark;
-                //DummyPiece dummyPiece = piecesLayout[i][j];
-                //Tile tile = new Tile((i*tileSize), (j*tileSize), tileSize, tileSize, color, dummyPiece);
                 Tile tile = new Tile((i*tileSize), (j*tileSize), tileSize, tileSize, color);
                 tiles[i][j] = tile;
             }
         }
         notifyAllObservers();
-    }
-
-    private void initPieceLayout(DummyPiece[][] pieceLayout){
-        for (int i = 0; i < pieceLayout.length; i++) {
-            for (int j = 0; j < pieceLayout[i].length; j++) {
-                if (j < 2){
-                    Rectangle rectangle = new Rectangle();
-                    DummyPiece dp = new DummyPiece((i*tileSize), (j*tileSize), tileSize, tileSize, rectangle);
-                    /*
-                    rectangle.setOnMouseClicked(event -> new BoardController().pressed(event, dp));
-                    rectangle.setOnMouseDragged(event -> new BoardController().dragged(event, dp));
-                    rectangle.setOnMouseReleased(event -> new BoardController().released(event, dp));
-                    pieceLayout[i][j] = dp;
-
-                     */
-                } else if (j > 5) {
-                    Rectangle rectangle = new Rectangle();
-                    DummyPiece dp = new DummyPiece((i*tileSize), (j*tileSize), tileSize, tileSize, rectangle);
-                    /*
-                    rectangle.setOnMouseClicked(event -> new BoardController().pressed(event, dp));
-                    rectangle.setOnMouseDragged(event -> new BoardController().dragged(event, dp));
-                    rectangle.setOnMouseReleased(event -> new BoardController().released(event, dp));
-                    pieceLayout[i][j] = dp;
-
-                     */
-                }
-            }
-        }
     }
 
     public void initMouseEventForPiece(Piece[][] pieceLayout, BoardController ctrl){

@@ -14,11 +14,7 @@ public class BoardController {
         this.boardGUI = gui;
         this.board = board;
     }
-    public BoardController(BoardGUI boardGUI) {
-        this.boardGUI = boardGUI;
-        this.board = new Board(boardGUI);
-        System.out.println("Controller initialized and created model(Board)");
-    }
+
 
     public BoardController() {
     }
@@ -29,12 +25,10 @@ public class BoardController {
     }
 
     public void dragged(MouseEvent event, Piece piece){
-
         int newX = (int) (event.getX() - (Board.tileSize/2));
         int newY = (int) (event.getY() - (Board.tileSize/2));
-        System.out.println("X: " + newX + " Y: " + newY);
+        //System.out.println("X: " + newX + " Y: " + newY);
         boardGUI.drawPiece(piece, Color.AQUA, newX, newY);
-
     }
 
     public void released(MouseEvent event, Piece piece){
@@ -47,15 +41,11 @@ public class BoardController {
     public void snapToGrid(MouseEvent event, Piece piece){
         int newX = (int) Math.floor(event.getX() / Board.tileSize);
         int newY = (int) Math.floor(event.getY() / Board.tileSize);
-
         piece.xPos = (newX);
         piece.yPos = (newY);
         piece.rect.setFill(Color.GREEN);
-        System.out.println(piece.xPos);
-        System.out.println(piece.yPos);
+        //System.out.println(piece.xPos);
+        //System.out.println(piece.yPos);
     }
-
-
-
 
 }
