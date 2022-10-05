@@ -1,16 +1,19 @@
 package MVC.model.Pieces;
 
+import javafx.scene.shape.Rectangle;
+
 public abstract class Piece {
     public int xPos;
     public int yPos;
     public int width;
     public int height;
+    public Rectangle rect;
     private String firstImagePath;
     private String secondImagePath;
     private String type;
-    private boolean isPlayer1;
+    private boolean isPlayerOne;
 
-    public Piece(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayer1){
+    public Piece(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne){
         this.xPos = xPos;
         this.yPos = yPos;
         this.width = width;
@@ -18,7 +21,7 @@ public abstract class Piece {
         this.firstImagePath = firstImagePath;
         this.secondImagePath = secondImagePath;
         this.type = type;
-        this.isPlayer1 = isPlayer1;
+        this.isPlayerOne = isPlayerOne;
     }
 
 
@@ -30,11 +33,11 @@ public abstract class Piece {
         return secondImagePath;
     }
 
-    public abstract String getType();
+    public String getType(){return type;}
     public abstract boolean legalMove(int newX, int newY);
 
-    public boolean isPlayer1() {
-        return isPlayer1;
+    public boolean isPlayerOne() {
+        return isPlayerOne;
     }
 
     void move(int newX, int newY){
