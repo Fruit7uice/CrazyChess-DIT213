@@ -4,17 +4,11 @@ import MVC.model.strategies.KingStrategy;
 
 public class King extends Piece{
     private KingStrategy kingStrategy;
-    public King(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, Boolean isPlayer1) {
-        super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayer1);
+
+    public King(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne) {
+        super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayerOne);
     }
-    /**
-     * method for retrieving the type of the piece
-     * @return the type of the piece
-     */
-    @Override
-    public String getType(){
-        return "King";
-    }
+
 
     /**
      * @param newX the desired x position

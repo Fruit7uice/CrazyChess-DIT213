@@ -4,17 +4,8 @@ import MVC.model.strategies.PawnStrategy;
 
 public class Pawn extends Piece{
     private PawnStrategy pawnStrategy;
-    public Pawn(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayer1) {
-        super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayer1);
-    }
-
-    /**
-     * method for retrieving the type of the piece
-     * @return the type of the piece
-     */
-    @Override
-    public String getType(){
-        return "Pawn";
+    public Pawn(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne) {
+        super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayerOne);
     }
 
     /**

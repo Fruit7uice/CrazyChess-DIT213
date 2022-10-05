@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="429.0" fitWidth="735.0" layoutX="-22.0" layoutY="-14.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/photo-1588412079929-790b9f593d8e.jpeg" />
+            <Image url="@images/background.jpeg" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b6363" height="223.0" layoutX="200.0" layoutY="95.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />

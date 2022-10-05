@@ -4,18 +4,10 @@ import MVC.model.strategies.DiagonalStrategy;
 
 public class Bishop extends Piece{
     private DiagonalStrategy diagonalStrategy;
-    public Bishop(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayer1) {
-        super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayer1);
+    public Bishop(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne) {
+        super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayerOne);
     }
 
-    /**
-     * method for retrieving the type of the piece
-     * @return the type of the piece
-     */
-    @Override
-    public String getType(){
-        return "Bishop";
-    }
 
     /**
      * @param newX the desired x position
