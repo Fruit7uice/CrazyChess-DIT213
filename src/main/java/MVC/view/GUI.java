@@ -1,28 +1,22 @@
 package MVC.view;
 
-import MVC.controller.BoardController;
+import MVC.model.Board;
+import MVC.model.Observer;
 import MVC.model.Piece;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import MVC.model.Tile;
 
-import java.awt.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.util.Observable;
 
-import static MVC.controller.BoardController.tileSize;
+import static MVC.model.Board.tileSize;
 
 
-public class GUIRenderer {
+public class GUI implements Observer {
 
-    private BoardController controller;
 
-    public GUIRenderer(BoardController controller){
-        this.controller = controller;
-    }
+
+
 
     public void drawTile(Tile tile, int x, int y, Color c){
         tile.setWidth(tileSize);
@@ -45,6 +39,12 @@ public class GUIRenderer {
 
     public static void main(String[] args) {
         Application.launch(args);
+    }
+
+    @Override
+    public void update(Tile[][] tileState, Piece[][] pieceState) {
+
+
     }
 }
 

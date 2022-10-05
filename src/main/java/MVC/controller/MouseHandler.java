@@ -1,25 +1,33 @@
+/**
+ * Author David Einhaus
+ */
 package MVC.controller;
 
+import MVC.model.Board;
 import MVC.model.Piece;
+import java.lang.Math;
+
+import MVC.view.GUI;
 import javafx.scene.input.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.Rectangle;
-import static MVC.controller.Chess.tileSize;
+import static MVC.model.Board.tileSize;
 
-public class MoveHandler {
+public class MouseHandler {
 
 
     private int initX;
     private int initY;
-    private Chess controller;
+    private Board model;
+    private GUI gui;
 
-    public MoveHandler(Chess controller){
-        this.controller = controller;
+    public MouseHandler(Board model, GUI gui){
+        this.model = model;
+        this.gui = gui;
     }
 
     public void pressed(MouseEvent event, Piece p) {
-        p.setFill(Color.PINK);
-        System.out.println(p.getType().toString());
+        p.setFill(Color.PINK); //TODO remove this, replace with different "marked piece" indicator(?)
         initX = (int) Math.floor(event.getSceneX() / tileSize);
         initY = (int) Math.floor(event.getSceneY() / tileSize);
     }
@@ -28,7 +36,7 @@ public class MoveHandler {
         double x = event.getSceneX();
         double y = event.getSceneY();
         p.move(x, y);
-        controller.movePiece(p, x, y);
+        gui.movePiece(p, x, y); // special case of direct call to GUI as we aren't changing anything in the model
 
 
     }
@@ -41,8 +49,8 @@ public class MoveHandler {
 
     // TODO implement checks for the different piece types, and collision return true if move is legal, otherwise return false
     private boolean tryMove(Piece p, int x, int y) {
-        if(controller.collisionDetection(x, y)){
-            if(p.player1 != controller.board[x][y].getPieceColor()){
+        if(model.collisionDetection(x, y)){
+            if(p.player1 != model.pieces[x][y].getPlayer()){
                 //TODO implement capture method
             }
             return false;
@@ -57,8 +65,8 @@ public class MoveHandler {
         if(tryMove(p, newX, newY)) {
             p.move(newX, newY);
             p.setFill(Color.BLUE);
-            controller.setPiece(p, newX, newY);
-            controller.removePiece(initX, initY);// TODO remove this
+            model.setPiece(p, newX, newY);
+            model.removePiece(initX, initY);// TODO remove this
             event.consume();
         }else{
             p.move(initX, initY);

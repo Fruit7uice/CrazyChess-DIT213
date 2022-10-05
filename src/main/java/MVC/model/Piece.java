@@ -1,8 +1,7 @@
 package MVC.model;
 
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import static MVC.controller.Chess.tileSize;
+import static MVC.model.Board.tileSize;
 
 public class Piece extends Rectangle {
 
@@ -19,6 +18,10 @@ public class Piece extends Rectangle {
 
 
 
+    }
+
+    public boolean getPlayer(){
+        return this.player1;
     }
 
     public PieceType getType(){
