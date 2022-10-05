@@ -1,5 +1,9 @@
 package MVC.model.Pieces;
 
+/**
+ * MoveHandler class takes care of the movement of pieces.
+ * @author Alva Johansson
+ */
 public class MoveHandler {
     /**
      * @param newX the desired x position

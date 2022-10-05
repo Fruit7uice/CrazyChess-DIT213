@@ -2,7 +2,8 @@ package MVC.model.strategies;
 /**
  * @author Alva Johansson
  */
-public class DiagonalStrategy implements IMoveStrategy {
+public class
+DiagonalStrategy implements IMoveStrategy {
     /**
      * @param startX Starting x coordinate on the board
      * @param startY Starting y coordinate on the board

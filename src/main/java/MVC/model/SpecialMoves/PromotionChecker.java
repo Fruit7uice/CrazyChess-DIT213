@@ -15,11 +15,21 @@ public class PromotionChecker {
     }
     //imagepath, fixa detta! också att fixa så att bonden kan bli andra pjäser än bara dam
     // kanske byta namn om denna kallas på ofta?
-    // kanske skapa pjäsen med factory istället senare
+    // skapa pjäsen med factory istället senare
+    // hur funkar det med isPlayer1 här?
     public void promotion(Piece p) {
-        if (p instanceof Pawn && tryPromotion(p)) {
+
+        if (p.getType() == "Pawn" && tryPromotion(p)) {
+            choosePice(p, showOptionForPromotion());
             Queen queen = new Queen(p.xPos, p.yPos, p.width, p.height,
-                                    "vit dama", "svart dama", "Queen");
+                                    "vit dama", "svart dama", "Queen", true);
         }
     }
+    public int showOptionForPromotion() {
+        return 0;
+    }
+    public static void choosePice(Piece p, int choice) {
+
+    }
+
 }
