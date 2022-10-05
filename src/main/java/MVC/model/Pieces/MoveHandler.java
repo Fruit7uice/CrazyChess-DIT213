@@ -38,6 +38,9 @@ public class MoveHandler {
         if(moveChecker(newX, newY, board, piece)){ // updates the position if the move is legal
             piece.xPos = newX;
             piece.yPos = newY;
+            if(piece.getClass() == King.class || piece.getClass() == Pawn.class || piece.getClass() == Rook.class){
+                piece.hasMoved = true; // The first time the piece moves, the boolean is going to get
+            }                          // switched to true.
         }
     }
 

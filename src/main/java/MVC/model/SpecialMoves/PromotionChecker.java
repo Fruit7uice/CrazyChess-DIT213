@@ -9,7 +9,7 @@ import MVC.model.Pieces.*;
  * @author Joel Leiditz Thorsson
  */
 public class PromotionChecker {
-
+    /*
     public boolean tryPromotion (Piece p){
         return p.yPos == 0 || p.yPos == 7;
     }
@@ -22,4 +22,6 @@ public class PromotionChecker {
                                     "vit dama", "svart dama", "Queen", true);
         }
     }
+
+     */
 }

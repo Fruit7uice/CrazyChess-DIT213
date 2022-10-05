@@ -13,8 +13,9 @@ public abstract class Piece {
     private String secondImagePath;
     private String type;
     public boolean isPlayerOne;
+    public boolean hasMoved;
 
-    public Piece(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne) {
+    public Piece(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne, boolean hasMoved) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.width = width;
@@ -24,6 +25,7 @@ public abstract class Piece {
         this.type = type;
         this.isPlayerOne = isPlayerOne;
         this.rect = new Rectangle(xPos, yPos, width, height);
+        this.hasMoved = hasMoved;
     }
 
 
