@@ -1,5 +1,7 @@
 package MVC.model.Pieces;
 
+import java.util.Objects;
+
 public class MoveHandler {
     /**
      * @param newX the desired x position
@@ -38,6 +40,12 @@ public class MoveHandler {
         if(moveChecker(newX, newY, board, piece)){ // updates the position if the move is legal
             piece.xPos = newX;
             piece.yPos = newY;
+            if(piece.getClass() == King.class){
+                ((King) piece).hasMoved = true;
+
+
+
+            }
         }
     }
 

@@ -2,10 +2,14 @@ package MVC.model.Pieces;
 
 import MVC.model.strategies.KingStrategy;
 
+
+
 public class King extends Piece{
+    public boolean hasMoved = false;
     private KingStrategy kingStrategy;
-    public King(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, Boolean isPlayer1) {
+    public King(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, Boolean isPlayer1, Boolean hasMoved) {
         super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayer1);
+        this.hasMoved = hasMoved;
     }
     /**
      * method for retrieving the type of the piece
