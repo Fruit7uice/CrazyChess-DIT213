@@ -7,13 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
 import java.io.File;
+import java.util.Objects;
 
 public class SettingsMenuGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            AnchorPane root = FXMLLoader.load(new File("src/main/resources/SettingsMenuGUI.fxml").toURI().toURL());
+            AnchorPane root =
+                    FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/SettingsMenuGUI.fxml")));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
             root.requestFocus();
