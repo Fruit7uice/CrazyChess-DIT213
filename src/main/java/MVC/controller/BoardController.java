@@ -39,15 +39,13 @@ public class BoardController {
         System.out.println(piece.yPos);
         int newX = (int) Math.floor(event.getX() / Board.tileSize);
         int newY = (int) Math.floor(event.getY() / Board.tileSize);
-        System.out.println("REALESED DRAAAAAAAAAAAAAAAAAAAG");
+
 
         if(onDrag && true){ //replace true with: moveHandler.moveChecker(newX, newY, pieces, piece)
             onDrag = false;
             board.updateGameLayout(piece, newX, newY);
             snapToGrid(event, piece, newX, newY);
             boardGUI.drawPieceInPlace(piece, Color.GREEN);
-
-
         }
         printMatrix();
 

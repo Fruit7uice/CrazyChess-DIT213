@@ -20,7 +20,6 @@ public class Board implements Observable {
     private Color light = Color.rgb(248, 226, 184); // Darker Color
 
     public Piece[][] pieceLayout;
-    //private DummyPiece[][] dummyPieceLayout;
     private Tile[][] tiles = new Tile[8][8];
 
     public Board(List<Observer> observers){
@@ -114,6 +113,7 @@ public class Board implements Observable {
         Piece tmp = pieceLayout[oldY][oldX];
         pieceLayout[newY][newX] = tmp;
         pieceLayout[oldY][oldX] = null;
+        notifyAllObservers();
     }
 
     @Override
