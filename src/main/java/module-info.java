@@ -1,8 +1,13 @@
 module MVC {
+
     requires javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
     exports MVC.controller;
-    exports MVC.view;
+    opens MVC.controller;
     exports MVC.model;
+    opens MVC.model;
+
+
 }

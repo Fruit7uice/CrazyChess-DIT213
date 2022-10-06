@@ -1,0 +1,5 @@
+package MVC.model;
+
+public enum PieceType {
+    WPAWN, BPAWN, WROOK, BROOK, WKNIGHT, BKNIGHT, WBISHOP, BBISHOP, WQUEEN, BQUEEN, WKING, BKING;
+}
