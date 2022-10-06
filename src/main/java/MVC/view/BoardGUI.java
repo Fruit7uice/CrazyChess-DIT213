@@ -53,32 +53,24 @@ public class BoardGUI implements Observer {
     }
 
     public void drawPiece(Piece piece, Color color, int x, int y){
+
         piece.rect.setFill(color);
         piece.rect.setWidth(piece.width);
         piece.rect.setHeight(piece.height);
         piece.rect.setX(x);
         piece.rect.setY(y);
-        System.out.println("Draws piece at coords: X" + x + " and Y" + y);
-        //printMatrix();
+        //System.out.println("Draws piece at coords: X" + x + " and Y" + y);
     }
 
     @Override
     public void update(Tile[][] boardState, Piece[][] pieceLayout) {
         //Board board = new Board();
+
         this.boardLayout = boardState;
         this.pieceLayout = pieceLayout;
         drawBoard();
         drawPieces();
     }
 
-    void printMatrix(){
 
-        for (int i = 0; i < pieceLayout.length; i++) {
-            System.out.println("\n {");
-            for (int j = 0; j < pieceLayout[i].length; j++) {
-                System.out.println(pieceLayout[i][j] + ", ");
-            }
-            System.out.println("}");
-        }
-    }
 }

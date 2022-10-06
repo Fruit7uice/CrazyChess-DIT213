@@ -2,7 +2,7 @@ package MVC.model.Pieces;
 
 import javafx.scene.shape.Rectangle;
 
-
+// remove the javafx stuff.
 public abstract class Piece {
     public int xPos;
     public int yPos;
@@ -13,6 +13,7 @@ public abstract class Piece {
     private String firstImagePath;
     private String secondImagePath;
     private String type;
+
     public boolean isPlayerOne;
 
     public Piece(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne) {
