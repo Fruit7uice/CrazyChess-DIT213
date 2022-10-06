@@ -55,7 +55,6 @@ public class BoardController {
 
         piece.xPos = (newX);
         piece.yPos = (newY);
-        piece.rect.setFill(Color.GREEN);
         //System.out.println(piece.xPos);
         //System.out.println(piece.yPos);
     }
