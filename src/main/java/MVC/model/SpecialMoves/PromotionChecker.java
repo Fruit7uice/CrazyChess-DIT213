@@ -1,6 +1,12 @@
 package MVC.model.SpecialMoves;
 
+import MVC.controller.BoardController;
+import MVC.controller.PromotionController;
+import MVC.model.PieceFactory;
 import MVC.model.Pieces.*;
+import javafx.scene.control.Button;
+
+import java.util.Objects;
 
 /**
  * Promotion for pawn, if it reaches either the top or
@@ -11,25 +17,32 @@ import MVC.model.Pieces.*;
 public class PromotionChecker {
 
     public boolean tryPromotion (Piece p){
-        return p.yPos == 0 || p.yPos == 7;
+        if ((p.yPos == 0 || p.yPos == 7) && Objects.equals(p.getType(), "Pawn")){
+
+            return true;
+        }  else {
+            return false;
+        }
     }
     //imagepath, fixa detta! också att fixa så att bonden kan bli andra pjäser än bara dam
     // kanske byta namn om denna kallas på ofta?
     // skapa pjäsen med factory istället senare
     // hur funkar det med isPlayer1 här?
-    public void promotion(Piece p) {
 
-        if (p.getType() == "Pawn" && tryPromotion(p)) {
-            choosePice(p, showOptionForPromotion());
-            Queen queen = new Queen(p.xPos, p.yPos, p.width, p.height,
-                    "vit dama", "svart dama", "Queen", true);
-        }
+    public static void bishopChoice(Piece p) {
+        PieceFactory.createBishop(p.xPos, p.yPos);
     }
-    public int showOptionForPromotion() {
-        return 0;
-    }
-    public static void choosePice(Piece p, int choice) {
 
+    public static void queenChoice(Piece p) {
+        PieceFactory.createQueen(p.xPos, p.yPos);
+    }
+
+    public static void knightChoice(Piece p) {
+        PieceFactory.createKnight(p.xPos, p.yPos);
+    }
+
+    public static void rookChoice(Piece p) {
+        PieceFactory.createRook(p.xPos, p.yPos);
     }
 
 }
