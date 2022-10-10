@@ -23,11 +23,8 @@ public class King extends Piece {
     public boolean legalMove(int newX, int newY) {
         if (newX != xPos || newY != yPos) {// checks if we have tried to move
             if (Math.abs(xPos - newX) < 2 && Math.abs(yPos - newY) < 2) {
-                if (horizontalStrategy.move(xPos, yPos, newX, newY) ^ verticalStrategy.move(xPos, yPos, newX, newY) ^ diagonalStrategy.move(xPos, yPos, newX, newY)) { //makes sure the strategy allows us to move
-                    return true;
-                } else {
-                    return false;
-                }
+                //makes sure the strategy allows us to move
+                return horizontalStrategy.move(xPos, yPos, newX, newY) ^ verticalStrategy.move(xPos, yPos, newX, newY) ^ diagonalStrategy.move(xPos, yPos, newX, newY);
             }else
             return false;
         }
