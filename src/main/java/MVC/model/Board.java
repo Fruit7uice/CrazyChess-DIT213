@@ -114,6 +114,17 @@ public class Board implements Observable {
         observers.add(o);
     }
 
+
+    public void updateGameLayout(Piece piece, int newX, int newY){
+        int oldX = piece.xPos;
+        int oldY = piece.yPos;
+        Piece tmp = pieceLayout[oldY][oldX];
+        pieceLayout[newY][newX] = tmp;
+        pieceLayout[oldY][oldX] = null;
+        notifyAllObservers();
+    }
+
+
     @Override
     public void notify(Observer observer) {
         observer.update(tiles, pieceLayout);

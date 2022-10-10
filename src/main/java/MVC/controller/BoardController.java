@@ -1,6 +1,7 @@
 package MVC.controller;
 
 import MVC.model.Board;
+import MVC.model.Pieces.MoveHandler;
 import MVC.model.Pieces.Piece;
 import MVC.view.BoardGUI;
 import javafx.scene.input.MouseEvent;
@@ -9,10 +10,12 @@ import javafx.scene.paint.Color;
 public class BoardController {
     BoardGUI boardGUI;
     Board board;
+    MoveHandler moveHandler;
 
-    public BoardController(BoardGUI gui, Board board) {
+    public BoardController(BoardGUI gui, Board board, MoveHandler moveHandler) {
         this.boardGUI = gui;
         this.board = board;
+        this.moveHandler = moveHandler;
     }
 
 
@@ -34,8 +37,14 @@ public class BoardController {
     public void released(MouseEvent event, Piece piece){
         System.out.println(piece.xPos);
         System.out.println(piece.yPos);
-        snapToGrid(event, piece);
-        boardGUI.drawPieceInPlace(piece, Color.GREEN);
+        int newX = (int) Math.floor(event.getX() / Board.tileSize);
+        int newY = (int) Math.floor(event.getY() / Board.tileSize);
+        if(moveHandler.moveChecker(newX, newY, board.pieceLayout, piece)){
+           snapToGrid(event, piece);
+           boardGUI.drawPieceInPlace(piece, Color.GREEN);
+        }
+
+
     }
 
     public void snapToGrid(MouseEvent event, Piece piece){
@@ -47,5 +56,6 @@ public class BoardController {
         //System.out.println(piece.xPos);
         //System.out.println(piece.yPos);
     }
+
 
 }

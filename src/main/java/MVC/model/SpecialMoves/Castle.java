@@ -2,6 +2,7 @@ package MVC.model.SpecialMoves;
 
 
 import MVC.model.Board;
+import MVC.model.PieceFactory;
 import MVC.model.PieceLayoutFactory;
 import MVC.model.Pieces.King;
 import MVC.model.Pieces.MoveHandler;
@@ -24,13 +25,17 @@ public class Castle {
     public MoveHandler moveHandler;
 
 
+
     public Castle(King king, Rook rook, Board board, Piece[][] pieces, MoveHandler moveHandler){
         this.king = king;
         this.rook = rook;
         this.board = board;
         this.pieces = pieces;
         this.moveHandler = moveHandler;
+
     }
+
+
 
 
     public boolean tryCastle(King king, Rook rook){
@@ -66,9 +71,8 @@ public class Castle {
         }
     }
 
-    public void castleBKRBR (Piece[][] pieces, King king, Rook rook){ // White King Right White Rook
+    public void castleBlackKingRightBlackRook (Piece[][] pieces, King king, Rook rook){ // White King Right White Rook
         if (preconditionsCastleWKLWR(pieces, king, rook)){ // måste jag ta in en matris i denna metoden?
-
             board.updateGameLayout(king, 6, 0);
             board.updateGameLayout(rook, 5, 0);
 
@@ -76,10 +80,7 @@ public class Castle {
     }
 
     public boolean whiteKingMovesLeft(King king, Piece[][] pieces){
-        if(moveHandler.movePiece(0, 7, pieces, king)){
-            return true;
-        }
-        return false;
+        return moveHandler.moveChecker(0, 7, pieces, king);
     }
 
     // whiteKingMovesLeft
