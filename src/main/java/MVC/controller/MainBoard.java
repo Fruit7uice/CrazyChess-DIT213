@@ -29,6 +29,7 @@ public class MainBoard extends Application {
         Piece[][] pieces = PieceLayoutFactory.createMatrixLayout();
         this.gui = new BoardGUI();
         this.board = new Board(pieces);
+        this.movehandler = new MoveHandler();
         this.controller = new BoardController(gui, board, movehandler);
         board.initMouseEventForPiece(pieces, controller);
         board.addObserver(gui);

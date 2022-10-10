@@ -4,8 +4,8 @@ import MVC.model.strategies.DiagonalStrategy;
 
 public class Bishop extends Piece{
     private DiagonalStrategy diagonalStrategy;
-    public Bishop(int xPos, int yPos, int width, int height, String firstImagePath, String type, boolean isPlayerOne) {
-        super(xPos, yPos, width, height, firstImagePath, type, isPlayerOne);
+    public Bishop(int xPos, int yPos, int width, int height, String imagePath, String type, boolean isPlayerOne) {
+        super(xPos, yPos, width, height, imagePath, type, isPlayerOne);
     }
 
 

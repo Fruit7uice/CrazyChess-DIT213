@@ -4,28 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="Commit to merge">
+    <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="Cleaned up redundant classes and changed all pieces to only have one image path.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/MainBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/MouseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/MouseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Game.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Observable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Observable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Observer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/PieceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/PieceFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/PieceType.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/King.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Knight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/MoveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/MoveHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Pawn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Queen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Rook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/view/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/view/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +29,9 @@
         <option value="Interface" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/development" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -189,7 +181,14 @@
       <option name="presentableId" value="LOCAL−00003" />
       <updated>1664787643727</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Cleaned up redundant classes and changed all pieces to only have one image path.">
+      <created>1665394177390</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1665394177390</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +209,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes to Piece and SnapToGridController, eventhandler created, needs functions, board drawn, pieces drawn (as circles) on board" />
     <MESSAGE value="Commit to merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit to merge" />
+    <MESSAGE value="Cleaned up redundant classes and changed all pieces to only have one image path." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up redundant classes and changed all pieces to only have one image path." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -8,8 +8,8 @@ import MVC.model.strategies.VerticalStrategy;
 public class Rook extends Piece{
     HorizontalStrategy horizontalStrategy;
     VerticalStrategy verticalStrategy;
-    public Rook(int xPos, int yPos, int width, int height, String firstImagePath, String type, boolean isPlayerOne) {
-        super(xPos, yPos, width, height, firstImagePath, type, isPlayerOne);
+    public Rook(int xPos, int yPos, int width, int height, String imagePath, String type, boolean isPlayerOne) {
+        super(xPos, yPos, width, height, imagePath, type, isPlayerOne);
     }
 
     /**
