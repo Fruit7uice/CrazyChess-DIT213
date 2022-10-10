@@ -11,12 +11,8 @@ public class KnightStrategy {
      * @return returns a bool if the desired movement is a "knight" movement
      */
     public boolean move(int startX, int startY, int newX, int newY){
-        if(Math.abs(startX - newX) + Math.abs(startY - newY) == 3  &&
-                Math.abs(startX - newX) > 0 && Math.abs(startY - newY) > 0){
-            return true;
-        }else{
-            return false;
-        }
+        return Math.abs(startX - newX) + Math.abs(startY - newY) == 3 &&
+                Math.abs(startX - newX) > 0 && Math.abs(startY - newY) > 0;
     }
 
 

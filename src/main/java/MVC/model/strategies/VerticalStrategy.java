@@ -11,10 +11,6 @@ public class VerticalStrategy implements IMoveStrategy{
     * @return returns a bool if the desired movement is a vertical movement
     */
     public boolean move(int startX, int startY, int newX, int newY) {
-        if ((Math.abs(startY - newY) > 0) && (startX == newX)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (Math.abs(startY - newY) > 0) && (startX == newX);
     }
 }
