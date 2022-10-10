@@ -19,7 +19,7 @@ public class PromotionChecker {
     public void promotion(Piece p) {
         if (p.getType() == "Pawn" && tryPromotion(p)) {
             Queen queen = new Queen(p.xPos, p.yPos, p.width, p.height,
-                                    "vit dama", "svart dama", "Queen", true);
+                                    "vit dama",  "Queen", true);
         }
     }
 }

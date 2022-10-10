@@ -5,18 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="Commit to merge">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/model/LayoutFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Observable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Observer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/model/PieceFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/Chess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/MoveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/MouseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/BoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/MainBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/MouseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/MouseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Observable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Observable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Observer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Piece.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/PieceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/PieceFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/PieceType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/King.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/MoveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/MoveHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Pawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Queen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Rook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/view/GUIRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/view/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/view/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/view/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +42,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="David-main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -79,7 +93,7 @@
       <recent name="MVC.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Board">
+  <component name="RunManager" selected="Application.MainBoard">
     <configuration name="Board" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-19" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -88,6 +102,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="MVC.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainBoard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MVC.controller.MainBoard" />
+      <module name="CrazyChess-DIT213" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MVC.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -124,9 +151,11 @@
     <list>
       <item itemvalue="Application.SnapToGridApp" />
       <item itemvalue="Application.Board" />
+      <item itemvalue="Application.MainBoard" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainBoard" />
         <item itemvalue="Application.Board" />
         <item itemvalue="Application.SnapToGridApp" />
       </list>

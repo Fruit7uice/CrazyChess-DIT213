@@ -8,8 +8,8 @@ public class Queen extends Piece{
     private HorizontalStrategy horizontalStrategy;
     private VerticalStrategy verticalStrategy;
     private DiagonalStrategy diagonalStrategy;
-    public Queen(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne) {
-        super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayerOne);
+    public Queen(int xPos, int yPos, int width, int height, String firstImagePath, String type, boolean isPlayerOne) {
+        super(xPos, yPos, width, height, firstImagePath, type, isPlayerOne);
     }
 
     /**

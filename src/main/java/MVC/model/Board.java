@@ -1,103 +1,119 @@
-/**
- * Author: David Einhaus
- */
-
 package MVC.model;
 
-import MVC.controller.MouseHandler;
-import MVC.model.*;
-import MVC.view.GUI;
-import javafx.application.Application;
-import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.*;
-import javafx.stage.Stage;
 
-import javax.imageio.plugins.tiff.ExifInteroperabilityTagSet;
+import MVC.model.Pieces.Piece;
+import MVC.controller.BoardController;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
 import java.util.List;
 
+
 public class Board implements Observable {
+    public static int BOARD_SIZE = 800;
 
-    @FXML
-    Pane pane;
+    public static int tileSize = BOARD_SIZE/8;
+    List<Observer> observers = new ArrayList<>();
 
-    public static final int tileSize = 100;
-    public static final int rows = 8;
-    public static final int columns = 8;
-    public static final int boardHeight = rows * tileSize;
-    public static final int boardWidth = columns * tileSize;
-    private Color darkTile = Color.rgb(248, 226, 184);
-    private Color lightTile = Color.rgb(65, 47, 44);
-    private MouseHandler mouseHandler;
-    private GUI gui;
-    public Tile[][] tiles = new Tile[columns][rows];
-    public Piece[][] pieces = new Piece[columns][rows];
-    private List<Observer> observers;
+    private Color dark = Color.rgb(65, 47, 44);  //Lighter Color
+    private Color light = Color.rgb(248, 226, 184); // Darker Color
 
-     Group tileGroup = new Group();
-     Group pieceGroup = new Group();
+    public Piece[][] pieceLayout;
+    private Tile[][] tiles = new Tile[8][8];
 
-     private Parent createContent() {
-         Pane root = new Pane();
-         root.setMaxSize(boardWidth, boardHeight);
-         root.getChildren().addAll(tileGroup, pieceGroup);
+    public Board(List<Observer> observers){
+        //initPieceLayout(pieceLayout);
+        this.observers = observers;
+        initBoardTiles();
+        notifyAllObservers();
+    }
 
-         for (int y = 0; y < rows; y++) {
-             for (int x = 0; x < columns; x++) {
-                 Tile tile;
-                 if ((x + y) % 2 == 0) {
-                     tile = new Tile(x, y);
-                     gui.drawTile(tile, x, y, darkTile);
-                 } else {
-                     tile = new Tile(x, y);
-                     gui.drawTile(tile, x, y, lightTile);
-                 }
-                 tiles[x][y] = tile;
-                 tileGroup.getChildren().add(tile);
-             }
-         }
+    public Board(Observer observer){
+        //initPieceLayout(pieceLayout);
+        initBoardTiles();
+        observers.add(observer);
+        notify(observer);
+    }
+    public Board(Piece[][] pieceLayout) {
+        //initPieceLayout(pieceLayout);
+        this.pieceLayout = pieceLayout;
+        initBoardTiles();
+    }
 
-
-         return root;
-     }
-
-
-
-
-    /**
-     * Puts a piece on each tile on the given row
-     * @param row the given row for the function
-     */
-    private void initializePieces(int row, PieceType[] typelist, int index){
-
-        for (int col = 0; col < columns; col++) { //TODO rewrite to implement factory method
-            Piece p = new Piece(typelist[index], col, row);
-            index++;
-            pieceGroup.getChildren().add(p);
-            pieces[row][col] = p;
-            gui.drawPiece(p, col, row);
-
-            p.setOnMousePressed(event -> mouseHandler.pressed(event, p));
-            p.setOnMouseDragged(event -> mouseHandler.dragDetected(event, p));
-            p.setOnDragDone(event -> mouseHandler.dragComplete(event, p));
-            p.setOnMouseReleased(event -> mouseHandler.released(event, p));
-
+    public void initBoardTiles(){
+        int counter = 0;
+        //Create grid and add pieces
+        for (int i = 0; i < tiles.length; i++) {
+            counter++;
+            for (int j = 0; j < tiles[i].length; j++) {
+                counter++;
+                Color color  = (counter % 2 == 0)? light : dark;
+                Tile tile = new Tile((i*tileSize), (j*tileSize), tileSize, tileSize, color);
+                tiles[i][j] = tile;
+            }
         }
-
+        notifyAllObservers();
     }
 
+    public void initMouseEventForPiece(Piece[][] pieceLayout, BoardController ctrl){
+        for (int i = 0; i < pieceLayout.length; i++) {
+            for (int j = 0; j < pieceLayout[i].length; j++) {
+                if (i < 2){
+                    Piece piece = pieceLayout[i][j];
+                    System.out.println("Here x: " + i + " y: " + j + " " + pieceLayout[i][j].rect);
+                    Rectangle rectangle = pieceLayout[i][j].rect;
+                    rectangle.setOnMouseClicked(event -> ctrl.pressed(event, piece));
+                    rectangle.setOnMouseDragged(event -> ctrl.dragged(event, piece));
+                    rectangle.setOnMouseReleased(event -> ctrl.dragReleased(event, piece));
 
-    public void setPiece(Piece p, int x,int y){
-        pieces[x][y] = p;
-
+                } else if (i > 5) {
+                    Piece piece = pieceLayout[i][j];
+                    System.out.println("Here x: " + i + " y: " + j + " " + pieceLayout[i][j].rect);
+                    Rectangle rectangle = pieceLayout[i][j].rect;
+                    rectangle.setOnMouseClicked(event -> ctrl.pressed(event, piece));
+                    rectangle.setOnMouseDragged(event -> ctrl.dragged(event, piece));
+                    rectangle.setOnMouseReleased(event -> ctrl.dragReleased(event, piece));
+                }
+            }
+        }
     }
-    public boolean collisionDetection(int x, int y){
-        return pieces[x][y] != null;
+
+    public Tile[][] getCurrentBoardLayout() {
+        Tile[][] layoutCopy = new Tile[tiles.length][tiles.length];
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                layoutCopy[i][j] = tiles[i][j];
+            }
+        }
+        return layoutCopy;
     }
 
-    public void removePiece(int x, int y){
-        pieces[x][y] = null;
+    public Piece[][] getPieceLayout() {
+        Piece[][] layoutCopy = new Piece[pieceLayout.length][pieceLayout.length];
+        for (int i = 0; i < pieceLayout.length; i++) {
+            for (int j = 0; j < pieceLayout[i].length; j++) {
+                layoutCopy[i][j] = pieceLayout[i][j];
+            }
+        }
+        return layoutCopy;
+    }
+
+    public Color getDarkColor() {
+        return dark;
+    }
+
+    public Color getLightColor() {
+        return light;
+    }
+
+    public void updateGameLayout(Piece piece, int newX, int newY){
+        int oldX = piece.xPos;
+        int oldY = piece.yPos;
+        Piece tmp = pieceLayout[oldY][oldX];
+        pieceLayout[newY][newX] = tmp;
+        pieceLayout[oldY][oldX] = null;
+        notifyAllObservers();
     }
 
     @Override
@@ -106,15 +122,15 @@ public class Board implements Observable {
     }
 
     @Override
-    public void updateObserver(Observer o, Tile[][] tileState, Piece[][] pieceState) {
-        o.update(tileState, pieceState);
+    public void notify(Observer observer) {
+        observer.update(tiles, pieceLayout);
     }
 
     @Override
-    public void updateAll(Tile[][] tileState, Piece[][] pieceState) {
-        for (Observer o: observers
-             ) {
-            o.update(tileState, pieceState);
+    public void notifyAllObservers() {
+        for (Observer observer : observers) {
+            observer.update(tiles, pieceLayout);
         }
     }
+
 }

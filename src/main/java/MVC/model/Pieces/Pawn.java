@@ -4,8 +4,8 @@ import MVC.model.strategies.PawnStrategy;
 
 public class Pawn extends Piece{
     private PawnStrategy pawnStrategy;
-    public Pawn(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne) {
-        super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayerOne);
+    public Pawn(int xPos, int yPos, int width, int height, String firstImagePath, String type, boolean isPlayerOne) {
+        super(xPos, yPos, width, height, firstImagePath, type, isPlayerOne);
     }
 
     /**

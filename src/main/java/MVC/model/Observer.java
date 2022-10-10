@@ -1,5 +1,7 @@
 package MVC.model;
 
+import MVC.model.Pieces.Piece;
+
 public interface Observer {
-    public void update(Tile[][] boardState, Piece[][] pieceState);
+    void update(Tile[][] boardState, Piece[][] pieces);
 }
