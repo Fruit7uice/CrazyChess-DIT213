@@ -9,7 +9,7 @@ public abstract class Piece {
     public int width;
     public int height;
     public int[][] listOfLegalMoves;
-    public Rectangle rect;
+    //public Rectangle rect;
     private String firstImagePath;
     private String secondImagePath;
     private String type;
@@ -25,7 +25,7 @@ public abstract class Piece {
         this.secondImagePath = secondImagePath;
         this.type = type;
         this.isPlayerOne = isPlayerOne;
-        this.rect = new Rectangle(xPos, yPos, width, height);
+        //this.rect = new Rectangle(xPos, yPos, width, height);
     }
 
 

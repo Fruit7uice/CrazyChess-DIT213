@@ -24,11 +24,12 @@ public class MainBoard extends Application {
 
     @Override
     public void init(){
-        Piece[][] pieces = PieceLayoutFactory.createMatrixLayout();
-        this.gui = new BoardGUI();
-        this.board = new Board(pieces);
+        Piece[][] pieceLayout = PieceLayoutFactory.createMatrixLayout();
+        this.boardPane = new Pane(); // Creates a new pane
+        this.gui = new BoardGUI(boardPane);
+        this.board = new Board(pieceLayout);
         this.controller = new BoardController(gui, board);
-        board.initMouseEventForPiece(pieces, controller);
+        //board.initMouseEventForPiece(pieceLayout, controller);
         board.addObserver(gui);
         //board.notifyAllObservers();
     }
@@ -37,16 +38,15 @@ public class MainBoard extends Application {
     public void start(Stage stage) throws Exception {
         System.out.println("Start controller: " + controller);
         board.notifyAllObservers(); // Notify observers and update their state.
-        this.boardPane = new Pane(); // Creates a new pane
         System.out.println("Gui: " + gui);
         System.out.println("Board: " + board);
         //System.out.println(gui.boardLayout[0][1]);
-        initBoard(boardPane); // Adds Tile layout to pane
-        initPieces(boardPane); // Adds Pieces layout to pane
+        //initBoard(boardPane); // Adds Tile layout to pane
+        //initPieces(boardPane); // Adds Pieces layout to pane
         board.notifyAllObservers(); // Notify observers and update their state.
 
-        gui.drawBoard(); // Draws the board layout Graphically
-        gui.drawPieces(); // Draws the piece layout Graphically
+        //gui.drawBoard(); // Draws the board layout Graphically
+        //gui.drawPieces(); // Draws the piece layout Graphically
         stage.setTitle("CrazyChess");
 
         Scene scene = new Scene(boardPane, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -55,6 +55,7 @@ public class MainBoard extends Application {
         stage.show();
     }
 
+    /*
     void initBoard(Pane pane) {
         //Loops through the matrix and adds all tiles to pane
         for (int i = 0; i < gui.boardLayout.length; i++) {
@@ -64,6 +65,9 @@ public class MainBoard extends Application {
             }
         }
     }
+     */
+
+   /*
     void initPieces(Pane pane) {
         //Loops through the matrix and adds all pieces to pane
         for (int i = 0; i < gui.pieceLayout.length; i++) {
@@ -75,4 +79,6 @@ public class MainBoard extends Application {
             }
         }
     }
+
+    */
 }

@@ -1,12 +1,14 @@
-package MVC.model;
+package MVC.view;
 
 
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+
+import static MVC.model.Board.BOARD_SIZE;
 
 public class Tile extends Rectangle {
 
+    public static int tileSize = BOARD_SIZE/8;
     private Color color;
 
     public Tile() {}

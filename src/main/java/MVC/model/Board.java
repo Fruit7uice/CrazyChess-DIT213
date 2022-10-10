@@ -3,6 +3,7 @@ package MVC.model;
 
 import MVC.model.Pieces.Piece;
 import MVC.controller.BoardController;
+import MVC.view.Tile;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -13,34 +14,37 @@ import java.util.List;
 public class Board implements Observable {
     public static int BOARD_SIZE = 800;
 
-    public static int tileSize = BOARD_SIZE/8;
+
     List<Observer> observers = new ArrayList<>();
 
-    private Color dark = Color.rgb(65, 47, 44);  //Lighter Color
-    private Color light = Color.rgb(248, 226, 184); // Darker Color
+    /*
+    private Color darkTile = Color.rgb(65, 47, 44);  //Lighter Color
+    private Color lightTile = Color.rgb(248, 226, 184); // Darker Color
+     */
 
     public Piece[][] pieceLayout;
-    private Tile[][] tiles = new Tile[8][8];
+    //private Tile[][] tiles = new Tile[8][8];
 
     public Board(List<Observer> observers){
         //initPieceLayout(pieceLayout);
         this.observers = observers;
-        initBoardTiles();
+        //initBoardTiles();
         notifyAllObservers();
     }
 
     public Board(Observer observer){
         //initPieceLayout(pieceLayout);
-        initBoardTiles();
+        //initBoardTiles();
         observers.add(observer);
         notify(observer);
     }
     public Board(Piece[][] pieceLayout) {
         //initPieceLayout(pieceLayout);
         this.pieceLayout = pieceLayout;
-        initBoardTiles();
+        //initBoardTiles();
     }
 
+    /*
     public void initBoardTiles(){
         int counter = 0;
         //Create grid and add pieces
@@ -48,7 +52,7 @@ public class Board implements Observable {
             counter++;
             for (int j = 0; j < tiles[i].length; j++) {
                 counter++;
-                Color color  = (counter % 2 == 0)? light : dark;
+                Color color  = (counter % 2 == 0)? lightTile : darkTile;
                 Tile tile = new Tile((i*tileSize), (j*tileSize), tileSize, tileSize, color);
                 tiles[i][j] = tile;
             }
@@ -56,7 +60,10 @@ public class Board implements Observable {
         notifyAllObservers();
     }
 
+     */
+
     public void initMouseEventForPiece(Piece[][] pieceLayout, BoardController ctrl){
+        /*
         for (int i = 0; i < pieceLayout.length; i++) {
             for (int j = 0; j < pieceLayout[i].length; j++) {
                 if (i < 2){
@@ -77,8 +84,10 @@ public class Board implements Observable {
                 }
             }
         }
+         */
     }
 
+    /*
     public Tile[][] getCurrentBoardLayout() {
         Tile[][] layoutCopy = new Tile[tiles.length][tiles.length];
         for (int i = 0; i < tiles.length; i++) {
@@ -88,6 +97,7 @@ public class Board implements Observable {
         }
         return layoutCopy;
     }
+     */
 
     public Piece[][] getPieceLayout() {
         Piece[][] layoutCopy = new Piece[pieceLayout.length][pieceLayout.length];
@@ -99,13 +109,6 @@ public class Board implements Observable {
         return layoutCopy;
     }
 
-    public Color getDarkColor() {
-        return dark;
-    }
-
-    public Color getLightColor() {
-        return light;
-    }
 
     public void updateGameLayout(Piece piece, int newX, int newY){
         int oldX = piece.xPos;
@@ -123,13 +126,13 @@ public class Board implements Observable {
 
     @Override
     public void notify(Observer observer) {
-        observer.update(tiles, pieceLayout);
+        observer.update(pieceLayout);
     }
 
     @Override
     public void notifyAllObservers() {
         for (Observer observer : observers) {
-            observer.update(tiles, pieceLayout);
+            observer.update(pieceLayout);
         }
     }
 

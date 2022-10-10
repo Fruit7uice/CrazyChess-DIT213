@@ -3,6 +3,7 @@ package MVC.controller;
 import MVC.model.Board;
 import MVC.model.Pieces.Piece;
 import MVC.view.BoardGUI;
+import MVC.view.Tile;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -28,8 +29,8 @@ public class BoardController {
 
     public void dragged(MouseEvent event, Piece piece){
         onDrag = true;
-        int newX = (int) (event.getX() - (Board.tileSize/2));
-        int newY = (int) (event.getY() - (Board.tileSize/2));
+        int newX = (int) (event.getX() - (Tile.tileSize/2));
+        int newY = (int) (event.getY() - (Tile.tileSize/2));
         //System.out.println("X: " + newX + " Y: " + newY);
         boardGUI.drawPiece(piece, Color.AQUA, newX, newY);
     }
@@ -37,8 +38,8 @@ public class BoardController {
     public void dragReleased(MouseEvent event, Piece piece){
         System.out.println(piece.xPos);
         System.out.println(piece.yPos);
-        int newX = (int) Math.floor(event.getX() / Board.tileSize);
-        int newY = (int) Math.floor(event.getY() / Board.tileSize);
+        int newX = (int) Math.floor(event.getX() / Tile.tileSize);
+        int newY = (int) Math.floor(event.getY() / Tile.tileSize);
 
 
         if(onDrag && true){ //replace true with: moveHandler.moveChecker(newX, newY, pieces, piece)
