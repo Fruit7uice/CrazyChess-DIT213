@@ -1,17 +1,23 @@
 package MVC.model.Pieces;
 
 import javafx.scene.shape.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
+// remove the javafx stuff.
 
 public abstract class Piece {
     public int xPos;
     public int yPos;
     public int width;
     public int height;
+    public List<List<Integer>> listOfLegalMoves = new ArrayList<List<Integer>>();
+    public List<Integer> tupleOfCoordinates = new ArrayList<Integer>();
     public Rectangle rect;
     private String firstImagePath;
     private String secondImagePath;
     private String type;
+
     public boolean isPlayerOne;
     public boolean hasMoved;
 
@@ -46,9 +52,4 @@ public abstract class Piece {
     public boolean isPlayerOne() {
         return isPlayerOne;
     }
-
-    void move(int newX, int newY) {
-
-    }
-
 }
