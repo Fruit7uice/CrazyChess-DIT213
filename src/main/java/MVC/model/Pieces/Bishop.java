@@ -8,7 +8,6 @@ public class Bishop extends Piece{
         super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayerOne);
     }
 
-
     /**
      * @param newX the desired x position
      * @param newY the desired y position
@@ -17,11 +16,8 @@ public class Bishop extends Piece{
      */
     public boolean legalMove(int newX, int newY){
         if (newX != xPos || newY != yPos){// checks if we have tried to move
-            if (diagonalStrategy.move(xPos, yPos, newX, newY)) { //makes sure the strategy allows uss to move
-                return  true;
-            } else {
-                return false;
-            }
+            //makes sure the strategy allows uss to move
+            return diagonalStrategy.move(xPos, yPos, newX, newY);
         }
         return false;
     }

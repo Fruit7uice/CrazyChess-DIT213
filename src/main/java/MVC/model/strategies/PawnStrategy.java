@@ -19,9 +19,7 @@ public class PawnStrategy implements IMoveStrategy {
                 hasMoved = true;
                 return true;
             }
-        } else if ((endY - startY) == 1 && startX == endX) {
-            return true;
-        }
+        } else return (endY - startY) == 1 && startX == endX;
         return false;
     }
 }
