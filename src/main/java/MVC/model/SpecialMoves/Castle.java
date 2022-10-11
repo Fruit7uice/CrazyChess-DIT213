@@ -2,8 +2,6 @@ package MVC.model.SpecialMoves;
 
 
 import MVC.model.Board;
-import MVC.model.PieceFactory;
-import MVC.model.PieceLayoutFactory;
 import MVC.model.Pieces.King;
 import MVC.model.Pieces.MoveHandler;
 import MVC.model.Pieces.Piece;
@@ -15,16 +13,12 @@ import MVC.model.Pieces.Rook;
  * @author Johannes Höher
  */
 
-
-
 public class Castle {
     public King king;
     public Rook rook;
     public Piece[][] pieces;
     public Board board;
     public MoveHandler moveHandler;
-
-
 
     public Castle(King king, Rook rook, Board board, Piece[][] pieces, MoveHandler moveHandler){
         this.king = king;
@@ -38,60 +32,66 @@ public class Castle {
 
 
 
-    public boolean tryCastle(King king, Rook rook){
-
-        // if newX && newY == the positions of the rook and they have not moved
-
-
-        return true;
+    public void isCastleAllowed(King king, Rook rook){
+        if(preconditionsWhiteKingLeftRook(pieces, king, rook)){
+            whiteKingLongCastle(king, rook);
+        }
+        else if(preconditionsWhiteKingRightRook(pieces, king, rook)){
+            whiteKingShortCastle(king, rook);
+        }
+        else if(preconditionsBlackKingLeftRook(pieces, king, rook)){
+            blackKingCa(king, rook);
+        }
+        else if(preconditionsBlackKingRightRook(pieces, king, rook)){
+            blackKingCastleRightRook(king, rook);
+        }
     }
 
 
+    /**
+     * Method that switches the positions of the King and the Rook into castle-positions.
+     * @param king
+     * @param rook
+     */
 
 
-
-    public void castleWKLWR (Board board, King king, Rook rook){ // White King Left White Rook
-        if (preconditionsCastleWKLWR(pieces, king, rook)) { // måste jag ta in en matris i denna metoden?
+    public void whiteKingLongCastle(King king, Rook rook){ // White king left white rook.
             board.updateGameLayout(king, 2, 7);
             board.updateGameLayout(rook, 3, 7);
         }
-    }
 
-    public void castleWKRWR (Board board, King king, Rook rook){ // White King Right White Rook
-        if (preconditionsCastleWKLWR(pieces, king, rook)){ // måste jag ta in en matris i denna metoden?
+    /**
+     *
+     * @param king
+     * @param rook
+     */
+
+    public void whiteKingShortCastle(King king, Rook rook){ // White king right white rook.
             board.updateGameLayout(king, 6, 7);
             board.updateGameLayout(rook, 5, 7);
         }
-    }
 
-    public void castleBKLBR (Piece[][] pieces, King king, Rook rook){ // White King Right White Rook
-        if (preconditionsCastleWKLWR(pieces, king, rook)){ // måste jag ta in en matris i denna metoden?
+    /**
+     *
+     * @param king
+     * @param rook
+     */
+
+    public void blackKingCa (King king, Rook rook){ // Black king left black rook.
             board.updateGameLayout(king, 2, 0);
             board.updateGameLayout(rook, 3, 0);
         }
-    }
 
-    public void castleBlackKingRightBlackRook (Piece[][] pieces, King king, Rook rook){ // White King Right White Rook
-        if (preconditionsCastleWKLWR(pieces, king, rook)){ // måste jag ta in en matris i denna metoden?
+    /**
+     *
+     * @param king
+     * @param rook
+     */
+
+    public void blackKingCastleRightRook (King king, Rook rook){ // Black King Right Black Rook
             board.updateGameLayout(king, 6, 0);
             board.updateGameLayout(rook, 5, 0);
-
         }
-    }
-
-    public boolean whiteKingMovesLeft(King king, Piece[][] pieces){
-        return moveHandler.moveChecker(0, 7, pieces, king);
-    }
-
-    // whiteKingMovesLeft
-
-    // whiteKingMovesRight
-
-    // blackKingMovesLeft
-
-    // blackKingMovesRight
-
-
 
 
     /**
@@ -103,8 +103,7 @@ public class Castle {
      * @return true if the space is not occupied between them.
      */
 
-
-    public boolean preconditionsCastleWKLWR(Piece[][] pieces, King king, Rook rook) { // White King Left White Rook
+    public boolean preconditionsWhiteKingLeftRook(Piece[][] pieces, King king, Rook rook) {
         if (king.isPlayerOne() && rook.isPlayerOne() && rook.xPos == 0 && rook.yPos == 7
                 && notMoved(king, rook)){
                 for (int row = 7; row < 8; row++) {
@@ -128,7 +127,7 @@ public class Castle {
 
 
 
-    public boolean preconditionsCastleWKRWR(Piece[][] pieces, King king, Rook rook){ // White King Right White Rook
+    public boolean preconditionsWhiteKingRightRook(Piece[][] pieces, King king, Rook rook){
         if(king.isPlayerOne() && rook.isPlayerOne() && rook.xPos == 7 && rook.yPos == 7
                 && notMoved(king, rook)){
                 for (int row = 7; row < 8; row++) {
@@ -152,7 +151,7 @@ public class Castle {
      */
 
 
-    public boolean preconditionsCastleBKLBR(Piece[][] pieces, King king, Rook rook){ // Black King Left Black Rook
+    public boolean preconditionsBlackKingLeftRook(Piece[][] pieces, King king, Rook rook){
         if(!king.isPlayerOne() && !rook.isPlayerOne() && rook.xPos == 0 && rook.yPos == 0
                 && notMoved(king, rook)){
                 for (int row = 0; row < 1; row++) {
@@ -175,7 +174,7 @@ public class Castle {
      */
 
 
-    public boolean preconditionsCastleBKRBR(Piece[][] pieces, King king, Rook rook){ // Black King Right Black Rooks
+    public boolean preconditionsBlackKingRightRook(Piece[][] pieces, King king, Rook rook){
         if(!king.isPlayerOne() && !rook.isPlayerOne() && rook.xPos == 0 && rook.yPos == 7
                 && notMoved(king, rook)){
                 for (int row = 0; row < 1; row++) {
@@ -190,10 +189,10 @@ public class Castle {
 
 
     /**
-     * Mehtod that checks if both the king and rook has moved or not.
+     * Method that checks if both the king and rook has moved or not.
      * @param king
      * @param rook
-     * @returns true if both of them has not moved.
+     * @return true if both of them has not moved.
      */
 
     public boolean notMoved(King king, Rook rook) {
