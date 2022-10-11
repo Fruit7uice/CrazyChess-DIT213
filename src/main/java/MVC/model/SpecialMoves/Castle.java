@@ -20,13 +20,13 @@ public class Castle {
     public Board board;
     public MoveHandler moveHandler;
 
+
     public Castle(King king, Rook rook, Board board, Piece[][] pieces, MoveHandler moveHandler){
         this.king = king;
         this.rook = rook;
         this.board = board;
         this.pieces = pieces;
         this.moveHandler = moveHandler;
-
     }
 
 
@@ -40,16 +40,16 @@ public class Castle {
             whiteKingShortCastle(king, rook);
         }
         else if(preconditionsBlackKingLeftRook(pieces, king, rook)){
-            blackKingCa(king, rook);
+            blackKingLongCastle(king, rook);
         }
         else if(preconditionsBlackKingRightRook(pieces, king, rook)){
-            blackKingCastleRightRook(king, rook);
+            blackKingShortCastle(king, rook);
         }
     }
 
 
     /**
-     * Method that switches the positions of the King and the Rook into castle-positions.
+     * Method that switches the positions of the White King and the left white Rook into castle-positions.
      * @param king
      * @param rook
      */
@@ -61,7 +61,7 @@ public class Castle {
         }
 
     /**
-     *
+     * Method that switches the positions of the White King and the right whit Rook into castle-positions.
      * @param king
      * @param rook
      */
@@ -72,23 +72,23 @@ public class Castle {
         }
 
     /**
-     *
+     * Method that switches the positions of the Black King and the left black Rook into castle-positions.
      * @param king
      * @param rook
      */
 
-    public void blackKingCa (King king, Rook rook){ // Black king left black rook.
+    public void blackKingLongCastle (King king, Rook rook){ // Black king left black rook.
             board.updateGameLayout(king, 2, 0);
             board.updateGameLayout(rook, 3, 0);
         }
 
     /**
-     *
+     * Method that switches the positions of the black King and the right black Rook into castle-positions.
      * @param king
      * @param rook
      */
 
-    public void blackKingCastleRightRook (King king, Rook rook){ // Black King Right Black Rook
+    public void blackKingShortCastle (King king, Rook rook){ // Black King Right Black Rook
             board.updateGameLayout(king, 6, 0);
             board.updateGameLayout(rook, 5, 0);
         }
