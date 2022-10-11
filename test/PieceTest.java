@@ -34,6 +34,7 @@ public class PieceTest {
     @Test
     public void bishopMoveIllegal() {
         assertFalse(moveHandler.moveChecker(1, 6, bishop, board));
+        assertFalse(moveHandler.moveChecker(6, 1, bishop, board));
     }
     @Test
     public void bishopMoveEnemyBlocking() {
@@ -46,6 +47,11 @@ public class PieceTest {
         PieceFactory.isPlayerOne = true;
         board[4][4] = PieceFactory.createRook(4,4);
         assertFalse(moveHandler.moveChecker(6, 6, bishop, board));
+    }
+    @Test
+    public void bishopLegalMoveMadeUpdatePos(){
+        moveHandler.movePiece(4,4, bishop, board);
+        assertTrue(bishop.xPos == 4 && bishop.yPos == 4);
     }
 
 }

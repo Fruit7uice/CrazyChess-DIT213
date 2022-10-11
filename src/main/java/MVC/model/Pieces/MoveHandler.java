@@ -47,7 +47,8 @@ public class MoveHandler {
         if(moveChecker(newX, newY, piece, board)){ // updates the position if the move is legal
             piece.xPos = newX;
             piece.yPos = newY;
-            piece.listOfLegalMoves = null;
+            piece.listOfLegalMoves.clear();
+            piece.tupleOfCoordinates.clear();
             listOfLegalMoves(piece, board);
         }
     }
@@ -72,28 +73,42 @@ public class MoveHandler {
         boolean piecePlayer1 = board[newX][newY].isPlayerOne();
         return piecePlayer1 != piece.isPlayerOne();
     }
-
+/*
+    public void clearListOfLegalMoves(Piece piece){
+        int[][] list = piece.listOfLegalMoves;
+        for (int row = 0; row < list.length; row++) {
+            for (int col = 0; col < list[row].length; col++) {
+                list[row][col] = Integer.parseInt(null);
+            }
+        }
+        piece.listOfLegalMoves = list;
+    }
+*/
     /**
      * updates the pieces list if legal moves
      * @param piece the current piece
      * @param board the current board
      */
     public void listOfLegalMoves(Piece piece, Piece[][] board){ //[[x,y], [x,y]...
+        piece.tupleOfCoordinates.clear();
         for (int x = 0; x < board.length; x++) {
             for (int y = 0; y < board[x].length; y++) {
                 if(moveChecker(x, y, piece, board)) {
-                    if (isPathBlocked(x, y, piece, board)) { //path is blocked
+                    piece.tupleOfCoordinates.add(x);
+                    piece.tupleOfCoordinates.add(y);
+                    piece.listOfLegalMoves.add(piece.tupleOfCoordinates);
+                   /* if (isPathBlocked(x, y, piece, board)) { //path is blocked
                         if (isOccupiedByEnemy(x, y, piece, board)) { // path is blocked by enemy
-                            //calculate the next position in the matrix and adds the current x and y value
-                            piece.listOfLegalMoves[piece.listOfLegalMoves.length][0] = x;
-                            piece.listOfLegalMoves[piece.listOfLegalMoves.length][1] = y;
-                        } else {
+                            calculate the next position in the matrix and adds the current x and y value
+                            piece.listOfLegalMoves[length][0] = x;
+                            piece.listOfLegalMoves[length][1] = y;
+                    } else {
                             //don't add to matrix
                         }
                     } else {
                         piece.listOfLegalMoves[piece.listOfLegalMoves.length][0] = x;
                         piece.listOfLegalMoves[piece.listOfLegalMoves.length][1] = y;
-                    }
+                    }*/
                 } else{
                     //don't add to matrix
                 }
