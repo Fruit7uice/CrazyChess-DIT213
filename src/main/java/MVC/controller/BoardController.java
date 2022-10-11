@@ -49,6 +49,7 @@ public class BoardController {
             int newX = (int) Math.floor(event.getX() / Tile.tileSize); // Index x
             int newY = (int) Math.floor(event.getY() / Tile.tileSize); // Index y
 
+
             snapPieceToGrid(piece, newX, newY);
             boardGUI.drawWrapperAfterIndex(piece, Color.GREEN);
         }
@@ -57,7 +58,10 @@ public class BoardController {
     }
 
     public void snapPieceToGrid(WrapperPiece piece, int newX, int newY){
-        board.changePiecePosition(piece.getRefPiece(), newX, newY); // Updates board as well
+        if (!(piece.getRefPiece().xPos == newX && piece.getRefPiece().yPos == newY)){
+            board.changePiecePosition(piece.getRefPiece(), newX, newY); // Updates board as well
+        }
+
     }
 
 
