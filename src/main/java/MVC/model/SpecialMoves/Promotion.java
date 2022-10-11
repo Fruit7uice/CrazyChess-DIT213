@@ -10,21 +10,7 @@ import java.util.Objects;
  * to a more powerful piece
  * @author Joel Leiditz Thorsson
  */
-public class PromotionChecker {
-
-    /*
-    (MoveHandler):
-        if(isPromotionAllowed(Piece p)),
-            true -> show view(p);
-                (inside View):
-                    if(buttonPressed(p))
-                        Piece NewPiece = createPiece()
-                            (controller(NewPiece, p)):
-                                model.replacePiece(NewPiece, (oldPiece) );
-
-    false -> do nothing.
-
-     */
+public class Promotion {
 
     /**
      * Checks if the piece can promote.

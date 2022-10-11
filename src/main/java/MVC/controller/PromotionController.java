@@ -1,6 +1,6 @@
 package MVC.controller;
 
-import MVC.model.SpecialMoves.PromotionChecker;
+import MVC.model.SpecialMoves.Promotion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,7 +24,7 @@ public class PromotionController {
      */
     public void chooseBishop(ActionEvent event) throws IOException {
         System.out.println("you choose bishop");
-        PromotionChecker.bishopChoice();
+        Promotion.bishopChoice();
         closeWindow(event);
     }
 
@@ -34,7 +34,7 @@ public class PromotionController {
      */
     public void chooseKnight(ActionEvent event) throws IOException {
         System.out.println("you choose Knight");
-        PromotionChecker.knightChoice();
+        Promotion.knightChoice();
         closeWindow(event);
     }
 
@@ -44,7 +44,7 @@ public class PromotionController {
      */
     public void chooseQueen(ActionEvent event) throws IOException {
         System.out.println("you choose Queen");
-        PromotionChecker.queenChoice();
+        Promotion.queenChoice();
         closeWindow(event);
     }
 
@@ -54,7 +54,7 @@ public class PromotionController {
      */
     public void chooseRook(ActionEvent event) throws IOException{
         System.out.println("you choose Rook");
-        PromotionChecker.rookChoice();
+        Promotion.rookChoice();
         closeWindow(event);
     }
 
