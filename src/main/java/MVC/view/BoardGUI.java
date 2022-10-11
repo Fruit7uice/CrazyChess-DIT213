@@ -123,6 +123,9 @@ public class BoardGUI implements Observer {
     }
 
 
+    /**
+     * Updates the pane by first clearing its children and then adding new ones.
+     */
     private void updatePane() {
         appPane.getChildren().clear();
         addTilesToPane(boardTiles); // adds Matrix of tiles to pane
@@ -130,6 +133,10 @@ public class BoardGUI implements Observer {
     }
 
 
+    /**
+     * Creates a Graphical copy of the logical Chess Piece layout
+     * and adds functionality to the graphical objects.
+     */
     private void createNewGraphicalPieceLayout() {
         mirroredLayout = new WrapperPiece[8][8];
         for (int i = 0; i < mirroredLayout.length; i++) {
@@ -149,12 +156,17 @@ public class BoardGUI implements Observer {
         }
     }
 
+    /**
+     * Updates the view when called.
+     * Overided from Observer interface.
+     * @param pieceLayout
+     */
     @Override
     public void update(Piece[][] pieceLayout) {
         this.pieceLayout = pieceLayout;
         createNewGraphicalPieceLayout();
         updatePane();
-        System.out.println("Pane has been updated");
+        //System.out.println("Pane has been updated");
         //drawBoard();
         drawPieces();
     }
