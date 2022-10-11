@@ -4,6 +4,7 @@ import MVC.model.Board;
 import MVC.model.Pieces.Piece;
 import MVC.view.BoardGUI;
 import MVC.view.Tile;
+import MVC.view.WrapperPiece;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -15,19 +16,24 @@ public class BoardController {
     public BoardController(BoardGUI gui, Board board) {
         this.boardGUI = gui;
         this.board = board;
+        System.out.println("Inside controller const: BoardGUI: " + boardGUI);
     }
 
 
     public BoardController() {
     }
 
-    public void pressed(MouseEvent event, Piece p){
+    public void pressed(MouseEvent event, WrapperPiece piece){
+        System.out.println("Logic Piece X: " + piece.getRefPiece().xPos);
+        System.out.println("Logic Piece Y: " + piece.getRefPiece().yPos);
         boardGUI.drawPieces();
-        boardGUI.drawPieceInPlace(p, Color.GRAY);
-        printMatrix();
+        boardGUI.drawPieceToPlace(piece, Color.GRAY);
+        //printMatrix();
     }
 
-    public void dragged(MouseEvent event, Piece piece){
+    public void dragged(MouseEvent event, WrapperPiece piece){
+        //int oldX = (int) piece.getX();
+        //int oldY = (int) piece.getY();
         onDrag = true;
         int newX = (int) (event.getX() - (Tile.tileSize/2));
         int newY = (int) (event.getY() - (Tile.tileSize/2));
@@ -35,31 +41,32 @@ public class BoardController {
         boardGUI.drawPiece(piece, Color.AQUA, newX, newY);
     }
 
-    public void dragReleased(MouseEvent event, Piece piece){
-        System.out.println(piece.xPos);
-        System.out.println(piece.yPos);
+    public void dragReleased(MouseEvent event, WrapperPiece piece){
+        System.out.println("Wrapper X: " + piece.getX());
+        System.out.println("Wrapper Y: " + piece.getY());
         int newX = (int) Math.floor(event.getX() / Tile.tileSize);
         int newY = (int) Math.floor(event.getY() / Tile.tileSize);
 
 
         if(onDrag && true){ //replace true with: moveHandler.moveChecker(newX, newY, pieces, piece)
             onDrag = false;
-            board.updateGameLayout(piece, newX, newY);
+            board.updateGameLayout(piece.getRefPiece(), newX, newY);
             snapToGrid(event, piece, newX, newY);
-            boardGUI.drawPieceInPlace(piece, Color.GREEN);
+            boardGUI.drawPieceToPlace(piece, Color.GREEN);
         }
-        printMatrix();
+        //printMatrix();
 
     }
 
-    public void snapToGrid(MouseEvent event, Piece piece, int newX, int newY){
+    public void snapToGrid(MouseEvent event, WrapperPiece piece, int newX, int newY){
 
-        piece.xPos = (newX);
-        piece.yPos = (newY);
+        piece.setX(newX);
+        piece.setY(newY);
         //System.out.println(piece.xPos);
         //System.out.println(piece.yPos);
     }
 
+    /*
     void printMatrix(){
         System.out.println("\n {");
         for (int i = 0; i < board.pieceLayout.length; i++) {
@@ -76,5 +83,33 @@ public class BoardController {
         }
         System.out.println("}");
     }
+     */
+
+/*
+    Movehandler:
+    moveChecker(newX, newY, Piece p){
+
+        if(isKingChecked()){
+            warnPlayer();
+        }
+        else{
+            if(isKing(p)){
+                if(castle.isMoveCastle(newX, newY, p)){
+                    if(castle.isCastleAllowed(newX, newY, p)){// this method could identify the type of castle
+                        castle.doCastle(newX, newY, p); // This will update the board!
+                    }
+                }
+            }
+            else{
+
+            }
+        }
+        }
+
+ */
+
+
+
+
 
 }

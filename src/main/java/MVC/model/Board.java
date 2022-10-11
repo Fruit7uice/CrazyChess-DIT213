@@ -33,59 +33,14 @@ public class Board implements Observable {
     }
 
     public Board(Observer observer){
-        //initPieceLayout(pieceLayout);
-        //initBoardTiles();
         observers.add(observer);
         notify(observer);
     }
     public Board(Piece[][] pieceLayout) {
-        //initPieceLayout(pieceLayout);
         this.pieceLayout = pieceLayout;
-        //initBoardTiles();
     }
 
-    /*
-    public void initBoardTiles(){
-        int counter = 0;
-        //Create grid and add pieces
-        for (int i = 0; i < tiles.length; i++) {
-            counter++;
-            for (int j = 0; j < tiles[i].length; j++) {
-                counter++;
-                Color color  = (counter % 2 == 0)? lightTile : darkTile;
-                Tile tile = new Tile((i*tileSize), (j*tileSize), tileSize, tileSize, color);
-                tiles[i][j] = tile;
-            }
-        }
-        notifyAllObservers();
-    }
 
-     */
-
-    public void initMouseEventForPiece(Piece[][] pieceLayout, BoardController ctrl){
-        /*
-        for (int i = 0; i < pieceLayout.length; i++) {
-            for (int j = 0; j < pieceLayout[i].length; j++) {
-                if (i < 2){
-                    Piece piece = pieceLayout[i][j];
-                    System.out.println("Here x: " + i + " y: " + j + " " + pieceLayout[i][j].rect);
-                    Rectangle rectangle = pieceLayout[i][j].rect;
-                    rectangle.setOnMouseClicked(event -> ctrl.pressed(event, piece));
-                    rectangle.setOnMouseDragged(event -> ctrl.dragged(event, piece));
-                    rectangle.setOnMouseReleased(event -> ctrl.dragReleased(event, piece));
-
-                } else if (i > 5) {
-                    Piece piece = pieceLayout[i][j];
-                    System.out.println("Here x: " + i + " y: " + j + " " + pieceLayout[i][j].rect);
-                    Rectangle rectangle = pieceLayout[i][j].rect;
-                    rectangle.setOnMouseClicked(event -> ctrl.pressed(event, piece));
-                    rectangle.setOnMouseDragged(event -> ctrl.dragged(event, piece));
-                    rectangle.setOnMouseReleased(event -> ctrl.dragReleased(event, piece));
-                }
-            }
-        }
-         */
-    }
 
     /*
     public Tile[][] getCurrentBoardLayout() {
@@ -134,6 +89,8 @@ public class Board implements Observable {
         for (Observer observer : observers) {
             observer.update(pieceLayout);
         }
+        System.out.println("all observers has been notified");
+
     }
 
 }

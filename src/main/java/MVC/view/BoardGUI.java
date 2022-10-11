@@ -1,7 +1,6 @@
 package MVC.view;
 
 import MVC.controller.BoardController;
-import MVC.model.Board;
 import MVC.model.Observer;
 import MVC.model.Pieces.Piece;
 import javafx.scene.Group;
@@ -13,7 +12,7 @@ import static MVC.view.Tile.tileSize;
 
 public class BoardGUI implements Observer {
 
-    //private BoardController controller;
+    private BoardController ctrl;
 
     private Color darkTile = Color.rgb(65, 47, 44);  //Lighter Color
     private Color lightTile = Color.rgb(248, 226, 184); // Darker Color
@@ -25,9 +24,11 @@ public class BoardGUI implements Observer {
 
     public BoardGUI(Pane appPane) {
         this.appPane = appPane;
-        initBoardTiles();
-        addTilesToPane(boardTiles);
-        drawBoard();
+        initBoardTiles(); //Creates the board grid
+        addTilesToPane(boardTiles); // adds the grid as a group to a pane
+        //drawBoard(); // Draws the board
+    }
+    public BoardGUI() {
     }
 
     public void drawBoard() {
@@ -44,38 +45,37 @@ public class BoardGUI implements Observer {
     }
 
     public void drawPieces() {
-        for (int i = 0; i < pieceLayout.length; i++) {
-            for (int j = 0; j < pieceLayout[i].length; j++) {
-                Piece p = pieceLayout[i][j];
+        for (int i = 0; i < mirroredLayout.length; i++) {
+            for (int j = 0; j < mirroredLayout[i].length; j++) {
+                WrapperPiece p = mirroredLayout[i][j];
                 if (p != null){
-                    drawPieceInPlace(p, Color.GREEN);
-                    System.out.println("Drawing pieces at: x-" + p.xPos + " y-" + p.yPos);
+                    drawPieceToPlace(p, Color.GREEN);
+                    //System.out.println("Drawing pieces at: x-" + p.xPos + " y-" + p.yPos);
                 }
             }
         }
     }
 
-    public void drawPieceInPlace(Piece piece, Color color){
-        /*
-        piece.rect.setFill(color);
-        piece.rect.setWidth(piece.width);
-        piece.rect.setHeight(piece.height);
-        piece.rect.setX(piece.xPos * Board.tileSize);
-        piece.rect.setY(piece.yPos * Board.tileSize);
+    public void drawPieceToPlace(WrapperPiece piece, Color color){
+        piece.setFill(color);
+        piece.setWidth(piece.getWidth());
+        piece.setHeight(piece.getHeight());
+        piece.setX(piece.getX() * tileSize);
+        piece.setY(piece.getY() * tileSize);
         //printMatrix();
-
-         */
     }
 
-    public void drawPiece(Piece piece, Color color, int x, int y){
-        /*
-        piece.rect.setFill(color);
-        piece.rect.setWidth(piece.width);
-        piece.rect.setHeight(piece.height);
-        piece.rect.setX(x);
-        piece.rect.setY(y);
+
+
+    public void drawPiece(WrapperPiece piece, Color color, int x, int y){
+
+        piece.setFill(color);
+        piece.setWidth(piece.getWidth());
+        piece.setHeight(piece.getHeight());
+        piece.setX(x);
+        piece.setY(y);
         //System.out.println("Draws piece at coords: X" + x + " and Y" + y);
-         */
+
     }
 
     /**
@@ -95,20 +95,10 @@ public class BoardGUI implements Observer {
         }
     }
 
-    /*
-    void initPieces(Pane pane) {
-        //Loops through the matrix and adds all pieces to pane
-        for (int i = 0; i < gui.pieceLayout.length; i++) {
-            for (int j = 0; j < gui.pieceLayout[i].length; j++) {
-                //System.out.println("Tile: " + layout[i][j]);
-                if (gui.pieceLayout[i][j] != null){
-                    pane.getChildren().add(gui.pieceLayout[i][j].rect); //Adds tile at i and j
-                }
-            }
-        }
+    public void setController(BoardController ctrl){
+        this.ctrl = ctrl;
     }
 
-     */
 
     private void addTilesToPane(Tile[][] tiles){
         Group tileGroup = new Group();
@@ -121,22 +111,65 @@ public class BoardGUI implements Observer {
         appPane.getChildren().add(tileGroup);
     }
 
-
-    @Override
-    public void update(Piece[][] pieceLayout) {
-        //this.boardLayout = boardState;
-        this.pieceLayout = pieceLayout;
-        //drawBoard();
-        //drawPieces();
-        mirrorPieceLayout();
+    private void addPiecesToPane() {
+        Group pieceGroup = new Group();
+        for (int i = 0; i < mirroredLayout.length; i++) {
+            for (int j = 0; j < mirroredLayout.length; j++) {
+                if (mirroredLayout[i][j] != null){
+                    pieceGroup.getChildren().add(mirroredLayout[i][j]);
+                }
+            }
+        }
+        if (appPane.getChildren().size() < 2){
+            appPane.getChildren().add(pieceGroup);
+        }
+        else{
+            appPane.getChildren().remove(1);
+            appPane.getChildren().add(pieceGroup);
+        }
     }
 
     private void mirrorPieceLayout() {
+        int x = pieceLayout.length;
+        int y = pieceLayout.length;
+        this.mirroredLayout = new WrapperPiece[x][y];
         for (int i = 0; i < pieceLayout.length; i++) {
             for (int j = 0; j < pieceLayout[i].length; j++) {
+                //Getting piece information.
+                if (pieceLayout[i][j] != null){
+                    //String type = pieceLayout[i][j].getType();
+                    int xPos = pieceLayout[i][j].xPos;
+                    int yPos = pieceLayout[i][j].yPos;
+                    String image = pieceLayout[i][j].getFirstImagePath();
+                    //Image img = new Image(image);
+                    //Creating wrapper piece
+                    Piece connectedPiece = pieceLayout[i][j];
+                    WrapperPiece wPiece = new WrapperPiece(xPos, yPos, tileSize, tileSize, connectedPiece);
+                    wPiece.setOnMouseClicked(event -> ctrl.pressed(event, wPiece));
+                    wPiece.setOnMouseDragged(event -> ctrl.dragged(event, wPiece));
+                    wPiece.setOnMouseReleased(event -> ctrl.dragReleased(event, wPiece));
+                    //wPiece.setFill(new ImagePattern(img));
+                    wPiece.setFill(Color.GREEN);
+                    mirroredLayout[i][j] = wPiece;
+                }
+            }
+        }
+    }
 
+    @Override
+    public void update(Piece[][] pieceLayout) {
+        this.pieceLayout = pieceLayout;
+        createGraphicalPieceLayout();
+        mirrorPieceLayout();
+        addPiecesToPane();
+        drawPieces();
+    }
 
-
+    private void createGraphicalPieceLayout() {
+        mirroredLayout = new WrapperPiece[8][8];
+        for (int i = 0; i < mirroredLayout.length; i++) {
+            for (int j = 0; j < mirroredLayout.length; j++) {
+                
             }
         }
     }
