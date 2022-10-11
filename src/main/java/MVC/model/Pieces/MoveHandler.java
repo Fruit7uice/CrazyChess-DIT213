@@ -133,9 +133,9 @@ public class MoveHandler {
      */
     public boolean pathBlockedHelperHorizontal(int newX, Piece piece, Piece[][] board, int counter){
         int deltaX = Math.abs(piece.xPos - newX);
-        if (piece.xPos > newX) { // current x > new x
+        if (piece.xPos > newX) { // current x > new x (moved left)
             while (counter < deltaX) {
-                if (board[piece.xPos + counter][piece.yPos] != null) {
+                if (board[piece.xPos - counter][piece.yPos] != null && (piece.xPos - counter) != piece.xPos) { // don't check where the piece is right now
                     return true;
                 } else {
                     counter++;
@@ -143,8 +143,8 @@ public class MoveHandler {
                 }
             }
         } else {
-            while (counter < deltaX) { // if current x < new x
-                if (board[piece.xPos - counter][piece.yPos] != null) {
+            while (counter < deltaX) { // if current x < new x (moved right)
+                if (board[piece.xPos + counter][piece.yPos] != null && (piece.xPos + counter) != piece.xPos) { // don't check where the piece is right now
                     return true;
                 } else {
                     counter++;
@@ -164,9 +164,9 @@ public class MoveHandler {
      */
     public boolean pathBlockedHelperVertical(int newY, Piece piece, Piece[][] board, int counter){
         int deltaY = Math.abs(piece.yPos - newY);
-        if (piece.yPos > newY) { // current y > new y
+        if (piece.yPos > newY) { // current y > new y (moved "backwards")
             while (counter < deltaY) {
-                if (board[piece.xPos][piece.yPos + counter] != null) {
+                if (board[piece.xPos][piece.yPos - counter] != null && (piece.yPos - counter) != piece.yPos) { // don't check where the piece is right now
                     return true;
                 } else {
                     counter++;
@@ -174,8 +174,8 @@ public class MoveHandler {
                 }
             }
         } else {
-            while (counter < deltaY) { // if current y < new y
-                if (board[piece.xPos][piece.yPos - counter] != null) {
+            while (counter < deltaY) { // if current y < new y (moved "forward")
+                if (board[piece.xPos][piece.yPos + counter] != null && (piece.xPos + counter) != piece.xPos) { // don't check where the piece is right now
                     return true;
                 } else {
                     counter++;
@@ -197,7 +197,7 @@ public class MoveHandler {
         int deltaX = Math.abs(piece.xPos - newX);
         if (piece.xPos > newX) { // current x > new x doesn't matter if we compute the delta x or y since the change is equal (moved "backwards")
             while (counter < deltaX) {
-                if (board[piece.xPos - counter][piece.yPos - counter] != null && (piece.xPos - counter) != piece.xPos && (piece.yPos - counter != piece.yPos) ) { // don't check where the piece are right now
+                if (board[piece.xPos - counter][piece.yPos - counter] != null && (piece.xPos - counter) != piece.xPos && (piece.yPos - counter != piece.yPos) ) { // don't check where the piece is right now
                     return true;
                 } else { // calls recursively
                     counter++;
@@ -206,7 +206,7 @@ public class MoveHandler {
             }
         } else {
             while (counter < deltaX) { // if current x < new x (moved "forward")
-                if (board[piece.xPos + counter][piece.yPos + counter] != null && (piece.xPos + counter) != piece.xPos && (piece.yPos + counter != piece.yPos) ) { // don't check where the piece are right now
+                if (board[piece.xPos + counter][piece.yPos + counter] != null && (piece.xPos + counter) != piece.xPos && (piece.yPos + counter != piece.yPos) ) { // don't check where the piece is right now
                     return true;
                 } else {
                     counter++;
