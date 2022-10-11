@@ -122,32 +122,6 @@ public class BoardGUI implements Observer {
         appPane.getChildren().add(pieceGroup);
     }
 
-    private void mirrorPieceLayout() {
-        int x = pieceLayout.length;
-        int y = pieceLayout.length;
-        this.mirroredLayout = new WrapperPiece[x][y];
-        for (int i = 0; i < pieceLayout.length; i++) {
-            for (int j = 0; j < pieceLayout[i].length; j++) {
-                //Getting piece information.
-                if (pieceLayout[i][j] != null){
-                    //String type = pieceLayout[i][j].getType();
-                    int xPos = pieceLayout[i][j].xPos;
-                    int yPos = pieceLayout[i][j].yPos;
-                    String image = pieceLayout[i][j].getFirstImagePath();
-                    //Image img = new Image(image);
-                    //Creating wrapper piece
-                    Piece connectedPiece = pieceLayout[i][j];
-                    WrapperPiece wPiece = new WrapperPiece(xPos, yPos, tileSize, tileSize, connectedPiece);
-                    wPiece.setOnMouseClicked(event -> ctrl.pressed(event, wPiece));
-                    wPiece.setOnMouseDragged(event -> ctrl.dragged(event, wPiece));
-                    wPiece.setOnMouseReleased(event -> ctrl.released(event, wPiece));
-                    //wPiece.setFill(new ImagePattern(img));
-                    wPiece.setFill(Color.GREEN);
-                    mirroredLayout[i][j] = wPiece;
-                }
-            }
-        }
-    }
 
     private void updatePane() {
         appPane.getChildren().clear();
@@ -166,7 +140,7 @@ public class BoardGUI implements Observer {
                     int yPos = index.yPos;
                     // CREATES GRAPHICAL PIECE WHERE IT IS A PIECE IN THE LOGICAL LAYOUT
                     WrapperPiece wPiece = new WrapperPiece(xPos, yPos, tileSize, tileSize, pieceLayout[i][j]);
-                    wPiece.setOnMouseClicked(event -> ctrl.pressed(event, wPiece));
+                    wPiece.setOnMouseClicked(event -> ctrl.pressed(wPiece));
                     wPiece.setOnMouseDragged(event -> ctrl.dragged(event, wPiece));
                     wPiece.setOnMouseReleased(event -> ctrl.released(event, wPiece));
                     mirroredLayout[i][j] = wPiece;

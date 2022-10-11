@@ -30,25 +30,18 @@ public class MainBoard extends Application {
         this.board = new Board(pieceLayout);
         this.controller = new BoardController(gui, board);
         gui.setController(controller);
-
-
-        //board.initMouseEventForPiece(pieceLayout, controller);
         board.addObserver(gui);
-
     }
 
     @Override
     public void start(Stage stage) throws Exception {
+        /* SOME TESTING FOR NULLPOINTEREXCEPTION
         System.out.println("Start controller: " + controller);
         System.out.println("Gui: " + gui);
         System.out.println("Board: " + board);
-        System.out.println("Application controller gui: " + controller.boardGUI);
-        //gui.drawBoard(); // Draws the board layout Graphically
-        board.notifyAllObservers(); // Notify observers and update their state.
-        //gui.drawPieces(); // Draws the piece layout Graphically
-
+         */
+        board.notifyAllObservers(); // Notify observers and update their state, which in return notifies gui.
         stage.setTitle("CrazyChess");
-
         Scene scene = new Scene(boardPane, WINDOW_WIDTH, WINDOW_HEIGHT);
         stage.setFullScreen(false);
         stage.setScene(scene);

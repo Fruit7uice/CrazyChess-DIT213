@@ -19,10 +19,11 @@ public class BoardController {
     }
 
 
-    public BoardController() {
-    }
-
-    public void pressed(MouseEvent event, WrapperPiece piece){
+    /**
+     * Redraws all pieces and then redraw the piece pressed on.
+     * @param piece is the WrapperPiece used to represent the logical Piece
+     */
+    public void pressed(WrapperPiece piece){
         // CHECK REFERENCE PIECE COORDS
         System.out.println("Logic Piece X: " + piece.getRefPiece().xPos);
         System.out.println("Logic Piece Y: " + piece.getRefPiece().yPos);
@@ -31,9 +32,14 @@ public class BoardController {
         System.out.println("Wrapper Piece Y: " + piece.getY());
         boardGUI.drawPieces();
         boardGUI.drawWrapperAfterIndex(piece, Color.GRAY);
-        printMatrix();
+        printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
     }
 
+    /**
+     * Calculates and draws the WrapperPiece position after the mouse's position
+     * @param event is the Mouse Event which is used to get x and y of the mouse position
+     * @param piece is the WrapperPiece used to represent the logical Piece
+     */
     public void dragged(MouseEvent event, WrapperPiece piece){
         onDrag = true;
         int newX = (int) (event.getX() - (Tile.tileSize/2));
@@ -42,6 +48,11 @@ public class BoardController {
         boardGUI.drawWrapperPiece(piece, Color.AQUA, newX, newY);
     }
 
+    /**
+     * If the release is after a drag event, it will move the piece and update the model.
+     * @param event is the Mouse Event which is used to get x and y of the mouse position
+     * @param piece is the WrapperPiece used to represent the logical Piece
+     */
     public void released(MouseEvent event, WrapperPiece piece){
 
         if(onDrag && true){ //replace true with: moveHandler.moveChecker(newX, newY, pieces, piece)
@@ -53,9 +64,10 @@ public class BoardController {
             snapPieceToGrid(piece, newX, newY);
             boardGUI.drawWrapperAfterIndex(piece, Color.GREEN);
         }
-        printMatrix();
+        printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
 
     }
+
 
     public void snapPieceToGrid(WrapperPiece piece, int newX, int newY){
         if (!(piece.getRefPiece().xPos == newX && piece.getRefPiece().yPos == newY)){
@@ -65,6 +77,10 @@ public class BoardController {
     }
 
 
+    /**
+     * Used to Test and debug the relations between gui -> controller -> model,
+     * making sure when an event has happend it should update the model.
+     */
     void printMatrix(){
         System.out.println("\n {");
         for (int i = 0; i < board.pieceLayout.length; i++) {
