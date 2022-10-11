@@ -26,7 +26,7 @@ public class BoardGUI implements Observer {
         this.appPane = appPane;
         initBoardTiles(); //Creates the board grid
         addTilesToPane(boardTiles); // adds the grid as a group to a pane
-        //drawBoard(); // Draws the board
+        drawBoard(); // Draws the board
     }
     public BoardGUI() {
     }
@@ -49,26 +49,25 @@ public class BoardGUI implements Observer {
             for (int j = 0; j < mirroredLayout[i].length; j++) {
                 WrapperPiece p = mirroredLayout[i][j];
                 if (p != null){
-                    drawPieceToPlace(p, Color.GREEN);
+                    drawWrapperAfterIndex(p, Color.GREEN);
                     //System.out.println("Drawing pieces at: x-" + p.xPos + " y-" + p.yPos);
                 }
             }
         }
     }
 
-    public void drawPieceToPlace(WrapperPiece piece, Color color){
+    public void drawWrapperAfterIndex(WrapperPiece piece, Color color){
         piece.setFill(color);
         piece.setWidth(piece.getWidth());
         piece.setHeight(piece.getHeight());
-        piece.setX(piece.getX() * tileSize);
-        piece.setY(piece.getY() * tileSize);
+        piece.setX(piece.getRefPiece().xPos * tileSize);
+        piece.setY(piece.getRefPiece().yPos * tileSize);
         //printMatrix();
     }
 
 
 
-    public void drawPiece(WrapperPiece piece, Color color, int x, int y){
-
+    public void drawWrapperPiece(WrapperPiece piece, Color color, int x, int y){
         piece.setFill(color);
         piece.setWidth(piece.getWidth());
         piece.setHeight(piece.getHeight());
@@ -141,7 +140,7 @@ public class BoardGUI implements Observer {
                     WrapperPiece wPiece = new WrapperPiece(xPos, yPos, tileSize, tileSize, connectedPiece);
                     wPiece.setOnMouseClicked(event -> ctrl.pressed(event, wPiece));
                     wPiece.setOnMouseDragged(event -> ctrl.dragged(event, wPiece));
-                    wPiece.setOnMouseReleased(event -> ctrl.dragReleased(event, wPiece));
+                    wPiece.setOnMouseReleased(event -> ctrl.released(event, wPiece));
                     //wPiece.setFill(new ImagePattern(img));
                     wPiece.setFill(Color.GREEN);
                     mirroredLayout[i][j] = wPiece;
@@ -169,7 +168,7 @@ public class BoardGUI implements Observer {
                     WrapperPiece wPiece = new WrapperPiece(xPos, yPos, tileSize, tileSize, pieceLayout[i][j]);
                     wPiece.setOnMouseClicked(event -> ctrl.pressed(event, wPiece));
                     wPiece.setOnMouseDragged(event -> ctrl.dragged(event, wPiece));
-                    wPiece.setOnMouseReleased(event -> ctrl.dragReleased(event, wPiece));
+                    wPiece.setOnMouseReleased(event -> ctrl.released(event, wPiece));
                     mirroredLayout[i][j] = wPiece;
                 }
             }
@@ -182,7 +181,7 @@ public class BoardGUI implements Observer {
         createNewGraphicalPieceLayout();
         updatePane();
         System.out.println("Pane has been updated");
-        drawBoard();
+        //drawBoard();
         drawPieces();
     }
 

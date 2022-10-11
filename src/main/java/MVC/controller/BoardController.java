@@ -1,7 +1,6 @@
 package MVC.controller;
 
 import MVC.model.Board;
-import MVC.model.Pieces.Piece;
 import MVC.view.BoardGUI;
 import MVC.view.Tile;
 import MVC.view.WrapperPiece;
@@ -24,49 +23,44 @@ public class BoardController {
     }
 
     public void pressed(MouseEvent event, WrapperPiece piece){
+        // CHECK REFERENCE PIECE COORDS
         System.out.println("Logic Piece X: " + piece.getRefPiece().xPos);
         System.out.println("Logic Piece Y: " + piece.getRefPiece().yPos);
+        // CHECK WRAPPER PIECE COORDS
+        System.out.println("Wrapper Piece X: " + piece.getX());
+        System.out.println("Wrapper Piece Y: " + piece.getY());
         boardGUI.drawPieces();
-        boardGUI.drawPieceToPlace(piece, Color.GRAY);
-        //printMatrix();
+        boardGUI.drawWrapperAfterIndex(piece, Color.GRAY);
+        printMatrix();
     }
 
     public void dragged(MouseEvent event, WrapperPiece piece){
-        //int oldX = (int) piece.getX();
-        //int oldY = (int) piece.getY();
         onDrag = true;
         int newX = (int) (event.getX() - (Tile.tileSize/2));
         int newY = (int) (event.getY() - (Tile.tileSize/2));
         //System.out.println("X: " + newX + " Y: " + newY);
-        boardGUI.drawPiece(piece, Color.AQUA, newX, newY);
+        boardGUI.drawWrapperPiece(piece, Color.AQUA, newX, newY);
     }
 
-    public void dragReleased(MouseEvent event, WrapperPiece piece){
-        System.out.println("Wrapper X: " + piece.getX());
-        System.out.println("Wrapper Y: " + piece.getY());
-        int newX = (int) Math.floor(event.getX() / Tile.tileSize);
-        int newY = (int) Math.floor(event.getY() / Tile.tileSize);
-
+    public void released(MouseEvent event, WrapperPiece piece){
 
         if(onDrag && true){ //replace true with: moveHandler.moveChecker(newX, newY, pieces, piece)
             onDrag = false;
-            board.updateGameLayout(piece.getRefPiece(), newX, newY);
-            snapToGrid(event, piece, newX, newY);
-            boardGUI.drawPieceToPlace(piece, Color.GREEN);
+            int newX = (int) Math.floor(event.getX() / Tile.tileSize); // Index x
+            int newY = (int) Math.floor(event.getY() / Tile.tileSize); // Index y
+
+            snapPieceToGrid(piece, newX, newY);
+            boardGUI.drawWrapperAfterIndex(piece, Color.GREEN);
         }
-        //printMatrix();
+        printMatrix();
 
     }
 
-    public void snapToGrid(MouseEvent event, WrapperPiece piece, int newX, int newY){
-
-        piece.setX(newX);
-        piece.setY(newY);
-        //System.out.println(piece.xPos);
-        //System.out.println(piece.yPos);
+    public void snapPieceToGrid(WrapperPiece piece, int newX, int newY){
+        board.changePiecePosition(piece.getRefPiece(), newX, newY); // Updates board as well
     }
 
-    /*
+
     void printMatrix(){
         System.out.println("\n {");
         for (int i = 0; i < board.pieceLayout.length; i++) {
@@ -83,33 +77,5 @@ public class BoardController {
         }
         System.out.println("}");
     }
-     */
-
-/*
-    Movehandler:
-    moveChecker(newX, newY, Piece p){
-
-        if(isKingChecked()){
-            warnPlayer();
-        }
-        else{
-            if(isKing(p)){
-                if(castle.isMoveCastle(newX, newY, p)){
-                    if(castle.isCastleAllowed(newX, newY, p)){// this method could identify the type of castle
-                        castle.doCastle(newX, newY, p); // This will update the board!
-                    }
-                }
-            }
-            else{
-
-            }
-        }
-        }
-
- */
-
-
-
-
 
 }

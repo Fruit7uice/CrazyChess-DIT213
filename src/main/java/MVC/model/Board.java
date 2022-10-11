@@ -2,10 +2,6 @@ package MVC.model;
 
 
 import MVC.model.Pieces.Piece;
-import MVC.controller.BoardController;
-import MVC.view.Tile;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,15 +61,21 @@ public class Board implements Observable {
     }
 
 
-    public void updateGameLayout(Piece piece, int newX, int newY){
-        int oldX = piece.xPos;
-        int oldY = piece.yPos;
-        Piece tmp = pieceLayout[oldY][oldX];
-        pieceLayout[newY][newX] = tmp;
-        pieceLayout[oldY][oldX] = null;
+    private void updateGameLayout(Piece piece, int newX, int newY){
+        int oldX = piece.xPos; // Old x-coords for piece
+        int oldY = piece.yPos; // Old y-coords for piece
+        Piece tmp = pieceLayout[oldY][oldX]; // Save a reference for piece
+        pieceLayout[newY][newX] = tmp; // Place saved piece in new slot
+        pieceLayout[oldY][oldX] = null; // Old slot is set to null
         notifyAllObservers();
     }
 
+    public void changePiecePosition(Piece piece, int newX, int newY){
+        updateGameLayout(piece, newX, newY);
+        piece.xPos = newX;
+        piece.yPos = newY;
+        notifyAllObservers();
+    }
     @Override
     public void addObserver(Observer o) {
         observers.add(o);
