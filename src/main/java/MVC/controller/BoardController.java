@@ -1,6 +1,7 @@
 package MVC.controller;
 
 import MVC.model.Board;
+import MVC.model.Pieces.MoveHandler;
 import MVC.model.Pieces.Piece;
 import MVC.view.BoardGUI;
 import javafx.scene.input.MouseEvent;
@@ -9,11 +10,14 @@ import javafx.scene.paint.Color;
 public class BoardController {
     BoardGUI boardGUI;
     Board board;
+    MoveHandler moveHandler;
     boolean onDrag;
 
-    public BoardController(BoardGUI gui, Board board) {
+
+    public BoardController(BoardGUI gui, Board board, MoveHandler moveHandler) {
         this.boardGUI = gui;
         this.board = board;
+        this.moveHandler = moveHandler;
     }
 
 
@@ -39,8 +43,17 @@ public class BoardController {
         System.out.println(piece.yPos);
         int newX = (int) Math.floor(event.getX() / Board.tileSize);
         int newY = (int) Math.floor(event.getY() / Board.tileSize);
+        if(moveHandler.moveChecker(newX, newY, piece, board.pieceLayout)){
+           snapToGrid(event, piece);
+           boardGUI.drawPieceInPlace(piece, Color.GREEN);
+        }
 
 
+    }
+
+    public void snapToGrid(MouseEvent event, Piece piece){
+        int newX = (int) Math.floor(event.getX() / Board.tileSize);
+        int newY = (int) Math.floor(event.getY() / Board.tileSize);
         if(onDrag && true){ //replace true with: moveHandler.moveChecker(newX, newY, pieces, piece)
             onDrag = false;
             board.updateGameLayout(piece, newX, newY);
@@ -59,6 +72,7 @@ public class BoardController {
         //System.out.println(piece.yPos);
     }
 
+
     void printMatrix(){
         System.out.println("\n {");
         for (int i = 0; i < board.pieceLayout.length; i++) {
@@ -75,5 +89,6 @@ public class BoardController {
         }
         System.out.println("}");
     }
+
 
 }

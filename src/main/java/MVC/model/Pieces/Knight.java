@@ -4,8 +4,8 @@ import MVC.model.strategies.KnightStrategy;
 
 public class Knight extends Piece{
     private KnightStrategy knightStrategy;
-    public Knight(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne) {
-        super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayerOne);
+    public Knight(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne, boolean hasMoved) {
+        super(xPos, yPos, width, height, firstImagePath, secondImagePath, type, isPlayerOne, hasMoved);
     }
 
     /**

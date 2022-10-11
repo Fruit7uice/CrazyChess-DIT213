@@ -47,11 +47,14 @@ public class MoveHandler {
         if(moveChecker(newX, newY, piece, board)){ // updates the position if the move is legal
             piece.xPos = newX;
             piece.yPos = newY;
+            piece.hasMoved = true; // The first time the piece moves, the boolean is going to get
+        }                          // switched to true.
             piece.listOfLegalMoves.clear();
             piece.tupleOfCoordinates.clear();
             listOfLegalMoves(piece, board);
         }
-    }
+
+
 
     /**
      * @param newX the desired x position
