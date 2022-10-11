@@ -5,10 +5,6 @@ import MVC.model.Pieces.*;
 public class PieceFactory {
 
     public static boolean isPlayerOne;
-    void PieceFactory(boolean isPlayerOne){
-        this.isPlayerOne = isPlayerOne;
-    }
-    void PieceFactory(){}
 
     public static Piece createRook(int x, int y){
         System.out.println("Piece(Rook) created with x:" + x + " and y: " + y);
