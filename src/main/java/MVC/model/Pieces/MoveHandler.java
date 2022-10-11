@@ -1,5 +1,8 @@
 package MVC.model.Pieces;
 
+import MVC.model.SpecialMoves.Promotion;
+import MVC.view.PromotionView;
+
 /**
  * @author Alva Johansson
  */
@@ -208,6 +211,13 @@ public class MoveHandler {
             }
         }
         return false;
+    }
+
+    public void promotionHandler(Piece p){
+        if(Promotion.checkPromotion(p)) {
+            PromotionView pv = new PromotionView();
+
+        }
     }
 
     /**

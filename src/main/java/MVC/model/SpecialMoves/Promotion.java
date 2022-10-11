@@ -17,7 +17,7 @@ public class Promotion {
      * @param p The current piece that tries to promote
      * @return true if statement holds.
      */
-    public boolean tryPromotion (Piece p) {
+    public static boolean checkPromotion (Piece p) {
         return (p.yPos == 0 || p.yPos == 7) && Objects.equals(p.getType(), "Pawn");
     }
 
@@ -26,8 +26,8 @@ public class Promotion {
      * a new piece will be created in the pawn's position.
      * @param p The current piece that tries promotion. Must be a pawn.
      */
-    public void promotion(Piece p) {
-        if(tryPromotion(p)) {
+    public static void promotion(Piece p) {
+        if(checkPromotion(p)) {
             if (queenChoice()) {
                 PieceFactory.createQueen(p.xPos, p.yPos);
             } else if (bishopChoice()){
