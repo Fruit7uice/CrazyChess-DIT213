@@ -1,11 +1,7 @@
 package MVC.model.SpecialMoves;
 
-import MVC.controller.BoardController;
-import MVC.controller.PromotionController;
 import MVC.model.PieceFactory;
 import MVC.model.Pieces.*;
-import javafx.scene.control.Button;
-
 import java.util.Objects;
 
 /**
@@ -16,33 +12,82 @@ import java.util.Objects;
  */
 public class PromotionChecker {
 
-    public boolean tryPromotion (Piece p){
-        if ((p.yPos == 0 || p.yPos == 7) && Objects.equals(p.getType(), "Pawn")){
+    /*
+    (MoveHandler):
+        if(isPromotionAllowed(Piece p)),
+            true -> show view(p);
+                (inside View):
+                    if(buttonPressed(p))
+                        Piece NewPiece = createPiece()
+                            (controller(NewPiece, p)):
+                                model.replacePiece(NewPiece, (oldPiece) );
 
-            return true;
-        }  else {
-            return false;
+    false -> do nothing.
+
+     */
+
+    /**
+     * Checks if the piece can promote.
+     * @param p The current piece that tries to promote
+     * @return true if statement holds.
+     */
+    public boolean tryPromotion (Piece p) {
+        return (p.yPos == 0 || p.yPos == 7) && Objects.equals(p.getType(), "Pawn");
+    }
+
+    /**
+     * Checks if a pawn can promote, depending on what button the client uses
+     * a new piece will be created in the pawn's position.
+     * @param p The current piece that tries promotion. Must be a pawn.
+     */
+    public void promotion(Piece p) {
+        if(tryPromotion(p)) {
+            if (queenChoice()) {
+                PieceFactory.createQueen(p.xPos, p.yPos);
+            } else if (bishopChoice()){
+                PieceFactory.createBishop(p.xPos, p.yPos);
+            } else if (knightChoice()) {
+                PieceFactory.createKnight(p.xPos,p.yPos);
+            } else if (rookChoice()) {
+                PieceFactory.createRook(p.xPos,p.yPos);
+            }
         }
     }
-    //imagepath, fixa detta! också att fixa så att bonden kan bli andra pjäser än bara dam
-    // kanske byta namn om denna kallas på ofta?
-    // skapa pjäsen med factory istället senare
-    // hur funkar det med isPlayer1 här?
 
-    public static void bishopChoice(Piece p) {
-        PieceFactory.createBishop(p.xPos, p.yPos);
+    /**
+     * The client chose queen and this method is run.
+     * @return true if method is run.
+     */
+    public static boolean queenChoice(){
+        System.out.println("createqueen set to true");
+        return true;
     }
 
-    public static void queenChoice(Piece p) {
-        PieceFactory.createQueen(p.xPos, p.yPos);
+    /**
+     * The client chose bishop and this method is run.
+     * @return true if method is run.
+     */
+    public static boolean bishopChoice() {
+        System.out.println("bishopChoice set to true");
+        return true;
     }
 
-    public static void knightChoice(Piece p) {
-        PieceFactory.createKnight(p.xPos, p.yPos);
+    /**
+     * The client chose knight and this method is run.
+     * @return true if method is run.
+     */
+    public static boolean knightChoice() {
+        System.out.println("kightChoice set to true");
+        return true;
     }
 
-    public static void rookChoice(Piece p) {
-        PieceFactory.createRook(p.xPos, p.yPos);
+    /**
+     * The client chose rook and this method is run.
+     * @return true if method is run.
+     */
+    public static boolean rookChoice() {
+        System.out.println("rookChoice set to true");
+        return true;
     }
 
 }
