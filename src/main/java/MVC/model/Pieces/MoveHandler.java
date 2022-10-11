@@ -49,7 +49,7 @@ public class MoveHandler {
             piece.yPos = newY;
             piece.hasMoved = true; // The first time the piece moves, the boolean is going to get
         }                          // switched to true.
-            piece.listOfLegalMoves.clear();
+            //piece.listOfLegalMoves.clear();
             piece.tupleOfCoordinates.clear();
             listOfLegalMoves(piece, board);
         }
@@ -73,8 +73,9 @@ public class MoveHandler {
      * @return true if the position on the board is occupied by an enemy piece
      */
     public boolean isOccupiedByEnemy(int newX, int newY, Piece piece, Piece[][] board){
-        boolean piecePlayer1 = board[newX][newY].isPlayerOne();
-        return piecePlayer1 != piece.isPlayerOne();
+        boolean piecePlayerOne = board[newX][newY].isPlayerOne();
+        return piecePlayerOne != piece.isPlayerOne();
+
     }
 
     /**
@@ -89,7 +90,7 @@ public class MoveHandler {
                 if(moveChecker(x, y, piece, board)) {
                     piece.tupleOfCoordinates.add(x);
                     piece.tupleOfCoordinates.add(y);
-                    piece.listOfLegalMoves.add(piece.tupleOfCoordinates);
+                    //piece.listOfLegalMoves.add(piece.tupleOfCoordinates);
                 } else{
                     //don't add to matrix
                 }

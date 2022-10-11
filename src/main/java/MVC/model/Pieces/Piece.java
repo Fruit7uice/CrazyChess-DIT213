@@ -11,9 +11,10 @@ public abstract class Piece {
     public int yPos;
     public int width;
     public int height;
+
     public List<List<Integer>> listOfLegalMoves = new ArrayList<List<Integer>>();
     public List<Integer> tupleOfCoordinates = new ArrayList<Integer>();
-    public Rectangle rect;
+
     private String firstImagePath;
     private String secondImagePath;
     private String type;
@@ -30,7 +31,6 @@ public abstract class Piece {
         this.secondImagePath = secondImagePath;
         this.type = type;
         this.isPlayerOne = isPlayerOne;
-        this.rect = new Rectangle(xPos, yPos, width, height);
         this.hasMoved = hasMoved;
     }
 

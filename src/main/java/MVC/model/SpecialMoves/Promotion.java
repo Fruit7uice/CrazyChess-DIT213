@@ -32,16 +32,16 @@ public class Promotion {
         if(tryPromotion(p)) {
             if (queenChoice()) {
                 PieceFactory.createQueen(p.xPos, p.yPos);
-                board.updateGameLayout(p, p.xPos, p.yPos);
+                //board.updateGameLayout(p, p.xPos, p.yPos);
             } else if (bishopChoice()){
                 PieceFactory.createBishop(p.xPos, p.yPos);
-                board.updateGameLayout(p, p.xPos, p.yPos);
+                //board.updateGameLayout(p, p.xPos, p.yPos);
             } else if (knightChoice()) {
                 PieceFactory.createKnight(p.xPos,p.yPos);
-                board.updateGameLayout(p, p.xPos, p.yPos);
+                //board.updateGameLayout(p, p.xPos, p.yPos);
             } else if (rookChoice()) {
                 PieceFactory.createRook(p.xPos,p.yPos);
-                board.updateGameLayout(p, p.xPos, p.yPos);
+                //board.updateGameLayout(p, p.xPos, p.yPos);
             }
         }
     }

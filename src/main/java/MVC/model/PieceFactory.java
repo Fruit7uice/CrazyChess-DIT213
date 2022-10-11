@@ -5,14 +5,11 @@ import MVC.model.Pieces.*;
 public class PieceFactory {
 
     public static boolean isPlayerOne;
-    void PieceFactory(boolean isPlayerOne){
-        this.isPlayerOne = isPlayerOne;
-    }
-    void PieceFactory(){}
 
     public static Piece createRook(int x, int y){
         System.out.println("Piece(Rook) created with x:" + x + " and y: " + y);
         return new Rook(y, x, 100, 100, "pathOne", "pathTwo", "Rook", isPlayerOne, false);
+
     }
 
     public static Piece createBishop(int x, int y){
