@@ -43,7 +43,7 @@ public class MainBoard extends Application {
         System.out.println("Gui: " + gui);
         System.out.println("Board: " + board);
         System.out.println("Application controller gui: " + controller.boardGUI);
-        gui.drawBoard(); // Draws the board layout Graphically
+        //gui.drawBoard(); // Draws the board layout Graphically
         board.notifyAllObservers(); // Notify observers and update their state.
         //gui.drawPieces(); // Draws the piece layout Graphically
 

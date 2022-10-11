@@ -111,22 +111,16 @@ public class BoardGUI implements Observer {
         appPane.getChildren().add(tileGroup);
     }
 
-    private void addPiecesToPane() {
+    private void addPiecesToPane(WrapperPiece[][] graphicalLayout) {
         Group pieceGroup = new Group();
-        for (int i = 0; i < mirroredLayout.length; i++) {
-            for (int j = 0; j < mirroredLayout.length; j++) {
-                if (mirroredLayout[i][j] != null){
-                    pieceGroup.getChildren().add(mirroredLayout[i][j]);
+        for (int i = 0; i < graphicalLayout.length; i++) {
+            for (int j = 0; j < graphicalLayout.length; j++) {
+                if (graphicalLayout[i][j] != null){
+                    pieceGroup.getChildren().add(graphicalLayout[i][j]);
                 }
             }
         }
-        if (appPane.getChildren().size() < 2){
-            appPane.getChildren().add(pieceGroup);
-        }
-        else{
-            appPane.getChildren().remove(1);
-            appPane.getChildren().add(pieceGroup);
-        }
+        appPane.getChildren().add(pieceGroup);
     }
 
     private void mirrorPieceLayout() {
@@ -156,23 +150,40 @@ public class BoardGUI implements Observer {
         }
     }
 
-    @Override
-    public void update(Piece[][] pieceLayout) {
-        this.pieceLayout = pieceLayout;
-        createGraphicalPieceLayout();
-        mirrorPieceLayout();
-        addPiecesToPane();
-        drawPieces();
+    private void updatePane() {
+        appPane.getChildren().clear();
+        addTilesToPane(boardTiles); // adds Matrix of tiles to pane
+        addPiecesToPane(mirroredLayout); // Adds Matrix of WrapperPieces to pane
     }
 
-    private void createGraphicalPieceLayout() {
+
+    private void createNewGraphicalPieceLayout() {
         mirroredLayout = new WrapperPiece[8][8];
         for (int i = 0; i < mirroredLayout.length; i++) {
             for (int j = 0; j < mirroredLayout.length; j++) {
-                
+                Piece index = pieceLayout[i][j];
+                if (index != null){
+                    int xPos = index.xPos;
+                    int yPos = index.yPos;
+                    // CREATES GRAPHICAL PIECE WHERE IT IS A PIECE IN THE LOGICAL LAYOUT
+                    WrapperPiece wPiece = new WrapperPiece(xPos, yPos, tileSize, tileSize, pieceLayout[i][j]);
+                    wPiece.setOnMouseClicked(event -> ctrl.pressed(event, wPiece));
+                    wPiece.setOnMouseDragged(event -> ctrl.dragged(event, wPiece));
+                    wPiece.setOnMouseReleased(event -> ctrl.dragReleased(event, wPiece));
+                    mirroredLayout[i][j] = wPiece;
+                }
             }
         }
     }
 
+    @Override
+    public void update(Piece[][] pieceLayout) {
+        this.pieceLayout = pieceLayout;
+        createNewGraphicalPieceLayout();
+        updatePane();
+        System.out.println("Pane has been updated");
+        drawBoard();
+        drawPieces();
+    }
 
 }
