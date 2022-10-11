@@ -15,7 +15,7 @@ public class MoveHandler {
      * @return true if the piece is allowed to make the desired move
      */
     public boolean moveChecker(int newX, int newY, Piece piece, Piece[][] board){
-        //if king.IsSchecked()
+        //TODO add a check if king.IsInCheck()
         if(piece.legalMove(newX, newY)){
             if (!isOccupied(newX, newY, board)) { //is the tile not occupied
                 return !isPathBlocked(newX, newY, piece, board); // true if path is not blocked
@@ -73,17 +73,7 @@ public class MoveHandler {
         boolean piecePlayer1 = board[newX][newY].isPlayerOne();
         return piecePlayer1 != piece.isPlayerOne();
     }
-/*
-    public void clearListOfLegalMoves(Piece piece){
-        int[][] list = piece.listOfLegalMoves;
-        for (int row = 0; row < list.length; row++) {
-            for (int col = 0; col < list[row].length; col++) {
-                list[row][col] = Integer.parseInt(null);
-            }
-        }
-        piece.listOfLegalMoves = list;
-    }
-*/
+
     /**
      * updates the pieces list if legal moves
      * @param piece the current piece
@@ -97,18 +87,6 @@ public class MoveHandler {
                     piece.tupleOfCoordinates.add(x);
                     piece.tupleOfCoordinates.add(y);
                     piece.listOfLegalMoves.add(piece.tupleOfCoordinates);
-                   /* if (isPathBlocked(x, y, piece, board)) { //path is blocked
-                        if (isOccupiedByEnemy(x, y, piece, board)) { // path is blocked by enemy
-                            calculate the next position in the matrix and adds the current x and y value
-                            piece.listOfLegalMoves[length][0] = x;
-                            piece.listOfLegalMoves[length][1] = y;
-                    } else {
-                            //don't add to matrix
-                        }
-                    } else {
-                        piece.listOfLegalMoves[piece.listOfLegalMoves.length][0] = x;
-                        piece.listOfLegalMoves[piece.listOfLegalMoves.length][1] = y;
-                    }*/
                 } else{
                     //don't add to matrix
                 }
