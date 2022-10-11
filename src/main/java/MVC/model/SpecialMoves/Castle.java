@@ -56,8 +56,8 @@ public class Castle {
 
 
     public void whiteKingLongCastle(King king, Rook rook){ // White king left white rook.
-            board.updateGameLayout(king, 2, 7);
-            board.updateGameLayout(rook, 3, 7);
+            //board.updateGameLayout(king, 2, 7);
+            //board.updateGameLayout(rook, 3, 7);
         }
 
     /**
@@ -67,8 +67,8 @@ public class Castle {
      */
 
     public void whiteKingShortCastle(King king, Rook rook){ // White king right white rook.
-            board.updateGameLayout(king, 6, 7);
-            board.updateGameLayout(rook, 5, 7);
+            //board.updateGameLayout(king, 6, 7);
+            //board.updateGameLayout(rook, 5, 7);
         }
 
     /**
@@ -78,8 +78,8 @@ public class Castle {
      */
 
     public void blackKingLongCastle (King king, Rook rook){ // Black king left black rook.
-            board.updateGameLayout(king, 2, 0);
-            board.updateGameLayout(rook, 3, 0);
+            //board.updateGameLayout(king, 2, 0);
+            //board.updateGameLayout(rook, 3, 0);
         }
 
     /**
@@ -89,8 +89,8 @@ public class Castle {
      */
 
     public void blackKingShortCastle (King king, Rook rook){ // Black King Right Black Rook
-            board.updateGameLayout(king, 6, 0);
-            board.updateGameLayout(rook, 5, 0);
+            //board.updateGameLayout(king, 6, 0);
+            //board.updateGameLayout(rook, 5, 0);
         }
 
 
