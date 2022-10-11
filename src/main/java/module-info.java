@@ -5,4 +5,7 @@ module MVC {
     exports MVC.controller;
     exports MVC.view;
     exports MVC.model;
+    exports MVC.model.Pieces;
+
+
 }

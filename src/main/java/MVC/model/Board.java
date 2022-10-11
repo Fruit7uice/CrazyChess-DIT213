@@ -47,6 +47,7 @@ public class Board implements Observable {
         observers.add(o);
     }
 
+
     @Override
     public void notify(Observer observer) {
         observer.update(pieceLayout);

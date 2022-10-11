@@ -11,11 +11,9 @@ public class HorizontalStrategy implements IMoveStrategy {
      * @param newY The y coordinate where the piece want to move
      * @return returns a bool if the desired movement is a horizontal movement
      */
-    public boolean move (int startX, int startY, int newX, int newY ){
-        if ((Math.abs(startX - newX) > 0) && (startY == newY)) {
-            return true;
-        }else{
-            return false;
-            }
+
+
+    public static boolean move (int startX, int startY, int newX, int newY ){
+        return (Math.abs(startX - newX) > 0) && (startY == newY);
         }
 }

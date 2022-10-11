@@ -1,6 +1,7 @@
 package MVC.controller;
 
 import MVC.model.Board;
+import MVC.model.Pieces.MoveHandler;
 import MVC.model.Pieces.Piece;
 import MVC.view.BoardGUI;
 import MVC.model.PieceLayoutFactory;
@@ -16,6 +17,7 @@ public class MainBoard extends Application {
     Board board;
     BoardController controller;
     BoardGUI gui;
+    MoveHandler moveHandler = new MoveHandler();
     private Pane boardPane;
 
     public static void main(String[] args) {
@@ -24,12 +26,14 @@ public class MainBoard extends Application {
 
     @Override
     public void init(){
+
         Piece[][] pieceLayout = PieceLayoutFactory.createMatrixLayout();
         this.boardPane = new Pane(); // Creates a new pane
         this.gui = new BoardGUI(boardPane);
         this.board = new Board(pieceLayout);
-        this.controller = new BoardController(gui, board);
+        this.controller = new BoardController(gui, board, new MoveHandler());
         gui.setController(controller);
+
         board.addObserver(gui);
     }
 

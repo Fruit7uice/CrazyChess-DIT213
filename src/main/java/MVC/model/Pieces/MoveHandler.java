@@ -4,6 +4,9 @@ package MVC.model.Pieces;
  * @author Alva Johansson
  */
 public class MoveHandler {
+    public MoveHandler() {
+    }
+
     /**
      * @param newX the desired x position
      * @param newY the desired y position
@@ -12,16 +15,20 @@ public class MoveHandler {
      * @return true if the piece is allowed to make the desired move
      */
     public boolean moveChecker(int newX, int newY, Piece piece, Piece[][] board){
-        //if king.IsSchecked()
+        //TODO add a check if king.IsInCheck()
         if(piece.legalMove(newX, newY)){
-            if (!isOccupied(newX, newY, board)){ //is the tile not occupied
-                return true;
+            if (!isOccupied(newX, newY, board)) { //is the tile not occupied
+                return !isPathBlocked(newX, newY, piece, board); // true if path is not blocked
             } else { // tile is occupied
                 if (isOccupiedByEnemy(newX, newY, piece, board)) { //is the piece my enemy?
-                    killEnemyPiece();
-                    return true;
-                } else {
-                    return false; //cant move because my teammate is in the way
+                    if(!isPathBlocked(newX,newY,piece,board)) { // path is not blocked
+                        killEnemyPiece();
+                        return true;
+                    }else { //path is blocked
+                        return false;
+                    }
+                } else { //occupied by teammate
+                    return false;
                 }
             }
         } else {
@@ -40,10 +47,14 @@ public class MoveHandler {
         if(moveChecker(newX, newY, piece, board)){ // updates the position if the move is legal
             piece.xPos = newX;
             piece.yPos = newY;
-            piece.listOfLegalMoves = null;
+            piece.hasMoved = true; // The first time the piece moves, the boolean is going to get
+        }                          // switched to true.
+            //piece.listOfLegalMoves.clear();
+            piece.tupleOfCoordinates.clear();
             listOfLegalMoves(piece, board);
         }
-    }
+
+
 
     /**
      * @param newX the desired x position
@@ -64,6 +75,7 @@ public class MoveHandler {
     public boolean isOccupiedByEnemy(int newX, int newY, Piece piece, Piece[][] board){
         boolean piecePlayerOne = board[newX][newY].isPlayerOne();
         return piecePlayerOne != piece.isPlayerOne();
+
     }
 
     /**
@@ -72,21 +84,13 @@ public class MoveHandler {
      * @param board the current board
      */
     public void listOfLegalMoves(Piece piece, Piece[][] board){ //[[x,y], [x,y]...
+        piece.tupleOfCoordinates.clear();
         for (int x = 0; x < board.length; x++) {
             for (int y = 0; y < board[x].length; y++) {
                 if(moveChecker(x, y, piece, board)) {
-                    if (isPathBlocked(x, y, piece, board)) { //path is blocked
-                        if (isOccupiedByEnemy(x, y, piece, board)) { // path is blocked by enemy
-                            //calculate the next position in the matrix and adds the current x and y value
-                            piece.listOfLegalMoves[piece.listOfLegalMoves.length][0] = x;
-                            piece.listOfLegalMoves[piece.listOfLegalMoves.length][1] = y;
-                        } else {
-                            //don't add to matrix
-                        }
-                    } else {
-                        piece.listOfLegalMoves[piece.listOfLegalMoves.length][0] = x;
-                        piece.listOfLegalMoves[piece.listOfLegalMoves.length][1] = y;
-                    }
+                    piece.tupleOfCoordinates.add(x);
+                    piece.tupleOfCoordinates.add(y);
+                    //piece.listOfLegalMoves.add(piece.tupleOfCoordinates);
                 } else{
                     //don't add to matrix
                 }
@@ -108,7 +112,7 @@ public class MoveHandler {
             } else if (piece.xPos == newX && piece.yPos != newY) { // y pos changed
                 return pathBlockedHelperVertical(newY, piece, board, 0);
             } else if (piece.xPos != newX && piece.yPos != newY) {
-                return pathBlockedHelperDiagonal(newX, piece, board, 0);
+                return pathBlockedHelperDiagonal(newX, newY, piece, board, 0);
             } else {
                 return true;
             }
@@ -126,19 +130,21 @@ public class MoveHandler {
      */
     public boolean pathBlockedHelperHorizontal(int newX, Piece piece, Piece[][] board, int counter){
         int deltaX = Math.abs(piece.xPos - newX);
-        if (piece.xPos > newX) { // current x > new x
+        if (piece.xPos > newX) { // current x > new x (moved left)
             while (counter < deltaX) {
-                if (board[piece.xPos + counter][piece.yPos] != null) {
+                if (board[piece.xPos - counter][piece.yPos] != null && (piece.xPos - counter) != piece.xPos) { // don't check where the piece is right now
                     return true;
                 } else {
+                    counter++;
                     pathBlockedHelperHorizontal(newX, piece, board, counter);
                 }
             }
         } else {
-            while (counter < deltaX) { // if current x < new x
-                if (board[piece.xPos - counter][piece.yPos] != null) {
+            while (counter < deltaX) { // if current x < new x (moved right)
+                if (board[piece.xPos + counter][piece.yPos] != null && (piece.xPos + counter) != piece.xPos) { // don't check where the piece is right now
                     return true;
                 } else {
+                    counter++;
                     pathBlockedHelperHorizontal(newX, piece, board, counter);
                 }
             }
@@ -155,19 +161,21 @@ public class MoveHandler {
      */
     public boolean pathBlockedHelperVertical(int newY, Piece piece, Piece[][] board, int counter){
         int deltaY = Math.abs(piece.yPos - newY);
-        if (piece.yPos > newY) { // current y > new y
+        if (piece.yPos > newY) { // current y > new y (moved "backwards")
             while (counter < deltaY) {
-                if (board[piece.xPos][piece.yPos + counter] != null) {
+                if (board[piece.xPos][piece.yPos - counter] != null && (piece.yPos - counter) != piece.yPos) { // don't check where the piece is right now
                     return true;
                 } else {
+                    counter++;
                     pathBlockedHelperVertical(newY, piece, board, counter);
                 }
             }
         } else {
-            while (counter < deltaY) { // if current y < new y
-                if (board[piece.xPos][piece.yPos - counter] != null) {
+            while (counter < deltaY) { // if current y < new y (moved "forward")
+                if (board[piece.xPos][piece.yPos + counter] != null && (piece.xPos + counter) != piece.xPos) { // don't check where the piece is right now
                     return true;
                 } else {
+                    counter++;
                     pathBlockedHelperVertical(newY, piece, board, counter);
                 }
             }
@@ -182,28 +190,30 @@ public class MoveHandler {
      * @param counter to keep track of how much we should increment
      * @return true if the current coordinates are not blocked
      */
-    public boolean pathBlockedHelperDiagonal(int newX, Piece piece, Piece[][] board, int counter){
+    public boolean pathBlockedHelperDiagonal(int newX, int newY, Piece piece, Piece[][] board, int counter){
         int deltaX = Math.abs(piece.xPos - newX);
-        if (piece.xPos > newX) { // current x > new x doesn't matter if we compute the delta x or y since the change is equal
+        if (piece.xPos > newX) { // current x > new x doesn't matter if we compute the delta x or y since the change is equal (moved "backwards")
             while (counter < deltaX) {
-                if (board[piece.xPos + counter][piece.yPos + counter] != null) {
+                if (board[piece.xPos - counter][piece.yPos - counter] != null && (piece.xPos - counter) != piece.xPos && (piece.yPos - counter != piece.yPos) ) { // don't check where the piece is right now
                     return true;
                 } else { // calls recursively
-                    pathBlockedHelperDiagonal(newX, piece,board, counter);
+                    counter++;
+                    pathBlockedHelperDiagonal(newX, newY, piece,board, counter);
                 }
             }
         } else {
-            while (counter< deltaX) { // if current x < new x
-                if (board[piece.xPos - counter][piece.yPos - counter] != null) {
+            while (counter < deltaX) { // if current x < new x (moved "forward")
+                if (board[piece.xPos + counter][piece.yPos + counter] != null && (piece.xPos + counter) != piece.xPos && (piece.yPos + counter != piece.yPos) ) { // don't check where the piece is right now
                     return true;
                 } else {
-                    pathBlockedHelperDiagonal(newX, piece,board, counter);
+                    counter++;
+                    pathBlockedHelperDiagonal(newX, newY, piece,board, counter);
                 }
             }
         }
         return false;
     }
-    
+
     /**
      * removes an enemy piece from the board when it's killed
      */
