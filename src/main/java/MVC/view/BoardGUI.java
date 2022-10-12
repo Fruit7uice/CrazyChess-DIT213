@@ -4,8 +4,15 @@ import MVC.controller.BoardController;
 import MVC.model.Observer;
 import MVC.model.Pieces.Piece;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Objects;
 
 import static MVC.view.Tile.tileSize;
 
@@ -44,20 +51,32 @@ public class BoardGUI implements Observer {
         }
     }
 
-    public void drawPieces() {
+    public void drawPieces(){
         for (int i = 0; i < mirroredLayout.length; i++) {
             for (int j = 0; j < mirroredLayout[i].length; j++) {
                 WrapperPiece p = mirroredLayout[i][j];
                 if (p != null){
-                    drawWrapperAfterIndex(p, Color.GREEN);
-                    //System.out.println("Drawing pieces at: x-" + p.xPos + " y-" + p.yPos);
+                    drawWrapperAfterIndex(p, Color.GREEN, Color.rgb(1,1,1,0));
                 }
             }
         }
     }
 
-    public void drawWrapperAfterIndex(WrapperPiece piece, Color color){
-        piece.setFill(color);
+    public void drawWrapperAfterIndex(WrapperPiece piece, Color color, Color stroke) {
+        String path = piece.getRefPiece().getImagePath();
+        //System.out.println(getClass().getResource(path));
+        //System.out.println(path);
+        if(path != "pathOne"){
+            String realPath = String.valueOf(getClass().getResource(path));
+            Image img = new Image(realPath);
+            ImagePattern imagePattern = new ImagePattern(img);
+            piece.setFill(imagePattern);
+        }
+        else {
+            piece.setFill(color);
+        }
+        piece.setStroke(stroke);
+        piece.setStrokeWidth(3);
         piece.setWidth(piece.getWidth());
         piece.setHeight(piece.getHeight());
         piece.setX(piece.getRefPiece().xPos * tileSize);
@@ -67,13 +86,27 @@ public class BoardGUI implements Observer {
 
 
 
-    public void drawWrapperPiece(WrapperPiece piece, Color color, int x, int y){
-        piece.setFill(color);
+    public void drawWrapperPiece(WrapperPiece piece, Color color, Color stroke, int x, int y){
+        String path = piece.getRefPiece().getImagePath();
+        if(path != "pathOne"){
+            String realPath = String.valueOf(getClass().getResource(path));
+            Image img = new Image(realPath);
+            ImagePattern imagePattern = new ImagePattern(img);
+            piece.setFill(imagePattern);
+        }
+        else {
+            piece.setFill(color);
+        }
+        piece.setStroke(stroke);
+        piece.setStrokeWidth(3);
+
         piece.setWidth(piece.getWidth());
         piece.setHeight(piece.getHeight());
         piece.setX(x);
         piece.setY(y);
+
         //System.out.println("Draws piece at coords: X" + x + " and Y" + y);
+
 
     }
 
