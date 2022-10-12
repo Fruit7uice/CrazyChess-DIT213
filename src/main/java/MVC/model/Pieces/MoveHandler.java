@@ -1,9 +1,7 @@
 package MVC.model.Pieces;
-
-
 import MVC.model.Board;
+import MVC.model.Player;
 import MVC.model.Tuple;
-
 
 /**
  * @author Alva Johansson
@@ -12,7 +10,7 @@ public class MoveHandler {
 
     Board board;
     public MoveHandler(Board board) {
-        this.board = this.board;
+        this.board = board;
     }
 
     /**
@@ -52,12 +50,12 @@ public class MoveHandler {
      * @param piece the current piece we are working on
      */
 
-    public void movePiece(int newX, int newY, Piece piece, Piece[][] board){
-        if(moveChecker(newX, newY, piece, board)){ // updates the position if the move is legal
+    public void movePiece(int newX, int newY, Piece piece, Piece[][] pieceLayout){
+        if(moveChecker(newX, newY, piece, pieceLayout)){ // updates the position if the move is legal
             piece.xPos = newX;
             piece.yPos = newY;
             piece.listOfLegalMoves.clear();
-            createListOfLegalMoves(piece, board);
+            createListOfLegalMoves(piece, pieceLayout);
             piece.hasMoved = true; // The first time the piece moves, the boolean is going to get
         }                          // switched to true.
     }
@@ -219,6 +217,16 @@ public class MoveHandler {
         }
         return false;
     }
+    public boolean isKingCheck(Player player, Piece king, Piece[][] board){
+        player.calcListOfLegalMovesPlayer(board); // creates the lists of legal moves
+        Tuple<Integer, Integer> tuple = new Tuple<>(king.xPos, king.yPos);
+        if(king.isPlayerOne()){
+            return player.playerTwoListOfLegalMoves.contains(tuple);
+        } else {
+            return player.playerOneListOfLegalMoves.contains(tuple);
+        }
+    }
+
 
     /**
      * removes an enemy piece from the board when it's killed

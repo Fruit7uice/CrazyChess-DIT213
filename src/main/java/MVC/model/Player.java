@@ -8,14 +8,15 @@ import java.util.List;
 public class Player {
     public List<Tuple<Integer, Integer>> playerOneListOfLegalMoves;
     public List<Tuple<Integer, Integer>> playerTwoListOfLegalMoves;
-    MoveHandler moveHandler = new MoveHandler();
+    MoveHandler moveHandler;
 
     /**
      * Calculates each player's list of legal moves by looping through the board and checking for each position
      * if there is a piece there and if that player is player one or not and then adding the coordinates
-     * @param board
+     * @param board the current board layout
      */
     public void calcListOfLegalMovesPlayer(Piece[][] board){
+
         for (int x = 0; x < board.length; x++) {
             for (int y = 0; y < board.length; y++) { //loops through the whole board
                 Piece piece = board[x][y];
