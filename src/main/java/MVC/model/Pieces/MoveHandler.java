@@ -1,5 +1,7 @@
 package MVC.model.Pieces;
 
+import MVC.model.Tuple;
+
 /**
  * @author Alva Johansson
  */
@@ -47,11 +49,11 @@ public class MoveHandler {
         if(moveChecker(newX, newY, piece, board)){ // updates the position if the move is legal
             piece.xPos = newX;
             piece.yPos = newY;
+            piece.listOfLegalMoves.clear();
+            createListOfLegalMoves(piece, board);
             piece.hasMoved = true; // The first time the piece moves, the boolean is going to get
         }                          // switched to true.
-            //piece.listOfLegalMoves.clear();
-            piece.tupleOfCoordinates.clear();
-            listOfLegalMoves(piece, board);
+
         }
 
 
@@ -83,14 +85,12 @@ public class MoveHandler {
      * @param piece the current piece
      * @param board the current board
      */
-    public void listOfLegalMoves(Piece piece, Piece[][] board){ //[[x,y], [x,y]...
-        piece.tupleOfCoordinates.clear();
+    public void createListOfLegalMoves(Piece piece, Piece[][] board){ //[[x,y], [x,y]...
         for (int x = 0; x < board.length; x++) {
             for (int y = 0; y < board[x].length; y++) {
                 if(moveChecker(x, y, piece, board)) {
-                    piece.tupleOfCoordinates.add(x);
-                    piece.tupleOfCoordinates.add(y);
-                    //piece.listOfLegalMoves.add(piece.tupleOfCoordinates);
+                    Tuple<Integer, Integer> tuple = new Tuple(x, y);
+                    piece.listOfLegalMoves.add(tuple);
                 } else{
                     //don't add to matrix
                 }

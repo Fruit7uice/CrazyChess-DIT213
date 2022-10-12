@@ -1,5 +1,6 @@
 package MVC.model.Pieces;
 
+import MVC.model.Tuple;
 import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +12,8 @@ public abstract class Piece {
     public int yPos;
     public int width;
     public int height;
-
-    public List<List<Integer>> listOfLegalMoves = new ArrayList<List<Integer>>();
-    public List<Integer> tupleOfCoordinates = new ArrayList<Integer>();
-
+    public List<Tuple<Integer, Integer>> listOfLegalMoves = new ArrayList<Tuple<Integer, Integer>>();
+    public Rectangle rect;
     private String firstImagePath;
     private String secondImagePath;
     private String type;
