@@ -1,27 +1,32 @@
 package MVC.model.Pieces;
 
+import MVC.model.Board;
+
 /**
  * @author Alva Johansson
  */
 public class MoveHandler {
-    public MoveHandler() {
+
+    Board board;
+    public MoveHandler(Board board) {
+        this.board = this.board;
     }
 
     /**
      * @param newX the desired x position
      * @param newY the desired y position
-     * @param board the board that contains the pieces
+     * @param pieceLayout the board that contains the pieces
      * @param piece the current piece we are working on
      * @return true if the piece is allowed to make the desired move
      */
-    public boolean moveChecker(int newX, int newY, Piece piece, Piece[][] board){
+    public boolean moveChecker(int newX, int newY, Piece piece, Piece[][] pieceLayout){
         //TODO add a check if king.IsInCheck()
         if(piece.legalMove(newX, newY)){
-            if (!isOccupied(newX, newY, board)) { //is the tile not occupied
-                return !isPathBlocked(newX, newY, piece, board); // true if path is not blocked
+            if (!isOccupied(newX, newY, pieceLayout)) { //is the tile not occupied
+                return !isPathBlocked(newX, newY, piece, pieceLayout); // true if path is not blocked
             } else { // tile is occupied
-                if (isOccupiedByEnemy(newX, newY, piece, board)) { //is the piece my enemy?
-                    if(!isPathBlocked(newX,newY,piece,board)) { // path is not blocked
+                if (isOccupiedByEnemy(newX, newY, piece, pieceLayout)) { //is the piece my enemy?
+                    if(!isPathBlocked(newX,newY,piece,pieceLayout)) { // path is not blocked
                         killEnemyPiece();
                         return true;
                     }else { //path is blocked
@@ -40,18 +45,16 @@ public class MoveHandler {
      * Updates the pieces coordinates if is allowed to make the desired move
      * @param newX the desired x position
      * @param newY the desired y position
-     * @param board the board that contains the pieces
+     * @param pieceLayout the board that contains the pieces
      * @param piece the current piece we are working on
      */
-    public void movePiece(int newX, int newY, Piece piece, Piece[][] board){
-        if(moveChecker(newX, newY, piece, board)){ // updates the position if the move is legal
-            piece.xPos = newX;
-            piece.yPos = newY;
-            piece.hasMoved = true; // The first time the piece moves, the boolean is going to get
+    public void movePiece(int newX, int newY, Piece piece, Piece[][] pieceLayout){
+        if(moveChecker(newX, newY, piece, pieceLayout)){ // updates the position if the move is legal
+            board.changePiecePosition(piece, newX, newY);
         }                          // switched to true.
             //piece.listOfLegalMoves.clear();
             piece.tupleOfCoordinates.clear();
-            listOfLegalMoves(piece, board);
+            listOfLegalMoves(piece, pieceLayout);
         }
 
 

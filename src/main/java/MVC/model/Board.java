@@ -41,6 +41,7 @@ public class Board implements Observable {
             piece.xPos = newX;
             piece.yPos = newY;
             notifyAllObservers();
+            //updateListOfLegalMoves();
     }
     @Override
     public void addObserver(Observer o) {

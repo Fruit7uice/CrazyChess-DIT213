@@ -2,12 +2,12 @@ package MVC.controller;
 
 import MVC.model.Board;
 import MVC.model.Pieces.MoveHandler;
-import MVC.model.Pieces.Piece;
 
 import MVC.view.BoardGUI;
-import MVC.view.Tile;
 import MVC.view.WrapperPiece;
+import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import static MVC.view.Tile.tileSize;
@@ -17,12 +17,14 @@ public class BoardController {
     Board board;
     MoveHandler moveHandler;
     boolean onDrag;
+    Pane pane;
 
 
-    public BoardController(BoardGUI gui, Board board, MoveHandler moveHandler) {
+    public BoardController(BoardGUI gui, Board board, MoveHandler moveHandler, Pane boardPane) {
         this.boardGUI = gui;
         this.board = board;
         this.moveHandler = moveHandler;
+        this.pane = boardPane;
     }
 
 
@@ -38,7 +40,7 @@ public class BoardController {
         System.out.println("Wrapper Piece X: " + piece.getX());
         System.out.println("Wrapper Piece Y: " + piece.getY());
         boardGUI.drawPieces();
-        boardGUI.drawWrapperAfterIndex(piece, Color.GRAY);
+        boardGUI.drawWrapperAfterIndex(piece, Color.GRAY, Color.RED);
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
     }
 
@@ -48,11 +50,17 @@ public class BoardController {
      * @param piece is the WrapperPiece used to represent the logical Piece
      */
     public void dragged(MouseEvent event, WrapperPiece piece){
+        if (!onDrag){
+            Group g = (Group) pane.getChildren().get(1);
+            int i = g.getChildren().indexOf(piece);
+            g.getChildren().get(i).toFront();
+        }
         onDrag = true;
         int newX = (int) (event.getX() - (tileSize/2));
         int newY = (int) (event.getY() - (tileSize/2));
+
         //System.out.println("X: " + newX + " Y: " + newY);
-        boardGUI.drawWrapperPiece(piece, Color.AQUA, newX, newY);
+        boardGUI.drawWrapperPiece(piece, Color.AQUA, Color.AQUA, newX, newY);
     }
     /**
      * If the release is after a drag event, it will move the piece and update the model.
@@ -66,7 +74,7 @@ public class BoardController {
         if(onDrag && true){ //replace true with: moveHandler.moveChecker(newX, newY, pieces, piece)
             onDrag = false;
             snapPieceToGrid(piece, newX, newY);
-            boardGUI.drawWrapperAfterIndex(piece, Color.GREEN);
+            boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
         }
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
     }
