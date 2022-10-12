@@ -1,11 +1,26 @@
 package MVC.model.Pieces;
 
+import MVC.model.Board;
+import MVC.model.SpecialMoves.Castle;
+
+
+
 /**
  * @author Alva Johansson
  */
 public class MoveHandler {
+
+
+    Castle castle = new Castle();
+
+
+
+
     public MoveHandler() {
     }
+
+
+
 
     /**
      * @param newX the desired x position
@@ -16,6 +31,9 @@ public class MoveHandler {
      */
     public boolean moveChecker(int newX, int newY, Piece piece, Piece[][] board){
         //TODO add a check if king.IsInCheck()
+        //if king is checked
+            // then can't castle
+            // else check for castle
         if(piece.legalMove(newX, newY)){
             if (!isOccupied(newX, newY, board)) { //is the tile not occupied
                 return !isPathBlocked(newX, newY, piece, board); // true if path is not blocked
@@ -212,6 +230,19 @@ public class MoveHandler {
         }
         return false;
     }
+
+    public void isCastle(int newX, int newY, Piece piece, Piece[][] board){
+
+
+
+
+    }
+
+
+
+
+
+
 
     /**
      * removes an enemy piece from the board when it's killed
