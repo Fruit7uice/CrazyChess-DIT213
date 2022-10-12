@@ -13,15 +13,15 @@ public abstract class Piece {
     public int width;
     public int height;
     public List<Tuple<Integer, Integer>> listOfLegalMoves = new ArrayList<Tuple<Integer, Integer>>();
-    //public Tuple tupleOfCoordinates = new Tuple(Integer, Integer );
     public Rectangle rect;
     private String firstImagePath;
     private String secondImagePath;
     private String type;
 
     public boolean isPlayerOne;
+    public boolean hasMoved;
 
-    public Piece(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne) {
+    public Piece(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne, boolean hasMoved) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.width = width;
@@ -30,7 +30,7 @@ public abstract class Piece {
         this.secondImagePath = secondImagePath;
         this.type = type;
         this.isPlayerOne = isPlayerOne;
-        this.rect = new Rectangle(xPos, yPos, width, height);
+        this.hasMoved = hasMoved;
     }
 
 

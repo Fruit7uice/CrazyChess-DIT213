@@ -51,8 +51,12 @@ public class MoveHandler {
             piece.yPos = newY;
             piece.listOfLegalMoves.clear();
             createListOfLegalMoves(piece, board);
+            piece.hasMoved = true; // The first time the piece moves, the boolean is going to get
+        }                          // switched to true.
+
         }
-    }
+
+
 
     /**
      * @param newX the desired x position
@@ -71,8 +75,9 @@ public class MoveHandler {
      * @return true if the position on the board is occupied by an enemy piece
      */
     public boolean isOccupiedByEnemy(int newX, int newY, Piece piece, Piece[][] board){
-        boolean piecePlayer1 = board[newX][newY].isPlayerOne();
-        return piecePlayer1 != piece.isPlayerOne();
+        boolean piecePlayerOne = board[newX][newY].isPlayerOne();
+        return piecePlayerOne != piece.isPlayerOne();
+
     }
 
     /**

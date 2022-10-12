@@ -11,6 +11,9 @@ public class DiagonalStrategy implements IMoveStrategy {
      * @return returns a bool if the desired movement is a diagonal movement
      */
 
+
+
+
     public static boolean move(int startX, int startY, int newX, int newY ) {
         return Math.abs(startX - newX) == Math.abs(startY - newY);
     }

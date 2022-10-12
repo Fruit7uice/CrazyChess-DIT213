@@ -1,5 +1,6 @@
 package MVC.model.SpecialMoves;
 
+import MVC.model.Board;
 import MVC.model.PieceFactory;
 import MVC.model.Pieces.*;
 import java.util.Objects;
@@ -11,6 +12,7 @@ import java.util.Objects;
  * @author Joel Leiditz Thorsson
  */
 public class Promotion {
+    public Board board;
 
     /**
      * Checks if the piece can promote.
@@ -30,12 +32,16 @@ public class Promotion {
         if(tryPromotion(p)) {
             if (queenChoice()) {
                 PieceFactory.createQueen(p.xPos, p.yPos);
+                //board.updateGameLayout(p, p.xPos, p.yPos);
             } else if (bishopChoice()){
                 PieceFactory.createBishop(p.xPos, p.yPos);
+                //board.updateGameLayout(p, p.xPos, p.yPos);
             } else if (knightChoice()) {
                 PieceFactory.createKnight(p.xPos,p.yPos);
+                //board.updateGameLayout(p, p.xPos, p.yPos);
             } else if (rookChoice()) {
                 PieceFactory.createRook(p.xPos,p.yPos);
+                //board.updateGameLayout(p, p.xPos, p.yPos);
             }
         }
     }

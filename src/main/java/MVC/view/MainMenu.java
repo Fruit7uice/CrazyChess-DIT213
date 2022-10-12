@@ -11,6 +11,11 @@ import javafx.scene.Scene;
 
 import java.util.Objects;
 
+/**
+ * Class that
+ */
+
+
 public class MainMenu extends Application {
     @Override
     public void start(Stage primaryStage) {
