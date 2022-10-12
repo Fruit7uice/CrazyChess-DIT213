@@ -3,7 +3,6 @@ package MVC.model.SpecialMoves;
 
 import MVC.model.Board;
 import MVC.model.Pieces.King;
-import MVC.model.Pieces.MoveHandler;
 import MVC.model.Pieces.Piece;
 import MVC.model.Pieces.Rook;
 
@@ -15,29 +14,32 @@ import MVC.model.Pieces.Rook;
 
 public class Castle {
 
+    public Castle(){}
 
 
-    public Castle(){
-    }
-
-
-
+    /**
+     * Method that checks so that the preconditions are satisfied before the King can castle with the rook.
+     * @param king King
+     * @param rook the rook in question.
+     * @param pieces
+     * @return
+     */
 
     public boolean isCastleAllowed(King king, Rook rook, Piece[][] pieces){
-        if(preconditionsWhiteKingLongCastle(pieces, king, rook)){
+        if(preconditionsWhiteKingLongCastle(pieces, king, rook) && pathCheckedWhiteLongCastle(pieces)){
             return true;
-        }else if(preconditionsWhiteKingShortCastle(pieces, king, rook)){
+        }else if(preconditionsWhiteKingShortCastle(pieces, king, rook) && pathCheckedWhiteShortCastle(pieces)){
             return true;
-        }else if(preconditionsBlackKingLongCastle(pieces, king, rook)){
+        }else if(preconditionsBlackKingLongCastle(pieces, king, rook) && pathCheckedBlackLongCastle(pieces)){
             return true;
-        }else return preconditionsBlackKingShortCastle(pieces, king, rook);
+        }else return preconditionsBlackKingShortCastle(pieces, king, rook) && pathCheckedBlackShortCastle(pieces);
     }
 
 
     /**
      * Method that switches the positions of the White King and the left white Rook into castle-positions.
-     * @param king
-     * @param rook
+     * @param king King
+     * @param rook = the rook in question.
      */
 
 
@@ -48,8 +50,8 @@ public class Castle {
 
     /**
      * Method that switches the positions of the White King and the right whit Rook into castle-positions.
-     * @param king
-     * @param rook
+     * @param king King
+     * @param rook = the rook in question.
      */
 
     public void whiteKingShortCastle(King king, Rook rook, Board board){ // White king right white rook.
@@ -59,8 +61,8 @@ public class Castle {
 
     /**
      * Method that switches the positions of the Black King and the left black Rook into castle-positions.
-     * @param king
-     * @param rook
+     * @param king King
+     * @param rook = the rook in question.
      */
 
     public void blackKingLongCastle (King king, Rook rook, Board board){ // Black king left black rook.
@@ -70,8 +72,8 @@ public class Castle {
 
     /**
      * Method that switches the positions of the black King and the right black Rook into castle-positions.
-     * @param king
-     * @param rook
+     * @param king King
+     * @param rook = the rook in question.
      */
 
     public void blackKingShortCastle (King king, Rook rook, Board board){ // Black King Right Black Rook
@@ -175,27 +177,36 @@ public class Castle {
 
 
 
-    public boolean pathCheckedWhiteLongCastle() {
-        return false;
-    }
 
-    public boolean pathCheckedWhiteShortCastle() {
+    public boolean pathCheckedWhiteLongCastle(Piece[][] pieces) {
         return false;
-    }
+    };
 
-    public boolean pathCheckedBlackLongCastle() {
-        return false;
-    }
 
-    public boolean pathCheckedBlackShortCastle() {
+    public boolean pathCheckedWhiteShortCastle(Piece[][] pieces) {
         return false;
-    }
+    };
+
+
+    public boolean pathCheckedBlackLongCastle(Piece[][] pieces) {
+        return false;
+    };
+
+
+    public boolean pathCheckedBlackShortCastle(Piece[][] pieces) {
+        return false;
+    };
+
+
+
+
+
 
 
     /**
      * Method that checks if both the king and rook has moved or not.
-     * @param king
-     * @param rook
+     * @param king King
+     * @param rook = the rook in question.
      * @return true if both of them has not moved.
      */
 
