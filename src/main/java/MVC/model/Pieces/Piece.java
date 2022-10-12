@@ -12,7 +12,7 @@ public abstract class Piece {
     public int yPos;
     public int width;
     public int height;
-    public List<Tuple<Integer, Integer>> listOfLegalMoves;
+    public List<Tuple<Integer, Integer>> listOfLegalMoves = new ArrayList<Tuple<Integer, Integer>>();
     public Rectangle rect;
     private String firstImagePath;
     private String secondImagePath;
