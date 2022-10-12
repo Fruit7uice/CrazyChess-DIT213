@@ -12,13 +12,13 @@ public abstract class Piece {
     public int yPos;
     public int width;
     public int height;
-    public List<Tuple<Integer, Integer>> listOfLegalMoves = new ArrayList<Tuple<Integer, Integer>>();
+    public List<Tuple<Integer, Integer>> listOfLegalMoves;
     public Rectangle rect;
     private String firstImagePath;
     private String secondImagePath;
     private String type;
 
-    public boolean isPlayerOne;
+    private boolean isPlayerOne;
     public boolean hasMoved;
 
     public Piece(int xPos, int yPos, int width, int height, String firstImagePath, String secondImagePath, String type, boolean isPlayerOne, boolean hasMoved) {
@@ -32,7 +32,6 @@ public abstract class Piece {
         this.isPlayerOne = isPlayerOne;
         this.hasMoved = hasMoved;
     }
-
 
     public String getFirstImagePath() {
         return firstImagePath;
