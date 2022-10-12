@@ -14,37 +14,23 @@ import MVC.model.Pieces.Rook;
  */
 
 public class Castle {
-    public King king;
-    public Rook rook;
-    public Piece[][] pieces;
-    public Board board;
-    public MoveHandler moveHandler;
 
 
-    public Castle(King king, Rook rook, Board board, Piece[][] pieces, MoveHandler moveHandler){
-        this.king = king;
-        this.rook = rook;
-        this.board = board;
-        this.pieces = pieces;
-        this.moveHandler = moveHandler;
+
+    public Castle(){
     }
 
 
 
 
-    public void isCastleAllowed(King king, Rook rook){
-        if(preconditionsWhiteKingLeftRook(pieces, king, rook)){
-            whiteKingLongCastle(king, rook);
-        }
-        else if(preconditionsWhiteKingRightRook(pieces, king, rook)){
-            whiteKingShortCastle(king, rook);
-        }
-        else if(preconditionsBlackKingLeftRook(pieces, king, rook)){
-            blackKingLongCastle(king, rook);
-        }
-        else if(preconditionsBlackKingRightRook(pieces, king, rook)){
-            blackKingShortCastle(king, rook);
-        }
+    public boolean isCastleAllowed(King king, Rook rook, Piece[][] pieces){
+        if(preconditionsWhiteKingLongCastle(pieces, king, rook)){
+            return true;
+        }else if(preconditionsWhiteKingShortCastle(pieces, king, rook)){
+            return true;
+        }else if(preconditionsBlackKingLongCastle(pieces, king, rook)){
+            return true;
+        }else return preconditionsBlackKingShortCastle(pieces, king, rook);
     }
 
 
@@ -55,10 +41,10 @@ public class Castle {
      */
 
 
-    public void whiteKingLongCastle(King king, Rook rook){ // White king left white rook.
-            //board.updateGameLayout(king, 2, 7);
-            //board.updateGameLayout(rook, 3, 7);
-        }
+    public void whiteKingLongCastle(King king, Rook rook, Board board){ // White king left white rook.
+        board.changePiecePosition(king, 2, 7);
+        board.changePiecePosition(rook, 3, 7);
+    }
 
     /**
      * Method that switches the positions of the White King and the right whit Rook into castle-positions.
@@ -66,10 +52,10 @@ public class Castle {
      * @param rook
      */
 
-    public void whiteKingShortCastle(King king, Rook rook){ // White king right white rook.
-            //board.updateGameLayout(king, 6, 7);
-            //board.updateGameLayout(rook, 5, 7);
-        }
+    public void whiteKingShortCastle(King king, Rook rook, Board board){ // White king right white rook.
+        board.changePiecePosition(king, 6, 7);
+        board.changePiecePosition(rook, 5, 7);
+    }
 
     /**
      * Method that switches the positions of the Black King and the left black Rook into castle-positions.
@@ -77,10 +63,10 @@ public class Castle {
      * @param rook
      */
 
-    public void blackKingLongCastle (King king, Rook rook){ // Black king left black rook.
-            //board.updateGameLayout(king, 2, 0);
-            //board.updateGameLayout(rook, 3, 0);
-        }
+    public void blackKingLongCastle (King king, Rook rook, Board board){ // Black king left black rook.
+        board.changePiecePosition(king, 2, 0);
+        board.changePiecePosition(rook, 3, 0);
+    }
 
     /**
      * Method that switches the positions of the black King and the right black Rook into castle-positions.
@@ -88,10 +74,10 @@ public class Castle {
      * @param rook
      */
 
-    public void blackKingShortCastle (King king, Rook rook){ // Black King Right Black Rook
-            //board.updateGameLayout(king, 6, 0);
-            //board.updateGameLayout(rook, 5, 0);
-        }
+    public void blackKingShortCastle (King king, Rook rook, Board board){ // Black King Right Black Rook
+        board.changePiecePosition(king, 6, 0);
+        board.changePiecePosition(rook, 5, 0);
+    }
 
 
     /**
@@ -103,16 +89,16 @@ public class Castle {
      * @return true if the space is not occupied between them.
      */
 
-    public boolean preconditionsWhiteKingLeftRook(Piece[][] pieces, King king, Rook rook) {
+    public boolean preconditionsWhiteKingLongCastle(Piece[][] pieces, King king, Rook rook) { // White King Left Rook
         if (king.isPlayerOne() && rook.isPlayerOne() && rook.xPos == 0 && rook.yPos == 7
                 && notMoved(king, rook)){
-                for (int row = 7; row < 8; row++) {
-                    for (int col = 1; col < 4; col++) {
-                        if ((pieces[row][col]) == null) {
-                            return true;
-                        }
+            for (int row = 7; row < 8; row++) {
+                for (int col = 1; col < 4; col++) {
+                    if ((pieces[row][col]) == null) {
+                        return true;
                     }
                 }
+            }
         }return false;
     }
 
@@ -127,16 +113,16 @@ public class Castle {
 
 
 
-    public boolean preconditionsWhiteKingRightRook(Piece[][] pieces, King king, Rook rook){
+    public boolean preconditionsWhiteKingShortCastle(Piece[][] pieces, King king, Rook rook){ // White King Right Rook
         if(king.isPlayerOne() && rook.isPlayerOne() && rook.xPos == 7 && rook.yPos == 7
                 && notMoved(king, rook)){
-                for (int row = 7; row < 8; row++) {
-                    for (int col = 5; col < 7; col++) {
-                        if ((pieces[row][col]) == null) {
-                            return true;
-                        }
+            for (int row = 7; row < 8; row++) {
+                for (int col = 5; col < 7; col++) {
+                    if ((pieces[row][col]) == null) {
+                        return true;
                     }
                 }
+            }
         }return false;
     }
 
@@ -151,16 +137,16 @@ public class Castle {
      */
 
 
-    public boolean preconditionsBlackKingLeftRook(Piece[][] pieces, King king, Rook rook){
+    public boolean preconditionsBlackKingLongCastle(Piece[][] pieces, King king, Rook rook){ // White King Left Rook
         if(!king.isPlayerOne() && !rook.isPlayerOne() && rook.xPos == 0 && rook.yPos == 0
                 && notMoved(king, rook)){
-                for (int row = 0; row < 1; row++) {
-                    for (int col = 1; col < 4; col++) {
-                        if ((pieces[row][col]) == null){
-                            return true;
-                        }
+            for (int row = 0; row < 1; row++) {
+                for (int col = 1; col < 4; col++) {
+                    if ((pieces[row][col]) == null){
+                        return true;
                     }
                 }
+            }
         }return false;
     }
 
@@ -174,17 +160,35 @@ public class Castle {
      */
 
 
-    public boolean preconditionsBlackKingRightRook(Piece[][] pieces, King king, Rook rook){
+    public boolean preconditionsBlackKingShortCastle(Piece[][] pieces, King king, Rook rook){ // Black King Right Rook
         if(!king.isPlayerOne() && !rook.isPlayerOne() && rook.xPos == 0 && rook.yPos == 7
                 && notMoved(king, rook)){
-                for (int row = 0; row < 1; row++) {
-                    for (int col = 5; col < 7; col++) {
-                        if ((pieces[row][col]) == null){
-                            return true;
-                        }
+            for (int row = 0; row < 1; row++) {
+                for (int col = 5; col < 7; col++) {
+                    if ((pieces[row][col]) == null){
+                        return true;
                     }
                 }
+            }
         }return false;
+    }
+
+
+
+    public boolean pathCheckedWhiteLongCastle() {
+        return false;
+    }
+
+    public boolean pathCheckedWhiteShortCastle() {
+        return false;
+    }
+
+    public boolean pathCheckedBlackLongCastle() {
+        return false;
+    }
+
+    public boolean pathCheckedBlackShortCastle() {
+        return false;
     }
 
 
