@@ -55,26 +55,21 @@ public class PieceLayoutFactory {
     public static ArrayList<Piece> CreatePieceList(String[][] layout, boolean isPlayerOne){
         PieceFactory.isPlayerOne = isPlayerOne;
         ArrayList<Piece> newPieces = new ArrayList<>();
-        int n = (isPlayerOne == true) ? 6 : 0;
+        int n = (isPlayerOne) ? 6 : 0;
         for (int row = 0; row < layout.length; row++) {
             for (int col = 0; col < layout[row].length; col++) {
                 String s = layout[row][col];
                 int finalRow = row + n;
+
                 switch (s){
                     case "Rook":
                         newPieces.add(PieceFactory.createRook(finalRow, col));
-                        System.out.println(finalRow);
                         break;
                     case "Knight":
                         newPieces.add(PieceFactory.createKnight(finalRow, col));
-                        System.out.println("N: " + n + " I: " + row + " n+i: " + (finalRow) + " J: " + col);
-                        System.out.println(finalRow);
-
                         break;
                     case "Bishop":
                         newPieces.add(PieceFactory.createBishop(finalRow, col));
-                        System.out.println(finalRow);
-
                         break;
                     case "Queen":
                         newPieces.add(PieceFactory.createQueen(finalRow, col));
@@ -85,6 +80,8 @@ public class PieceLayoutFactory {
                     case "Pawn":
                         newPieces.add(PieceFactory.createPawn(finalRow, col));
                         break;
+                    case ("null"):
+                        newPieces.add(null);
                     default:
                         System.out.println("Error: Piece not created, possibly a faulty initial list. ");
                         break;

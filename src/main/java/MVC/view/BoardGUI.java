@@ -175,10 +175,8 @@ public class BoardGUI implements Observer {
             for (int col = 0; col < mirroredLayout.length; col++) {
                 Piece index = pieceLayout[row][col];
                 if (index != null){
-                    int xPos = index.xPos;
-                    int yPos = index.yPos;
                     // CREATES GRAPHICAL PIECE WHERE IT IS A PIECE IN THE LOGICAL LAYOUT
-                    WrapperPiece wPiece = new WrapperPiece(row, col, tileSize, tileSize, index);
+                    WrapperPiece wPiece = new WrapperPiece(col, row, tileSize, tileSize, index);
                     wPiece.setOnMouseClicked(event -> ctrl.pressed(wPiece));
                     wPiece.setOnMouseDragged(event -> ctrl.dragged(event, wPiece));
                     wPiece.setOnMouseReleased(event -> ctrl.released(event, wPiece));

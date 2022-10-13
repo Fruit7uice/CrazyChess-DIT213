@@ -90,7 +90,7 @@ public class BoardController {
 
     /**
      * Used to Test and debug the relations between gui -> controller -> model,
-     * making sure when an event has happend it should update the model.
+     * making sure when an event has happened it should update the model.
      */
     void printMatrix(){
         System.out.println("\n {");
