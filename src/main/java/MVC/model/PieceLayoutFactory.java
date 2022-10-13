@@ -26,6 +26,7 @@ public class PieceLayoutFactory {
         Piece[][] pieces = new Piece[8][8];
         ArrayList<Piece> playerTwoPieces = CreatePieceList(playerTwoLayout, false);
         ArrayList<Piece> playerOnePieces = CreatePieceList(playerOneLayout, true);
+        System.out.println(playerOnePieces.get(6).getType() + " Position X: " + playerOnePieces.get(8).xPos + " and Y: " + playerOnePieces.get(8).yPos );
         int p1Index = 0;
         int p2Index = 0;
 
@@ -54,29 +55,35 @@ public class PieceLayoutFactory {
     public static ArrayList<Piece> CreatePieceList(String[][] layout, boolean isPlayerOne){
         PieceFactory.isPlayerOne = isPlayerOne;
         ArrayList<Piece> newPieces = new ArrayList<>();
-
-        for (int i = 0; i < layout.length; i++) {
-            for (int j = 0; j < layout[i].length; j++) {
-                String s = layout[i][j];
-                int n = (isPlayerOne == true) ? 6 : 0;
+        int n = (isPlayerOne == true) ? 6 : 0;
+        for (int row = 0; row < layout.length; row++) {
+            for (int col = 0; col < layout[row].length; col++) {
+                String s = layout[row][col];
+                int finalRow = row + n;
                 switch (s){
                     case "Rook":
-                        newPieces.add(PieceFactory.createRook(n+i, j));
+                        newPieces.add(PieceFactory.createRook(finalRow, col));
+                        System.out.println(finalRow);
                         break;
                     case "Knight":
-                        newPieces.add(PieceFactory.createKnight(n+i, j));
+                        newPieces.add(PieceFactory.createKnight(finalRow, col));
+                        System.out.println("N: " + n + " I: " + row + " n+i: " + (finalRow) + " J: " + col);
+                        System.out.println(finalRow);
+
                         break;
                     case "Bishop":
-                        newPieces.add(PieceFactory.createBishop(n+i, j));
+                        newPieces.add(PieceFactory.createBishop(finalRow, col));
+                        System.out.println(finalRow);
+
                         break;
                     case "Queen":
-                        newPieces.add(PieceFactory.createQueen(n+i, j));
+                        newPieces.add(PieceFactory.createQueen(finalRow, col));
                         break;
                     case "King":
-                        newPieces.add(PieceFactory.createKing(n+i, j));
+                        newPieces.add(PieceFactory.createKing(finalRow, col));
                         break;
                     case "Pawn":
-                        newPieces.add(PieceFactory.createPawn(n+i, j));
+                        newPieces.add(PieceFactory.createPawn(finalRow, col));
                         break;
                     default:
                         System.out.println("Error: Piece not created, possibly a faulty initial list. ");

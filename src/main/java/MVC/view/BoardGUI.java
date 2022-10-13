@@ -99,7 +99,6 @@ public class BoardGUI implements Observer {
         }
         piece.setStroke(stroke);
         piece.setStrokeWidth(3);
-
         piece.setWidth(piece.getWidth());
         piece.setHeight(piece.getHeight());
         piece.setX(x);
@@ -172,18 +171,18 @@ public class BoardGUI implements Observer {
      */
     private void createNewGraphicalPieceLayout() {
         mirroredLayout = new WrapperPiece[8][8];
-        for (int i = 0; i < mirroredLayout.length; i++) {
-            for (int j = 0; j < mirroredLayout.length; j++) {
-                Piece index = pieceLayout[i][j];
+        for (int row = 0; row < mirroredLayout.length; row++) {
+            for (int col = 0; col < mirroredLayout.length; col++) {
+                Piece index = pieceLayout[row][col];
                 if (index != null){
                     int xPos = index.xPos;
                     int yPos = index.yPos;
                     // CREATES GRAPHICAL PIECE WHERE IT IS A PIECE IN THE LOGICAL LAYOUT
-                    WrapperPiece wPiece = new WrapperPiece(xPos, yPos, tileSize, tileSize, pieceLayout[i][j]);
+                    WrapperPiece wPiece = new WrapperPiece(row, col, tileSize, tileSize, index);
                     wPiece.setOnMouseClicked(event -> ctrl.pressed(wPiece));
                     wPiece.setOnMouseDragged(event -> ctrl.dragged(event, wPiece));
                     wPiece.setOnMouseReleased(event -> ctrl.released(event, wPiece));
-                    mirroredLayout[i][j] = wPiece;
+                    mirroredLayout[row][col] = wPiece;
                 }
             }
         }
