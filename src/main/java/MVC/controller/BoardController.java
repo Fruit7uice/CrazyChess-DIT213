@@ -68,20 +68,20 @@ public class BoardController {
      * @param piece is the WrapperPiece used to represent the logical Piece
      */
     public void released(MouseEvent event, WrapperPiece piece){
-        int newCol = (int) Math.floor(event.getX() / tileSize); // Index x
-        int newRow = (int) Math.floor(event.getY() / tileSize); // Index y
+        int newX = (int) Math.floor(event.getX() / tileSize); // Index x
+        int newY = (int) Math.floor(event.getY() / tileSize); // Index y
         // moveHandler.moveChecker(newCol, newRow, piece, board.pieceLayout)
         if(onDrag && true){ //replace true with: moveHandler.moveChecker(newCol, newRow, pieces, piece)
             onDrag = false;
-            snapPieceToGrid(piece, newRow, newCol);
+            snapPieceToGrid(piece, newX, newY);
             boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
         }
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
     }
 
-    public void snapPieceToGrid(WrapperPiece piece, int newRow, int newCol){
-        if (!(piece.getRefPiece().xPos == newCol && piece.getRefPiece().yPos == newRow)){
-            board.changePiecePosition(piece.getRefPiece(), newRow, newCol); // Updates board as well
+    public void snapPieceToGrid(WrapperPiece piece, int newX, int newY){
+        if (!(piece.getRefPiece().xPos == newX && piece.getRefPiece().yPos == newY)){
+            board.changePiecePosition(piece.getRefPiece(), newX, newY); // Updates board as well
         }
 
     }

@@ -26,20 +26,20 @@ public class Board implements Observable {
     }
 
 
-    private void updateGameLayout(Piece piece, int newRow, int newCol){
-        int oldCol = piece.xPos; // Old x-coords for piece
-        int oldRow = piece.yPos; // Old y-coords for piece
-        Piece tmp = pieceLayout[oldRow][oldCol]; // Save a reference for piece
-        pieceLayout[newRow][newCol] = tmp; // Place saved piece in new slot
-        pieceLayout[oldRow][oldCol] = null; // Old slot is set to null
+    private void updateGameLayout(Piece piece, int newX, int newY){
+        int oldX = piece.xPos; // Old x-coords for piece
+        int oldY = piece.yPos; // Old y-coords for piece
+        Piece tmp = pieceLayout[oldY][oldX]; // Save a reference for piece
+        pieceLayout[newY][newX] = tmp; // Place saved piece in new slot
+        pieceLayout[oldY][oldX] = null; // Old slot is set to null
         notifyAllObservers();
     }
 
 
-    public void changePiecePosition(Piece piece, int newRow, int newCol){
-            updateGameLayout(piece, newRow, newCol);
-            piece.xPos = newCol;
-            piece.yPos = newRow;
+    public void changePiecePosition(Piece piece, int x, int y){
+            updateGameLayout(piece, x, y);
+            piece.xPos = x;
+            piece.yPos = y;
             notifyAllObservers();
             //updateListOfLegalMoves();
     }

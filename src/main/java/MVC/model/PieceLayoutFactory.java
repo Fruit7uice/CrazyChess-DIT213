@@ -35,7 +35,7 @@ public class PieceLayoutFactory {
 
                 if (i < 2){
                     pieces[i][j] = playerTwoPieces.get(p2Index);
-                    System.out.println("Placed Piece at: Row " + i + " and Col " + j);
+                    System.out.println("Placed Piece at: Row(Y) " + i + " and Col(X) " + j);
                     p2Index++;
                 }
                 else if (i > 5) {
