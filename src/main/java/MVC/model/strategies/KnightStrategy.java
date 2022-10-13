@@ -11,8 +11,16 @@ public class KnightStrategy {
      * @return returns a bool if the desired movement is a "knight" movement
      */
  public static boolean move(int startX, int startY, int newX, int newY){
-        return Math.abs(startX - newX) + Math.abs(startY - newY) == 3 &&
-                Math.abs(startX - newX) > 0 && Math.abs(startY - newY) > 0;
+     int deltaX = Math.abs(startX - newX);
+     int deltaY = Math.abs(startY - newY);
+        if ((deltaX + deltaY == 3) && (deltaX > 0 && deltaY > 0)){
+            System.out.println("DeltaX: " + deltaX + " DeltaY: " + deltaY);
+            return true;
+        }
+        else {
+            System.out.println("Inside Else: DeltaX: " + deltaX + " DeltaY: " + deltaY);
+            return false;
+        }
     }
 
 

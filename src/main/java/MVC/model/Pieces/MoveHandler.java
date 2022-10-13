@@ -12,7 +12,7 @@ public class MoveHandler {
 
     Board board;
     public MoveHandler(Board board) {
-        this.board = this.board;
+        this.board = board;
     }
 
     /**
@@ -25,7 +25,9 @@ public class MoveHandler {
     public boolean moveChecker(int newX, int newY, Piece piece, Piece[][] pieceLayout){
         //TODO add a check if king.IsInCheck()
         if(piece.legalMove(newX, newY)){
+            System.out.println("Move Was Legal");
             if (!isOccupied(newX, newY, pieceLayout)) { //is the tile not occupied
+                System.out.println("Is not occupied");
                 return !isPathBlocked(newX, newY, piece, pieceLayout); // true if path is not blocked
             } else { // tile is occupied
                 if (isOccupiedByEnemy(newX, newY, piece, pieceLayout)) { //is the piece my enemy?
@@ -40,6 +42,7 @@ public class MoveHandler {
                 }
             }
         } else {
+            System.out.println("Move Was Illegal");
             return false;
         }
     }
@@ -52,12 +55,12 @@ public class MoveHandler {
      * @param piece the current piece we are working on
      */
 
-    public void movePiece(int newX, int newY, Piece piece, Piece[][] board){
-        if(moveChecker(newX, newY, piece, board)){ // updates the position if the move is legal
+    public void movePiece(int newX, int newY, Piece piece, Piece[][] pieceLayout){
+        if(moveChecker(newX, newY, piece, pieceLayout)){ // updates the position if the move is legal
             piece.xPos = newX;
             piece.yPos = newY;
             piece.listOfLegalMoves.clear();
-            createListOfLegalMoves(piece, board);
+            createListOfLegalMoves(piece, pieceLayout);
             piece.hasMoved = true; // The first time the piece moves, the boolean is going to get
         }                          // switched to true.
     }
@@ -71,7 +74,7 @@ public class MoveHandler {
      * @return true if the position on the board is occupied
      */
     public boolean isOccupied(int newX, int newY, Piece[][] board){
-        return (board[newX][newY] != null);
+        return (board[newY][newX] != null);
     }
 
     /**
@@ -107,18 +110,18 @@ public class MoveHandler {
     /**
      * @param newX the desired x position
      * @param newY the desired y position
-     * @param board the board that contains the pieces
+     * @param pieceLayout the pieceLayout that contains the pieces
      * @param piece the current piece we are working on
      * @return true if the path is blocked by any piece as long as the piece is not a knight
      */
-    public boolean isPathBlocked(int newX, int newY, Piece piece, Piece[][] board){
+    public boolean isPathBlocked(int newX, int newY, Piece piece, Piece[][] pieceLayout){
         if(!piece.getType().equals("Knight")) {
             if (piece.xPos != newX && piece.yPos == newY) { // x pos changed
-                return pathBlockedHelperHorizontal(newX, piece, board, 0);
+                return pathBlockedHelperHorizontal(newX, piece, pieceLayout, 0);
             } else if (piece.xPos == newX && piece.yPos != newY) { // y pos changed
-                return pathBlockedHelperVertical(newY, piece, board, 0);
+                return pathBlockedHelperVertical(newY, piece, pieceLayout, 0);
             } else if (piece.xPos != newX && piece.yPos != newY) {
-                return pathBlockedHelperDiagonal(newX, newY, piece, board, 0);
+                return pathBlockedHelperDiagonal(newX, newY, piece, pieceLayout, 0);
             } else {
                 return true;
             }
@@ -130,28 +133,28 @@ public class MoveHandler {
     /**
      * @param newX the desired x position
      * @param piece the current piece
-     * @param board the current board that holds the pieces
+     * @param pieceLayout the current pieceLayout that holds the pieces
      * @param counter to keep track of how much we should increment
      * @return true if the current coordinates are not blocked
      */
-    public boolean pathBlockedHelperHorizontal(int newX, Piece piece, Piece[][] board, int counter){
+    public boolean pathBlockedHelperHorizontal(int newX, Piece piece, Piece[][] pieceLayout, int counter){
         int deltaX = Math.abs(piece.xPos - newX);
         if (piece.xPos > newX) { // current x > new x (moved left)
             while (counter < deltaX) {
-                if (board[piece.xPos - counter][piece.yPos] != null && (piece.xPos - counter) != piece.xPos) { // don't check where the piece is right now
+                if (pieceLayout[piece.xPos - counter][piece.yPos] != null && (piece.xPos - counter) != piece.xPos) { // don't check where the piece is right now
                     return true;
                 } else {
                     counter++;
-                    pathBlockedHelperHorizontal(newX, piece, board, counter);
+                    pathBlockedHelperHorizontal(newX, piece, pieceLayout, counter);
                 }
             }
         } else {
             while (counter < deltaX) { // if current x < new x (moved right)
-                if (board[piece.xPos + counter][piece.yPos] != null && (piece.xPos + counter) != piece.xPos) { // don't check where the piece is right now
+                if (pieceLayout[piece.xPos + counter][piece.yPos] != null && (piece.xPos + counter) != piece.xPos) { // don't check where the piece is right now
                     return true;
                 } else {
                     counter++;
-                    pathBlockedHelperHorizontal(newX, piece, board, counter);
+                    pathBlockedHelperHorizontal(newX, piece, pieceLayout, counter);
                 }
             }
         }

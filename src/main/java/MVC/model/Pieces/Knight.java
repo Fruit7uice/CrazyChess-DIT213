@@ -17,7 +17,7 @@ public class Knight extends Piece{
      */
     public boolean legalMove(int newX, int newY){
         if (newX != xPos || newY != yPos){// checks if we have tried to move
-            if (knightStrategy.move(xPos, yPos, newX, newY)) { //makes sure the strategy allows uss to move
+            if (KnightStrategy.move(xPos, yPos, newX, newY)) { //makes sure the strategy allows uss to move
                 return true;
             } else {
                 return false;
