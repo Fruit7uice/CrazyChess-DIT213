@@ -8,7 +8,7 @@ import java.util.List;
 public class Player {
     public List<Tuple<Integer, Integer>> playerOneListOfLegalMoves;
     public List<Tuple<Integer, Integer>> playerTwoListOfLegalMoves;
-    MoveHandler moveHandler = new MoveHandler();
+    MoveHandler moveHandler; //= new MoveHandler();
 
     /**
      * Calculates each player's list of legal moves by looping through the board and checking for each position
