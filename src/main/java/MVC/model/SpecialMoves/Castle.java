@@ -5,7 +5,8 @@ import MVC.model.Board;
 import MVC.model.Pieces.King;
 import MVC.model.Pieces.Piece;
 import MVC.model.Pieces.Rook;
-
+import MVC.model.Tuple;
+import MVC.model.Player;
 
 /**
  * Class that holds the logic for the Special move of castle.
@@ -15,6 +16,9 @@ import MVC.model.Pieces.Rook;
 public class Castle {
 
     public Castle(){}
+
+    Player player = new Player();
+
 
 
     /**
@@ -26,13 +30,13 @@ public class Castle {
      */
 
     public boolean isCastleAllowed(King king, Rook rook, Piece[][] pieces){
-        if(preconditionsWhiteKingLongCastle(pieces, king, rook) && pathCheckedWhiteLongCastle(pieces)){
+        if(preconditionsWhiteKingLongCastle(pieces, king, rook) && pathCheckedWhiteLongCastle()){
             return true;
-        }else if(preconditionsWhiteKingShortCastle(pieces, king, rook) && pathCheckedWhiteShortCastle(pieces)){
+        }else if(preconditionsWhiteKingShortCastle(pieces, king, rook) && pathCheckedWhiteShortCastle()){
             return true;
-        }else if(preconditionsBlackKingLongCastle(pieces, king, rook) && pathCheckedBlackLongCastle(pieces)){
+        }else if(preconditionsBlackKingLongCastle(pieces, king, rook) && pathCheckedBlackLongCastle()){
             return true;
-        }else return preconditionsBlackKingShortCastle(pieces, king, rook) && pathCheckedBlackShortCastle(pieces);
+        }else return preconditionsBlackKingShortCastle(pieces, king, rook) && pathCheckedBlackShortCastle();
     }
 
 
@@ -175,25 +179,44 @@ public class Castle {
         }return false;
     }
 
+    /**
+     * Method that checks if there are any legal moves for the opponent in their list of legal moves that
+     * corresponds to the tiles that need to be unchecked for the castle to be made.
+     *
+     * This method in particular correspond to the White Long Castle.
+     * @return True if any piece of the opposing player can move to any of these tiles.
+     */
 
 
+    public boolean pathCheckedWhiteLongCastle(){
+        Tuple<Integer, Integer> tuple71 = new Tuple(7, 1);
+        Tuple<Integer, Integer> tuple72 = new Tuple(7, 2);
+        Tuple<Integer, Integer> tuple73 = new Tuple(7, 3);
+        Tuple<Integer, Integer> tuple74 = new Tuple(7, 4);
 
-    public boolean pathCheckedWhiteLongCastle(Piece[][] pieces) {
+        for (int i = 0; i < player.playerTwoListOfLegalMoves.size()-1; i++) {
+                if (player.playerTwoListOfLegalMoves.get(i) == tuple71 ||
+                    player.playerTwoListOfLegalMoves.get(i) == tuple72 ||
+                    player.playerTwoListOfLegalMoves.get(i) == tuple73 ||
+                    player.playerTwoListOfLegalMoves.get(i) == tuple74){
+                return true;
+            }
+        }
         return false;
     };
 
 
-    public boolean pathCheckedWhiteShortCastle(Piece[][] pieces) {
+    public boolean pathCheckedWhiteShortCastle() {
         return false;
     };
 
 
-    public boolean pathCheckedBlackLongCastle(Piece[][] pieces) {
+    public boolean pathCheckedBlackLongCastle() {
         return false;
     };
 
 
-    public boolean pathCheckedBlackShortCastle(Piece[][] pieces) {
+    public boolean pathCheckedBlackShortCastle() {
         return false;
     };
 

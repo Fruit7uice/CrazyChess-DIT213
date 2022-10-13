@@ -48,7 +48,7 @@ public class MoveHandler {
      * Updates the pieces coordinates if is allowed to make the desired move
      * @param newX the desired x position
      * @param newY the desired y position
-     * @param pieceLayout the board that contains the pieces
+     * @param piece Layout the board that contains the pieces
      * @param piece the current piece we are working on
      */
 
