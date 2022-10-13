@@ -30,13 +30,13 @@ public class Castle {
      */
 
     public boolean isCastleAllowed(King king, Rook rook, Piece[][] pieces){
-        if(preconditionsWhiteKingLongCastle(pieces, king, rook) && pathCheckedWhiteLongCastle()){
+        if(preconditionsWhiteKingLongCastle(pieces, king, rook) && !pathCheckedWhiteLongCastle()){
             return true;
-        }else if(preconditionsWhiteKingShortCastle(pieces, king, rook) && pathCheckedWhiteShortCastle()){
+        }else if(preconditionsWhiteKingShortCastle(pieces, king, rook) && !pathCheckedWhiteShortCastle()){
             return true;
-        }else if(preconditionsBlackKingLongCastle(pieces, king, rook) && pathCheckedBlackLongCastle()){
+        }else if(preconditionsBlackKingLongCastle(pieces, king, rook) && !pathCheckedBlackLongCastle()){
             return true;
-        }else return preconditionsBlackKingShortCastle(pieces, king, rook) && pathCheckedBlackShortCastle();
+        }else return preconditionsBlackKingShortCastle(pieces, king, rook) && !pathCheckedBlackShortCastle();
     }
 
 
@@ -206,24 +206,79 @@ public class Castle {
     };
 
 
-    public boolean pathCheckedWhiteShortCastle() {
+    /**
+     * Method that checks if there are any legal moves for the opponent in their list of legal moves that
+     * corresponds to the tiles that need to be unchecked for the castle to be made.
+     *
+     * This method in particular correspond to the White Short Castle.
+     * @return True if any piece of the opposing player can move to any of these tiles.
+     */
+
+
+    public boolean pathCheckedWhiteShortCastle(){
+        Tuple<Integer, Integer> tuple74 = new Tuple(7, 4);
+        Tuple<Integer, Integer> tuple75 = new Tuple(7, 5);
+        Tuple<Integer, Integer> tuple76 = new Tuple(7, 6);
+
+        for (int i = 0; i < player.playerTwoListOfLegalMoves.size()-1; i++) {
+                if (player.playerTwoListOfLegalMoves.get(i) == tuple74 ||
+                    player.playerTwoListOfLegalMoves.get(i) == tuple75 ||
+                    player.playerTwoListOfLegalMoves.get(i) == tuple76){
+                return true;
+            }
+        }
         return false;
     };
 
+    /**
+     * Method that checks if there are any legal moves for the opponent in their list of legal moves that
+     * corresponds to the tiles that need to be unchecked for the castle to be made.
+     *
+     * This method in particular correspond to the Black Long Castle.
+     * @return True if any piece of the opposing player can move to any of these tiles.
+     */
 
-    public boolean pathCheckedBlackLongCastle() {
+
+    public boolean pathCheckedBlackLongCastle(){
+        Tuple<Integer, Integer> tuple01 = new Tuple(0, 1);
+        Tuple<Integer, Integer> tuple02 = new Tuple(0, 2);
+        Tuple<Integer, Integer> tuple03 = new Tuple(0, 3);
+        Tuple<Integer, Integer> tuple04 = new Tuple(0, 4);
+
+        for (int i = 0; i < player.playerOneListOfLegalMoves.size()-1; i++) {
+                if (player.playerOneListOfLegalMoves.get(i) == tuple01 ||
+                    player.playerOneListOfLegalMoves.get(i) == tuple02 ||
+                    player.playerOneListOfLegalMoves.get(i) == tuple03 ||
+                    player.playerOneListOfLegalMoves.get(i) == tuple04){
+                return true;
+            }
+        }
         return false;
     };
 
+    /**
+     * Method that checks if there are any legal moves for the opponent in their list of legal moves that
+     * corresponds to the tiles that need to be unchecked for the castle to be made.
+     *
+     * This method in particular correspond to the Black Short Castle.
+     * @return True if any piece of the opposing player can move to any of these tiles.
+     */
 
-    public boolean pathCheckedBlackShortCastle() {
+
+    public boolean pathCheckedBlackShortCastle(){
+        Tuple<Integer, Integer> tuple04 = new Tuple(0, 4);
+        Tuple<Integer, Integer> tuple05 = new Tuple(0, 5);
+        Tuple<Integer, Integer> tuple06 = new Tuple(0, 6);
+
+        for (int i = 0; i < player.playerOneListOfLegalMoves.size()-1; i++) {
+            if (player.playerOneListOfLegalMoves.get(i) == tuple04 ||
+                    player.playerOneListOfLegalMoves.get(i) == tuple05 ||
+                    player.playerOneListOfLegalMoves.get(i) == tuple06){
+                return true;
+            }
+        }
         return false;
     };
-
-
-
-
-
 
 
     /**
