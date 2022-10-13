@@ -30,7 +30,7 @@ public class MainBoard extends Application {
         this.boardPane = new Pane(); // Creates a new pane
         this.gui = new BoardGUI(boardPane);
         this.board = new Board(pieceLayout);
-        this.controller = new BoardController(gui, board, new MoveHandler(board), boardPane);
+        this.controller = new BoardController(gui, board, new MoveHandler(pieceLayout), boardPane);
         gui.setController(controller);
 
         board.addObserver(gui);

@@ -16,8 +16,8 @@ public class PieceTest {
     Piece bishop;
     Piece rook;
     Piece pawn;
-    MoveHandler moveHandler;
     Piece[][] board;
+    MoveHandler moveHandler = new MoveHandler(board);
 
     @Before
     public void setUp() {
