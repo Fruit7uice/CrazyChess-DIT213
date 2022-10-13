@@ -26,7 +26,7 @@ public class PieceLayoutFactory {
         Piece[][] pieces = new Piece[8][8];
         ArrayList<Piece> playerTwoPieces = CreatePieceList(playerTwoLayout, false);
         ArrayList<Piece> playerOnePieces = CreatePieceList(playerOneLayout, true);
-        System.out.println(playerOnePieces.get(6).getType() + " Position X: " + playerOnePieces.get(8).xPos + " and Y: " + playerOnePieces.get(8).yPos );
+        //System.out.println(playerOnePieces.get(6).getType() + " Position X: " + playerOnePieces.get(8).xPos + " and Y: " + playerOnePieces.get(8).yPos );
         int p1Index = 0;
         int p2Index = 0;
 
@@ -35,12 +35,12 @@ public class PieceLayoutFactory {
 
                 if (i < 2){
                     pieces[i][j] = playerTwoPieces.get(p2Index);
-                    System.out.println("Placed Piece at: " + i + " and " + j);
+                    System.out.println("Placed Piece at: Row " + i + " and Col " + j);
                     p2Index++;
                 }
                 else if (i > 5) {
                     pieces[i][j] = playerOnePieces.get(p1Index);
-                    System.out.println("Placed Piece at: " + i + " and " + j);
+                    System.out.println("Placed Piece at: Row " + i + " and Col " + j);
                     p1Index++;
                 }
                 else {
