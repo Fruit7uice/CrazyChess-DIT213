@@ -70,7 +70,7 @@ public class BoardController {
     public void released(MouseEvent event, WrapperPiece piece){
         int newX = (int) Math.floor(event.getX() / tileSize); // Index x
         int newY = (int) Math.floor(event.getY() / tileSize); // Index y
-        if(onDrag && moveHandler.moveChecker(newX, newY, piece.getRefPiece(), board.pieceLayout)){
+        if(onDrag && moveHandler.isMoveAllowed(newX, newY, piece.getRefPiece(), board.pieceLayout)){
             onDrag = false;
             snapPieceToGrid(piece, newX, newY);
             boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));

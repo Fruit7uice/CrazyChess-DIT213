@@ -14,6 +14,7 @@ public class HorizontalStrategy implements IMoveStrategy {
 
 
     public static boolean move (int startX, int startY, int newX, int newY ){
-        return (Math.abs(startX - newX) > 0) && (startY == newY);
+        int deltaX = Math.abs(startX - newX);
+        return (deltaX > 0) && (startY == newY);
         }
 }

@@ -9,17 +9,18 @@ package MVC.model.strategies;
  * @author Joel Leiditz Thorsson
  */
 public class PawnStrategy implements IMoveStrategy {
-    private boolean hasMoved = false; // not finished, move logic to another class
 
-
-    public static boolean move(int startX, int startY, int endX, int endY) {
-        if (!hasMoved) {          // not finished, move logic to another class.
-            if ((endY - startY) == 2 || (endY - startY) == 1
-                    && startX == endX) {
-                hasMoved = true;
-                return true;
-            }
-        } else return (endY - startY) == 1 && startX == endX;
-        return false;
+    public static boolean move(int startX, int startY, int endX, int endY, boolean hasMoved, boolean isPlayerOne) {
+        if (isPlayerOne){
+            if (!hasMoved) {// not finished, move logic to another class.
+                return (endY - startY) == -2 || (endY - startY) == -1 && startX == endX;
+            } else return (endY - startY) == -1 && startX == endX;
+        }
+        else {
+            if (!hasMoved) {// not finished, move logic to another class.
+                return (endY - startY) == 2 || (endY - startY) == 1
+                        && startX == endX;
+            } else return (endY - startY) == 1 && startX == endX;
+        }
     }
 }

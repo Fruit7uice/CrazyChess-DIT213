@@ -13,6 +13,7 @@ public class VerticalStrategy implements IMoveStrategy{
 
 
     public static boolean move(int startX, int startY, int newX, int newY) {
-        return (Math.abs(startY - newY) > 0) && (startX == newX);
+        int deltaY = Math.abs(startY - newY);
+        return (deltaY > 0) && (startX == newX);
     }
 }

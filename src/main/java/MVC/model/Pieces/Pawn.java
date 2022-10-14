@@ -17,7 +17,8 @@ public class Pawn extends Piece{
      */
     public boolean legalMove(int newX, int newY){
         if (newX != xPos || newY != yPos){// checks if we have tried to move
-            if (PawnStrategy.move(xPos, yPos, newX, newY)) { //makes sure the strategy allows uss to move
+            if (PawnStrategy.move(xPos, yPos, newX, newY, hasMoved, isPlayerOne())) { //makes sure the strategy allows uss to move
+                hasMoved = true;
                 return true;
             } else {
                 return false;

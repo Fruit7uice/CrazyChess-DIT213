@@ -15,6 +15,8 @@ public class DiagonalStrategy implements IMoveStrategy {
 
 
     public static boolean move(int startX, int startY, int newX, int newY ) {
-        return Math.abs(startX - newX) == Math.abs(startY - newY);
+        int deltaX = Math.abs(startX - newX);
+        int deltaY = Math.abs(startY - newY);
+        return deltaX == deltaY;
     }
 }
