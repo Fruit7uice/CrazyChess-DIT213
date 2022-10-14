@@ -7,6 +7,7 @@ import MVC.model.Pieces.Piece;
 import MVC.model.Pieces.Rook;
 import MVC.model.Tuple;
 import MVC.model.Player;
+import MVC.model.Pieces.MoveHandler;
 
 /**
  * Class that holds the logic for the Special move of castle.
@@ -18,6 +19,7 @@ public class Castle {
     public Castle(){}
 
     Player player = new Player();
+
 
 
 
@@ -189,16 +191,16 @@ public class Castle {
 
 
     public boolean pathCheckedWhiteLongCastle(){
-        Tuple<Integer, Integer> tuple71 = new Tuple(7, 1);
-        Tuple<Integer, Integer> tuple72 = new Tuple(7, 2);
-        Tuple<Integer, Integer> tuple73 = new Tuple(7, 3);
-        Tuple<Integer, Integer> tuple74 = new Tuple(7, 4);
+        Tuple<Integer, Integer> tuple17 = new Tuple(1, 7);
+        Tuple<Integer, Integer> tuple27 = new Tuple(2, 7);
+        Tuple<Integer, Integer> tuple37 = new Tuple(3, 7);
+        Tuple<Integer, Integer> tuple47 = new Tuple(4, 7);
 
         for (int i = 0; i < player.playerTwoListOfLegalMoves.size()-1; i++) {
-                if (player.playerTwoListOfLegalMoves.get(i) == tuple71 ||
-                    player.playerTwoListOfLegalMoves.get(i) == tuple72 ||
-                    player.playerTwoListOfLegalMoves.get(i) == tuple73 ||
-                    player.playerTwoListOfLegalMoves.get(i) == tuple74){
+                if (player.playerTwoListOfLegalMoves.get(i) == tuple17 ||
+                    player.playerTwoListOfLegalMoves.get(i) == tuple27 ||
+                    player.playerTwoListOfLegalMoves.get(i) == tuple37 ||
+                    player.playerTwoListOfLegalMoves.get(i) == tuple47){
                 return true;
             }
         }
@@ -216,14 +218,14 @@ public class Castle {
 
 
     public boolean pathCheckedWhiteShortCastle(){
-        Tuple<Integer, Integer> tuple74 = new Tuple(7, 4);
-        Tuple<Integer, Integer> tuple75 = new Tuple(7, 5);
-        Tuple<Integer, Integer> tuple76 = new Tuple(7, 6);
+        Tuple<Integer, Integer> tuple47 = new Tuple(4, 7);
+        Tuple<Integer, Integer> tuple57 = new Tuple(5, 7);
+        Tuple<Integer, Integer> tuple67 = new Tuple(6, 7);
 
         for (int i = 0; i < player.playerTwoListOfLegalMoves.size()-1; i++) {
-                if (player.playerTwoListOfLegalMoves.get(i) == tuple74 ||
-                    player.playerTwoListOfLegalMoves.get(i) == tuple75 ||
-                    player.playerTwoListOfLegalMoves.get(i) == tuple76){
+                if (player.playerTwoListOfLegalMoves.get(i) == tuple47 ||
+                    player.playerTwoListOfLegalMoves.get(i) == tuple57 ||
+                    player.playerTwoListOfLegalMoves.get(i) == tuple67){
                 return true;
             }
         }
@@ -240,16 +242,16 @@ public class Castle {
 
 
     public boolean pathCheckedBlackLongCastle(){
-        Tuple<Integer, Integer> tuple01 = new Tuple(0, 1);
-        Tuple<Integer, Integer> tuple02 = new Tuple(0, 2);
-        Tuple<Integer, Integer> tuple03 = new Tuple(0, 3);
-        Tuple<Integer, Integer> tuple04 = new Tuple(0, 4);
+        Tuple<Integer, Integer> tuple10 = new Tuple(1, 0);
+        Tuple<Integer, Integer> tuple20 = new Tuple(2, 0);
+        Tuple<Integer, Integer> tuple30 = new Tuple(3, 0);
+        Tuple<Integer, Integer> tuple40 = new Tuple(4, 0);
 
         for (int i = 0; i < player.playerOneListOfLegalMoves.size()-1; i++) {
-                if (player.playerOneListOfLegalMoves.get(i) == tuple01 ||
-                    player.playerOneListOfLegalMoves.get(i) == tuple02 ||
-                    player.playerOneListOfLegalMoves.get(i) == tuple03 ||
-                    player.playerOneListOfLegalMoves.get(i) == tuple04){
+                if (player.playerOneListOfLegalMoves.get(i) == tuple10 ||
+                    player.playerOneListOfLegalMoves.get(i) == tuple20 ||
+                    player.playerOneListOfLegalMoves.get(i) == tuple30 ||
+                    player.playerOneListOfLegalMoves.get(i) == tuple40){
                 return true;
             }
         }
@@ -266,14 +268,14 @@ public class Castle {
 
 
     public boolean pathCheckedBlackShortCastle(){
-        Tuple<Integer, Integer> tuple04 = new Tuple(0, 4);
-        Tuple<Integer, Integer> tuple05 = new Tuple(0, 5);
-        Tuple<Integer, Integer> tuple06 = new Tuple(0, 6);
+        Tuple<Integer, Integer> tuple40 = new Tuple(4, 0);
+        Tuple<Integer, Integer> tuple50 = new Tuple(5, 0);
+        Tuple<Integer, Integer> tuple60 = new Tuple(6, 0);
 
         for (int i = 0; i < player.playerOneListOfLegalMoves.size()-1; i++) {
-            if (player.playerOneListOfLegalMoves.get(i) == tuple04 ||
-                    player.playerOneListOfLegalMoves.get(i) == tuple05 ||
-                    player.playerOneListOfLegalMoves.get(i) == tuple06){
+                 if(player.playerOneListOfLegalMoves.get(i) == tuple40 ||
+                    player.playerOneListOfLegalMoves.get(i) == tuple50 ||
+                    player.playerOneListOfLegalMoves.get(i) == tuple60){
                 return true;
             }
         }

@@ -2,6 +2,7 @@ package MVC.model.Pieces;
 
 
 import MVC.model.Board;
+import MVC.model.SpecialMoves.Castle;
 import MVC.model.Tuple;
 
 
@@ -15,6 +16,8 @@ public class MoveHandler {
         this.board = this.board;
     }
 
+    Castle castle = new Castle();
+
     /**
      * @param newX the desired x position
      * @param newY the desired y position
@@ -24,6 +27,11 @@ public class MoveHandler {
      */
     public boolean moveChecker(int newX, int newY, Piece piece, Piece[][] pieceLayout){
         //TODO add a check if king.IsInCheck()
+        if(piece.getClass() == King.class){
+            castle(king, rook, piece, pieceLayout);
+
+
+        }
         if(piece.legalMove(newX, newY)){
             if (!isOccupied(newX, newY, pieceLayout)) { //is the tile not occupied
                 return !isPathBlocked(newX, newY, piece, pieceLayout); // true if path is not blocked
@@ -218,6 +226,48 @@ public class MoveHandler {
             }
         }
         return false;
+    }
+
+
+    /**
+     * Method that takes all the aspects into consideration regarding the castle. Are the pre-conditions satisfied?
+     * If so, then complete the castle-move.
+     * @param king The king that is trying to castle
+     * @param rook The associated rook in the castle.
+     * @param piece The piece of king
+     * @param pieces The board of pieces
+     * @param board THe board
+     *
+     * @author Johannes Höher
+     */
+
+
+    public void castle(King king, Rook rook, Piece piece, Piece[][] pieces, Board board){
+        if(castle.isCastleAllowed(king, rook, pieces)){
+            if(piece.xPos == 2 && piece.yPos == 7){
+                castle.whiteKingLongCastle(king, rook, board); // Switch the positions of the king and the rook.
+            }
+            else if(piece.xPos == 6 && piece.yPos == 7){
+                castle.whiteKingShortCastle(king, rook, board); // Switch the positions of the king and the rook.
+            }
+            else if(piece.xPos == 2 && piece.yPos == 0){
+                castle.blackKingLongCastle(king, rook, board); // Switch the positions of the king and the rook.
+            }
+            else if(piece.xPos == 6 && piece.yPos == 0){
+                castle.blackKingShortCastle(king, rook, board); // Switch the positions of the king and the rook.
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
 
     /**
