@@ -10,6 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
+import java.util.Objects;
+
 import static MVC.view.Tile.tileSize;
 
 public class BoardController {
@@ -70,20 +72,12 @@ public class BoardController {
     public void released(MouseEvent event, WrapperPiece piece){
         int newX = (int) Math.floor(event.getX() / tileSize); // Index x
         int newY = (int) Math.floor(event.getY() / tileSize); // Index y
-        if(onDrag && moveHandler.isMoveAllowed(newX, newY, piece.getRefPiece(), board.pieceLayout)){
+        if(onDrag){
             onDrag = false;
-            if (piece.getRefPiece().isPlayerOne() && moveHandler.hasPlayerOneCastled()){
-                boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
-            }
-            else if (!piece.getRefPiece().isPlayerOne() && moveHandler.hasPlayerTwoCastled()){
-                boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
-            }
-            else {
-                snapPieceToGrid(piece, newX, newY);
-                boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
-            }
-
+            moveHandler.tryAndCheckMove(newX, newY, piece.getRefPiece(), board.pieceLayout);
+            boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
         }
+
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
     }
 

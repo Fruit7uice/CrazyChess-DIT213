@@ -3,11 +3,12 @@ package MVC.model;
 import MVC.model.Pieces.MoveHandler;
 import MVC.model.Pieces.Piece;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    public List<Tuple<Integer, Integer>> playerOneListOfLegalMoves;
-    public List<Tuple<Integer, Integer>> playerTwoListOfLegalMoves;
+    public List<Tuple<Integer, Integer>> playerOneListOfLegalMoves = new ArrayList<>();
+    public List<Tuple<Integer, Integer>> playerTwoListOfLegalMoves = new ArrayList<>();
     MoveHandler moveHandler; //= new MoveHandler();
 
     /**

@@ -30,9 +30,27 @@ public class MoveHandler {
 
     public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout){ // Allowed
         //TODO add a check if king.IsInCheck()
-        if(Objects.equals(piece.getType(), "King")) {
-            castle.performCastle(piece, newX, newY, pieceLayout, board);
+        if (piece.isPlayerOne()){
+            if (!hasPlayerOneCastled() && Objects.equals(piece.getType(), "King")){ // Has not Done Castle
+                castle.performCastle(piece, newX, newY, pieceLayout, board);
+            }
+            else{
+                return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
+            }
         }
+        else { // Is player two
+            if (!hasPlayerTwoCastled() && Objects.equals(piece.getType(), "King")){ // Has not Done Castle
+                castle.performCastle(piece, newX, newY, pieceLayout, board);
+            }
+            else{
+                return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
+            }
+        }
+        return false;
+    }
+
+    private boolean isMoveAllowedHelper(int newX, int newY, Piece piece, Piece[][] pieceLayout){
+
         if(piece.legalMove(newX, newY)){
             System.out.println("Move Was Legal");
             if (isOccupied(newX, newY, pieceLayout)) { //is the tile not occupied
@@ -73,8 +91,6 @@ public class MoveHandler {
      * @param piece Layout the board that contains the pieces
      * @param piece the current piece we are working on
      */
-
-
     public void movePiece(int newX, int newY, Piece piece, Piece[][] pieceLayout){
         if(isMoveAllowed(newX, newY, piece, pieceLayout)){ // updates the position if the move is legal
             piece.xPos = newX;
@@ -85,6 +101,27 @@ public class MoveHandler {
         }                          // switched to true.
     }
 
+    public void tryAndCheckMove(int newX, int newY, Piece piece, Piece[][] pieceLayout){
+        if (piece.isPlayerOne() && castle.isWhiteLongCastle(newX, newY) && Objects.equals(piece.getType(), "King")
+                && !hasPlayerOneCastled()){
+            castle.performCastle(piece, newX, newY, pieceLayout, board);
+        }
+        else if (piece.isPlayerOne() && castle.isWhiteShortCastle(newX, newY) && Objects.equals(piece.getType(), "King")
+                && !hasPlayerOneCastled()){
+            castle.performCastle(piece, newX, newY, pieceLayout, board);
+        }
+        else if (!piece.isPlayerOne() && castle.isBlackLongCastle(newX, newY) && Objects.equals(piece.getType(), "King")
+                && !hasPlayerTwoCastled()){
+            castle.performCastle(piece, newX, newY, pieceLayout, board);
+        }
+        else if (!piece.isPlayerOne() && castle.isBlackShortCastle(newX, newY) && Objects.equals(piece.getType(), "King")
+                && !hasPlayerTwoCastled()){
+            castle.performCastle(piece, newX, newY, pieceLayout, board);
+        }
+        else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
+            board.changePiecePosition(piece, newX, newY);
+        }
+    }
 
 
     /**

@@ -2,9 +2,7 @@ package MVC.model.SpecialMoves;
 
 
 import MVC.model.Board;
-import MVC.model.Pieces.King;
 import MVC.model.Pieces.Piece;
-import MVC.model.Pieces.Rook;
 import MVC.model.Tuple;
 import MVC.model.Player;
 
@@ -39,19 +37,34 @@ public class Castle {
 
     public void performCastle(Piece piece, int newX, int newY, Piece[][] pieces, Board board) {
         if (isCastleAllowed(piece, pieces)) {
-            if (newX == 2 && newY == 7) {
+            if (isWhiteLongCastle(newX, newY)) {
                 whiteKingLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
-            } else if (newX == 6 && newY == 7) {
+                playerOneHasCastled = true;
+            } else if (isWhiteShortCastle(newX, newY)) {
                 whiteKingShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
-            } else if (newX == 2 && newY == 0) {
+                playerOneHasCastled = true;
+            } else if (isBlackLongCastle(newX, newY)) {
                 blackKingLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
-            } else if (newX == 6 && newY == 0) {
+                playerTwoHasCastled = true;
+            } else if (isBlackShortCastle(newX, newY)) {
                 blackKingShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
+                playerTwoHasCastled = true;
             }
         }
     }
 
-
+    public boolean isWhiteLongCastle(int newX, int newY){
+        return (newX == 2 && newY == 7);
+    }
+    public boolean isWhiteShortCastle(int newX, int newY){
+        return (newX == 6 && newY == 7);
+    }
+    public boolean isBlackLongCastle(int newX, int newY){
+        return (newX == 2 && newY == 0);
+    }
+    public boolean isBlackShortCastle(int newX, int newY){
+        return (newX == 6 && newY == 0);
+    }
 
 
     /**
@@ -115,7 +128,7 @@ public class Castle {
      * @param board
      */
     public void blackKingShortCastle (Piece king, Piece[][] pieces, Board board){ // Black King Right Black Rook
-        Piece rook = pieces[7][0];
+        Piece rook = pieces[0][7];
         board.changePiecePosition(king, 6, 0);
         board.changePiecePosition(rook, 5, 0);
     }
@@ -193,7 +206,7 @@ public class Castle {
      * @return true if the space is not occupied between them.
      */
     public boolean preconditionsBlackKingShortCastle(Piece[][] pieces, Piece king){ // Black King Right Rook
-        Piece rook = pieces[7][0];
+        Piece rook = pieces[0][7];
         if(!king.isPlayerOne() && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
                 && notMoved(king, rook)){
             for (int row = 0; row < 1; row++) {
