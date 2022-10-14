@@ -7,7 +7,8 @@ import MVC.model.Pieces.Piece;
 import MVC.model.Pieces.Rook;
 import MVC.model.Tuple;
 import MVC.model.Player;
-import MVC.model.Pieces.MoveHandler;
+
+import java.util.Objects;
 
 /**
  * Class that holds the logic for the Special move of castle.
@@ -16,7 +17,13 @@ import MVC.model.Pieces.MoveHandler;
 
 public class Castle {
 
-    public Castle(){}
+    public boolean playerOneHasCastled;
+    public boolean playerTwoHasCastled;
+
+    public Castle(){
+        this.playerOneHasCastled = false;
+        this.playerTwoHasCastled = false;
+    }
 
     Player player = new Player();
 
@@ -24,24 +31,22 @@ public class Castle {
     /**
      * Method that takes all the aspects into consideration regarding the castle. Are the pre-conditions satisfied?
      * If so, then complete the castle-move.
-     * @param king The king that is trying to castle
-     * @param rook The associated rook in the castle.
      * @param piece The piece of king
      * @param pieces The board of pieces
      * @param board THe board
      **/
 
 
-    public void performCastle(King king, Rook rook, Piece piece, Piece[][] pieces, Board board) {
-        if (isCastleAllowed(king, rook, pieces)) {
-            if (piece.xPos == 2 && piece.yPos == 7) {
-                whiteKingLongCastle(king, rook, board); // Switch the positions of the king and the rook.
-            } else if (piece.xPos == 6 && piece.yPos == 7) {
-                whiteKingShortCastle(king, rook, board); // Switch the positions of the king and the rook.
-            } else if (piece.xPos == 2 && piece.yPos == 0) {
-                blackKingLongCastle(king, rook, board); // Switch the positions of the king and the rook.
-            } else if (piece.xPos == 6 && piece.yPos == 0) {
-                blackKingShortCastle(king, rook, board); // Switch the positions of the king and the rook.
+    public void performCastle(Piece piece, int newX, int newY, Piece[][] pieces, Board board) {
+        if (isCastleAllowed(piece, pieces)) {
+            if (newX == 2 && newY == 7) {
+                whiteKingLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
+            } else if (newX == 6 && newY == 7) {
+                whiteKingShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
+            } else if (newX == 2 && newY == 0) {
+                blackKingLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
+            } else if (newX == 6 && newY == 0) {
+                blackKingShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
             }
         }
     }
@@ -52,63 +57,65 @@ public class Castle {
     /**
      * Method that checks so that the preconditions are satisfied before the King can castle with the rook.
      * @param king King
-     * @param rook the rook in question.
      * @param pieces
      * @return
      */
 
-    public boolean isCastleAllowed(King king, Rook rook, Piece[][] pieces){
-        if(preconditionsWhiteKingLongCastle(pieces, king, rook) && !pathCheckedWhiteLongCastle()){
+    public boolean isCastleAllowed(Piece king, Piece[][] pieces){
+        if(preconditionsWhiteLongCastle(pieces, king) && !pathCheckedWhiteLongCastle()){
             return true;
-        }else if(preconditionsWhiteKingShortCastle(pieces, king, rook) && !pathCheckedWhiteShortCastle()){
+        }else if(preconditionsWhiteShortCastle(pieces, king) && !pathCheckedWhiteShortCastle()){
             return true;
-        }else if(preconditionsBlackKingLongCastle(pieces, king, rook) && !pathCheckedBlackLongCastle()){
+        }else if(preconditionsBlackKingLongCastle(pieces, king) && !pathCheckedBlackLongCastle()){
             return true;
-        }else return preconditionsBlackKingShortCastle(pieces, king, rook) && !pathCheckedBlackShortCastle();
+        }else return preconditionsBlackKingShortCastle(pieces, king) && !pathCheckedBlackShortCastle();
     }
 
 
     /**
-     * Method that switches the positions of the White King and the left white Rook into castle-positions.
-     * @param king King
-     * @param rook = the rook in question.
+     * Method that switches the positions of the White King and the left white Rook into castle-positions
+     * @param king
+     * @param pieces
+     * @param board
      */
-
-
-    public void whiteKingLongCastle(King king, Rook rook, Board board){ // White king left white rook.
+    public void whiteKingLongCastle(Piece king, Piece[][] pieces, Board board){ // White king left white rook.
+        Piece rook = pieces[7][0];
         board.changePiecePosition(king, 2, 7);
         board.changePiecePosition(rook, 3, 7);
     }
 
     /**
      * Method that switches the positions of the White King and the right whit Rook into castle-positions.
-     * @param king King
-     * @param rook = the rook in question.
+     * @param king
+     * @param pieces
+     * @param board
      */
-
-    public void whiteKingShortCastle(King king, Rook rook, Board board){ // White king right white rook.
+    public void whiteKingShortCastle(Piece king, Piece[][] pieces,  Board board){ // White king right white rook.
+        Piece rook = pieces[7][7];
         board.changePiecePosition(king, 6, 7);
         board.changePiecePosition(rook, 5, 7);
     }
 
     /**
      * Method that switches the positions of the Black King and the left black Rook into castle-positions.
-     * @param king King
-     * @param rook = the rook in question.
+     * @param king
+     * @param pieces
+     * @param board
      */
-
-    public void blackKingLongCastle (King king, Rook rook, Board board){ // Black king left black rook.
+    public void blackKingLongCastle (Piece king, Piece[][] pieces, Board board){ // Black king left black rook.
+        Piece rook = pieces[0][0];
         board.changePiecePosition(king, 2, 0);
         board.changePiecePosition(rook, 3, 0);
     }
 
     /**
      * Method that switches the positions of the black King and the right black Rook into castle-positions.
-     * @param king King
-     * @param rook = the rook in question.
+     * @param king
+     * @param pieces
+     * @param board
      */
-
-    public void blackKingShortCastle (King king, Rook rook, Board board){ // Black King Right Black Rook
+    public void blackKingShortCastle (Piece king, Piece[][] pieces, Board board){ // Black King Right Black Rook
+        Piece rook = pieces[7][0];
         board.changePiecePosition(king, 6, 0);
         board.changePiecePosition(rook, 5, 0);
     }
@@ -119,12 +126,11 @@ public class Castle {
      * free and not occupied and that the king and rook has not moved.
      * @param pieces Matrix of the Board-layout with all the pieces.
      * @param king The white King
-     * @param rook The left white Rook.
      * @return true if the space is not occupied between them.
      */
-
-    public boolean preconditionsWhiteKingLongCastle(Piece[][] pieces, King king, Rook rook) { // White King Left Rook
-        if (king.isPlayerOne() && rook.isPlayerOne() && rook.xPos == 0 && rook.yPos == 7
+    public boolean preconditionsWhiteLongCastle(Piece[][] pieces, Piece king) { // White King Left Rook
+        Piece rook = pieces[7][0];
+        if (king.isPlayerOne() && rook.isPlayerOne() && rook.getType().equals("Rook")
                 && notMoved(king, rook)){
             for (int row = 7; row < 8; row++) {
                 for (int col = 1; col < 4; col++) {
@@ -141,18 +147,15 @@ public class Castle {
      * free and not occupied and that the king and rook has not moved.
      * @param pieces Matrix of the Board-layout with all the pieces.
      * @param king The white King
-     * @param rook The right white Rook.
      * @return true if the space is not occupied between them.
      */
-
-
-
-    public boolean preconditionsWhiteKingShortCastle(Piece[][] pieces, King king, Rook rook){ // White King Right Rook
-        if(king.isPlayerOne() && rook.isPlayerOne() && rook.xPos == 7 && rook.yPos == 7
+    public boolean preconditionsWhiteShortCastle(Piece[][] pieces, Piece king){ // White King Right Rook
+        Piece rook = pieces[7][7];
+        if(king.isPlayerOne() && rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
                 && notMoved(king, rook)){
             for (int row = 7; row < 8; row++) {
                 for (int col = 5; col < 7; col++) {
-                    if ((pieces[row][col]) == null) {
+                    if ((pieces[row][col]) == null){
                         return true;
                     }
                 }
@@ -166,13 +169,11 @@ public class Castle {
      * free and not occupied and that the king and rook has not moved.
      * @param pieces Matrix of the Board-layout with all the pieces.
      * @param king The black King
-     * @param rook The left black Rook.
      * @return true if the space is not occupied between them.
      */
-
-
-    public boolean preconditionsBlackKingLongCastle(Piece[][] pieces, King king, Rook rook){ // White King Left Rook
-        if(!king.isPlayerOne() && !rook.isPlayerOne() && rook.xPos == 0 && rook.yPos == 0
+    public boolean preconditionsBlackKingLongCastle(Piece[][] pieces, Piece king){ // White King Left Rook
+        Piece rook = pieces[0][0];
+        if(!king.isPlayerOne() && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
                 && notMoved(king, rook)){
             for (int row = 0; row < 1; row++) {
                 for (int col = 1; col < 4; col++) {
@@ -189,13 +190,11 @@ public class Castle {
      * free and not occupied and that the king and rook has not moved.
      * @param pieces Matrix of the Board-layout with all the pieces.
      * @param king The black King
-     * @param rook The right black Rook.
      * @return true if the space is not occupied between them.
      */
-
-
-    public boolean preconditionsBlackKingShortCastle(Piece[][] pieces, King king, Rook rook){ // Black King Right Rook
-        if(!king.isPlayerOne() && !rook.isPlayerOne() && rook.xPos == 0 && rook.yPos == 7
+    public boolean preconditionsBlackKingShortCastle(Piece[][] pieces, Piece king){ // Black King Right Rook
+        Piece rook = pieces[7][0];
+        if(!king.isPlayerOne() && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
                 && notMoved(king, rook)){
             for (int row = 0; row < 1; row++) {
                 for (int col = 5; col < 7; col++) {
@@ -316,7 +315,7 @@ public class Castle {
      * @return true if both of them has not moved.
      */
 
-    public boolean notMoved(King king, Rook rook) {
+    public boolean notMoved(Piece king, Piece rook) {
         return !king.hasMoved && !rook.hasMoved;
     }
 

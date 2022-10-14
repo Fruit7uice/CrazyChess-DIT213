@@ -5,6 +5,8 @@ import MVC.model.Board;
 import MVC.model.SpecialMoves.Castle;
 import MVC.model.Tuple;
 
+import java.util.Objects;
+
 
 /**
  * @author Alva Johansson
@@ -28,7 +30,9 @@ public class MoveHandler {
 
     public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout){ // Allowed
         //TODO add a check if king.IsInCheck()
-
+        if(Objects.equals(piece.getType(), "King")) {
+            castle.performCastle(piece, newX, newY, pieceLayout, board);
+        }
         if(piece.legalMove(newX, newY)){
             System.out.println("Move Was Legal");
             if (isOccupied(newX, newY, pieceLayout)) { //is the tile not occupied
@@ -278,5 +282,14 @@ public class MoveHandler {
     public void killEnemyPiece (){
         //TODO implement this maybe move it to another class
     }
+
+    public boolean hasPlayerOneCastled() {
+        return castle.playerOneHasCastled;
+    }
+
+    public boolean hasPlayerTwoCastled() {
+        return castle.playerTwoHasCastled;
+    }
+
 }
 

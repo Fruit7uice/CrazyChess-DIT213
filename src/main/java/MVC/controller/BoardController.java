@@ -72,8 +72,17 @@ public class BoardController {
         int newY = (int) Math.floor(event.getY() / tileSize); // Index y
         if(onDrag && moveHandler.isMoveAllowed(newX, newY, piece.getRefPiece(), board.pieceLayout)){
             onDrag = false;
-            snapPieceToGrid(piece, newX, newY);
-            boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
+            if (piece.getRefPiece().isPlayerOne() && moveHandler.hasPlayerOneCastled()){
+                boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
+            }
+            else if (!piece.getRefPiece().isPlayerOne() && moveHandler.hasPlayerTwoCastled()){
+                boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
+            }
+            else {
+                snapPieceToGrid(piece, newX, newY);
+                boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
+            }
+
         }
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
     }
