@@ -26,7 +26,7 @@ public class Player {
                 if(piece == null){ // is there a piece on this pos?
                     //if not don't calculate
                 } else{
-                    moveHandler.createListOfLegalMoves(piece, board); //create the pieces list of legal moves
+                    moveHandler.createListOfLegalMoves(piece, board, this); //create the pieces list of legal moves
                     if(piece.isPlayerOne()){
                         // add the tuples from the pieces list to player ones list
                         playerOneListOfLegalMoves.addAll(piece.listOfLegalMoves);
