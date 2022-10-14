@@ -13,7 +13,7 @@ public class MoveHandler {
 
     Board board;
     public MoveHandler(Board board) {
-        this.board = this.board;
+        this.board = board;
     }
 
     Castle castle = new Castle();
@@ -25,13 +25,9 @@ public class MoveHandler {
      * @param piece the current piece we are working on
      * @return true if the piece is allowed to make the desired move
      */
-    public boolean moveChecker(int newX, int newY, Piece piece, Piece[][] pieceLayout){
+    public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout){
         //TODO add a check if king.IsInCheck()
-        if(piece.getClass() == King.class){
-            castle(king, rook, piece, pieceLayout);
 
-
-        }
         if(piece.legalMove(newX, newY)){
             if (!isOccupied(newX, newY, pieceLayout)) { //is the tile not occupied
                 return !isPathBlocked(newX, newY, piece, pieceLayout); // true if path is not blocked
@@ -61,7 +57,7 @@ public class MoveHandler {
      */
 
     public void movePiece(int newX, int newY, Piece piece, Piece[][] board){
-        if(moveChecker(newX, newY, piece, board)){ // updates the position if the move is legal
+        if(isMoveAllowed(newX, newY, piece, board)){ // updates the position if the move is legal
             piece.xPos = newX;
             piece.yPos = newY;
             piece.listOfLegalMoves.clear();
@@ -102,7 +98,7 @@ public class MoveHandler {
     public void createListOfLegalMoves(Piece piece, Piece[][] board){ //[[x,y], [x,y]...
         for (int x = 0; x < board.length; x++) {
             for (int y = 0; y < board[x].length; y++) {
-                if(moveChecker(x, y, piece, board)) {
+                if(isMoveAllowed(x, y, piece, board)) {
                     Tuple<Integer, Integer> tuple = new Tuple(x, y);
                     piece.listOfLegalMoves.add(tuple);
                 } else{
@@ -119,6 +115,7 @@ public class MoveHandler {
      * @param piece the current piece we are working on
      * @return true if the path is blocked by any piece as long as the piece is not a knight
      */
+
     public boolean isPathBlocked(int newX, int newY, Piece piece, Piece[][] board){
         if(!piece.getType().equals("Knight")) {
             if (piece.xPos != newX && piece.yPos == newY) { // x pos changed
@@ -228,47 +225,6 @@ public class MoveHandler {
         return false;
     }
 
-
-    /**
-     * Method that takes all the aspects into consideration regarding the castle. Are the pre-conditions satisfied?
-     * If so, then complete the castle-move.
-     * @param king The king that is trying to castle
-     * @param rook The associated rook in the castle.
-     * @param piece The piece of king
-     * @param pieces The board of pieces
-     * @param board THe board
-     *
-     * @author Johannes Höher
-     */
-
-
-    public void castle(King king, Rook rook, Piece piece, Piece[][] pieces, Board board){
-        if(castle.isCastleAllowed(king, rook, pieces)){
-            if(piece.xPos == 2 && piece.yPos == 7){
-                castle.whiteKingLongCastle(king, rook, board); // Switch the positions of the king and the rook.
-            }
-            else if(piece.xPos == 6 && piece.yPos == 7){
-                castle.whiteKingShortCastle(king, rook, board); // Switch the positions of the king and the rook.
-            }
-            else if(piece.xPos == 2 && piece.yPos == 0){
-                castle.blackKingLongCastle(king, rook, board); // Switch the positions of the king and the rook.
-            }
-            else if(piece.xPos == 6 && piece.yPos == 0){
-                castle.blackKingShortCastle(king, rook, board); // Switch the positions of the king and the rook.
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-    }
 
     /**
      * removes an enemy piece from the board when it's killed
