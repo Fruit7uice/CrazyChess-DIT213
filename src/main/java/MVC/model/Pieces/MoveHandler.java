@@ -218,10 +218,10 @@ public class MoveHandler {
     }
 
     /**
-     * @param player the player whos turn it is right now
+     * @param player the player who's turn it is right now
      * @param king the players king that we are checking if checked on
-     * @param pieceLayout
-     * @return
+     * @param pieceLayout current placement of the pieces
+     * @return true if the king is checked
      */
     public boolean isKingCheck(Player player, Piece king, Piece[][] pieceLayout){
         player.calcListOfLegalMovesPlayer(pieceLayout, this); // creates the lists of legal moves
