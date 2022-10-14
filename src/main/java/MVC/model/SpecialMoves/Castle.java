@@ -21,6 +21,32 @@ public class Castle {
     Player player = new Player();
 
 
+    /**
+     * Method that takes all the aspects into consideration regarding the castle. Are the pre-conditions satisfied?
+     * If so, then complete the castle-move.
+     * @param king The king that is trying to castle
+     * @param rook The associated rook in the castle.
+     * @param piece The piece of king
+     * @param pieces The board of pieces
+     * @param board THe board
+     **/
+
+
+    public void performCastle(King king, Rook rook, Piece piece, Piece[][] pieces, Board board) {
+        if (isCastleAllowed(king, rook, pieces)) {
+            if (piece.xPos == 2 && piece.yPos == 7) {
+                whiteKingLongCastle(king, rook, board); // Switch the positions of the king and the rook.
+            } else if (piece.xPos == 6 && piece.yPos == 7) {
+                whiteKingShortCastle(king, rook, board); // Switch the positions of the king and the rook.
+            } else if (piece.xPos == 2 && piece.yPos == 0) {
+                blackKingLongCastle(king, rook, board); // Switch the positions of the king and the rook.
+            } else if (piece.xPos == 6 && piece.yPos == 0) {
+                blackKingShortCastle(king, rook, board); // Switch the positions of the king and the rook.
+            }
+        }
+    }
+
+
 
 
     /**
@@ -293,6 +319,8 @@ public class Castle {
     public boolean notMoved(King king, Rook rook) {
         return !king.hasMoved && !rook.hasMoved;
     }
+
+
 
 
 
