@@ -5,9 +5,6 @@ import MVC.model.strategies.HorizontalStrategy;
 import MVC.model.strategies.VerticalStrategy;
 
 public class Queen extends Piece{
-    private HorizontalStrategy horizontalStrategy;
-    private VerticalStrategy verticalStrategy;
-    private DiagonalStrategy diagonalStrategy;
     public Queen(int xPos, int yPos, int width, int height, String imagePath, String type, boolean isPlayerOne, boolean hasMoved) {
         super(xPos, yPos, width, height, imagePath, type, isPlayerOne, hasMoved);
     }
@@ -19,12 +16,24 @@ public class Queen extends Piece{
      * @author Alva Johansson
      */
     public boolean legalMove(int newX, int newY){
+
         if (newX != xPos || newY != yPos){// checks if we have tried to move
-            if (horizontalStrategy.move(xPos, yPos, newX, newY) ^ verticalStrategy.move(xPos, yPos, newX, newY) ^ diagonalStrategy.move(xPos, yPos, newX, newY)) { //makes sure the strategy allows uss to move
-                return  true;
-            } else {
+            //makes sure the strategy allows uss to move
+            if (HorizontalStrategy.move(xPos, yPos, newX, newY) || VerticalStrategy.move(xPos, yPos, newX, newY)
+                    || DiagonalStrategy.move(xPos, yPos, newX, newY)){
+                System.out.println("Horizontal: " + HorizontalStrategy.move(xPos, yPos, newX, newY));
+                System.out.println("Vertical: " + VerticalStrategy.move(xPos, yPos, newX, newY));
+                System.out.println("Diagonal: " + DiagonalStrategy.move(xPos, yPos, newX, newY));
+                return true;
+            }
+            else {
+                System.out.println("In Else");
+                System.out.println("Horizontal: " + HorizontalStrategy.move(xPos, yPos, newX, newY));
+                System.out.println("Vertical: " + VerticalStrategy.move(xPos, yPos, newX, newY));
+                System.out.println("Diagonal: " + DiagonalStrategy.move(xPos, yPos, newX, newY));
                 return false;
             }
+
         }
         return false;
     }
