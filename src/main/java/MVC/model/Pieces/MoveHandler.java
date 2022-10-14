@@ -2,6 +2,7 @@ package MVC.model.Pieces;
 
 
 import MVC.model.Board;
+import MVC.model.SpecialMoves.Castle;
 import MVC.model.Tuple;
 
 
@@ -15,6 +16,8 @@ public class MoveHandler {
         this.board = board;
     }
 
+    Castle castle = new Castle();
+
     /**
      * @param newX the desired x position
      * @param newY the desired y position
@@ -22,8 +25,10 @@ public class MoveHandler {
      * @param piece the current piece we are working on
      * @return true if the piece is allowed to make the desired move
      */
+
     public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout){ // Allowed
         //TODO add a check if king.IsInCheck()
+
         if(piece.legalMove(newX, newY)){
             System.out.println("Move Was Legal");
             if (isOccupied(newX, newY, pieceLayout)) { //is the tile not occupied
@@ -61,9 +66,10 @@ public class MoveHandler {
      * Updates the pieces coordinates if is allowed to make the desired move
      * @param newX the desired x position
      * @param newY the desired y position
-     * @param pieceLayout the board that contains the pieces
+     * @param piece Layout the board that contains the pieces
      * @param piece the current piece we are working on
      */
+
 
     public void movePiece(int newX, int newY, Piece piece, Piece[][] pieceLayout){
         if(isMoveAllowed(newX, newY, piece, pieceLayout)){ // updates the position if the move is legal
@@ -264,6 +270,7 @@ public class MoveHandler {
         }
         return false;
     }
+
 
     /**
      * removes an enemy piece from the board when it's killed
