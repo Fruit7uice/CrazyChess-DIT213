@@ -21,16 +21,9 @@ public class Queen extends Piece{
             //makes sure the strategy allows uss to move
             if (HorizontalStrategy.move(xPos, yPos, newX, newY) || VerticalStrategy.move(xPos, yPos, newX, newY)
                     || DiagonalStrategy.move(xPos, yPos, newX, newY)){
-                System.out.println("Horizontal: " + HorizontalStrategy.move(xPos, yPos, newX, newY));
-                System.out.println("Vertical: " + VerticalStrategy.move(xPos, yPos, newX, newY));
-                System.out.println("Diagonal: " + DiagonalStrategy.move(xPos, yPos, newX, newY));
                 return true;
             }
             else {
-                System.out.println("In Else");
-                System.out.println("Horizontal: " + HorizontalStrategy.move(xPos, yPos, newX, newY));
-                System.out.println("Vertical: " + VerticalStrategy.move(xPos, yPos, newX, newY));
-                System.out.println("Diagonal: " + DiagonalStrategy.move(xPos, yPos, newX, newY));
                 return false;
             }
 

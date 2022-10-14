@@ -3,7 +3,6 @@ package MVC.model.Pieces;
 import MVC.model.strategies.KnightStrategy;
 
 public class Knight extends Piece{
-    private KnightStrategy knightStrategy;
     public Knight(int xPos, int yPos, int width, int height, String imagePath, String type, boolean isPlayerOne, boolean hasMoved) {
         super(xPos, yPos, width, height, imagePath, type, isPlayerOne, hasMoved);
     }

@@ -144,7 +144,7 @@ public class Castle {
     public boolean preconditionsWhiteLongCastle(Piece[][] pieces, Piece king) { // White King Left Rook
         Piece rook = pieces[7][0];
         if (king.isPlayerOne() && rook.isPlayerOne() && rook.getType().equals("Rook")
-                && notMoved(king, rook)){
+                && !hasAnyMoved(king, rook)){
             for (int row = 7; row < 8; row++) {
                 for (int col = 1; col < 4; col++) {
                     if ((pieces[row][col]) == null) {
@@ -165,7 +165,7 @@ public class Castle {
     public boolean preconditionsWhiteShortCastle(Piece[][] pieces, Piece king){ // White King Right Rook
         Piece rook = pieces[7][7];
         if(king.isPlayerOne() && rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
-                && notMoved(king, rook)){
+                && !hasAnyMoved(king, rook)){
             for (int row = 7; row < 8; row++) {
                 for (int col = 5; col < 7; col++) {
                     if ((pieces[row][col]) == null){
@@ -187,7 +187,7 @@ public class Castle {
     public boolean preconditionsBlackKingLongCastle(Piece[][] pieces, Piece king){ // White King Left Rook
         Piece rook = pieces[0][0];
         if(!king.isPlayerOne() && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
-                && notMoved(king, rook)){
+                && !hasAnyMoved(king, rook)){
             for (int row = 0; row < 1; row++) {
                 for (int col = 1; col < 4; col++) {
                     if ((pieces[row][col]) == null){
@@ -208,7 +208,7 @@ public class Castle {
     public boolean preconditionsBlackKingShortCastle(Piece[][] pieces, Piece king){ // Black King Right Rook
         Piece rook = pieces[0][7];
         if(!king.isPlayerOne() && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
-                && notMoved(king, rook)){
+                && !hasAnyMoved(king, rook)){
             for (int row = 0; row < 1; row++) {
                 for (int col = 5; col < 7; col++) {
                     if ((pieces[row][col]) == null){
@@ -328,8 +328,8 @@ public class Castle {
      * @return true if both of them has not moved.
      */
 
-    public boolean notMoved(Piece king, Piece rook) {
-        return !king.hasMoved && !rook.hasMoved;
+    public boolean hasAnyMoved(Piece king, Piece rook) {
+        return (king.hasMoved || rook.hasMoved);
     }
 
 

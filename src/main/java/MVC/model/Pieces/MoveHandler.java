@@ -30,6 +30,8 @@ public class MoveHandler {
 
     public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout){ // Allowed
         //TODO add a check if king.IsInCheck()
+        return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
+        /*
         if (piece.isPlayerOne()){
             if (!hasPlayerOneCastled() && Objects.equals(piece.getType(), "King")){ // Has not Done Castle
                 castle.performCastle(piece, newX, newY, pieceLayout, board);
@@ -43,10 +45,10 @@ public class MoveHandler {
                 castle.performCastle(piece, newX, newY, pieceLayout, board);
             }
             else{
-                return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
+
             }
         }
-        return false;
+        */
     }
 
     private boolean isMoveAllowedHelper(int newX, int newY, Piece piece, Piece[][] pieceLayout){
@@ -105,6 +107,7 @@ public class MoveHandler {
         if (piece.isPlayerOne() && castle.isWhiteLongCastle(newX, newY) && Objects.equals(piece.getType(), "King")
                 && !hasPlayerOneCastled()){
             castle.performCastle(piece, newX, newY, pieceLayout, board);
+            System.out.println("TRYING TO PERFORM WHITE LONG CASTLE");
         }
         else if (piece.isPlayerOne() && castle.isWhiteShortCastle(newX, newY) && Objects.equals(piece.getType(), "King")
                 && !hasPlayerOneCastled()){
@@ -120,6 +123,7 @@ public class MoveHandler {
         }
         else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
             board.changePiecePosition(piece, newX, newY);
+            System.out.println("DOES NOT WANNA CASTLE");
         }
     }
 
