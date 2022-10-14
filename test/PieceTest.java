@@ -1,6 +1,7 @@
 import MVC.model.PieceFactory;
 import MVC.model.Pieces.*;
 
+import MVC.model.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,19 +10,19 @@ import static org.junit.Assert.*;
 
 
 public class PieceTest {
-    PieceFactory pieceFactory;
+    //PieceFactory pieceFactory;
     Piece king;
     Piece queen;
     Piece knight;
     Piece bishop;
     Piece rook;
     Piece pawn;
-    Piece[][] board;
+    Player player = new Player();
+    Piece[][] board = new Piece[8][8];
     MoveHandler moveHandler = new MoveHandler(board);
 
     @Before
     public void setUp() {
-        board = new Piece[8][8];
         PieceFactory.isPlayerOne = true;
         bishop = PieceFactory.createBishop(1,1);
         board[1][1] = bishop;
@@ -31,6 +32,8 @@ public class PieceTest {
         board[6][6] = queen;
         knight = PieceFactory.createKnight(2,7);
         board[2][7] = knight;
+        king  = PieceFactory.createKing(5,0);
+        board [0][5] = king;
 
     }
     //-----------------Bishop Tests---------------------------
@@ -190,6 +193,25 @@ public class PieceTest {
         int startY = knight.yPos;
         moveHandler.movePiece(0,5, knight, board);
         assertTrue(knight.xPos == startX && knight.yPos == startY);
+    }
+    //-------------------Test king checked-------------------------
+    @Test
+    public void kingIsChecked(){
+        board = new Piece[8][8];
+        PieceFactory.isPlayerOne = true;
+        king  = PieceFactory.createKing(5,0);
+        board [0][5] = king;
+        PieceFactory.isPlayerOne = false;
+        board[4][5] = PieceFactory.createQueen(5,4);
+        assertTrue(moveHandler.isKingCheck(player, king, board));
+    }
+    @Test
+    public void kingIsNotChecked(){
+        board = new Piece[8][8];
+        king  = PieceFactory.createKing(5,0);
+        board [0][5] = king;
+        board[4][5] = PieceFactory.createQueen(5,4);
+        assertFalse(moveHandler.isKingCheck(player, king, board));
     }
 }
 

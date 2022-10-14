@@ -1,5 +1,4 @@
 package MVC.model.Pieces;
-import MVC.model.Board;
 import MVC.model.Player;
 import MVC.model.Tuple;
 
@@ -217,8 +216,15 @@ public class MoveHandler {
         }
         return false;
     }
+
+    /**
+     * @param player the player whos turn it is right now
+     * @param king the players king that we are checking if checked on
+     * @param pieceLayout
+     * @return
+     */
     public boolean isKingCheck(Player player, Piece king, Piece[][] pieceLayout){
-        player.calcListOfLegalMovesPlayer(pieceLayout); // creates the lists of legal moves
+        player.calcListOfLegalMovesPlayer(pieceLayout, this); // creates the lists of legal moves
         Tuple<Integer, Integer> tuple = new Tuple<>(king.xPos, king.yPos);
         if(king.isPlayerOne()){
             return player.playerTwoListOfLegalMoves.contains(tuple);

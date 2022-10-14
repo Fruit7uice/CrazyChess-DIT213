@@ -78,6 +78,9 @@ public class PieceLayoutFactory {
                     case "Pawn":
                         newPieces.add(PieceFactory.createPawn(n+i, j));
                         break;
+                    case ("null"):
+                        newPieces.add(null);
+                        break;
                     default:
                         System.out.println("Error: Piece not created, possibly a faulty initial list. ");
                         break;
