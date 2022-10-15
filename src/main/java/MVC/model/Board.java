@@ -40,6 +40,7 @@ public class Board implements Observable {
             updateGameLayout(piece, x, y);
             piece.xPos = x;
             piece.yPos = y;
+            piece.hasMoved = true;
             notifyAllObservers();
             //updateListOfLegalMoves();
     }
