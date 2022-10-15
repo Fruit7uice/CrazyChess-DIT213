@@ -30,24 +30,6 @@ public class MoveHandler {
     public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout){ // Allowed
         //TODO add a check if king.IsInCheck()
         return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
-        /*
-        if (piece.isPlayerOne()){
-            if (!hasPlayerOneCastled() && Objects.equals(piece.getType(), "King")){ // Has not Done Castle
-                castle.performCastle(piece, newX, newY, pieceLayout, board);
-            }
-            else{
-                return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
-            }
-        }
-        else { // Is player two
-            if (!hasPlayerTwoCastled() && Objects.equals(piece.getType(), "King")){ // Has not Done Castle
-                castle.performCastle(piece, newX, newY, pieceLayout, board);
-            }
-            else{
-
-            }
-        }
-        */
     }
 
     private boolean isMoveAllowedHelper(int newX, int newY, Piece piece, Piece[][] pieceLayout){
