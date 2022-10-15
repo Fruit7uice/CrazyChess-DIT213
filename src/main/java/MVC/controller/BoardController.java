@@ -65,7 +65,7 @@ public class BoardController {
         boardGUI.drawWrapperPiece(piece, Color.AQUA, Color.AQUA, newX, newY);
     }
     /**
-     * If the release is after a drag event, it will move the piece and update the model.
+     * If the release is after a drag event, it will call the MoveHandler class and update the model.
      * @param event is the Mouse Event which is used to get x and y of the mouse position
      * @param piece is the WrapperPiece used to represent the logical Piece
      */
@@ -93,6 +93,7 @@ public class BoardController {
     /**
      * Used to Test and debug the relations between gui -> controller -> model,
      * making sure when an event has happened it should update the model.
+     * Displays the current Logical Board that is worked upon.
      */
     void printMatrix(){
         System.out.println("\n {");
