@@ -20,7 +20,6 @@ public class Rook extends Piece{
     public boolean legalMove(int newX, int newY){
         if (newX != xPos || newY != yPos){// checks if we have tried to move
             if (HorizontalStrategy.move(xPos, yPos, newX, newY) ^ VerticalStrategy.move(xPos, yPos, newX, newY)) { //makes sure the strategy allows uss to move
-                hasMoved = true;
                 return true;
             } else {
                 return false;
