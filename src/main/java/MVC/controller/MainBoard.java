@@ -20,7 +20,7 @@ public class MainBoard extends Application {
     private Pane boardPane;
 
     public static void main(String[] args) {
-        Application.launch(args);
+        launch();
     }
 
     @Override
@@ -71,6 +71,12 @@ public class MainBoard extends Application {
             System.out.print("} \n");
         }
         System.out.println("}");
+    }
+
+
+    public void runAfterLaunch(Stage stage) throws Exception {
+        this.init();
+        this.start(stage);
     }
 
 }

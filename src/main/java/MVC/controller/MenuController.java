@@ -1,5 +1,10 @@
 package MVC.controller;
 
+import MVC.model.Board;
+import MVC.model.PieceLayoutFactory;
+import MVC.model.Pieces.MoveHandler;
+import MVC.model.Pieces.Piece;
+import MVC.view.BoardGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,10 +16,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.EventObject;
 import java.util.Objects;
+
+import static MVC.controller.MainBoard.WINDOW_HEIGHT;
+import static MVC.controller.MainBoard.WINDOW_WIDTH;
 
 /**
  * @author Johannes Höher
@@ -33,11 +42,12 @@ public class MenuController {
     }
 
 
-    public void startClassic(ActionEvent e) {
+    public void startClassic(ActionEvent e) throws Exception {
+        MainBoard classicGame = new MainBoard();
 
-        System.out.println("startClassic");
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        classicGame.runAfterLaunch(stage);
 
-        //TODO: connect this to the classicChess implemenation.
     }
 
 
