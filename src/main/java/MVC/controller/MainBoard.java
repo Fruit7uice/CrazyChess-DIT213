@@ -8,9 +8,12 @@ import MVC.model.PieceLayoutFactory;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import java.io.ObjectInputStream;
 
 public class MainBoard extends Application {
     public static int WINDOW_WIDTH = 800;
@@ -52,10 +55,21 @@ public class MainBoard extends Application {
         container.getChildren().add(hAlign);
         container.setAlignment(Pos.CENTER);
         container.setPrefSize(800, 800);
-
-
         Scene scene = new Scene(container);
 
+        //Setting background
+        String path = "/images/background.jpeg";
+        Image bgImage = new Image(String.valueOf(getClass().getResource(path)));
+        BackgroundImage backgroundImage = new BackgroundImage(
+                                            bgImage,
+                                            BackgroundRepeat.NO_REPEAT,
+                                            BackgroundRepeat.NO_REPEAT,
+                                            BackgroundPosition.CENTER,
+                                            new BackgroundSize(1.0, 1.0, true, true, false, false));
+        Background bGround = new Background(backgroundImage);
+        container.setBackground(bGround);
+
+        // Window Settings
         stage.setFullScreen(false);
         stage.setMinWidth(815);
         stage.setMinHeight(830);
