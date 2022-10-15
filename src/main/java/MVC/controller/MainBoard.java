@@ -6,8 +6,10 @@ import MVC.model.Pieces.Piece;
 import MVC.view.BoardGUI;
 import MVC.model.PieceLayoutFactory;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class MainBoard extends Application {
@@ -25,36 +27,47 @@ public class MainBoard extends Application {
 
     @Override
     public void init(){
-
         Piece[][] pieceLayout = PieceLayoutFactory.createMatrixLayout();
+        System.out.println("Start Matrix of Pieces: ");
         printMatrix(pieceLayout);
         this.boardPane = new Pane(); // Creates a new pane
         this.gui = new BoardGUI(boardPane);
         this.board = new Board(pieceLayout);
         this.controller = new BoardController(gui, board, new MoveHandler(board), boardPane);
         gui.setController(controller);
-
         board.addObserver(gui);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        /* SOME TESTING FOR NULLPOINTEREXCEPTION
-        System.out.println("Start controller: " + controller);
-        System.out.println("Gui: " + gui);
-        System.out.println("Board: " + board);
-         */
         board.notifyAllObservers(); // Notify observers and update their state, which in return notifies gui.
         stage.setTitle("CrazyChess");
-        Scene scene = new Scene(boardPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+        StackPane container = new StackPane();
+        HBox hAlign = new HBox();
+        VBox vAlign = new VBox();
+        hAlign.getChildren().add(vAlign);
+        hAlign.setAlignment(Pos.CENTER);
+        vAlign.getChildren().add(boardPane);
+        vAlign.setAlignment(Pos.CENTER);
+        container.getChildren().add(hAlign);
+        container.setAlignment(Pos.CENTER);
+        container.setPrefSize(800, 800);
+
+
+        Scene scene = new Scene(container);
+
         stage.setFullScreen(false);
+        stage.setMinWidth(815);
+        stage.setMinHeight(830);
+        stage.setMaximized(true);
+
         stage.setScene(scene);
         stage.show();
     }
 
     /**
      * Used to Test and debug the relations between gui -> controller -> model,
-     * making sure when an event has happend it should update the model.
+     * making sure when an event has happened it should update the model.
      */
     void printMatrix(Piece[][] pieces){
         System.out.println("\n {");

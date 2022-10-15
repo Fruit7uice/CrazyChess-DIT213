@@ -46,6 +46,7 @@ public class MenuController {
         MainBoard classicGame = new MainBoard();
 
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.close();
         classicGame.runAfterLaunch(stage);
 
     }
