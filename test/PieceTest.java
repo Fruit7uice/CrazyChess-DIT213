@@ -16,7 +16,8 @@ public class PieceTest {
     Piece knight;
     Piece bishop;
     Piece rook;
-    Piece pawn;
+    Piece whitePawn;
+    Piece blackPawn;
     Player player = new Player();
     Piece[][] pieceLayout = new Piece[8][8];
     Board board = new Board(pieceLayout);
@@ -33,8 +34,30 @@ public class PieceTest {
         pieceLayout[6][6] = queen;
         knight = PieceFactory.createKnight(2,7);
         pieceLayout[7][2] = knight;
+        blackPawn = PieceFactory.createPawn(3,1);
+        pieceLayout[1][3] = blackPawn;
+        whitePawn = PieceFactory.createPawn(3,6);
+        pieceLayout[6][3] = whitePawn;
 
     }
+
+    //-----------------Pawn Tests---------------------------
+    @Test
+    public void whitePawnMoveLegal() {
+        assertTrue(moveHandler.isMoveAllowed(3,4,whitePawn,pieceLayout));
+        assertTrue(moveHandler.isMoveAllowed(3,5,whitePawn,pieceLayout));
+    }
+
+    @Test
+    public void blackPawnMoveLegal() {
+        Piece[][] testLayout= new Piece[8][8];
+        PieceFactory.isPlayerOne = false;
+        Piece blackTestPawn = PieceFactory.createPawn(3,1);
+        assertTrue(moveHandler.isMoveAllowed(3,2,blackTestPawn,testLayout));
+        assertTrue(moveHandler.isMoveAllowed(3,3,blackTestPawn,testLayout));
+    }
+
+
     //-----------------Bishop Tests---------------------------
     @Test
     public void bishopMoveLegal() {
