@@ -10,6 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
+import java.util.Objects;
+
 import static MVC.view.Tile.tileSize;
 
 public class BoardController {
@@ -34,11 +36,11 @@ public class BoardController {
      */
     public void pressed(WrapperPiece piece){
         // CHECK REFERENCE PIECE COORDS
-        System.out.println("Logic Piece X: " + piece.getRefPiece().xPos);
-        System.out.println("Logic Piece Y: " + piece.getRefPiece().yPos);
+        System.out.println("Logic Piece Col: " + piece.getRefPiece().xPos);
+        System.out.println("Logic Piece Row: " + piece.getRefPiece().yPos);
         // CHECK WRAPPER PIECE COORDS
-        System.out.println("Wrapper Piece X: " + piece.getX());
-        System.out.println("Wrapper Piece Y: " + piece.getY());
+        System.out.println("Wrapper Piece Col: " + piece.getX());
+        System.out.println("Wrapper Piece Row: " + piece.getY());
         boardGUI.drawPieces();
         boardGUI.drawWrapperAfterIndex(piece, Color.GRAY, Color.RED);
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
@@ -70,12 +72,12 @@ public class BoardController {
     public void released(MouseEvent event, WrapperPiece piece){
         int newX = (int) Math.floor(event.getX() / tileSize); // Index x
         int newY = (int) Math.floor(event.getY() / tileSize); // Index y
-        // moveHandler.moveChecker(newX, newY, piece, board.pieceLayout)
-        if(onDrag && true){ //replace true with: moveHandler.moveChecker(newX, newY, pieces, piece)
+        if(onDrag){
             onDrag = false;
-            snapPieceToGrid(piece, newX, newY);
+            moveHandler.tryAndCheckMove(newX, newY, piece.getRefPiece(), board.pieceLayout);
             boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
         }
+
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
     }
 
@@ -90,7 +92,7 @@ public class BoardController {
 
     /**
      * Used to Test and debug the relations between gui -> controller -> model,
-     * making sure when an event has happend it should update the model.
+     * making sure when an event has happened it should update the model.
      */
     void printMatrix(){
         System.out.println("\n {");

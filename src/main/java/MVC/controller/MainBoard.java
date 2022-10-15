@@ -27,6 +27,7 @@ public class MainBoard extends Application {
     public void init(){
 
         Piece[][] pieceLayout = PieceLayoutFactory.createMatrixLayout();
+        printMatrix(pieceLayout);
         this.boardPane = new Pane(); // Creates a new pane
         this.gui = new BoardGUI(boardPane);
         this.board = new Board(pieceLayout);
@@ -49,6 +50,27 @@ public class MainBoard extends Application {
         stage.setFullScreen(false);
         stage.setScene(scene);
         stage.show();
+    }
+
+    /**
+     * Used to Test and debug the relations between gui -> controller -> model,
+     * making sure when an event has happend it should update the model.
+     */
+    void printMatrix(Piece[][] pieces){
+        System.out.println("\n {");
+        for (int i = 0; i < pieces.length; i++) {
+            System.out.print("{ ");
+            for (int j = 0; j < pieces[i].length; j++) {
+                if (pieces[i][j] != null){
+                    System.out.print(pieces[i][j].getType() + ", ");
+                }
+                else{
+                    System.out.print(pieces[i][j] + ", ");
+                }
+            }
+            System.out.print("} \n");
+        }
+        System.out.println("}");
     }
 
 }

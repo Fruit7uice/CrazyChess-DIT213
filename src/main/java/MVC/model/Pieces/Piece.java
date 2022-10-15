@@ -15,7 +15,6 @@ public abstract class Piece {
 
     private String imagePath;
     public List<Tuple<Integer, Integer>> listOfLegalMoves = new ArrayList<Tuple<Integer, Integer>>();
-    public Rectangle rect;
     private String type;
 
     private boolean isPlayerOne;

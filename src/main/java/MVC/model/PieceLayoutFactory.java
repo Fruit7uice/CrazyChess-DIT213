@@ -26,6 +26,7 @@ public class PieceLayoutFactory {
         Piece[][] pieces = new Piece[8][8];
         ArrayList<Piece> playerTwoPieces = CreatePieceList(playerTwoLayout, false);
         ArrayList<Piece> playerOnePieces = CreatePieceList(playerOneLayout, true);
+        //System.out.println(playerOnePieces.get(6).getType() + " Position X: " + playerOnePieces.get(8).xPos + " and Y: " + playerOnePieces.get(8).yPos );
         int p1Index = 0;
         int p2Index = 0;
 
@@ -34,12 +35,12 @@ public class PieceLayoutFactory {
 
                 if (i < 2){
                     pieces[i][j] = playerTwoPieces.get(p2Index);
-                    System.out.println("Placed Piece at: " + i + " and " + j);
+                    System.out.println("Placed Piece at: Row(Y) " + i + " and Col(X) " + j);
                     p2Index++;
                 }
                 else if (i > 5) {
                     pieces[i][j] = playerOnePieces.get(p1Index);
-                    System.out.println("Placed Piece at: " + i + " and " + j);
+                    System.out.println("Placed Piece at: Row " + i + " and Col " + j);
                     p1Index++;
                 }
                 else {
@@ -54,29 +55,33 @@ public class PieceLayoutFactory {
     public static ArrayList<Piece> CreatePieceList(String[][] layout, boolean isPlayerOne){
         PieceFactory.isPlayerOne = isPlayerOne;
         ArrayList<Piece> newPieces = new ArrayList<>();
+        int n = (isPlayerOne) ? 6 : 0;
+        for (int row = 0; row < layout.length; row++) {
+            for (int col = 0; col < layout[row].length; col++) {
+                String s = layout[row][col];
+                int finalRow = row + n;
 
-        for (int i = 0; i < layout.length; i++) {
-            for (int j = 0; j < layout[i].length; j++) {
-                String s = layout[i][j];
-                int n = (isPlayerOne == true) ? 6 : 0;
                 switch (s){
                     case "Rook":
-                        newPieces.add(PieceFactory.createRook(n+i, j));
+                        newPieces.add(PieceFactory.createRook(col, finalRow));
                         break;
                     case "Knight":
-                        newPieces.add(PieceFactory.createKnight(n+i, j));
+                        newPieces.add(PieceFactory.createKnight(col, finalRow));
                         break;
                     case "Bishop":
-                        newPieces.add(PieceFactory.createBishop(n+i, j));
+                        newPieces.add(PieceFactory.createBishop(col, finalRow));
                         break;
                     case "Queen":
-                        newPieces.add(PieceFactory.createQueen(n+i, j));
+                        newPieces.add(PieceFactory.createQueen(col, finalRow));
                         break;
                     case "King":
-                        newPieces.add(PieceFactory.createKing(n+i, j));
+                        newPieces.add(PieceFactory.createKing(col, finalRow));
                         break;
                     case "Pawn":
-                        newPieces.add(PieceFactory.createPawn(n+i, j));
+                        newPieces.add(PieceFactory.createPawn(col, finalRow));
+                        break;
+                    case ("null"):
+                        newPieces.add(null);
                         break;
                     case ("null"):
                         newPieces.add(null);

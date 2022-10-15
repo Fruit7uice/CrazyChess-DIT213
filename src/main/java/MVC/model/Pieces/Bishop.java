@@ -3,7 +3,6 @@ package MVC.model.Pieces;
 import MVC.model.strategies.DiagonalStrategy;
 
 public class Bishop extends Piece{
-    private DiagonalStrategy diagonalStrategy;
     public Bishop(int xPos, int yPos, int width, int height, String imagePath, String type, boolean isPlayerOne, boolean hasMoved) {
         super(xPos, yPos, width, height, imagePath, type, isPlayerOne, hasMoved
         );
@@ -18,7 +17,7 @@ public class Bishop extends Piece{
     public boolean legalMove(int newX, int newY){
         if (newX != xPos || newY != yPos){// checks if we have tried to move
             //makes sure the strategy allows uss to move
-            return diagonalStrategy.move(xPos, yPos, newX, newY);
+            return DiagonalStrategy.move(xPos, yPos, newX, newY);
         }
         return false;
     }

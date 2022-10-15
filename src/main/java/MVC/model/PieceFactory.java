@@ -7,7 +7,7 @@ public class PieceFactory {
     public static boolean isPlayerOne;
 
     public static Piece createRook(int x, int y){
-        //System.out.println("Piece(Rook) created with x:" + x + " and y: " + y);
+        //System.out.println("Piece(Rook) created with row:" + row + " and y: " + y);
         String blackPath =  "/PieceImages/Black_Rook.png";
         String whitePath = "/PieceImages/White_Rook.png";
         String path = (isPlayerOne) ? whitePath : blackPath;
@@ -15,7 +15,7 @@ public class PieceFactory {
     }
 
     public static Piece createBishop(int x, int y){
-        //System.out.println("Piece(Bishop) created with x:" + x + " and y: " + y);
+        //System.out.println("Piece(Bishop) created with row:" + row + " and col: " + col);
         String blackPath =  "/PieceImages/Black_Bishop.png";
         String whitePath = "/PieceImages/White_Bishop.png";
         String path = (isPlayerOne) ? whitePath : blackPath;
@@ -23,7 +23,7 @@ public class PieceFactory {
     }
 
     public static Piece createKnight(int x, int y){
-        //System.out.println("Piece(Knight) created with x:" + x + " and y: " + y);
+        //System.out.println("Piece(Knight) created with row:" + row + " and y: " + y);
         String blackPath =  "/PieceImages/Black_Knight.png";
         String whitePath = "/PieceImages/White_Knight.png";
         String path = (isPlayerOne) ? whitePath : blackPath;
@@ -31,7 +31,7 @@ public class PieceFactory {
     }
 
     public static Piece createQueen(int x, int y){
-        //System.out.println("Piece(Queen) created with x:" + x + " and y: " + y);
+        //System.out.println("Piece(Queen) created with row:" + row + " and col: " + col);
         String blackPath =  "/PieceImages/Black_Queen.png";
         String whitePath = "/PieceImages/White_Queen.png";
         String path = (isPlayerOne) ? whitePath : blackPath;
@@ -39,7 +39,7 @@ public class PieceFactory {
     }
 
     public static Piece createKing(int x, int y){
-        //System.out.println("Piece(King) created with x:" + x + " and y: " + y);
+        //System.out.println("Piece(King) created with row:" + row + " and col: " + col);
         String blackPath =  "/PieceImages/Black_King.png";
         String whitePath = "/PieceImages/White_King.png";
         String path = (isPlayerOne) ? whitePath : blackPath;
@@ -47,7 +47,7 @@ public class PieceFactory {
     }
 
     public static Piece createPawn(int x, int y){
-        //System.out.println("Piece(Pawn) created with x:" + x + " and y: " + y);
+        //System.out.println("Piece(Pawn) created with row:" + row + " and col: " + col);
         String blackPath =  "/PieceImages/Black_Pawn.png";
         String whitePath = "/PieceImages/White_Pawn.png";
         String path = (isPlayerOne) ? whitePath : blackPath;

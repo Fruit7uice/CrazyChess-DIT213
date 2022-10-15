@@ -36,10 +36,10 @@ public class Board implements Observable {
     }
 
 
-    public void changePiecePosition(Piece piece, int newX, int newY){
-            updateGameLayout(piece, newX, newY);
-            piece.xPos = newX;
-            piece.yPos = newY;
+    public void changePiecePosition(Piece piece, int x, int y){
+            updateGameLayout(piece, x, y);
+            piece.xPos = x;
+            piece.yPos = y;
             notifyAllObservers();
             //updateListOfLegalMoves();
     }
