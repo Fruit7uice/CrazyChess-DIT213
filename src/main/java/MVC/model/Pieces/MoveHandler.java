@@ -1,6 +1,5 @@
 package MVC.model.Pieces;
-
-
+import MVC.model.Player;
 import MVC.model.Board;
 import MVC.model.SpecialMoves.Castle;
 import MVC.model.Tuple;
@@ -131,9 +130,10 @@ public class MoveHandler {
     /**
      * @param newX the desired x position
      * @param newY the desired y position
-     * @param board the board that contains the pieces
+     * @param pieceLayout the board that contains the pieces
      * @return true if the position on the board is occupied
      */
+
     public boolean isOccupied(int newX, int newY, Piece[][] board){
         return (board[newY][newX] != null);
     }
@@ -141,9 +141,10 @@ public class MoveHandler {
     /**
      * @param newX the desired x position
      * @param newY the desired y position
-     * @param board the board that the pieces are on??
+     * @param pieceLayout the board that the pieces are on??
      * @return true if the position on the board is occupied by an enemy piece
      */
+
     public boolean isOccupiedByEnemy(int newX, int newY, Piece piece, Piece[][] board){
         boolean piecePlayerOne = board[newY][newX].isPlayerOne();
         return piecePlayerOne != piece.isPlayerOne();
@@ -153,12 +154,13 @@ public class MoveHandler {
     /**
      * updates the pieces list if legal moves
      * @param piece the current piece
-     * @param board the current board
+     * @param pieceLayout the current board
      */
-    public void createListOfLegalMoves(Piece piece, Piece[][] board){ //[[x,y], [x,y]...
-        for (int x = 0; x < board.length; x++) {
-            for (int y = 0; y < board[x].length; y++) {
-                if(isMoveAllowed(x, y, piece, board)) {
+
+    public void createListOfLegalMoves(Piece piece, Piece[][] pieceLayout){ //[[x,y], [x,y]...
+        for (int y = 0; y < pieceLayout.length; y++) {
+            for (int x = 0; x < pieceLayout[y].length; x++) {
+                if(isMoveAllowed(x, y, piece, pieceLayout)) {
                     Tuple<Integer, Integer> tuple = new Tuple(x, y);
                     piece.listOfLegalMoves.add(tuple);
                 } else{
@@ -314,6 +316,23 @@ public class MoveHandler {
             }
         }
         return false;
+    }
+
+
+    /**
+     * @param player the player who's turn it is right now
+     * @param king the players king that we are checking if checked on
+     * @param pieceLayout current placement of the pieces
+     * @return true if the king is checked
+     */
+    public boolean isKingCheck(Player player, Piece king, Piece[][] pieceLayout){
+        player.calcListOfLegalMovesPlayer(pieceLayout, this); // creates the lists of legal moves
+        Tuple<Integer, Integer> tuple = new Tuple<>(king.xPos, king.yPos);
+        if(king.isPlayerOne()){
+            return player.playerTwoListOfLegalMoves.contains(tuple);
+        } else {
+            return player.playerOneListOfLegalMoves.contains(tuple);
+        }
     }
 
 

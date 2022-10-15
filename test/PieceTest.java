@@ -1,6 +1,7 @@
 import MVC.model.PieceFactory;
 import MVC.model.Pieces.*;
 
+import MVC.model.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,19 +10,18 @@ import static org.junit.Assert.*;
 
 
 public class PieceTest {
-    PieceFactory pieceFactory;
     Piece king;
     Piece queen;
     Piece knight;
     Piece bishop;
     Piece rook;
     Piece pawn;
-    MoveHandler moveHandler = new MoveHandler();
-    Piece[][] board;
+    Player player = new Player();
+    Piece[][] board = new Piece[8][8];
+    MoveHandler moveHandler = new MoveHandler(board);
 
     @Before
     public void setUp() {
-        board = new Piece[8][8];
         PieceFactory.isPlayerOne = true;
         bishop = PieceFactory.createBishop(1,1);
         board[1][1] = bishop;
@@ -30,7 +30,7 @@ public class PieceTest {
         queen = PieceFactory.createQueen(6,6);
         board[6][6] = queen;
         knight = PieceFactory.createKnight(2,7);
-        board[2][7] = knight;
+        board[7][2] = knight;
 
     }
     //-----------------Bishop Tests---------------------------
@@ -87,13 +87,13 @@ public class PieceTest {
     @Test
     public void rookMoveEnemyBlocking() {
         PieceFactory.isPlayerOne = false;
-        board[6][2] = PieceFactory.createPawn(6, 2);
+        board[2][6] = PieceFactory.createPawn(6, 2);
         assertTrue(moveHandler.moveChecker(6, 2, rook, board));
     }
    @Test
     public void rookMovePathBlocked() {
         PieceFactory.isPlayerOne = true;
-        board[6][2] = PieceFactory.createPawn(6,2);
+        board[2][6] = PieceFactory.createPawn(6,2);
         assertFalse(moveHandler.moveChecker(6, 3, rook, board));
     }
     @Test
@@ -130,13 +130,13 @@ public class PieceTest {
     @Test
     public void queenMoveEnemyBlocking() {
         PieceFactory.isPlayerOne = false;
-        board[6][5] = PieceFactory.createPawn(6, 5);
+        board[5][6] = PieceFactory.createPawn(6, 5);
         assertTrue(moveHandler.moveChecker(6, 5, queen, board));
     }
    @Test
     public void queenMovePathBlocked() {
         PieceFactory.isPlayerOne = true;
-        board[6][5] = PieceFactory.createPawn(6,5);
+        board[5][6] = PieceFactory.createPawn(6,5);
         assertFalse(moveHandler.moveChecker(6, 4, queen, board));
     }
     @Test
@@ -170,13 +170,13 @@ public class PieceTest {
     @Test
     public void knightMoveEnemyBlocking() {
         PieceFactory.isPlayerOne = false;
-        board[6][5] = PieceFactory.createPawn(1, 5);
+        board[5][1] = PieceFactory.createPawn(1, 5);
         assertTrue(moveHandler.moveChecker(1, 5, knight, board));
     }
     @Test
     public void knightMovePathBlocked() {
         PieceFactory.isPlayerOne = true;
-        board[2][6] = PieceFactory.createPawn(2,6);
+        board[6][2] = PieceFactory.createPawn(2,6);
         assertTrue(moveHandler.moveChecker(1, 5, knight, board));
     }
     @Test
@@ -190,6 +190,25 @@ public class PieceTest {
         int startY = knight.yPos;
         moveHandler.movePiece(0,5, knight, board);
         assertTrue(knight.xPos == startX && knight.yPos == startY);
+    }
+    //-------------------Test king checked-------------------------
+    @Test
+    public void kingIsChecked(){
+        board = new Piece[8][8];
+        PieceFactory.isPlayerOne = true;
+        king  = PieceFactory.createKing(5,0);
+        board[0][5] = king;
+        PieceFactory.isPlayerOne = false;
+        board[4][5] = PieceFactory.createQueen(5,4);
+        assertTrue(moveHandler.isKingCheck(player, king, board));
+    }
+    @Test
+    public void kingIsNotChecked(){
+        board = new Piece[8][8];
+        king  = PieceFactory.createKing(5,0);
+        board[0][5] = king;
+        board[4][5] = PieceFactory.createQueen(5,4);
+        assertFalse(moveHandler.isKingCheck(player, king, board));
     }
 }
 

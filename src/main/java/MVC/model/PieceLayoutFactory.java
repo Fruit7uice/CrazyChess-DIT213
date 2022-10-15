@@ -83,6 +83,9 @@ public class PieceLayoutFactory {
                     case ("null"):
                         newPieces.add(null);
                         break;
+                    case ("null"):
+                        newPieces.add(null);
+                        break;
                     default:
                         System.out.println("Error: Piece not created, possibly a faulty initial list. ");
                         break;
