@@ -22,6 +22,11 @@ public class PieceLayoutFactory {
     }
 
 
+    /**
+     * Creates the Matrix which is later used to work on the game.
+     * Uses the CreatePieceList, so it can differentiate between where it should put the pieces in the matrix.
+     * @return A Matrix filled with Pieces.
+     */
     public static Piece[][] createMatrixLayout(){
         Piece[][] pieces = new Piece[8][8];
         ArrayList<Piece> playerTwoPieces = CreatePieceList(playerTwoLayout, false);
@@ -52,6 +57,12 @@ public class PieceLayoutFactory {
     }
 
 
+    /**
+     * Creates an ArrayList of Pieces with the attribute if it is player One or Two.
+     * @param layout The String Matrix containing the way we want to fill 2 Rows and 8 Columns with Pieces.
+     * @param isPlayerOne Boolean saying if the piece created belongs to player One or Two.
+     * @return ArrayList filled with the Pieces just created with its x and y positions.
+     */
     public static ArrayList<Piece> CreatePieceList(String[][] layout, boolean isPlayerOne){
         PieceFactory.isPlayerOne = isPlayerOne;
         ArrayList<Piece> newPieces = new ArrayList<>();
