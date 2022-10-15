@@ -28,7 +28,7 @@ public class MoveHandler {
      */
 
     public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout){ // Allowed
-        //TODO add a check if king.IsInCheck()
+        //TODO add a check if king.IsInCheck() and if king is checkmate
         return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
     }
 
@@ -315,6 +315,24 @@ public class MoveHandler {
         } else {
             return player.playerOneListOfLegalMoves.contains(tuple);
         }
+    }
+
+    public boolean isKingCheckMate(Player player, Piece king, Piece[][] pieceLayout){
+        player.calcListOfLegalMovesPlayer(pieceLayout, this);
+        if(king.isPlayerOne()){
+            return player.playerTwoListOfLegalMoves.contains(checkPosAroundKing(player, king));
+        } else {
+            return player.playerOneListOfLegalMoves.contains(checkPosAroundKing(player, king));
+        }
+    }
+    private boolean checkPosAroundKing(Player player, Piece king){
+        return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+            && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+            && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+            && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right upp
+            && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)) // left upp
+            && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)) // right down
+            && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
     }
 
 
