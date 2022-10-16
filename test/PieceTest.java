@@ -212,6 +212,23 @@ public class PieceTest {
         pieceLayout[4][5] = PieceFactory.createQueen(5,4);
         assertFalse(moveHandler.isKingCheck(player, king, pieceLayout));
     }
+
+    //-------------------Test king checkmate-------------------------
+    @Test
+    public void kingIsCheckmate(){
+        pieceLayout = new Piece[8][8];
+        PieceFactory.isPlayerOne = true;
+        king  = PieceFactory.createKing(5,0);
+        pieceLayout[0][5] = king;
+        PieceFactory.isPlayerOne = false;
+        pieceLayout[4][5] = PieceFactory.createRook(5,4);
+        pieceLayout[2][3] = PieceFactory.createBishop(3,2);
+        pieceLayout[0][1] = PieceFactory.createRook(1,0);
+        pieceLayout[2][7] = PieceFactory.createBishop(7,2);
+        pieceLayout[0][7] = PieceFactory.createRook(7,0);
+            assertTrue(moveHandler.isKingCheckMate(player, king, pieceLayout));
+    }
+
 }
 
 

@@ -14,11 +14,11 @@ public class KnightStrategy {
      int deltaX = Math.abs(startX - newX);
      int deltaY = Math.abs(startY - newY);
         if ((deltaX + deltaY == 3) && (deltaX > 0 && deltaY > 0)){
-            System.out.println("DeltaX: " + deltaX + " DeltaY: " + deltaY);
+           // System.out.println("DeltaX: " + deltaX + " DeltaY: " + deltaY);
             return true;
         }
         else {
-            System.out.println("Inside Else: DeltaX: " + deltaX + " DeltaY: " + deltaY);
+           // System.out.println("Inside Else: DeltaX: " + deltaX + " DeltaY: " + deltaY);
             return false;
         }
     }

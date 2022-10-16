@@ -35,16 +35,16 @@ public class MoveHandler {
     private boolean isMoveAllowedHelper(int newX, int newY, Piece piece, Piece[][] pieceLayout){
 
         if(piece.legalMove(newX, newY)){
-            System.out.println("Move Was Legal");
+           // System.out.println("Move Was Legal");
             if (isOccupied(newX, newY, pieceLayout)) { //is the tile not occupied
 
                 if (isOccupiedByEnemy(newX, newY, piece, pieceLayout)) { //is the piece my enemy?
 
                     if(isPathBlocked(newX,newY,piece,pieceLayout)) {
-                        System.out.println("Im here");
+                   //     System.out.println("Im here");
                         return false;
                     } else { //path is blocked
-                        System.out.println("TRYING TO KILL");
+                    //    System.out.println("TRYING TO KILL");
                         killEnemyPiece();
                         return true;
                     }
@@ -53,7 +53,7 @@ public class MoveHandler {
                 }
 
             } else { // tile is not occupied
-                System.out.println("Is not occupied");
+               // System.out.println("Is not occupied");
                 if (isPathBlocked(newX, newY, piece, pieceLayout)){
                     return false;
                 } else {
@@ -62,7 +62,7 @@ public class MoveHandler {
 
             }
         } else {
-            System.out.println("Move Was Illegal");
+          //  System.out.println("Move Was Illegal");
             return false;
         }
     }
@@ -88,7 +88,7 @@ public class MoveHandler {
         if (piece.isPlayerOne() && castle.isWhiteLongCastle(newX, newY) && Objects.equals(piece.getType(), "King")
                 && !hasPlayerOneCastled()){
             castle.performCastle(piece, newX, newY, pieceLayout, board);
-            System.out.println("TRYING TO PERFORM WHITE LONG CASTLE");
+           // System.out.println("TRYING TO PERFORM WHITE LONG CASTLE");
         }
         else if (piece.isPlayerOne() && castle.isWhiteShortCastle(newX, newY) && Objects.equals(piece.getType(), "King")
                 && !hasPlayerOneCastled()){
@@ -104,7 +104,7 @@ public class MoveHandler {
         }
         else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
             board.changePiecePosition(piece, newX, newY);
-            System.out.println("DOES NOT WANNA CASTLE");
+          //  System.out.println("DOES NOT WANNA CASTLE");
         }
     }
 
@@ -162,13 +162,13 @@ public class MoveHandler {
     public boolean isPathBlocked(int newX, int newY, Piece piece, Piece[][] pieceLayout){
         if(!piece.getType().equals("Knight")) {
             if (piece.xPos != newX && piece.yPos == newY) { // x pos changed
-                System.out.println("Checking Horizontal Blocked: " + pathBlockedHelperHorizontal(newX, piece, pieceLayout));
+               // System.out.println("Checking Horizontal Blocked: " + pathBlockedHelperHorizontal(newX, piece, pieceLayout));
                 return pathBlockedHelperHorizontal(newX, piece, pieceLayout);
             } else if (piece.xPos == newX && piece.yPos != newY) { // y pos changed
-                System.out.println("Checking Vertical Blocked: " + pathBlockedHelperVertical(newY, piece, pieceLayout));
+               // System.out.println("Checking Vertical Blocked: " + pathBlockedHelperVertical(newY, piece, pieceLayout));
                 return pathBlockedHelperVertical(newY, piece, pieceLayout);
             } else if (piece.xPos != newX && piece.yPos != newY) {
-                System.out.println("Checking Diagonal Blocked: " + pathBlockedHelperDiagonal(newX, newY, piece, pieceLayout));
+               // System.out.println("Checking Diagonal Blocked: " + pathBlockedHelperDiagonal(newX, newY, piece, pieceLayout));
                 return pathBlockedHelperDiagonal(newX, newY, piece, pieceLayout);
             } else {
                 return true;
@@ -191,7 +191,7 @@ public class MoveHandler {
             while (counter <= deltaX) {
                 if (pieceLayout[piece.yPos][piece.xPos - counter] != null && (piece.xPos - counter) != piece.xPos
                         && pieceLayout[piece.yPos][piece.xPos-counter] != pieceLayout[piece.yPos][newX]) { // don't check where the piece is right now
-                    System.out.println("Occupied at: " + pieceLayout[piece.yPos][piece.xPos - counter].isPlayerOne());
+                  //  System.out.println("Occupied at: " + pieceLayout[piece.yPos][piece.xPos - counter].isPlayerOne());
                     return true;
                 } else {
                     counter++;
@@ -201,7 +201,7 @@ public class MoveHandler {
             while (counter <= deltaX) { // if current x < new x (moved right)
                 if (pieceLayout[piece.yPos][piece.xPos + counter] != null && (piece.xPos + counter) != piece.xPos
                         && pieceLayout[piece.yPos][piece.xPos+counter] != pieceLayout[piece.yPos][newX]) { // don't check where the piece is right now
-                    System.out.println("Occupied at: " + pieceLayout[piece.yPos][piece.xPos + counter]);
+                    //System.out.println("Occupied at: " + pieceLayout[piece.yPos][piece.xPos + counter]);
                     return true;
                 } else {
                     counter++;
@@ -223,7 +223,7 @@ public class MoveHandler {
         if (piece.yPos > newY) { // current y > new y (moved "backwards")
             while (counter < deltaY) {
                 if (board[piece.yPos - counter][piece.xPos] != null && (piece.yPos - counter) != piece.yPos) { // don't check where the piece is right now
-                    System.out.println("Occupied at: " + board[piece.yPos - counter][piece.xPos]);
+                    //System.out.println("Occupied at: " + board[piece.yPos - counter][piece.xPos]);
                     return true;
                 } else {
                     counter++;
@@ -232,7 +232,7 @@ public class MoveHandler {
         } else {
             while (counter < deltaY) { // if current y < new y (moved "forward")
                 if (board[piece.yPos + counter][piece.xPos] != null && (piece.xPos + counter) != piece.xPos) { // don't check where the piece is right now
-                    System.out.println("Occupied at: " + board[piece.yPos + counter][piece.xPos]);
+                    //System.out.println("Occupied at: " + board[piece.yPos + counter][piece.xPos]);
                     return true;
                 } else {
                     counter++;
@@ -320,8 +320,10 @@ public class MoveHandler {
     public boolean isKingCheckMate(Player player, Piece king, Piece[][] pieceLayout){
         player.calcListOfLegalMovesPlayer(pieceLayout, this);
         if(king.isPlayerOne()){
+           // System.out.println(player.playerTwoListOfLegalMoves);
             return player.playerTwoListOfLegalMoves.contains(checkPosAroundKing(player, king));
         } else {
+           // System.out.println(player.playerOneListOfLegalMoves);
             return player.playerOneListOfLegalMoves.contains(checkPosAroundKing(player, king));
         }
     }
