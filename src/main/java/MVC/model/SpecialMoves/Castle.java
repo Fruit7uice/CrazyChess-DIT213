@@ -93,8 +93,8 @@ public class Castle {
      */
     public void whiteKingLongCastle(Piece king, Piece[][] pieces, Board board){ // White king left white rook.
         Piece rook = pieces[7][0];
-            board.changePiecePosition(king, 2, 7);
-            board.changePiecePosition(rook, 3, 7);
+        board.changePiecePosition(king, 2, 7);
+        board.changePiecePosition(rook, 3, 7);
     }
 
     /**
@@ -147,9 +147,9 @@ public class Castle {
                 && !hasAnyMoved(king, rook)){
             for (int row = 7; row < 8; row++) {
                 for (int col = 1; col < 4; col++) {
-                    if (Objects.equals((pieces[row][col]).getType(), "null")) {
+                    if ((pieces[row][col]) == null) {
                         return true;
-                    }else return false;
+                    }
                 }
             }
         }return false;
@@ -168,9 +168,9 @@ public class Castle {
                 && !hasAnyMoved(king, rook)){
             for (int row = 7; row < 8; row++) {
                 for (int col = 5; col < 7; col++) {
-                    if (Objects.equals((pieces[row][col]).getType(), "null")){
+                    if ((pieces[row][col]) == null){
                         return true;
-                    }else return false;
+                    }
                 }
             }
         }return false;
@@ -190,9 +190,9 @@ public class Castle {
                 && !hasAnyMoved(king, rook)){
             for (int row = 0; row < 1; row++) {
                 for (int col = 1; col < 4; col++) {
-                    if (Objects.equals((pieces[row][col]).getType(), "null")){
+                    if ((pieces[row][col]) == null){
                         return true;
-                    }else return false;
+                    }
                 }
             }
         }return false;
@@ -211,9 +211,9 @@ public class Castle {
                 && !hasAnyMoved(king, rook)){
             for (int row = 0; row < 1; row++) {
                 for (int col = 5; col < 7; col++) {
-                    if (Objects.equals((pieces[row][col]).getType(), "null")){
+                    if ((pieces[row][col]) == null){
                         return true;
-                    }else return false;
+                    }
                 }
             }
         }return false;
@@ -235,7 +235,7 @@ public class Castle {
         Tuple<Integer, Integer> tuple47 = new Tuple(4, 7);
 
         for (int i = 0; i < player.playerTwoListOfLegalMoves.size()-1; i++) {
-                if (player.playerTwoListOfLegalMoves.get(i) == tuple17 ||
+            if (player.playerTwoListOfLegalMoves.get(i) == tuple17 ||
                     player.playerTwoListOfLegalMoves.get(i) == tuple27 ||
                     player.playerTwoListOfLegalMoves.get(i) == tuple37 ||
                     player.playerTwoListOfLegalMoves.get(i) == tuple47){
@@ -261,7 +261,7 @@ public class Castle {
         Tuple<Integer, Integer> tuple67 = new Tuple(6, 7);
 
         for (int i = 0; i < player.playerTwoListOfLegalMoves.size()-1; i++) {
-                if (player.playerTwoListOfLegalMoves.get(i) == tuple47 ||
+            if (player.playerTwoListOfLegalMoves.get(i) == tuple47 ||
                     player.playerTwoListOfLegalMoves.get(i) == tuple57 ||
                     player.playerTwoListOfLegalMoves.get(i) == tuple67){
                 return true;
@@ -286,7 +286,7 @@ public class Castle {
         Tuple<Integer, Integer> tuple40 = new Tuple(4, 0);
 
         for (int i = 0; i < player.playerOneListOfLegalMoves.size()-1; i++) {
-                if (player.playerOneListOfLegalMoves.get(i) == tuple10 ||
+            if (player.playerOneListOfLegalMoves.get(i) == tuple10 ||
                     player.playerOneListOfLegalMoves.get(i) == tuple20 ||
                     player.playerOneListOfLegalMoves.get(i) == tuple30 ||
                     player.playerOneListOfLegalMoves.get(i) == tuple40){
@@ -311,7 +311,7 @@ public class Castle {
         Tuple<Integer, Integer> tuple60 = new Tuple(6, 0);
 
         for (int i = 0; i < player.playerOneListOfLegalMoves.size()-1; i++) {
-                 if(player.playerOneListOfLegalMoves.get(i) == tuple40 ||
+            if(player.playerOneListOfLegalMoves.get(i) == tuple40 ||
                     player.playerOneListOfLegalMoves.get(i) == tuple50 ||
                     player.playerOneListOfLegalMoves.get(i) == tuple60){
                 return true;
