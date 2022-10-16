@@ -16,7 +16,7 @@ public class MoveHandler {
     public MoveHandler(Board board) {
         this.board = board;
     }
-    Castle castle = new Castle();
+    Castle castle = new Castle(this);
     PawnCapture pawnCapture = new PawnCapture(this);
 
     /**
@@ -103,25 +103,26 @@ public class MoveHandler {
      * @author Jeffrey Wolff && Johannes Höher
      */
     public void tryAndCheckMove(int newX, int newY, Piece piece, Piece[][] pieceLayout){
-        if (piece.isPlayerOne() && castle.isWhiteLongCastle(newX, newY) &&
+        int deltaX = Math.abs(piece.xPos - newX);
+        if (piece.isPlayerOne() && deltaX == 2 && castle.isWhiteLongCastle(newX, newY) &&
                 Objects.equals(piece.getType(), "King")
                 && !hasPlayerOneCastled()){
             castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the white long castle
         }
 
-        else if (piece.isPlayerOne() && castle.isWhiteShortCastle(newX, newY) &&
+        else if (piece.isPlayerOne() && deltaX == 2 && castle.isWhiteShortCastle(newX, newY) &&
                 Objects.equals(piece.getType(), "King")
                 && !hasPlayerOneCastled()){
             castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the white short castle
         }
 
-        else if (!piece.isPlayerOne() && castle.isBlackLongCastle(newX, newY) &&
+        else if (!piece.isPlayerOne() && deltaX == 2 && castle.isBlackLongCastle(newX, newY) &&
                 Objects.equals(piece.getType(), "King")
                 && !hasPlayerTwoCastled()){
             castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the black long castle
         }
 
-        else if (!piece.isPlayerOne() && castle.isBlackShortCastle(newX, newY) &&
+        else if (!piece.isPlayerOne() && deltaX == 2 && castle.isBlackShortCastle(newX, newY) &&
                 Objects.equals(piece.getType(), "King")
                 && !hasPlayerTwoCastled()){
             castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the black short castle

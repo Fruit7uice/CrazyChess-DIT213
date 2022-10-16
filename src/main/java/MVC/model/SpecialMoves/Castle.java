@@ -2,6 +2,7 @@ package MVC.model.SpecialMoves;
 
 
 import MVC.model.Board;
+import MVC.model.Pieces.MoveHandler;
 import MVC.model.Pieces.Piece;
 import MVC.model.Tuple;
 import MVC.model.Player;
@@ -17,13 +18,20 @@ public class Castle {
 
     public boolean playerOneHasCastled;
     public boolean playerTwoHasCastled;
+    MoveHandler moveHandler;
 
-    public Castle(){
+    public Castle(MoveHandler moveHandler){
         this.playerOneHasCastled = false;
         this.playerTwoHasCastled = false;
+        this.moveHandler = moveHandler;
     }
 
     Player player = new Player();
+
+
+
+
+
 
 
     /**
@@ -141,17 +149,12 @@ public class Castle {
      * @param king The white King
      * @return true if the space is not occupied between them.
      */
+
     public boolean preconditionsWhiteLongCastle(Piece[][] pieces, Piece king) { // White King Left Rook
         Piece rook = pieces[7][0];
-        if (king.isPlayerOne() && rook.isPlayerOne() && rook.getType().equals("Rook")
-                && !hasAnyMoved(king, rook)){
-            for (int row = 7; row < 8; row++) {
-                for (int col = 1; col < 4; col++) {
-                    if ((pieces[row][col]) == null) {
-                        return true;
-                    }
-                }
-            }
+        if (king.isPlayerOne() &&  rook != null && rook.isPlayerOne() && rook.getType().equals("Rook")
+                && !hasAnyMoved(king, rook) && !moveHandler.isPathBlocked(0,7, king, pieces)){
+            return true;
         }return false;
     }
 
@@ -162,17 +165,12 @@ public class Castle {
      * @param king The white King
      * @return true if the space is not occupied between them.
      */
+
     public boolean preconditionsWhiteShortCastle(Piece[][] pieces, Piece king){ // White King Right Rook
         Piece rook = pieces[7][7];
-        if(king.isPlayerOne() && rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
-                && !hasAnyMoved(king, rook)){
-            for (int row = 7; row < 8; row++) {
-                for (int col = 5; col < 7; col++) {
-                    if ((pieces[row][col]) == null){
-                        return true;
-                    }
-                }
-            }
+        if(king.isPlayerOne() && rook != null && rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
+                && !hasAnyMoved(king, rook) && !moveHandler.isPathBlocked(7, 7, king, pieces)){
+            return true;
         }return false;
     }
 
@@ -186,18 +184,11 @@ public class Castle {
      */
     public boolean preconditionsBlackKingLongCastle(Piece[][] pieces, Piece king){ // White King Left Rook
         Piece rook = pieces[0][0];
-        if(!king.isPlayerOne() && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
-                && !hasAnyMoved(king, rook)){
-            for (int row = 0; row < 1; row++) {
-                for (int col = 1; col < 4; col++) {
-                    if ((pieces[row][col]) == null){
-                        return true;
-                    }
-                }
-            }
+        if(!king.isPlayerOne() &&  rook != null && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
+                && !hasAnyMoved(king, rook) && !moveHandler.isPathBlocked(0, 0, king, pieces)){
+            return true;
         }return false;
     }
-
     /**
      * Method that makes sure that the space between the black King and the right black Rook is
      * free and not occupied and that the king and rook has not moved.
@@ -207,15 +198,9 @@ public class Castle {
      */
     public boolean preconditionsBlackKingShortCastle(Piece[][] pieces, Piece king){ // Black King Right Rook
         Piece rook = pieces[0][7];
-        if(!king.isPlayerOne() && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
-                && !hasAnyMoved(king, rook)){
-            for (int row = 0; row < 1; row++) {
-                for (int col = 5; col < 7; col++) {
-                    if ((pieces[row][col]) == null){
-                        return true;
-                    }
-                }
-            }
+        if(!king.isPlayerOne() && rook != null && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
+                && !hasAnyMoved(king, rook) && !moveHandler.isPathBlocked(7, 0, king, pieces)){
+            return true;
         }return false;
     }
 
