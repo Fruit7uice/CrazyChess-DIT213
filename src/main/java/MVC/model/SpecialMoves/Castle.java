@@ -93,8 +93,8 @@ public class Castle {
      */
     public void whiteKingLongCastle(Piece king, Piece[][] pieces, Board board){ // White king left white rook.
         Piece rook = pieces[7][0];
-        board.changePiecePosition(king, 2, 7);
-        board.changePiecePosition(rook, 3, 7);
+            board.changePiecePosition(king, 2, 7);
+            board.changePiecePosition(rook, 3, 7);
     }
 
     /**
@@ -147,9 +147,9 @@ public class Castle {
                 && !hasAnyMoved(king, rook)){
             for (int row = 7; row < 8; row++) {
                 for (int col = 1; col < 4; col++) {
-                    if ((pieces[row][col]) == null) {
+                    if (Objects.equals((pieces[row][col]).getType(), "null")) {
                         return true;
-                    }
+                    }else return false;
                 }
             }
         }return false;
@@ -168,9 +168,9 @@ public class Castle {
                 && !hasAnyMoved(king, rook)){
             for (int row = 7; row < 8; row++) {
                 for (int col = 5; col < 7; col++) {
-                    if ((pieces[row][col]) == null){
+                    if (Objects.equals((pieces[row][col]).getType(), "null")){
                         return true;
-                    }
+                    }else return false;
                 }
             }
         }return false;
@@ -190,9 +190,9 @@ public class Castle {
                 && !hasAnyMoved(king, rook)){
             for (int row = 0; row < 1; row++) {
                 for (int col = 1; col < 4; col++) {
-                    if ((pieces[row][col]) == null){
+                    if (Objects.equals((pieces[row][col]).getType(), "null")){
                         return true;
-                    }
+                    }else return false;
                 }
             }
         }return false;
@@ -211,9 +211,9 @@ public class Castle {
                 && !hasAnyMoved(king, rook)){
             for (int row = 0; row < 1; row++) {
                 for (int col = 5; col < 7; col++) {
-                    if ((pieces[row][col]) == null){
+                    if (Objects.equals((pieces[row][col]).getType(), "null")){
                         return true;
-                    }
+                    }else return false;
                 }
             }
         }return false;
