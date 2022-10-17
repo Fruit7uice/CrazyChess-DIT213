@@ -2,15 +2,12 @@ package MVC.controller;
 
 import MVC.model.Board;
 import MVC.model.Pieces.MoveHandler;
-
 import MVC.view.BoardGUI;
 import MVC.view.WrapperPiece;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-
-import java.util.Objects;
 
 import static MVC.view.Tile.tileSize;
 
@@ -58,12 +55,37 @@ public class BoardController {
             g.getChildren().get(i).toFront();
         }
         onDrag = true;
-        int newX = (int) (event.getX() - (tileSize/2));
-        int newY = (int) (event.getY() - (tileSize/2));
+        int newX = (int) calculateNewX(event.getX() - (tileSize/2));
+        int newY = (int) calculateNewY(event.getY() - (tileSize/2));
+
+        boardGUI.drawWrapperPiece(piece, Color.AQUA, Color.AQUA, newX, newY);
 
         //System.out.println("X: " + newX + " Y: " + newY);
-        boardGUI.drawWrapperPiece(piece, Color.AQUA, Color.AQUA, newX, newY);
     }
+
+    double calculateNewX(double x){
+        if (x > MainBoard.WINDOW_WIDTH-tileSize){
+            return MainBoard.WINDOW_WIDTH-tileSize;
+        }
+        else if (x < 0){
+            return 0;
+        }
+        else return x;
+    }
+
+    double calculateNewY(double y){
+        if (y > MainBoard.WINDOW_HEIGHT-tileSize){
+            return MainBoard.WINDOW_HEIGHT-tileSize;
+        }
+        else if (y < 0){
+            return 0;
+        }
+        else return y;
+    }
+
+
+
+
     /**
      * If the release is after a drag event, it will call the MoveHandler class and update the model.
      * @param event is the Mouse Event which is used to get x and y of the mouse position
@@ -81,12 +103,7 @@ public class BoardController {
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
     }
 
-    public void snapPieceToGrid(WrapperPiece piece, int newX, int newY){
-        if (!(piece.getRefPiece().xPos == newX && piece.getRefPiece().yPos == newY)){
-            board.changePiecePosition(piece.getRefPiece(), newX, newY); // Updates board as well
-        }
 
-    }
 
 
 

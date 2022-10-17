@@ -1,4 +1,5 @@
 package MVC.model.Pieces;
+import MVC.controller.MainBoard;
 import MVC.model.Player;
 import MVC.model.Board;
 import MVC.model.SpecialMoves.Castle;
@@ -29,7 +30,10 @@ public class MoveHandler {
      */
     public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout){ // Allowed
         //TODO add a check if king.IsInCheck()
-        return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
+        // NewX and NewY cannot be outside board.
+        if (newX > MainBoard.WINDOW_WIDTH || newX < 0 || newY > MainBoard.WINDOW_HEIGHT || newY < 0)
+            return false;
+        else return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
     }
 
     /**

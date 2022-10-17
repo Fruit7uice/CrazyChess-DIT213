@@ -6,14 +6,15 @@ import MVC.model.Pieces.Piece;
 import MVC.view.BoardGUI;
 import MVC.model.PieceLayoutFactory;
 import javafx.application.Application;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 
-import java.io.ObjectInputStream;
+import javafx.stage.Stage;
 
 public class MainBoard extends Application {
     public static int WINDOW_WIDTH = 800;
@@ -45,15 +46,12 @@ public class MainBoard extends Application {
     public void start(Stage stage) throws Exception {
         board.notifyAllObservers(); // Notify observers and update their state, which in return notifies gui.
         stage.setTitle("CrazyChess");
-        StackPane container = new StackPane();
-        HBox hAlign = new HBox();
-        VBox vAlign = new VBox();
-        hAlign.getChildren().add(vAlign);
-        hAlign.setAlignment(Pos.CENTER);
-        vAlign.getChildren().add(boardPane);
-        vAlign.setAlignment(Pos.CENTER);
-        container.getChildren().add(hAlign);
+        GridPane container = new GridPane();
+
+        container.getChildren().add(boardPane);
         container.setAlignment(Pos.CENTER);
+        GridPane.setHalignment(boardPane, HPos.CENTER);
+        GridPane.setValignment(boardPane, VPos.CENTER);
         container.setPrefSize(800, 800);
         Scene scene = new Scene(container);
 
@@ -77,6 +75,28 @@ public class MainBoard extends Application {
 
         stage.setScene(scene);
         stage.show();
+    }
+
+    private VBox createNumbers() {
+        VBox container = new VBox();
+        String[] numbers = {"1","2","3","4","5","6","7","8"};
+        for (int i = 0; i < numbers.length; i++) {
+            Label letter = new Label(numbers[i]);
+            container.getChildren().add(letter);
+            System.out.println("Number created and added: " + letter.getText());
+        }
+        return container;
+    }
+
+    private HBox createLetters() {
+        HBox container = new HBox();
+        String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H"};
+        for (int i = 0; i < letters.length; i++) {
+            Label letter = new Label(letters[i]);
+            container.getChildren().add(letter);
+            System.out.println("Letter created and added: " + letter.getText());
+        }
+        return container;
     }
 
     /**

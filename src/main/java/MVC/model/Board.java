@@ -61,7 +61,6 @@ public class Board implements Observable {
             observer.update(pieceLayout);
         }
         System.out.println("All observers has been notified");
-
     }
 
 }
