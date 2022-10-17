@@ -26,7 +26,7 @@ public class MainBoard extends Application {
 
     @Override
     public void init(){
-        Piece[][] pieces = PieceLayoutFactory.createMatrixLayout();
+        Piece[][] pieces = PieceLayoutFactory.createCrazyLayout();
         this.gui = new BoardGUI();
         this.board = new Board(pieces);
         this.movehandler = new MoveHandler();

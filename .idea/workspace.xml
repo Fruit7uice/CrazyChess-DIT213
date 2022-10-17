@@ -6,15 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d7470bda-e2b2-4312-9e1d-70282ac9a8ab" name="Changes" comment="Cleaned up redundant classes and changed all pieces to only have one image path.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/controller/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/controller/MainBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Bishop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Knight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Queen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/Pieces/Rook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/model/PieceLayoutFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/model/PieceLayoutFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,6 +212,15 @@
           <properties class="java.lang.IllegalAccessException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/MVC/model/PieceLayoutFactory.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
