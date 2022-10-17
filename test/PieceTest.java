@@ -16,11 +16,12 @@ public class PieceTest {
     Piece knight;
     Piece bishop;
     Piece rook;
-    Piece pawn;
+    Piece whitePawn;
+    Piece blackPawn;
     Player player = new Player();
     Piece[][] pieceLayout = new Piece[8][8];
     Board board = new Board(pieceLayout);
-   MoveHandler moveHandler = new MoveHandler(board);
+    MoveHandler moveHandler = new MoveHandler(board);
 
     @Before
     public void setUp() {
@@ -33,8 +34,48 @@ public class PieceTest {
         pieceLayout[6][6] = queen;
         knight = PieceFactory.createKnight(2,7);
         pieceLayout[7][2] = knight;
+        blackPawn = PieceFactory.createPawn(3,1);
+        pieceLayout[1][3] = blackPawn;
+        whitePawn = PieceFactory.createPawn(3,6);
+        pieceLayout[6][3] = whitePawn;
 
     }
+
+    //-----------------Pawn Tests---------------------------
+    @Test
+    public void whitePawnMoveLegal() {
+        assertTrue(moveHandler.isMoveAllowed(3,4,whitePawn,pieceLayout));
+        assertTrue(moveHandler.isMoveAllowed(3,5,whitePawn,pieceLayout));
+    }
+
+    @Test
+    public void blackPawnMoveLegal() {
+        PieceFactory.isPlayerOne = false;
+        Piece blackTestPawn = PieceFactory.createPawn(3,1);
+        assertTrue(moveHandler.isMoveAllowed(3,2,blackTestPawn,pieceLayout));
+        assertTrue(moveHandler.isMoveAllowed(3,3,blackTestPawn,pieceLayout));
+    }
+
+    @Test
+    public void blackPawnMoveIllegal() {
+        PieceFactory.isPlayerOne = false;
+        Piece blackTestPawn = PieceFactory.createPawn(3,1);
+        assertFalse(moveHandler.isMoveAllowed(2, 2, blackTestPawn, pieceLayout));
+        assertFalse(moveHandler.isMoveAllowed(4,2,blackTestPawn,pieceLayout));
+        assertFalse(moveHandler.isMoveAllowed(3,1,blackTestPawn,pieceLayout));
+
+    }
+
+    @Test
+    public void whitePawnMoveIllegal() {
+        PieceFactory.isPlayerOne = true;
+        Piece whiteTestPawn = PieceFactory.createPawn(3,6);
+        assertFalse(moveHandler.isMoveAllowed(2,5,whiteTestPawn,pieceLayout));
+        assertFalse(moveHandler.isMoveAllowed(4,5,whiteTestPawn,pieceLayout));
+        assertFalse(moveHandler.isMoveAllowed(3,6,whiteTestPawn,pieceLayout));
+    }
+
+
     //-----------------Bishop Tests---------------------------
     @Test
     public void bishopMoveLegal() {

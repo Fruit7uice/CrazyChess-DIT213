@@ -2,6 +2,7 @@ package MVC.model.Pieces;
 import MVC.model.Player;
 import MVC.model.Board;
 import MVC.model.SpecialMoves.Castle;
+import MVC.model.SpecialMoves.PawnCapture;
 import MVC.model.Tuple;
 
 import java.util.Objects;
@@ -15,7 +16,8 @@ public class MoveHandler {
     public MoveHandler(Board board) {
         this.board = board;
     }
-    Castle castle = new Castle();
+    Castle castle = new Castle(this);
+    PawnCapture pawnCapture = new PawnCapture(this);
 
     /**
      * @param newX the desired x position
@@ -98,32 +100,46 @@ public class MoveHandler {
      * @param newY New Y position in the matrix, which piece wants to move.
      * @param piece current piece that has been moved.
      * @param pieceLayout Logical matrix which is worked on.
-     * @author Jeffrey Wolff
+     * @author Jeffrey Wolff && Johannes Höher
      */
     public void tryAndCheckMove(int newX, int newY, Piece piece, Piece[][] pieceLayout){
-        if (piece.isPlayerOne() && castle.isWhiteLongCastle(newX, newY) && Objects.equals(piece.getType(), "King")
+        int deltaX = Math.abs(piece.xPos - newX);
+        if (piece.isPlayerOne() && deltaX == 2 && castle.isWhiteLongCastle(newX, newY) &&
+                Objects.equals(piece.getType(), "King")
                 && !hasPlayerOneCastled()){
-            castle.performCastle(piece, newX, newY, pieceLayout, board);
-            System.out.println("TRYING TO PERFORM WHITE LONG CASTLE");
+            castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the white long castle
         }
-        else if (piece.isPlayerOne() && castle.isWhiteShortCastle(newX, newY) && Objects.equals(piece.getType(), "King")
+
+        else if (piece.isPlayerOne() && deltaX == 2 && castle.isWhiteShortCastle(newX, newY) &&
+                Objects.equals(piece.getType(), "King")
                 && !hasPlayerOneCastled()){
-            castle.performCastle(piece, newX, newY, pieceLayout, board);
-            System.out.println("TRYING TO PERFORM WHITE LONG CASTLE");
+            castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the white short castle
         }
-        else if (!piece.isPlayerOne() && castle.isBlackLongCastle(newX, newY) && Objects.equals(piece.getType(), "King")
+
+        else if (!piece.isPlayerOne() && deltaX == 2 && castle.isBlackLongCastle(newX, newY) &&
+                Objects.equals(piece.getType(), "King")
                 && !hasPlayerTwoCastled()){
-            castle.performCastle(piece, newX, newY, pieceLayout, board);
-            System.out.println("TRYING TO PERFORM WHITE LONG CASTLE");
+            castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the black long castle
         }
-        else if (!piece.isPlayerOne() && castle.isBlackShortCastle(newX, newY) && Objects.equals(piece.getType(), "King")
+
+        else if (!piece.isPlayerOne() && deltaX == 2 && castle.isBlackShortCastle(newX, newY) &&
+                Objects.equals(piece.getType(), "King")
                 && !hasPlayerTwoCastled()){
-            castle.performCastle(piece, newX, newY, pieceLayout, board);
-            System.out.println("TRYING TO PERFORM WHITE LONG CASTLE");
+            castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the black short castle
         }
+
+        else if(Objects.equals(piece.getType(), "Pawn") && piece.isPlayerOne() &&
+                pawnCapture.isPlayerOnePawnCapture(pieceLayout, piece, newX, newY) ){
+            pawnCapture.playerOnePawnCaptures(pieceLayout, piece, newX, newY, board); // White pawn captures an enemy piece
+        }
+
+        else if(Objects.equals(piece.getType(), "Pawn") && !piece.isPlayerOne() &&
+                pawnCapture.isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY) ){
+            pawnCapture.playerTwoPawnCaptures(pieceLayout, piece, newX, newY, board); // Black pawn captures an enemy piece
+        }
+
         else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
             board.changePiecePosition(piece, newX, newY);
-            System.out.println("DOES NOT WANNA CASTLE");
         }
     }
 

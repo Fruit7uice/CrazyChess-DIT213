@@ -2,6 +2,7 @@ package MVC.model.SpecialMoves;
 
 
 import MVC.model.Board;
+import MVC.model.Pieces.MoveHandler;
 import MVC.model.Pieces.Piece;
 import MVC.model.Tuple;
 import MVC.model.Player;
@@ -17,13 +18,20 @@ public class Castle {
 
     public boolean playerOneHasCastled;
     public boolean playerTwoHasCastled;
+    MoveHandler moveHandler;
 
-    public Castle(){
+    public Castle(MoveHandler moveHandler){
         this.playerOneHasCastled = false;
         this.playerTwoHasCastled = false;
+        this.moveHandler = moveHandler;
     }
 
     Player player = new Player();
+
+
+
+
+
 
 
     /**
@@ -38,16 +46,16 @@ public class Castle {
     public void performCastle(Piece piece, int newX, int newY, Piece[][] pieces, Board board) {
         if (isCastleAllowed(piece, pieces)) {
             if (isWhiteLongCastle(newX, newY)) {
-                whiteKingLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
+                whiteLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
                 playerOneHasCastled = true;
             } else if (isWhiteShortCastle(newX, newY)) {
-                whiteKingShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
+                whiteShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
                 playerOneHasCastled = true;
             } else if (isBlackLongCastle(newX, newY)) {
-                blackKingLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
+                blackLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
                 playerTwoHasCastled = true;
             } else if (isBlackShortCastle(newX, newY)) {
-                blackKingShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
+                blackShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
                 playerTwoHasCastled = true;
             }
         }
@@ -79,9 +87,9 @@ public class Castle {
             return true;
         }else if(preconditionsWhiteShortCastle(pieces, king) && !pathCheckedWhiteShortCastle()){
             return true;
-        }else if(preconditionsBlackKingLongCastle(pieces, king) && !pathCheckedBlackLongCastle()){
+        }else if(preconditionsBlackLongCastle(pieces, king) && !pathCheckedBlackLongCastle()){
             return true;
-        }else return preconditionsBlackKingShortCastle(pieces, king) && !pathCheckedBlackShortCastle();
+        }else return preconditionsBlackShortCastle(pieces, king) && !pathCheckedBlackShortCastle();
     }
 
 
@@ -91,7 +99,7 @@ public class Castle {
      * @param pieces
      * @param board
      */
-    public void whiteKingLongCastle(Piece king, Piece[][] pieces, Board board){ // White king left white rook.
+    public void whiteLongCastle(Piece king, Piece[][] pieces, Board board){ // White king left white rook.
         Piece rook = pieces[7][0];
         board.changePiecePosition(king, 2, 7);
         board.changePiecePosition(rook, 3, 7);
@@ -103,7 +111,7 @@ public class Castle {
      * @param pieces
      * @param board
      */
-    public void whiteKingShortCastle(Piece king, Piece[][] pieces,  Board board){ // White king right white rook.
+    public void whiteShortCastle(Piece king, Piece[][] pieces, Board board){ // White king right white rook.
         Piece rook = pieces[7][7];
         board.changePiecePosition(king, 6, 7);
         board.changePiecePosition(rook, 5, 7);
@@ -115,7 +123,7 @@ public class Castle {
      * @param pieces
      * @param board
      */
-    public void blackKingLongCastle (Piece king, Piece[][] pieces, Board board){ // Black king left black rook.
+    public void blackLongCastle(Piece king, Piece[][] pieces, Board board){ // Black king left black rook.
         Piece rook = pieces[0][0];
         board.changePiecePosition(king, 2, 0);
         board.changePiecePosition(rook, 3, 0);
@@ -127,7 +135,7 @@ public class Castle {
      * @param pieces
      * @param board
      */
-    public void blackKingShortCastle (Piece king, Piece[][] pieces, Board board){ // Black King Right Black Rook
+    public void blackShortCastle(Piece king, Piece[][] pieces, Board board){ // Black King Right Black Rook
         Piece rook = pieces[0][7];
         board.changePiecePosition(king, 6, 0);
         board.changePiecePosition(rook, 5, 0);
@@ -141,17 +149,12 @@ public class Castle {
      * @param king The white King
      * @return true if the space is not occupied between them.
      */
+
     public boolean preconditionsWhiteLongCastle(Piece[][] pieces, Piece king) { // White King Left Rook
         Piece rook = pieces[7][0];
-        if (king.isPlayerOne() && rook.isPlayerOne() && rook.getType().equals("Rook")
-                && !hasAnyMoved(king, rook)){
-            for (int row = 7; row < 8; row++) {
-                for (int col = 1; col < 4; col++) {
-                    if ((pieces[row][col]) == null) {
-                        return true;
-                    }
-                }
-            }
+        if (king.isPlayerOne() &&  rook != null && rook.isPlayerOne() && rook.getType().equals("Rook")
+                && !hasAnyMoved(king, rook) && !moveHandler.isPathBlocked(0,7, king, pieces)){
+            return true;
         }return false;
     }
 
@@ -162,17 +165,12 @@ public class Castle {
      * @param king The white King
      * @return true if the space is not occupied between them.
      */
+
     public boolean preconditionsWhiteShortCastle(Piece[][] pieces, Piece king){ // White King Right Rook
         Piece rook = pieces[7][7];
-        if(king.isPlayerOne() && rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
-                && !hasAnyMoved(king, rook)){
-            for (int row = 7; row < 8; row++) {
-                for (int col = 5; col < 7; col++) {
-                    if ((pieces[row][col]) == null){
-                        return true;
-                    }
-                }
-            }
+        if(king.isPlayerOne() && rook != null && rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
+                && !hasAnyMoved(king, rook) && !moveHandler.isPathBlocked(7, 7, king, pieces)){
+            return true;
         }return false;
     }
 
@@ -184,20 +182,13 @@ public class Castle {
      * @param king The black King
      * @return true if the space is not occupied between them.
      */
-    public boolean preconditionsBlackKingLongCastle(Piece[][] pieces, Piece king){ // White King Left Rook
+    public boolean preconditionsBlackLongCastle(Piece[][] pieces, Piece king){ // White King Left Rook
         Piece rook = pieces[0][0];
-        if(!king.isPlayerOne() && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
-                && !hasAnyMoved(king, rook)){
-            for (int row = 0; row < 1; row++) {
-                for (int col = 1; col < 4; col++) {
-                    if ((pieces[row][col]) == null){
-                        return true;
-                    }
-                }
-            }
+        if(!king.isPlayerOne() &&  rook != null && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
+                && !hasAnyMoved(king, rook) && !moveHandler.isPathBlocked(0, 0, king, pieces)){
+            return true;
         }return false;
     }
-
     /**
      * Method that makes sure that the space between the black King and the right black Rook is
      * free and not occupied and that the king and rook has not moved.
@@ -205,17 +196,11 @@ public class Castle {
      * @param king The black King
      * @return true if the space is not occupied between them.
      */
-    public boolean preconditionsBlackKingShortCastle(Piece[][] pieces, Piece king){ // Black King Right Rook
+    public boolean preconditionsBlackShortCastle(Piece[][] pieces, Piece king){ // Black King Right Rook
         Piece rook = pieces[0][7];
-        if(!king.isPlayerOne() && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
-                && !hasAnyMoved(king, rook)){
-            for (int row = 0; row < 1; row++) {
-                for (int col = 5; col < 7; col++) {
-                    if ((pieces[row][col]) == null){
-                        return true;
-                    }
-                }
-            }
+        if(!king.isPlayerOne() && rook != null && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
+                && !hasAnyMoved(king, rook) && !moveHandler.isPathBlocked(7, 0, king, pieces)){
+            return true;
         }return false;
     }
 
@@ -235,7 +220,7 @@ public class Castle {
         Tuple<Integer, Integer> tuple47 = new Tuple(4, 7);
 
         for (int i = 0; i < player.playerTwoListOfLegalMoves.size()-1; i++) {
-                if (player.playerTwoListOfLegalMoves.get(i) == tuple17 ||
+            if (player.playerTwoListOfLegalMoves.get(i) == tuple17 ||
                     player.playerTwoListOfLegalMoves.get(i) == tuple27 ||
                     player.playerTwoListOfLegalMoves.get(i) == tuple37 ||
                     player.playerTwoListOfLegalMoves.get(i) == tuple47){
@@ -261,7 +246,7 @@ public class Castle {
         Tuple<Integer, Integer> tuple67 = new Tuple(6, 7);
 
         for (int i = 0; i < player.playerTwoListOfLegalMoves.size()-1; i++) {
-                if (player.playerTwoListOfLegalMoves.get(i) == tuple47 ||
+            if (player.playerTwoListOfLegalMoves.get(i) == tuple47 ||
                     player.playerTwoListOfLegalMoves.get(i) == tuple57 ||
                     player.playerTwoListOfLegalMoves.get(i) == tuple67){
                 return true;
@@ -286,7 +271,7 @@ public class Castle {
         Tuple<Integer, Integer> tuple40 = new Tuple(4, 0);
 
         for (int i = 0; i < player.playerOneListOfLegalMoves.size()-1; i++) {
-                if (player.playerOneListOfLegalMoves.get(i) == tuple10 ||
+            if (player.playerOneListOfLegalMoves.get(i) == tuple10 ||
                     player.playerOneListOfLegalMoves.get(i) == tuple20 ||
                     player.playerOneListOfLegalMoves.get(i) == tuple30 ||
                     player.playerOneListOfLegalMoves.get(i) == tuple40){
@@ -311,7 +296,7 @@ public class Castle {
         Tuple<Integer, Integer> tuple60 = new Tuple(6, 0);
 
         for (int i = 0; i < player.playerOneListOfLegalMoves.size()-1; i++) {
-                 if(player.playerOneListOfLegalMoves.get(i) == tuple40 ||
+            if(player.playerOneListOfLegalMoves.get(i) == tuple40 ||
                     player.playerOneListOfLegalMoves.get(i) == tuple50 ||
                     player.playerOneListOfLegalMoves.get(i) == tuple60){
                 return true;
