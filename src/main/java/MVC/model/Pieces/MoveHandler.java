@@ -2,7 +2,7 @@ package MVC.model.Pieces;
 import MVC.model.Player;
 import MVC.model.Board;
 import MVC.model.SpecialMoves.Castle;
-import MVC.model.SpecialMoves.PawnCapture;
+import MVC.model.SpecialMoves.PawnMove;
 import MVC.model.Tuple;
 
 import java.util.Objects;
@@ -17,7 +17,7 @@ public class MoveHandler {
         this.board = board;
     }
     Castle castle = new Castle(this);
-    PawnCapture pawnCapture = new PawnCapture(this);
+    PawnMove pawnMove = new PawnMove(this);
 
     /**
      * @param newX the desired x position
@@ -129,13 +129,13 @@ public class MoveHandler {
         }
 
         else if(Objects.equals(piece.getType(), "Pawn") && piece.isPlayerOne() &&
-                pawnCapture.isPlayerOnePawnCapture(pieceLayout, piece, newX, newY) ){
-            pawnCapture.playerOnePawnCaptures(pieceLayout, piece, newX, newY, board); // White pawn captures an enemy piece
+                pawnMove.isPlayerOnePawnCapture(pieceLayout, piece, newX, newY) ){
+            pawnMove.playerOnePawnCaptures(pieceLayout, piece, newX, newY, board); // White pawn captures an enemy piece
         }
 
         else if(Objects.equals(piece.getType(), "Pawn") && !piece.isPlayerOne() &&
-                pawnCapture.isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY) ){
-            pawnCapture.playerTwoPawnCaptures(pieceLayout, piece, newX, newY, board); // Black pawn captures an enemy piece
+                pawnMove.isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY) ){
+            pawnMove.playerTwoPawnCaptures(pieceLayout, piece, newX, newY, board); // Black pawn captures an enemy piece
         }
 
         else if (isMoveAllowed(newX, newY, piece, pieceLayout)){

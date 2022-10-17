@@ -13,10 +13,10 @@ import MVC.model.Pieces.Piece;
  * Class of PawnCapture handles the behavior for when the pawn tries to capture enemy-pieces.
  */
 
-public class PawnCapture {
+public class PawnMove {
     MoveHandler moveHandler;
 
-    public PawnCapture(MoveHandler moveHandler){
+    public PawnMove(MoveHandler moveHandler){
         this.moveHandler = moveHandler;
     }
 
