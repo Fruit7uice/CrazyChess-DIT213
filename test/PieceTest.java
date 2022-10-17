@@ -21,7 +21,7 @@ public class PieceTest {
     Player player = new Player();
     Piece[][] pieceLayout = new Piece[8][8];
     Board board = new Board(pieceLayout);
-   MoveHandler moveHandler = new MoveHandler(board);
+    MoveHandler moveHandler = new MoveHandler(board);
 
     @Before
     public void setUp() {
@@ -50,11 +50,29 @@ public class PieceTest {
 
     @Test
     public void blackPawnMoveLegal() {
-        Piece[][] testLayout= new Piece[8][8];
         PieceFactory.isPlayerOne = false;
         Piece blackTestPawn = PieceFactory.createPawn(3,1);
-        assertTrue(moveHandler.isMoveAllowed(3,2,blackTestPawn,testLayout));
-        assertTrue(moveHandler.isMoveAllowed(3,3,blackTestPawn,testLayout));
+        assertTrue(moveHandler.isMoveAllowed(3,2,blackTestPawn,pieceLayout));
+        assertTrue(moveHandler.isMoveAllowed(3,3,blackTestPawn,pieceLayout));
+    }
+
+    @Test
+    public void blackPawnMoveIllegal() {
+        PieceFactory.isPlayerOne = false;
+        Piece blackTestPawn = PieceFactory.createPawn(3,1);
+        assertFalse(moveHandler.isMoveAllowed(2, 2, blackTestPawn, pieceLayout));
+        assertFalse(moveHandler.isMoveAllowed(4,2,blackTestPawn,pieceLayout));
+        assertFalse(moveHandler.isMoveAllowed(3,1,blackTestPawn,pieceLayout));
+
+    }
+
+    @Test
+    public void whitePawnMoveIllegal() {
+        PieceFactory.isPlayerOne = true;
+        Piece whiteTestPawn = PieceFactory.createPawn(3,6);
+        assertFalse(moveHandler.isMoveAllowed(2,5,whiteTestPawn,pieceLayout));
+        assertFalse(moveHandler.isMoveAllowed(4,5,whiteTestPawn,pieceLayout));
+        assertFalse(moveHandler.isMoveAllowed(3,6,whiteTestPawn,pieceLayout));
     }
 
 

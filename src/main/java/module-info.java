@@ -6,6 +6,7 @@ module MVC {
     exports MVC.view;
     exports MVC.model;
     exports MVC.model.Pieces;
+    exports MVC.model.SpecialMoves;
 
 
 }
