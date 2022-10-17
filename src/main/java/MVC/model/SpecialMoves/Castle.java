@@ -46,16 +46,16 @@ public class Castle {
     public void performCastle(Piece piece, int newX, int newY, Piece[][] pieces, Board board) {
         if (isCastleAllowed(piece, pieces)) {
             if (isWhiteLongCastle(newX, newY)) {
-                whiteKingLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
+                whiteLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
                 playerOneHasCastled = true;
             } else if (isWhiteShortCastle(newX, newY)) {
-                whiteKingShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
+                whiteShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
                 playerOneHasCastled = true;
             } else if (isBlackLongCastle(newX, newY)) {
-                blackKingLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
+                blackLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
                 playerTwoHasCastled = true;
             } else if (isBlackShortCastle(newX, newY)) {
-                blackKingShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
+                blackShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
                 playerTwoHasCastled = true;
             }
         }
@@ -87,9 +87,9 @@ public class Castle {
             return true;
         }else if(preconditionsWhiteShortCastle(pieces, king) && !pathCheckedWhiteShortCastle()){
             return true;
-        }else if(preconditionsBlackKingLongCastle(pieces, king) && !pathCheckedBlackLongCastle()){
+        }else if(preconditionsBlackLongCastle(pieces, king) && !pathCheckedBlackLongCastle()){
             return true;
-        }else return preconditionsBlackKingShortCastle(pieces, king) && !pathCheckedBlackShortCastle();
+        }else return preconditionsBlackShortCastle(pieces, king) && !pathCheckedBlackShortCastle();
     }
 
 
@@ -99,7 +99,7 @@ public class Castle {
      * @param pieces
      * @param board
      */
-    public void whiteKingLongCastle(Piece king, Piece[][] pieces, Board board){ // White king left white rook.
+    public void whiteLongCastle(Piece king, Piece[][] pieces, Board board){ // White king left white rook.
         Piece rook = pieces[7][0];
         board.changePiecePosition(king, 2, 7);
         board.changePiecePosition(rook, 3, 7);
@@ -111,7 +111,7 @@ public class Castle {
      * @param pieces
      * @param board
      */
-    public void whiteKingShortCastle(Piece king, Piece[][] pieces,  Board board){ // White king right white rook.
+    public void whiteShortCastle(Piece king, Piece[][] pieces, Board board){ // White king right white rook.
         Piece rook = pieces[7][7];
         board.changePiecePosition(king, 6, 7);
         board.changePiecePosition(rook, 5, 7);
@@ -123,7 +123,7 @@ public class Castle {
      * @param pieces
      * @param board
      */
-    public void blackKingLongCastle (Piece king, Piece[][] pieces, Board board){ // Black king left black rook.
+    public void blackLongCastle(Piece king, Piece[][] pieces, Board board){ // Black king left black rook.
         Piece rook = pieces[0][0];
         board.changePiecePosition(king, 2, 0);
         board.changePiecePosition(rook, 3, 0);
@@ -135,7 +135,7 @@ public class Castle {
      * @param pieces
      * @param board
      */
-    public void blackKingShortCastle (Piece king, Piece[][] pieces, Board board){ // Black King Right Black Rook
+    public void blackShortCastle(Piece king, Piece[][] pieces, Board board){ // Black King Right Black Rook
         Piece rook = pieces[0][7];
         board.changePiecePosition(king, 6, 0);
         board.changePiecePosition(rook, 5, 0);
@@ -182,7 +182,7 @@ public class Castle {
      * @param king The black King
      * @return true if the space is not occupied between them.
      */
-    public boolean preconditionsBlackKingLongCastle(Piece[][] pieces, Piece king){ // White King Left Rook
+    public boolean preconditionsBlackLongCastle(Piece[][] pieces, Piece king){ // White King Left Rook
         Piece rook = pieces[0][0];
         if(!king.isPlayerOne() &&  rook != null && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
                 && !hasAnyMoved(king, rook) && !moveHandler.isPathBlocked(0, 0, king, pieces)){
@@ -196,7 +196,7 @@ public class Castle {
      * @param king The black King
      * @return true if the space is not occupied between them.
      */
-    public boolean preconditionsBlackKingShortCastle(Piece[][] pieces, Piece king){ // Black King Right Rook
+    public boolean preconditionsBlackShortCastle(Piece[][] pieces, Piece king){ // Black King Right Rook
         Piece rook = pieces[0][7];
         if(!king.isPlayerOne() && rook != null && !rook.isPlayerOne() && Objects.equals(rook.getType(), "Rook")
                 && !hasAnyMoved(king, rook) && !moveHandler.isPathBlocked(7, 0, king, pieces)){
