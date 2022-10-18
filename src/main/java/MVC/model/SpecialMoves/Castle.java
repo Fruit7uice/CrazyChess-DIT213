@@ -26,7 +26,7 @@ public class Castle {
         this.moveHandler = moveHandler;
     }
 
-    Player player = new Player();
+    Player player = new Player(true);
 
 
 

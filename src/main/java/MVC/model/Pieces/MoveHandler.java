@@ -16,6 +16,7 @@ public class MoveHandler {
     public MoveHandler(Board board) {
         this.board = board;
     }
+    Player player = new Player(true);
     Castle castle = new Castle(this);
     PawnCapture pawnCapture = new PawnCapture(this);
 
@@ -28,8 +29,11 @@ public class MoveHandler {
      * @author Jeffrey Wolff
      */
     public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout){ // Allowed
-        //TODO add a check if king.IsInCheck() and if king is checkmate
-        return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
+        if(isKingCheck(player, pieceLayout)){
+            return false;
+        } else{
+            return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
+        }
     }
 
     /**
@@ -63,34 +67,13 @@ public class MoveHandler {
 
             } else { // tile is not occupied
                // System.out.println("Is not occupied");
-                if (isPathBlocked(newX, newY, piece, pieceLayout)){
-                    return false;
-                } else {
-                    return true;
-                }
+                return !isPathBlocked(newX, newY, piece, pieceLayout);
 
             }
         } else {
           //  System.out.println("Move Was Illegal");
             return false;
         }
-    }
-
-    /**
-     * Updates the pieces coordinates if is allowed to make the desired move
-     * @param newX the desired x position
-     * @param newY the desired y position
-     * @param piece Layout the board that contains the pieces
-     * @param piece the current piece we are working on
-     */
-    public void movePiece(int newX, int newY, Piece piece, Piece[][] pieceLayout){
-        if(isMoveAllowed(newX, newY, piece, pieceLayout)){ // updates the position if the move is legal
-            piece.xPos = newX;
-            piece.yPos = newY;
-            piece.listOfLegalMoves.clear();
-            createListOfLegalMoves(piece, pieceLayout);
-            piece.hasMoved = true; // The first time the piece moves, the boolean is going to get
-        }                          // switched to true.
     }
 
     /**
@@ -140,6 +123,10 @@ public class MoveHandler {
 
         else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
             board.changePiecePosition(piece, newX, newY);
+            piece.listOfLegalMoves.clear();
+            createListOfLegalMoves(piece, pieceLayout);
+            player.calcListOfLegalMovesPlayer(pieceLayout, this);
+            piece.hasMoved = true; // The first time the piece moves, the boolean is going to get
         }
     }
 
@@ -149,6 +136,7 @@ public class MoveHandler {
      * @param newY the desired y position
      * @param pieceLayout the board that contains the pieces
      * @return true if the position on the board is occupied
+     * @author Alva Johansson
      */
     public boolean isOccupied(int newX, int newY, Piece[][] pieceLayout){
         return (pieceLayout[newY][newX] != null);
@@ -170,6 +158,7 @@ public class MoveHandler {
      * updates the pieces list if legal moves
      * @param piece the current piece
      * @param pieceLayout the current board
+     * @author Alva Johansson
      */
     public void createListOfLegalMoves(Piece piece, Piece[][] pieceLayout){ //[[x,y], [x,y]...
         for (int y = 0; y < pieceLayout.length; y++) {
@@ -190,6 +179,7 @@ public class MoveHandler {
      * @param pieceLayout the pieceLayout that contains the pieces
      * @param piece the current piece we are working on
      * @return true if the path is blocked by any piece as long as the piece is not a knight
+     * @author Alva Johansson
      */
     public boolean isPathBlocked(int newX, int newY, Piece piece, Piece[][] pieceLayout){
         if(!piece.getType().equals("Knight")) {
@@ -215,6 +205,7 @@ public class MoveHandler {
      * @param piece the current piece
      * @param pieceLayout the current pieceLayout that holds the pieces
      * @return true if the current coordinates are not blocked
+     * @author Alva Johansson
      */
     public boolean pathBlockedHelperHorizontal(int newX, Piece piece, Piece[][] pieceLayout){
         int counter = 0;
@@ -248,6 +239,7 @@ public class MoveHandler {
      * @param piece the current piece
      * @param pieceLayout the current board that holds the pieces
      * @return true if the current coordinates are not blocked
+     * @author Alva Johansson
      */
     public boolean pathBlockedHelperVertical(int newY, Piece piece, Piece[][] pieceLayout){
         int counter = 0;
@@ -279,11 +271,12 @@ public class MoveHandler {
      * @param piece the current piece
      * @param pieceLayout the current board that holds the pieces
      * @return true if the current coordinates are not blocked
+     * @author Alva Johansson
      */
     public boolean pathBlockedHelperDiagonal(int newX, int newY, Piece piece, Piece[][] pieceLayout){
         int counter = 0;
         int deltaX = Math.abs(piece.xPos - newX);
-        int deltaY = Math.abs(piece.yPos - newY);
+        //int deltaY = Math.abs(piece.yPos - newY);
         if (piece.xPos > newX) { // Goes Left current x > new x doesn't matter if we compute the delta x or y since the change is equal (moved "backwards")
             if (piece.yPos > newY){ // Goes up
                 while (counter < deltaX) {
@@ -334,46 +327,74 @@ public class MoveHandler {
 
 
     /**
-     * @param player the player whose turn it is right now
-     * @param king the players king that we are checking if checked on
+     * param player the player whose turn it is right now
      * @param pieceLayout current placement of the pieces
      * @return true if the king is checked
+     * @author Alva Johansson
      */
-    public boolean isKingCheck(Player player, Piece king, Piece[][] pieceLayout){
-        player.calcListOfLegalMovesPlayer(pieceLayout, this); // creates the lists of legal moves
-        Tuple<Integer, Integer> tuple = new Tuple<>(king.xPos, king.yPos);
-        if(king.isPlayerOne()){
-            return player.playerTwoListOfLegalMoves.contains(tuple);
+    public boolean isKingCheck(Player player, Piece[][] pieceLayout){
+        Piece king = findPlayersKing(player, pieceLayout);
+        if(king != null){
+            player.calcListOfLegalMovesPlayer(pieceLayout, this); // creates the lists of legal moves
+            Tuple<Integer, Integer> tuple = new Tuple<>(king.xPos, king.yPos);
+            if(king.isPlayerOne()){
+                return player.playerTwoListOfLegalMoves.contains(tuple);
+            } else {
+                return player.playerOneListOfLegalMoves.contains(tuple);
+            }
         } else {
-            return player.playerOneListOfLegalMoves.contains(tuple);
+            return false;
         }
     }
 
     /**
      *
      * @param player the current player
-     * @param king the king we check
      * @param pieceLayout the current placement of pieces
      * @return true if king is checkmate
+     * @author Alva Johansson
      */
-    public boolean isKingCheckMate(Player player, Piece king, Piece[][] pieceLayout){
-        player.calcListOfLegalMovesPlayer(pieceLayout, this);
-        if(king.isPlayerOne()){
-           // System.out.println(player.playerTwoListOfLegalMoves);
-            //System.out.println("hgkgjfgfh"+ player.playerTwoListOfLegalMoves);
-            return player.playerTwoListOfLegalMoves.contains(checkPosAroundKing(player, king));
-            //[Pair[1,0]!!!, Pair[0,1]!!, Pair[1,1], Pair[1,0]!!, Pair[0,1], Pair[1,1]]
-        } else {
-           // System.out.println(player.playerOneListOfLegalMoves);
-            return player.playerOneListOfLegalMoves.contains(checkPosAroundKing(player, king));
+    public boolean isKingCheckMate(Player player, Piece[][] pieceLayout){
+        Piece king = findPlayersKing(player, pieceLayout);
+        if(king != null) {
+            player.calcListOfLegalMovesPlayer(pieceLayout, this);
+            if (king.isPlayerOne()) {
+                // System.out.println(player.playerTwoListOfLegalMoves);
+                //System.out.println(player.playerTwoListOfLegalMoves);
+                return player.playerTwoListOfLegalMoves.contains(checkPosAroundKing(player, king));
+                //[Pair[1,0]!!!, Pair[0,1]!!, Pair[1,1], Pair[1,0]!!, Pair[0,1], Pair[1,1]]
+            } else {
+                // System.out.println(player.playerOneListOfLegalMoves);
+                return player.playerOneListOfLegalMoves.contains(checkPosAroundKing(player, king));
+            }
+        }
+        else {
+            return false;
         }
     }
+    public Piece findPlayersKing(Player player, Piece[][] piecesLayout){
+        for (int y = 0; y < piecesLayout.length; y++){
+            for (int x = 0; x < piecesLayout[y].length; x++){
+                if(piecesLayout[y][x] != null) {
+                    Piece p = piecesLayout[y][x];
+                    System.out.println(p);
+                    if (p.getType().equals("King") && p.isPlayerOne() == player.isPlayerOne()) {
+                        System.out.println(p.isPlayerOne() + " " + p.getType());
+                        return p;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
 
     /**
      * checks if the "enemy" players list of legal moves contains any of the positions around the king
      * @param player the current player
      * @param king the current player
      * @return true if positions around the king is in the enemy players list of legal moves
+     * @author Alva Johansson
      */
     private boolean checkPosAroundKing(Player player, Piece king){
         if(king.isPlayerOne()){

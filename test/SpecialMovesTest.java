@@ -24,7 +24,7 @@ public class SpecialMovesTest {
     Piece[][] pieceLayout = new Piece[8][8];
     Board board = new Board(pieceLayout);
     MoveHandler moveHandler = new MoveHandler(board);
-    Castle castle = new Castle();
+    Castle castle/* = new Castle()*/;
 
     @Before
     public void setup(){
@@ -72,8 +72,8 @@ public class SpecialMovesTest {
 
     @Test
     public void castleAfterMoved(){
-        moveHandler.movePiece(5,7,whiteKing,pieceLayout);
-        moveHandler.movePiece(5,6, whiteKing, pieceLayout);
+        moveHandler.tryAndCheckMove(5,7,whiteKing,pieceLayout);
+        moveHandler.tryAndCheckMove(5,6, whiteKing, pieceLayout);
         assertFalse(castle.isCastleAllowed(whiteKing,pieceLayout));
     }
 

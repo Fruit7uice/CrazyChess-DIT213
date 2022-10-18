@@ -1,3 +1,4 @@
+import MVC.controller.MainBoard;
 import MVC.model.Board;
 import MVC.model.PieceFactory;
 import MVC.model.Pieces.*;
@@ -21,7 +22,8 @@ public class PieceTest {
     Piece rook;
     Piece whitePawn;
     Piece blackPawn;
-    Player player = new Player();
+    Player player = new Player(true);
+
     Piece[][] pieceLayout = new Piece[8][8];
     Board board = new Board(pieceLayout);
     MoveHandler moveHandler = new MoveHandler(board);
@@ -83,7 +85,7 @@ public class PieceTest {
     public void bishopMoveLegal() {
         assertTrue(moveHandler.isMoveAllowed(2, 2, bishop, pieceLayout));
     }
-    @Test
+  @Test
     public void bishopMoveIllegal() {
         assertFalse(moveHandler.isMoveAllowed(1, 2, bishop, pieceLayout));// upp
         assertFalse(moveHandler.isMoveAllowed(2, 1, bishop, pieceLayout));// right
@@ -104,14 +106,14 @@ public class PieceTest {
     }
     @Test
     public void bishopLegalMoveMadeUpdatePos(){
-        moveHandler.movePiece(0,2, bishop, pieceLayout);
+        moveHandler.tryAndCheckMove(0,2, bishop, pieceLayout);
         assertTrue(bishop.xPos == 0 && bishop.yPos == 2);
     }
     @Test
     public void bishopIllegalMoveMadeNotUpdatePos(){
         int startX = bishop.xPos;
         int startY = bishop.yPos;
-        moveHandler.movePiece(0,1, bishop, pieceLayout);
+        moveHandler.tryAndCheckMove(0,1, bishop, pieceLayout);
         assertTrue(bishop.xPos == startX && bishop.yPos == startY);
     }
     //-----------------Rook Tests---------------------------
@@ -143,14 +145,14 @@ public class PieceTest {
     }
     @Test
     public void rookLegalMoveMadeUpdatePos(){
-        moveHandler.movePiece(6,0, rook, pieceLayout);
+        moveHandler.tryAndCheckMove(6,0, rook, pieceLayout);
         assertTrue(rook.xPos == 6 && rook.yPos == 0);
     }
     @Test
     public void rookIllegalMoveMadeNotUpdatePos(){
         int startX = rook.xPos;
         int startY = rook.yPos;
-        moveHandler.movePiece(5,0, rook, pieceLayout);
+        moveHandler.tryAndCheckMove(5,0, rook, pieceLayout);
         assertTrue(rook.xPos == startX && rook.yPos == startY);
     }
     //------------------Queen Tests----------------------------
@@ -186,14 +188,14 @@ public class PieceTest {
     }
     @Test
     public void queenLegalMoveMadeUpdatePos(){
-        moveHandler.movePiece(7,6, queen, pieceLayout);
+        moveHandler.tryAndCheckMove(7,6, queen, pieceLayout);
         assertTrue(queen.xPos == 7 && queen.yPos == 6);
     }
     @Test
     public void queenIllegalMoveMadeNotUpdatePos(){
         int startX = queen.xPos;
         int startY = queen.yPos;
-        moveHandler.movePiece(7,4, queen, pieceLayout);
+        moveHandler.tryAndCheckMove(7,4, queen, pieceLayout);
         assertTrue(queen.xPos == startX && queen.yPos == startY);
     }
     //------------------Knight Tests----------------------------
@@ -226,14 +228,14 @@ public class PieceTest {
     }
     @Test
     public void knightLegalMoveMadeUpdatePos(){
-        moveHandler.movePiece(3,5, knight, pieceLayout);
+        moveHandler.tryAndCheckMove(3,5, knight, pieceLayout);
         assertTrue(knight.xPos == 3 && knight.yPos == 5);
     }
     @Test
     public void knightIllegalMoveMadeNotUpdatePos(){
         int startX = knight.xPos;
         int startY = knight.yPos;
-        moveHandler.movePiece(0,5, knight, pieceLayout);
+        moveHandler.tryAndCheckMove(0,5, knight, pieceLayout);
         assertTrue(knight.xPos == startX && knight.yPos == startY);
     }
     //-------------------Test king checked-------------------------
@@ -245,7 +247,7 @@ public class PieceTest {
         pieceLayout[0][5] = king;
         PieceFactory.isPlayerOne = false;
         pieceLayout[4][5] = PieceFactory.createQueen(5,4);
-        assertTrue(moveHandler.isKingCheck(player, king, pieceLayout));
+        assertTrue(moveHandler.isKingCheck(player, pieceLayout));
     }
     @Test
     public void kingIsNotChecked(){
@@ -253,7 +255,7 @@ public class PieceTest {
         king  = PieceFactory.createKing(5,0);
         pieceLayout[0][5] = king;
         pieceLayout[4][5] = PieceFactory.createQueen(5,4);
-        assertFalse(moveHandler.isKingCheck(player, king, pieceLayout));
+        assertFalse(moveHandler.isKingCheck(player, pieceLayout));
     }
 
     //-------------------Test king checkmate-------------------------
@@ -261,32 +263,55 @@ public class PieceTest {
     public void kingIsCheckmate(){
         pieceLayout = new Piece[8][8];
         PieceFactory.isPlayerOne = true;
-        king  = PieceFactory.createKing(0,0);
-        pieceLayout[0][0] = king;
+        king  = PieceFactory.createKing(4,7);
+        pieceLayout[7][4] = king;
         PieceFactory.isPlayerOne = false;
         pieceLayout[2][0] = PieceFactory.createRook(0,2);
         pieceLayout[2][2] = PieceFactory.createBishop(2,2);
         pieceLayout[0][7] = PieceFactory.createRook(7,0);
         //moveHandler.createListOfLegalMoves(king,pieceLayout);
-        player.calcListOfLegalMovesPlayer(pieceLayout, moveHandler);
-        List<Tuple<Integer, Integer>> tList = king.listOfLegalMoves;
-
-        System.out.println(player.playerOneListOfLegalMoves);
-        System.out.println(tList);
+        //player.calcListOfLegalMovesPlayer(pieceLayout, moveHandler);
+        //List<Tuple<Integer, Integer>> tList = king.listOfLegalMoves;
+        //System.out.println(player.playerOneListOfLegalMoves);
+        //System.out.println(tList);
         //assertTrue(tList.equals(player.playerOneListOfLegalMoves));
-        assertTrue(moveHandler.isKingCheckMate(player, king, pieceLayout));
+        assertFalse(moveHandler.isKingCheckMate(player, pieceLayout));
+
     }
-    /*@Test
+
+    void printMatrix(Piece[][] pieces){
+        System.out.println("\n {");
+        for (int i = 0; i < pieces.length; i++) {
+            System.out.print("{ ");
+            for (int j = 0; j < pieces[i].length; j++) {
+                if (pieces[i][j] != null){
+                    System.out.print(pieces[i][j].getType() + ", ");
+                }
+                else{
+                    System.out.print(pieces[i][j] + ", ");
+                }
+            }
+            System.out.print("} \n");
+        }
+        System.out.println("}");
+    }
+
+    @Test
     public void kingIsNotCheckmate(){
+        MainBoard mboard = new MainBoard();
         pieceLayout = new Piece[8][8];
         PieceFactory.isPlayerOne = true;
-        king  = PieceFactory.createKing(0,0);
+        Piece king  = PieceFactory.createKing(0,0);
         pieceLayout[0][0] = king;
         PieceFactory.isPlayerOne = false;
-        pieceLayout[2][2] = PieceFactory.createBishop(2,2);
-        pieceLayout[0][7] = PieceFactory.createRook(7,0);
-        assertFalse(moveHandler.isKingCheckMate(player, king, pieceLayout));
-    }*/
+        Piece bishop = PieceFactory.createBishop(2,2);
+        pieceLayout[2][2] = bishop;
+        Piece rook = PieceFactory.createRook(7,0);
+        pieceLayout[0][7] = rook;
+        System.out.println(king.isPlayerOne() + " " + bishop.isPlayerOne() + " " + rook.isPlayerOne());
+        printMatrix(pieceLayout);
+        assertFalse(moveHandler.isKingCheckMate(player, pieceLayout));
+    }
 
 }
 
