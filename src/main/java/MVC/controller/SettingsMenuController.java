@@ -1,5 +1,6 @@
 package MVC.controller;
 
+import MVC.view.MainBoard;
 import MVC.view.SettingsMenuGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -22,17 +23,16 @@ public class SettingsMenuController {
     }
 
 
-
-    public void restartGame(ActionEvent e){
-        System.out.println("restart");
-        //TODO make something happen
+    public void restartGame(ActionEvent e) throws Exception {
+        MainBoard game = new MainBoard();
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.close();
+        game.runAfterLaunch(stage);
     }
+
     public void closeSettingsMenu(ActionEvent e){
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-
         stage.setFullScreen(false);
-        stage.setMinWidth(815);
-        stage.setMinHeight(830);
         stage.setMaximized(true);
         stage.close();
         stage.setScene(SettingsMenuGUI.savedGame);

@@ -1,5 +1,5 @@
 package MVC.model.Pieces;
-import MVC.controller.MainBoard;
+import MVC.view.MainBoard;
 import MVC.model.Player;
 import MVC.model.Board;
 import MVC.model.SpecialMoves.Castle;

@@ -3,21 +3,19 @@ package MVC.controller;
 import MVC.model.Board;
 import MVC.model.Pieces.MoveHandler;
 import MVC.view.BoardGUI;
+import MVC.view.MainBoard;
 import MVC.view.SettingsMenuGUI;
 import MVC.view.WrapperPiece;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import static MVC.view.Tile.tileSize;
 
@@ -116,6 +114,7 @@ public class BoardController {
     public void settings(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
+        stage.centerOnScreen();
         Scene saved = stage.getScene();
         SettingsMenuGUI settings = new SettingsMenuGUI();
         settings.setSavedGame(saved);

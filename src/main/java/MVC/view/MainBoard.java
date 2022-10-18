@@ -1,5 +1,6 @@
-package MVC.controller;
+package MVC.view;
 
+import MVC.controller.BoardController;
 import MVC.model.Board;
 import MVC.model.Pieces.MoveHandler;
 import MVC.model.Pieces.Piece;
@@ -23,6 +24,8 @@ public class MainBoard extends Application {
     public static int WINDOW_WIDTH = 800;
     public static int WINDOW_HEIGHT = 800;
 
+    public static boolean isCrazy;
+
     Board board;
     BoardController controller;
     BoardGUI gui;
@@ -34,9 +37,15 @@ public class MainBoard extends Application {
 
     @Override
     public void init(){
-
+        Piece[][] pieceLayout;
         System.out.println("Start Matrix of Pieces: ");
-        Piece[][] pieceLayout = PieceLayoutFactory.createClassicLayout();
+        if(isCrazy){
+            pieceLayout = PieceLayoutFactory.createClassicLayout();
+        }
+        else{
+            pieceLayout = PieceLayoutFactory.createCrazyLayout();
+
+        }
 
         printMatrix(pieceLayout);
         this.boardPane = new Pane(); // Creates a new pane
