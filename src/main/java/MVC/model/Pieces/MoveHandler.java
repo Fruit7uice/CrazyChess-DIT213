@@ -120,6 +120,7 @@ public class MoveHandler {
     public void tryAndCheckMove(int newX, int newY, Piece piece, Piece[][] pieceLayout){
         int oldX = piece.xPos;
         int oldY = piece.yPos;
+
         int deltaX = Math.abs(piece.xPos - newX);
         if (piece.isPlayerOne() && deltaX == 2 && castle.isWhiteLongCastle(newX, newY) &&
                 Objects.equals(piece.getType(), "King")
@@ -161,18 +162,13 @@ public class MoveHandler {
                 movePiece(newX, newY, piece, pieceLayout);
         }
 
-        // if piece has moved, check for promotion and switch turn
-        if (newX != oldX & newY != oldY){ // Piece has moved
+        // if not (newX or newY is not equal to my piece current X or current Y)
+        if (!(newX != piece.xPos || newY != piece.yPos)){ // Piece has moved
             if (promotion.isPromotable(piece, newY)) {
-                System.out.println("is PROMOTABLE");
-                //board.changePiecePosition(piece, newX, newY);
-                //movePiece(newX, newY, piece, pieceLayout);
                 promotion.promote(piece);
             }
 
             //***** Switch turn *****
-        }else {
-
         }
 
     }
