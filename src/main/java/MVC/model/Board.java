@@ -64,4 +64,7 @@ public class Board implements Observable {
 
     }
 
+    public void placePieceAt(Piece p, int x, int y) {
+        this.pieceLayout[y][x] = p;
+    }
 }
