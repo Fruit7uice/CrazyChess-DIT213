@@ -20,10 +20,14 @@ public class MoveHandler {
     Board board;
     public MoveHandler(Board board) {
         this.board = board;
+        System.out.println();
+        this.promotion = new Promotion(board);
+        this.pawnCapture = new PawnCapture(this);
+        this.castle = new Castle(this);
     }
-    Castle castle = new Castle(this);
-    PawnCapture pawnCapture = new PawnCapture(this);
-    //Promotion promotion = new Promotion();
+    Castle castle;
+    PawnCapture pawnCapture;
+    Promotion promotion;
 
 
     /**
@@ -35,7 +39,7 @@ public class MoveHandler {
      * @author Jeffrey Wolff
      */
     public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout){ // Allowed
-
+        System.out.println("CHECKING IF MOVE IS ALLOWED");
         //TODO add a check if king.IsInCheck() and if king is checkmate.
         // NewX and NewY cannot be outside board.
         if (newX > MainBoard.WINDOW_WIDTH || newX < 0 || newY > MainBoard.WINDOW_HEIGHT || newY < 0)
@@ -62,7 +66,6 @@ public class MoveHandler {
                 if(Objects.equals(piece.getType(), "Pawn")){
                     return false;
                 }
-
                 if (isOccupiedByEnemy(newX, newY, piece, pieceLayout)) { //is the piece my enemy?
 
                     if(isPathBlocked(newX,newY,piece,pieceLayout)) {
@@ -101,8 +104,8 @@ public class MoveHandler {
      */
     public void movePiece(int newX, int newY, Piece piece, Piece[][] pieceLayout){
             piece.listOfLegalMoves.clear();
-            createListOfLegalMoves(piece, pieceLayout);
             board.changePiecePosition(piece, newX, newY);
+            createListOfLegalMoves(piece, pieceLayout);
     }
 
     /**
@@ -115,6 +118,8 @@ public class MoveHandler {
      * @author Jeffrey Wolff && Johannes Höher
      */
     public void tryAndCheckMove(int newX, int newY, Piece piece, Piece[][] pieceLayout){
+        int oldX = piece.xPos;
+        int oldY = piece.yPos;
         int deltaX = Math.abs(piece.xPos - newX);
         if (piece.isPlayerOne() && deltaX == 2 && castle.isWhiteLongCastle(newX, newY) &&
                 Objects.equals(piece.getType(), "King")
@@ -148,20 +153,30 @@ public class MoveHandler {
         else if(Objects.equals(piece.getType(), "Pawn") && !piece.isPlayerOne() &&
                 pawnCapture.isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY) ){
             pawnCapture.playerTwoPawnCaptures(pieceLayout, piece, newX, newY, board); // Black pawn captures an enemy piece
+
         }
 
         else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
-            movePiece(newX, newY, piece, pieceLayout);
-            //board.changePiecePosition(piece, newX, newY);
+                System.out.println("MOVE WAS ALLOWED");
+                movePiece(newX, newY, piece, pieceLayout);
         }
+
+        // if piece has moved, check for promotion and switch turn
+        if (newX != oldX & newY != oldY){ // Piece has moved
+            if (promotion.isPromotable(piece, newY)) {
+                System.out.println("is PROMOTABLE");
+                //board.changePiecePosition(piece, newX, newY);
+                //movePiece(newX, newY, piece, pieceLayout);
+                promotion.promote(piece);
+            }
+
+            //***** Switch turn *****
+        }else {
+
+        }
+
     }
 
-    public boolean promotionCheck(int newX, int newY, Piece p){
-        if ((p.isPlayerOne() && newY == 0 && Objects.equals(p.getType(), "Pawn"))
-            || (!p.isPlayerOne() && newY == 7 && Objects.equals(p.getType(), "Pawn"))) {
-            //promotion.promotion(p);
-        } return true;
-    }
 
 
     /**
