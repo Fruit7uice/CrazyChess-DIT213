@@ -23,6 +23,7 @@ public class MoveHandler {
     PawnCapture pawnCapture = new PawnCapture(this);
     //Promotion promotion = new Promotion();
 
+
     /**
      * @param newX the desired x position
      * @param newY the desired y position
@@ -48,8 +49,12 @@ public class MoveHandler {
     private boolean isMoveAllowedHelper(int newX, int newY, Piece piece, Piece[][] pieceLayout){
 
         if(piece.legalMove(newX, newY)){
-           // System.out.println("Move Was Legal");
-            if (isOccupied(newX, newY, pieceLayout)) { //is the tile not occupied
+
+            System.out.println("Move Was Legal");
+            if (isOccupied(newX, newY, pieceLayout)) {//is the tile not occupied
+                if(Objects.equals(piece.getType(), "Pawn")){
+                    return false;
+                }
 
                 if (isOccupiedByEnemy(newX, newY, piece, pieceLayout)) { //is the piece my enemy?
 
