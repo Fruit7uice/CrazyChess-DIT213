@@ -13,10 +13,10 @@ import MVC.model.Pieces.Piece;
  * Class of PawnCapture handles the behavior for when the pawn tries to capture enemy-pieces.
  */
 
-public class PawnMove {
+public class PawnCapture {
     MoveHandler moveHandler;
 
-    public PawnMove(MoveHandler moveHandler){
+    public PawnCapture(MoveHandler moveHandler){
         this.moveHandler = moveHandler;
     }
 
@@ -93,12 +93,6 @@ public class PawnMove {
 
 
 
-    public boolean isPawnIllegalVertical(Piece[][] pieceLayout, Piece piece, int newX, int newY){
-        if(moveHandler.isOccupied(newX, newY, pieceLayout)){
-            return true;
-        }
-        return false;
-    }
 
 
 

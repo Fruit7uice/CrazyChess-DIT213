@@ -2,7 +2,7 @@ package MVC.model.Pieces;
 import MVC.model.Player;
 import MVC.model.Board;
 import MVC.model.SpecialMoves.Castle;
-import MVC.model.SpecialMoves.PawnMove;
+import MVC.model.SpecialMoves.PawnCapture;
 import MVC.model.Tuple;
 
 import java.util.Objects;
@@ -17,7 +17,7 @@ public class MoveHandler {
         this.board = board;
     }
     Castle castle = new Castle(this);
-    PawnMove pawnMove = new PawnMove(this);
+    PawnCapture pawnCapture = new PawnCapture(this);
 
 
     /**
@@ -46,7 +46,11 @@ public class MoveHandler {
 
         if(piece.legalMove(newX, newY)){
             System.out.println("Move Was Legal");
-            if (isOccupied(newX, newY, pieceLayout)) { //is the tile not occupied
+            if (isOccupied(newX, newY, pieceLayout)) {//is the tile not occupied
+                if(Objects.equals(piece.getType(), "Pawn")){
+                    return false;
+                }
+
 
                 if (isOccupiedByEnemy(newX, newY, piece, pieceLayout)) { //is the piece my enemy?
 
@@ -130,22 +134,14 @@ public class MoveHandler {
         }
 
         else if(Objects.equals(piece.getType(), "Pawn") && piece.isPlayerOne() &&
-                pawnMove.isPlayerOnePawnCapture(pieceLayout, piece, newX, newY) ){
-            pawnMove.playerOnePawnCaptures(pieceLayout, piece, newX, newY, board); // White pawn captures an enemy piece
+                pawnCapture.isPlayerOnePawnCapture(pieceLayout, piece, newX, newY) ){
+            pawnCapture.playerOnePawnCaptures(pieceLayout, piece, newX, newY, board); // White pawn captures an enemy piece
         }
 
         else if(Objects.equals(piece.getType(), "Pawn") && !piece.isPlayerOne() &&
-                pawnMove.isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY) ){
-            pawnMove.playerTwoPawnCaptures(pieceLayout, piece, newX, newY, board); // Black pawn captures an enemy piece
+                pawnCapture.isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY) ){
+            pawnCapture.playerTwoPawnCaptures(pieceLayout, piece, newX, newY, board); // Black pawn captures an enemy piece
         }
-
-        else if(Objects.equals(piece.getType(), "Pawn") &&
-                pawnMove.isPawnIllegalVertical(pieceLayout, piece, newX, newY)){
-
-        }
-
-
-
 
         else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
             board.changePiecePosition(piece, newX, newY);
