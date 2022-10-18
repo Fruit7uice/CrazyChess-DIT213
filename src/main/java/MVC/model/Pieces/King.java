@@ -23,7 +23,6 @@ public class King extends Piece {
                 //makes sure the strategy allows us to move
                 if (HorizontalStrategy.move(xPos, yPos, newX, newY)
                         ^ VerticalStrategy.move(xPos, yPos, newX, newY) ^ DiagonalStrategy.move(xPos, yPos, newX, newY)){
-                    hasMoved = true;
                     return true;
                 }
             }

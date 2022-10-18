@@ -10,17 +10,17 @@ package MVC.model.strategies;
  */
 public class PawnStrategy implements IMoveStrategy {
 
-    public static boolean move(int startX, int startY, int endX, int endY, boolean hasMoved, boolean isPlayerOne) {
+    public static boolean move(int startX, int startY, int newX, int newY, boolean hasMoved, boolean isPlayerOne) {
         if (isPlayerOne){
             if (!hasMoved) {// not finished, move logic to another class.
-                return (endY - startY) == -2 || (endY - startY) == -1 && startX == endX;
-            } else return (endY - startY) == -1 && startX == endX;
+                return (newY - startY) == -2 || (newY - startY) == -1 && startX == newX;
+            } else return (newY - startY) == -1 && startX == newX;
         }
         else {
             if (!hasMoved) {// not finished, move logic to another class.
-                return (endY - startY) == 2 || (endY - startY) == 1
-                        && startX == endX;
-            } else return (endY - startY) == 1 && startX == endX;
+                return (newY - startY) == 2 || (newY - startY) == 1
+                        && startX == newX;
+            } else return (newY - startY) == 1 && startX == newX;
         }
     }
 }

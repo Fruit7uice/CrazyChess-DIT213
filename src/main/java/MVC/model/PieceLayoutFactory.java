@@ -4,12 +4,10 @@ import MVC.model.PieceFactory;
 import MVC.model.Pieces.Piece;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class PieceLayoutFactory {
 
-    static String[][] playerTwoLayout = {
-            {"Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook",},
-            {"Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn"}};
     static String[][] playerOneLayout = {
             {"Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn",},
             {"Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"}};
@@ -21,11 +19,27 @@ public class PieceLayoutFactory {
         pieceFactory = new PieceFactory();
     }
 
+    public static Piece[][] createClassicLayout() {
+        return createMatrixLayout(playerOneLayout, reverseLayout(playerOneLayout));
+    }
 
-    public static Piece[][] createMatrixLayout(){
+    public static Piece[][] createCrazyLayout() {
+        String[][] p1Layout = shufflePieceRow(playerOneLayout, 1);
+
+        return createMatrixLayout(p1Layout, reverseLayout(p1Layout));
+
+    }
+
+
+    /**
+     * Creates the Matrix which is later used to work on the game.
+     * Uses the CreatePieceList, so it can differentiate between where it should put the pieces in the matrix.
+     * @return A Matrix filled with Pieces.
+     */
+    private static Piece[][] createMatrixLayout(String[][] p1Layout, String[][] p2Layout){
         Piece[][] pieces = new Piece[8][8];
-        ArrayList<Piece> playerTwoPieces = CreatePieceList(playerTwoLayout, false);
-        ArrayList<Piece> playerOnePieces = CreatePieceList(playerOneLayout, true);
+        ArrayList<Piece> playerTwoPieces = CreatePieceList(p2Layout, false);
+        ArrayList<Piece> playerOnePieces = CreatePieceList(p1Layout, true);
         //System.out.println(playerOnePieces.get(6).getType() + " Position X: " + playerOnePieces.get(8).xPos + " and Y: " + playerOnePieces.get(8).yPos );
         int p1Index = 0;
         int p2Index = 0;
@@ -52,6 +66,12 @@ public class PieceLayoutFactory {
     }
 
 
+    /**
+     * Creates an ArrayList of Pieces with the attribute if it is player One or Two.
+     * @param layout The String Matrix containing the way we want to fill 2 Rows and 8 Columns with Pieces.
+     * @param isPlayerOne Boolean saying if the piece created belongs to player One or Two.
+     * @return ArrayList filled with the Pieces just created with its x and y positions.
+     */
     public static ArrayList<Piece> CreatePieceList(String[][] layout, boolean isPlayerOne){
         PieceFactory.isPlayerOne = isPlayerOne;
         ArrayList<Piece> newPieces = new ArrayList<>();
@@ -91,5 +111,31 @@ public class PieceLayoutFactory {
         }
         return newPieces;
     }
+    private static String[][] shufflePieceRow(String[][] pieces, int row) {
+        Random rd = new Random();
 
+        for (int i = pieces[row].length - 1; i > 0; i--) {
+            int index = rd.nextInt(i + 1);
+
+            String s = pieces[row][index];
+            pieces[row][index] = pieces[row][i];
+            pieces[row][i] = s;
+
+        }
+        System.out.println(pieces);
+        return pieces;
+    }
+
+
+    private static String[][] reverseLayout(String[][] layout){
+        int index = 0;
+        String[][] reversed = new String[layout.length][layout[0].length];
+        for(int i = (layout.length-1) ; i >= 0  ; i--){
+            for(int j = 0 ; j < layout[i].length ; j++){
+                reversed[i][j] = layout[index][j];
+            }
+            index++;
+        }
+        return reversed;
+    }
 }
