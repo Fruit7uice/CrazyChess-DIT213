@@ -317,11 +317,18 @@ public class MoveHandler {
         }
     }
 
+    /**
+     *
+     * @param player the current player
+     * @param king the king we check
+     * @param pieceLayout the current placement of pieces
+     * @return true if king is checkmate
+     */
     public boolean isKingCheckMate(Player player, Piece king, Piece[][] pieceLayout){
         player.calcListOfLegalMovesPlayer(pieceLayout, this);
         if(king.isPlayerOne()){
            // System.out.println(player.playerTwoListOfLegalMoves);
-            System.out.println("hgkgjfgfh"+ player.playerTwoListOfLegalMoves);
+            //System.out.println("hgkgjfgfh"+ player.playerTwoListOfLegalMoves);
             return player.playerTwoListOfLegalMoves.contains(checkPosAroundKing(player, king));
             //[Pair[1,0]!!!, Pair[0,1]!!, Pair[1,1], Pair[1,0]!!, Pair[0,1], Pair[1,1]]
         } else {
@@ -329,68 +336,135 @@ public class MoveHandler {
             return player.playerOneListOfLegalMoves.contains(checkPosAroundKing(player, king));
         }
     }
+
+    /**
+     * checks if the "enemy" players list of legal moves contains any of the positions around the king
+     * @param player the current player
+     * @param king the current player
+     * @return true if positions around the king is in the enemy players list of legal moves
+     */
     private boolean checkPosAroundKing(Player player, Piece king){
-        if(king.xPos == 0 && king.yPos == 0){
-
-            return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)); // right up
-        } else if(king.xPos == 7 && king.yPos == 0){
-            return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)); // left up
-        } else if (king.xPos == 0 && king.yPos == 7) {
-            return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)); // right down
-        } else if(king.xPos == 7 && king.yPos == 7){
-            return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
-        } else if(king.xPos == 0){
-            return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right upp
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)); // right down
-        } else if(king.xPos == 7){
-            return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)) // left upp
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
-        } else if (king.yPos == 0) {
-            return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right up
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)); // left up
-        } else if(king.yPos == 7){
-            return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)) // right down
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
+        if(king.isPlayerOne()){
+            if(king.xPos == 0 && king.yPos == 0){
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)); // right up
+            } else if(king.xPos == 7 && king.yPos == 0){
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)); // left up
+            } else if (king.xPos == 0 && king.yPos == 7) {
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)); // right down
+            } else if(king.xPos == 7 && king.yPos == 7){
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
+            } else if(king.xPos == 0){
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right upp
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)); // right down
+            } else if(king.xPos == 7){
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)) // left upp
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
+            } else if (king.yPos == 0) {
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right up
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)); // left up
+            } else if(king.yPos == 7){
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)) // right down
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
+            } else{
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right upp
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)) // left upp
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)) // right down
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
+            }
         } else{
-            return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right upp
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)) // left upp
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)) // right down
-                    && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
+            if(king.xPos == 0 && king.yPos == 0){
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)); // right up
+            } else if(king.xPos == 7 && king.yPos == 0){
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)); // left up
+            } else if (king.xPos == 0 && king.yPos == 7) {
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)); // right down
+            } else if(king.xPos == 7 && king.yPos == 7){
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
+            } else if(king.xPos == 0){
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right upp
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)); // right down
+            } else if(king.xPos == 7){
+                return player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)) // left upp
+                        && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
+            } else if (king.yPos == 0) {
+                return player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right up
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)); // left up
+            } else if(king.yPos == 7){
+                return player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)) // right down
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
+            } else{
+                return player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right upp
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)) // left upp
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)) // right down
+                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
+            }
         }
-
     }
 
 
