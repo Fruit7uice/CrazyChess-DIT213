@@ -3,9 +3,12 @@ import MVC.model.PieceFactory;
 import MVC.model.Pieces.*;
 
 import MVC.model.Player;
+import MVC.model.Tuple;
 import org.junit.Before;
 import org.junit.Test;
 
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -218,16 +221,32 @@ public class PieceTest {
     public void kingIsCheckmate(){
         pieceLayout = new Piece[8][8];
         PieceFactory.isPlayerOne = true;
-        king  = PieceFactory.createKing(5,0);
-        pieceLayout[0][5] = king;
+        king  = PieceFactory.createKing(0,0);
+        pieceLayout[0][0] = king;
         PieceFactory.isPlayerOne = false;
-        pieceLayout[4][5] = PieceFactory.createRook(5,4);
-        pieceLayout[2][3] = PieceFactory.createBishop(3,2);
-        pieceLayout[0][1] = PieceFactory.createRook(1,0);
-        pieceLayout[2][7] = PieceFactory.createBishop(7,2);
+        pieceLayout[2][0] = PieceFactory.createRook(0,2);
+        pieceLayout[2][2] = PieceFactory.createBishop(2,2);
         pieceLayout[0][7] = PieceFactory.createRook(7,0);
-            assertTrue(moveHandler.isKingCheckMate(player, king, pieceLayout));
+        //moveHandler.createListOfLegalMoves(king,pieceLayout);
+        player.calcListOfLegalMovesPlayer(pieceLayout, moveHandler);
+        List<Tuple<Integer, Integer>> tList = king.listOfLegalMoves;
+
+        System.out.println(player.playerOneListOfLegalMoves);
+        System.out.println(tList);
+        //assertTrue(tList.equals(player.playerOneListOfLegalMoves));
+        assertTrue(moveHandler.isKingCheckMate(player, king, pieceLayout));
     }
+    /*@Test
+    public void kingIsNotCheckmate(){
+        pieceLayout = new Piece[8][8];
+        PieceFactory.isPlayerOne = true;
+        king  = PieceFactory.createKing(0,0);
+        pieceLayout[0][0] = king;
+        PieceFactory.isPlayerOne = false;
+        pieceLayout[2][2] = PieceFactory.createBishop(2,2);
+        pieceLayout[0][7] = PieceFactory.createRook(7,0);
+        assertFalse(moveHandler.isKingCheckMate(player, king, pieceLayout));
+    }*/
 
 }
 
