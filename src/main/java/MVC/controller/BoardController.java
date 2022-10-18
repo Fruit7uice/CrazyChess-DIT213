@@ -3,11 +3,15 @@ package MVC.controller;
 import MVC.model.Board;
 import MVC.model.Pieces.MoveHandler;
 import MVC.view.BoardGUI;
+import MVC.view.SettingsMenuGUI;
 import MVC.view.WrapperPiece;
+import javafx.event.ActionEvent;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import static MVC.view.Tile.tileSize;
 
@@ -92,8 +96,8 @@ public class BoardController {
      * @param piece is the WrapperPiece used to represent the logical Piece
      */
     public void released(MouseEvent event, WrapperPiece piece){
-        int newX = (int) Math.floor(event.getX() / tileSize); // Index x
-        int newY = (int) Math.floor(event.getY() / tileSize); // Index y
+        int newX = (int) Math.floor(calculateNewX(event.getX()) / tileSize); // Index x
+        int newY = (int) calculateNewX(Math.floor(event.getY()) / tileSize); // Index y
         if(onDrag){
             onDrag = false;
             moveHandler.tryAndCheckMove(newX, newY, piece.getRefPiece(), board.pieceLayout);
@@ -103,6 +107,14 @@ public class BoardController {
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
     }
 
+    public void settings(ActionEvent e){
+        SettingsMenuGUI settings = new SettingsMenuGUI();
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.close();
+        stage.setFullScreen(false);
+        settings.start(stage);
+    }
 
 
 
