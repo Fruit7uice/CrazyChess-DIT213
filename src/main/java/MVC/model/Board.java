@@ -44,6 +44,12 @@ public class Board implements Observable {
             notifyAllObservers();
             //updateListOfLegalMoves();
     }
+
+    public void placePieceAt(Piece p, int x, int y) {
+        this.pieceLayout[y][x] = p;
+    }
+
+
     @Override
     public void addObserver(Observer o) {
         observers.add(o);

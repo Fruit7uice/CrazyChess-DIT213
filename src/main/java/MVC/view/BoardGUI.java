@@ -64,8 +64,6 @@ public class BoardGUI implements Observer {
 
     public void drawWrapperAfterIndex(WrapperPiece piece, Color color, Color stroke) {
         String path = piece.getRefPiece().getImagePath();
-        //System.out.println(getClass().getResource(path));
-        //System.out.println(path);
         if(path != "pathOne"){
             String realPath = String.valueOf(getClass().getResource(path));
             Image img = new Image(realPath);
