@@ -19,6 +19,7 @@ public class MoveHandler {
     Castle castle = new Castle(this);
     PawnMove pawnMove = new PawnMove(this);
 
+
     /**
      * @param newX the desired x position
      * @param newY the desired y position
@@ -137,6 +138,14 @@ public class MoveHandler {
                 pawnMove.isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY) ){
             pawnMove.playerTwoPawnCaptures(pieceLayout, piece, newX, newY, board); // Black pawn captures an enemy piece
         }
+
+        else if(Objects.equals(piece.getType(), "Pawn") &&
+                pawnMove.isPawnIllegalVertical(pieceLayout, piece, newX, newY)){
+
+        }
+
+
+
 
         else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
             board.changePiecePosition(piece, newX, newY);

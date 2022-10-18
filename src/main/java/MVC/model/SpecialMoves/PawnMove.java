@@ -31,7 +31,7 @@ public class PawnMove {
 
 
 
-    public boolean isPlayerOnePawnCapture(Piece[][] pieceLayout, Piece piece,int newX, int newY){
+    public boolean isPlayerOnePawnCapture(Piece[][] pieceLayout, Piece piece, int newX, int newY){
         int deltaX = Math.abs(newX - piece.xPos);
         int deltaY = newY - piece.yPos;
         return ((piece.isPlayerOne()) && (deltaX == 1) && (deltaY == -1) && moveHandler.isOccupied(newX, newY, pieceLayout) &&
@@ -86,10 +86,26 @@ public class PawnMove {
 
     public void playerTwoPawnCaptures(Piece[][] pieceLayout, Piece piece, int newX, int newY, Board board){
         if (isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY)) {
-            System.out.println(" Player two tries to capture");
             board.changePiecePosition(piece, newX, newY);
         }
     }
+
+
+
+
+    public boolean isPawnIllegalVertical(Piece[][] pieceLayout, Piece piece, int newX, int newY){
+        if(moveHandler.isOccupied(newX, newY, pieceLayout)){
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+
+
+
 
 
 
