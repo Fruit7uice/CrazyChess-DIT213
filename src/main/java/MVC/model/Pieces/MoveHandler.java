@@ -1,4 +1,6 @@
 package MVC.model.Pieces;
+
+import MVC.view.MainBoard;
 import MVC.model.PieceFactory;
 import MVC.model.Player;
 import MVC.model.Board;
@@ -33,8 +35,13 @@ public class MoveHandler {
      * @author Jeffrey Wolff
      */
     public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout){ // Allowed
-        //TODO add a check if king.IsInCheck() and if king is checkmate
-        return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
+
+        //TODO add a check if king.IsInCheck() and if king is checkmate.
+        // NewX and NewY cannot be outside board.
+        if (newX > MainBoard.WINDOW_WIDTH || newX < 0 || newY > MainBoard.WINDOW_HEIGHT || newY < 0)
+            return false;
+        else return isMoveAllowedHelper(newX, newY, piece, pieceLayout);
+
     }
 
     /**
@@ -93,13 +100,9 @@ public class MoveHandler {
      * @param piece the current piece we are working on
      */
     public void movePiece(int newX, int newY, Piece piece, Piece[][] pieceLayout){
-        if(isMoveAllowed(newX, newY, piece, pieceLayout)){ // updates the position if the move is legal
-            piece.xPos = newX;
-            piece.yPos = newY;
             piece.listOfLegalMoves.clear();
             createListOfLegalMoves(piece, pieceLayout);
-            piece.hasMoved = true; // The first time the piece moves, the boolean is going to get
-        }                          // switched to true.
+            board.changePiecePosition(piece, newX, newY);
     }
 
     /**
@@ -148,7 +151,8 @@ public class MoveHandler {
         }
 
         else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
-            board.changePiecePosition(piece, newX, newY);
+            movePiece(newX, newY, piece, pieceLayout);
+            //board.changePiecePosition(piece, newX, newY);
         }
     }
 
@@ -193,8 +197,6 @@ public class MoveHandler {
                 if(isMoveAllowed(x, y, piece, pieceLayout)) {
                     Tuple<Integer, Integer> tuple = new Tuple(x, y);
                     piece.listOfLegalMoves.add(tuple);
-                } else{
-                    //don't add to matrix
                 }
             }
         }
