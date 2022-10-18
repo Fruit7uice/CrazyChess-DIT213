@@ -1,6 +1,8 @@
 package MVC.model.SpecialMoves;
 
 import MVC.model.Board;
+import MVC.model.Observable;
+import MVC.model.Observer;
 import MVC.model.PieceFactory;
 import MVC.model.Pieces.*;
 import java.util.Objects;
@@ -11,7 +13,7 @@ import java.util.Objects;
  * to a more powerful piece
  * @author Joel Leiditz Thorsson
  */
-public class Promotion {
+public class Promotion implements Observable {
     public Board board;
 
     /**
@@ -82,4 +84,18 @@ public class Promotion {
         return true;
     }
 
+    @Override
+    public void addObserver(Observer o) {
+
+    }
+
+    @Override
+    public void notify(Observer observer) {
+
+    }
+
+    @Override
+    public void notifyAllObservers() {
+
+    }
 }

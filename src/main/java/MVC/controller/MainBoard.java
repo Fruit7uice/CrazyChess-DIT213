@@ -26,7 +26,7 @@ public class MainBoard extends Application {
     @Override
     public void init(){
 
-        Piece[][] pieceLayout = PieceLayoutFactory.createMatrixLayout();
+        Piece[][] pieceLayout = PieceLayoutFactory.createClassicLayout();
         printMatrix(pieceLayout);
         this.boardPane = new Pane(); // Creates a new pane
         this.gui = new BoardGUI(boardPane);
