@@ -5,6 +5,7 @@ import MVC.model.Observable;
 import MVC.model.Observer;
 import MVC.model.PieceFactory;
 import MVC.model.Pieces.*;
+
 import java.util.Objects;
 
 /**
@@ -15,38 +16,55 @@ import java.util.Objects;
  */
 public class Promotion implements Observable {
     public Board board;
+    private Piece[][] pieceLayout;
+
+    public Promotion(Board board) {
+        this.board = board;
+    }
+
+    public boolean isPromotable(Piece p, int newX, int newY){
+        if ((p.isPlayerOne() && newY == 0 && Objects.equals(p.getType(), "Pawn"))
+                || (!p.isPlayerOne() && newY == 7 && Objects.equals(p.getType(), "Pawn"))) {
+            return true;
+        }
+        else return false;
+    }
 
     /**
      * Checks if the piece can promote.
      * @param p The current piece that tries to promote
      * @return true if statement holds.
      */
-    public boolean tryPromotion (Piece p) {
-        return (p.yPos == 0 || p.yPos == 7) && Objects.equals(p.getType(), "Pawn");
-    }
+  //  public boolean isPromotoinAvailable (Piece p) {
+  //      return (p.yPos == 0 || p.yPos == 7) && Objects.equals(p.getType(), "Pawn");
+  //  }
 
     /**
      * Checks if a pawn can promote, depending on what button the client uses
      * a new piece will be created in the pawn's position.
      * @param p The current piece that tries promotion. Must be a pawn.
      */
-    public void promotion(Piece p) {
-        if(tryPromotion(p)) {
+    public void promote(Piece p, Board board) {
+        if (board != null) {
             if (queenChoice()) {
-                PieceFactory.createQueen(p.xPos, p.yPos);
-                //board.updateGameLayout(p, p.xPos, p.yPos);
-            } else if (bishopChoice()){
-                PieceFactory.createBishop(p.xPos, p.yPos);
-                //board.updateGameLayout(p, p.xPos, p.yPos);
+                Piece queen = PieceFactory.createQueen(p.xPos, p.yPos);
+                // Psuedokod
+                // update boards piece layout and put newly created piece at the right place.
+                board.placePieceAt(queen, p.xPos,p.yPos);
+
+            } else if (bishopChoice()) {
+                Piece bishop = PieceFactory.createBishop(p.xPos, p.yPos);
+                board.placePieceAt(bishop, p.xPos,p.yPos);
             } else if (knightChoice()) {
-                PieceFactory.createKnight(p.xPos,p.yPos);
-                //board.updateGameLayout(p, p.xPos, p.yPos);
+                Piece knight = PieceFactory.createKnight(p.xPos, p.yPos);
+                board.placePieceAt(knight, p.xPos,p.yPos);
             } else if (rookChoice()) {
-                PieceFactory.createRook(p.xPos,p.yPos);
-                //board.updateGameLayout(p, p.xPos, p.yPos);
+                Piece rook = PieceFactory.createRook(p.xPos, p.yPos);
+                board.placePieceAt(rook, p.xPos,p.yPos);
             }
         }
     }
+
 
     /**
      * The client chose queen and this method is run.

@@ -1,12 +1,10 @@
 package MVC.model.Pieces;
-import MVC.model.PieceFactory;
 import MVC.model.Player;
 import MVC.model.Board;
 import MVC.model.SpecialMoves.Castle;
 import MVC.model.SpecialMoves.PawnCapture;
 import MVC.model.SpecialMoves.Promotion;
 import MVC.model.Tuple;
-import MVC.view.PromotionView;
 
 import java.util.Objects;
 
@@ -18,10 +16,11 @@ public class MoveHandler {
     Board board;
     public MoveHandler(Board board) {
         this.board = board;
+        this.promotion = new Promotion(board);
     }
     Castle castle = new Castle(this);
     PawnCapture pawnCapture = new PawnCapture(this);
-    //Promotion promotion = new Promotion();
+    Promotion promotion;
 
     /**
      * @param newX the desired x position
@@ -141,18 +140,15 @@ public class MoveHandler {
                 pawnCapture.isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY) ){
             pawnCapture.playerTwoPawnCaptures(pieceLayout, piece, newX, newY, board); // Black pawn captures an enemy piece
         }
-
-        else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
+        else if (Objects.equals(piece.getType(), "Pawn") && promotion.isPromotable(piece, newX, newY)){
             board.changePiecePosition(piece, newX, newY);
+            promotion.promote(piece, board);
+        }
+        else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
         }
     }
 
-    public boolean promotionCheck(int newX, int newY, Piece p){
-        if ((p.isPlayerOne() && newY == 0 && Objects.equals(p.getType(), "Pawn"))
-            || (!p.isPlayerOne() && newY == 7 && Objects.equals(p.getType(), "Pawn"))) {
-            //promotion.promotion(p);
-        } return true;
-    }
+
 
 
     /**
