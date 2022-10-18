@@ -1,10 +1,14 @@
 package MVC.model.Pieces;
+
 import MVC.view.MainBoard;
+import MVC.model.PieceFactory;
 import MVC.model.Player;
 import MVC.model.Board;
 import MVC.model.SpecialMoves.Castle;
 import MVC.model.SpecialMoves.PawnCapture;
+import MVC.model.SpecialMoves.Promotion;
 import MVC.model.Tuple;
+import MVC.view.PromotionView;
 
 import java.util.Objects;
 
@@ -19,6 +23,8 @@ public class MoveHandler {
     }
     Castle castle = new Castle(this);
     PawnCapture pawnCapture = new PawnCapture(this);
+    //Promotion promotion = new Promotion();
+
 
     /**
      * @param newX the desired x position
@@ -50,8 +56,12 @@ public class MoveHandler {
     private boolean isMoveAllowedHelper(int newX, int newY, Piece piece, Piece[][] pieceLayout){
 
         if(piece.legalMove(newX, newY)){
-           // System.out.println("Move Was Legal");
-            if (isOccupied(newX, newY, pieceLayout)) { //is the tile not occupied
+
+            System.out.println("Move Was Legal");
+            if (isOccupied(newX, newY, pieceLayout)) {//is the tile not occupied
+                if(Objects.equals(piece.getType(), "Pawn")){
+                    return false;
+                }
 
                 if (isOccupiedByEnemy(newX, newY, piece, pieceLayout)) { //is the piece my enemy?
 
@@ -144,6 +154,13 @@ public class MoveHandler {
             movePiece(newX, newY, piece, pieceLayout);
             //board.changePiecePosition(piece, newX, newY);
         }
+    }
+
+    public boolean promotionCheck(int newX, int newY, Piece p){
+        if ((p.isPlayerOne() && newY == 0 && Objects.equals(p.getType(), "Pawn"))
+            || (!p.isPlayerOne() && newY == 7 && Objects.equals(p.getType(), "Pawn"))) {
+            //promotion.promotion(p);
+        } return true;
     }
 
 
