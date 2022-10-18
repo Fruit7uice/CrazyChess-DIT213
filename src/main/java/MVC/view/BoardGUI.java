@@ -3,15 +3,15 @@ package MVC.view;
 import MVC.controller.BoardController;
 import MVC.model.Observer;
 import MVC.model.Pieces.Piece;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.IOException;
 import java.util.Objects;
 
 import static MVC.view.Tile.tileSize;
@@ -33,12 +33,12 @@ public class BoardGUI implements Observer {
         this.appPane = appPane;
         initBoardTiles(); //Creates the board grid
         addTilesToPane(boardTiles); // adds the grid as a group to a pane
-        drawBoard(); // Draws the board
+        drawTiles(); // Draws the board
     }
     public BoardGUI() {
     }
 
-    public void drawBoard() {
+    public void drawTiles() {
         System.out.println("Drawing board...");
         for (int i = 0; i < boardTiles.length; i++) {
             for (int j = 0; j < boardTiles[i].length; j++) {
@@ -103,10 +103,6 @@ public class BoardGUI implements Observer {
         piece.setHeight(piece.getHeight());
         piece.setX(x);
         piece.setY(y);
-
-        //System.out.println("Draws piece at coords: X" + x + " and Y" + y);
-
-
     }
 
     /**
@@ -184,6 +180,10 @@ public class BoardGUI implements Observer {
                 }
             }
         }
+    }
+
+    private void drawSettings() throws IOException {
+
     }
 
     /**

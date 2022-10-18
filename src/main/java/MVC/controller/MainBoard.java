@@ -17,6 +17,8 @@ import javafx.scene.layout.*;
 
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class MainBoard extends Application {
     public static int WINDOW_WIDTH = 800;
     public static int WINDOW_HEIGHT = 800;
@@ -61,7 +63,13 @@ public class MainBoard extends Application {
 
         // Create Button and initialize it
         Button settingsBtn = new Button();
-        settingsBtn.setOnAction(event -> controller.settings(event));
+        settingsBtn.setOnAction(event -> {
+            try {
+                controller.settings(event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         settingsBtn.setMinWidth(75);
         settingsBtn.setMinHeight(75);
         // Setting Settings button background
@@ -79,10 +87,7 @@ public class MainBoard extends Application {
 
         // Window Settings
         stage.setFullScreen(false);
-        stage.setMinWidth(815);
-        stage.setMinHeight(830);
         stage.setMaximized(true);
-
         stage.setScene(scene);
         stage.show();
     }
@@ -100,7 +105,6 @@ public class MainBoard extends Application {
     }
 
     private void setSettingsBtnBackground(Button settingsBtn, String path) {
-
         Image bgImage = new Image(String.valueOf(getClass().getResource(path)));
         BackgroundImage backgroundImage = new BackgroundImage(
                 bgImage,

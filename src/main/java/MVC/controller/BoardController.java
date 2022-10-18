@@ -6,12 +6,18 @@ import MVC.view.BoardGUI;
 import MVC.view.SettingsMenuGUI;
 import MVC.view.WrapperPiece;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Objects;
 
 import static MVC.view.Tile.tileSize;
 
@@ -107,12 +113,12 @@ public class BoardController {
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
     }
 
-    public void settings(ActionEvent e){
-        SettingsMenuGUI settings = new SettingsMenuGUI();
-
+    public void settings(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        stage.close();
-        stage.setFullScreen(false);
+
+        Scene saved = stage.getScene();
+        SettingsMenuGUI settings = new SettingsMenuGUI();
+        settings.setSavedGame(saved);
         settings.start(stage);
     }
 
