@@ -118,8 +118,6 @@ public class MoveHandler {
      * @author Jeffrey Wolff && Johannes Höher
      */
     public void tryAndCheckMove(int newX, int newY, Piece piece, Piece[][] pieceLayout){
-        int oldX = piece.xPos;
-        int oldY = piece.yPos;
 
         int deltaX = Math.abs(piece.xPos - newX);
         if (piece.isPlayerOne() && deltaX == 2 && castle.isWhiteLongCastle(newX, newY) &&
