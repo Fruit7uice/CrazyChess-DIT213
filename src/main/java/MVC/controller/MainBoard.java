@@ -10,6 +10,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -31,8 +32,10 @@ public class MainBoard extends Application {
 
     @Override
     public void init(){
-        Piece[][] pieceLayout = PieceLayoutFactory.createMatrixLayout();
+
         System.out.println("Start Matrix of Pieces: ");
+        Piece[][] pieceLayout = PieceLayoutFactory.createClassicLayout();
+
         printMatrix(pieceLayout);
         this.boardPane = new Pane(); // Creates a new pane
         this.gui = new BoardGUI(boardPane);
@@ -46,26 +49,33 @@ public class MainBoard extends Application {
     public void start(Stage stage) throws Exception {
         board.notifyAllObservers(); // Notify observers and update their state, which in return notifies gui.
         stage.setTitle("CrazyChess");
-        GridPane container = new GridPane();
 
-        container.getChildren().add(boardPane);
-        container.setAlignment(Pos.CENTER);
-        GridPane.setHalignment(boardPane, HPos.CENTER);
-        GridPane.setValignment(boardPane, VPos.CENTER);
-        container.setPrefSize(800, 800);
-        Scene scene = new Scene(container);
+        BorderPane bigContainer = new BorderPane(); // Keeping all object in a layout
+        //bigContainer.setMinSize(stage.getMinWidth(), stage.getMinHeight());
 
-        //Setting background
-        String path = "/images/background.jpeg";
-        Image bgImage = new Image(String.valueOf(getClass().getResource(path)));
-        BackgroundImage backgroundImage = new BackgroundImage(
-                                            bgImage,
-                                            BackgroundRepeat.NO_REPEAT,
-                                            BackgroundRepeat.NO_REPEAT,
-                                            BackgroundPosition.CENTER,
-                                            new BackgroundSize(1.0, 1.0, true, true, false, false));
-        Background bGround = new Background(backgroundImage);
-        container.setBackground(bGround);
+        // Create and Align Pane
+        GridPane boardContainer = new GridPane(); // keeps board pane
+        boardContainer.setAlignment(Pos.CENTER);
+        // Add board to StackPane
+        boardContainer.getChildren().add(boardPane);
+
+        // Create Button and initialize it
+        Button settingsBtn = new Button();
+        settingsBtn.setOnAction(event -> controller.settings(event));
+        settingsBtn.setMinWidth(75);
+        settingsBtn.setMinHeight(75);
+        // Setting Settings button background
+        setSettingsBtnBackground(settingsBtn, "/images/SettingsGearWhite.png");
+
+        // Add stuff to big Container
+        bigContainer.setCenter(boardContainer);
+        bigContainer.setRight(settingsBtn);
+
+        bigContainer.setPrefSize(800, 800);
+        Scene scene = new Scene(bigContainer);
+
+        //Setting chess background
+        setPaneBackground(bigContainer, "/images/background.jpeg");
 
         // Window Settings
         stage.setFullScreen(false);
@@ -77,26 +87,29 @@ public class MainBoard extends Application {
         stage.show();
     }
 
-    private VBox createNumbers() {
-        VBox container = new VBox();
-        String[] numbers = {"1","2","3","4","5","6","7","8"};
-        for (int i = 0; i < numbers.length; i++) {
-            Label letter = new Label(numbers[i]);
-            container.getChildren().add(letter);
-            System.out.println("Number created and added: " + letter.getText());
-        }
-        return container;
+    private void setPaneBackground(Pane pane, String path) {
+        Image bgImage = new Image(String.valueOf(getClass().getResource(path)));
+        BackgroundImage backgroundImage = new BackgroundImage(
+                bgImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(1.0, 1.0, true, true, false, false));
+        Background bGround = new Background(backgroundImage);
+        pane.setBackground(bGround);
     }
 
-    private HBox createLetters() {
-        HBox container = new HBox();
-        String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H"};
-        for (int i = 0; i < letters.length; i++) {
-            Label letter = new Label(letters[i]);
-            container.getChildren().add(letter);
-            System.out.println("Letter created and added: " + letter.getText());
-        }
-        return container;
+    private void setSettingsBtnBackground(Button settingsBtn, String path) {
+
+        Image bgImage = new Image(String.valueOf(getClass().getResource(path)));
+        BackgroundImage backgroundImage = new BackgroundImage(
+                bgImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(1.0, 1.0, true, true, false, false));
+        Background bGround = new Background(backgroundImage);
+        settingsBtn.setBackground(bGround);
     }
 
     /**
