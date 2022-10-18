@@ -40,11 +40,10 @@ public class MainBoard extends Application {
         Piece[][] pieceLayout;
         System.out.println("Start Matrix of Pieces: ");
         if(isCrazy){
-            pieceLayout = PieceLayoutFactory.createClassicLayout();
+            pieceLayout = PieceLayoutFactory.createCrazyLayout();
         }
         else{
-            pieceLayout = PieceLayoutFactory.createCrazyLayout();
-
+            pieceLayout = PieceLayoutFactory.createClassicLayout();
         }
 
         printMatrix(pieceLayout);

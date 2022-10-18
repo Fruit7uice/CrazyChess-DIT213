@@ -24,7 +24,7 @@ public class MenuController {
 
 
     public void startCrazy(ActionEvent e) throws Exception {
-        MainBoard.isCrazy = false;
+        MainBoard.isCrazy = true;
         MainBoard game = new MainBoard();
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         stage.close();

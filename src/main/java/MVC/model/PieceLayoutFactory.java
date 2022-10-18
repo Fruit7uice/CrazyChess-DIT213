@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class PieceLayoutFactory {
 
-    static String[][] playerOneLayout = {
+    private static String[][] playerOneLayout = {
             {"Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn",},
             {"Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"}};
 
@@ -112,18 +112,29 @@ public class PieceLayoutFactory {
         return newPieces;
     }
     private static String[][] shufflePieceRow(String[][] pieces, int row) {
+        String[][] copy = createMatrixCopy(pieces);
         Random rd = new Random();
 
-        for (int i = pieces[row].length - 1; i > 0; i--) {
+        for (int i = copy[row].length-1; i > 0; i--) {
             int index = rd.nextInt(i + 1);
 
-            String s = pieces[row][index];
-            pieces[row][index] = pieces[row][i];
-            pieces[row][i] = s;
+            String s = copy[row][index];
+            copy[row][index] = copy[row][i];
+            copy[row][i] = s;
 
         }
-        System.out.println(pieces);
-        return pieces;
+        System.out.println(copy);
+        return copy;
+    }
+
+    private static String[][] createMatrixCopy(String[][] pieces) {
+        String[][] copy = new String[pieces.length][pieces[0].length];
+        for (int i = 0; i < pieces.length; i++) {
+            for (int j = 0; j < pieces[i].length; j++) {
+                copy[i][j] = pieces[i][j];
+            }
+        }
+        return copy;
     }
 
 
