@@ -45,13 +45,10 @@ public class Promotion implements Observable {
      * @param p The current piece that tries promotion. Must be a pawn.
      */
     public void promote(Piece p, Board board) {
-        if (board != null) {
             if (queenChoice()) {
                 Piece queen = PieceFactory.createQueen(p.xPos, p.yPos);
-                // Psuedokod
                 // update boards piece layout and put newly created piece at the right place.
                 board.placePieceAt(queen, p.xPos,p.yPos);
-
             } else if (bishopChoice()) {
                 Piece bishop = PieceFactory.createBishop(p.xPos, p.yPos);
                 board.placePieceAt(bishop, p.xPos,p.yPos);
@@ -62,7 +59,6 @@ public class Promotion implements Observable {
                 Piece rook = PieceFactory.createRook(p.xPos, p.yPos);
                 board.placePieceAt(rook, p.xPos,p.yPos);
             }
-        }
     }
 
 
