@@ -105,7 +105,9 @@ public class BoardController {
         if(onDrag){
             onDrag = false;
             moveHandler.tryAndCheckMove(newX, newY, piece.getRefPiece(), board.pieceLayout);
-            boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
+            //boardGUI.update(board.pieceLayout);
+            //boardGUI.afterLogicalBoard();
+            //boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
         }
 
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event

@@ -19,47 +19,19 @@ public class Castle {
     public boolean playerOneHasCastled;
     public boolean playerTwoHasCastled;
     MoveHandler moveHandler;
+    Player playerOne;
+    Player playerTwo;
 
-    public Castle(MoveHandler moveHandler){
+    Board board;
+    public Castle(MoveHandler moveHandler, Player playerOne, Player playerTwo, Board board){
         this.playerOneHasCastled = false;
         this.playerTwoHasCastled = false;
         this.moveHandler = moveHandler;
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+        this.board = board;
     }
 
-    Player player = new Player();
-
-
-
-
-
-
-
-    /**
-     * Method that takes all the aspects into consideration regarding the castle. Are the pre-conditions satisfied?
-     * If so, then complete the castle-move.
-     * @param piece The piece of king
-     * @param pieces The board of pieces
-     * @param board THe board
-     **/
-
-
-    public void performCastle(Piece piece, int newX, int newY, Piece[][] pieces, Board board) {
-        if (isCastleAllowed(piece, pieces)) {
-            if (isWhiteLongCastle(newX, newY)) {
-                whiteLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
-                playerOneHasCastled = true;
-            } else if (isWhiteShortCastle(newX, newY)) {
-                whiteShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
-                playerOneHasCastled = true;
-            } else if (isBlackLongCastle(newX, newY)) {
-                blackLongCastle(piece, pieces, board); // Switch the positions of the king and the rook.
-                playerTwoHasCastled = true;
-            } else if (isBlackShortCastle(newX, newY)) {
-                blackShortCastle(piece, pieces, board); // Switch the positions of the king and the rook.
-                playerTwoHasCastled = true;
-            }
-        }
-    }
 
     public boolean isWhiteLongCastle(int newX, int newY){
         return (newX == 2 && newY == 7);
@@ -78,67 +50,72 @@ public class Castle {
     /**
      * Method that checks so that the preconditions are satisfied before the King can castle with the rook.
      * @param king King
-     * @param pieces
+     * @param pieceLayout
      * @return
      */
 
-    public boolean isCastleAllowed(Piece king, Piece[][] pieces){
-        if(preconditionsWhiteLongCastle(pieces, king) && !pathCheckedWhiteLongCastle()){
+    public boolean isBlackCastleAllowed(Piece king, Piece[][] pieceLayout){
+        if(preconditionsBlackLongCastle(pieceLayout, king) && !pathCheckedBlackLongCastle()){
             return true;
-        }else if(preconditionsWhiteShortCastle(pieces, king) && !pathCheckedWhiteShortCastle()){
-            return true;
-        }else if(preconditionsBlackLongCastle(pieces, king) && !pathCheckedBlackLongCastle()){
-            return true;
-        }else return preconditionsBlackShortCastle(pieces, king) && !pathCheckedBlackShortCastle();
+        }else return preconditionsBlackShortCastle(pieceLayout, king) && !pathCheckedBlackShortCastle();
     }
 
+    public boolean isWhiteCastleAllowed(Piece king, Piece[][] pieceLayout){
+        if(preconditionsWhiteLongCastle(pieceLayout, king) && !pathCheckedWhiteLongCastle()){
+            return true;
+        }else if(preconditionsWhiteShortCastle(pieceLayout, king) && !pathCheckedWhiteShortCastle()){
+            return true;
+        }
+        else return false;
+    }
 
     /**
      * Method that switches the positions of the White King and the left white Rook into castle-positions
      * @param king
-     * @param pieces
-     * @param board
+     * @param pieceLayout
      */
-    public void whiteLongCastle(Piece king, Piece[][] pieces, Board board){ // White king left white rook.
-        Piece rook = pieces[7][0];
-        board.changePiecePosition(king, 2, 7);
-        board.changePiecePosition(rook, 3, 7);
+    public void whiteLongCastle(Piece king, Piece[][] pieceLayout){ // White king left white rook.
+        Piece rook = pieceLayout[7][0];
+        Piece[][] kingChangedLayout = board.updateLayout(pieceLayout, king, 2, 7);
+        Piece[][] castleDoneLayout = board.updateLayout(kingChangedLayout, rook, 3, 7);
+        board.setPieceLayout(castleDoneLayout);
     }
 
     /**
      * Method that switches the positions of the White King and the right whit Rook into castle-positions.
      * @param king
-     * @param pieces
-     * @param board
+     * @param pieceLayout
      */
-    public void whiteShortCastle(Piece king, Piece[][] pieces, Board board){ // White king right white rook.
-        Piece rook = pieces[7][7];
-        board.changePiecePosition(king, 6, 7);
-        board.changePiecePosition(rook, 5, 7);
+    public void whiteShortCastle(Piece king, Piece[][] pieceLayout){ // White king right white rook.
+        Piece rook = pieceLayout[7][7];
+        Piece[][] kingChangedLayout = board.updateLayout(pieceLayout, king, 6, 7);
+        Piece[][] castleDoneLayout = board.updateLayout(kingChangedLayout, rook, 5, 7);
+        board.setPieceLayout(castleDoneLayout);
     }
 
     /**
      * Method that switches the positions of the Black King and the left black Rook into castle-positions.
      * @param king
-     * @param pieces
-     * @param board
+     * @param pieceLayout
      */
-    public void blackLongCastle(Piece king, Piece[][] pieces, Board board){ // Black king left black rook.
-        Piece rook = pieces[0][0];
-        board.changePiecePosition(king, 2, 0);
-        board.changePiecePosition(rook, 3, 0);
+    public void blackLongCastle(Piece king, Piece[][] pieceLayout){ // Black king left black rook.
+        System.out.println("TRYING BLACK LONG CASTLE");
+        Piece rook = pieceLayout[0][0];
+        Piece[][] kingChangedLayout = board.updateLayout(pieceLayout, king, 2, 0);
+        Piece[][] castleDoneLayout = board.updateLayout(kingChangedLayout, rook, 3, 0);
+        board.setPieceLayout(castleDoneLayout);
     }
 
     /**
      * Method that switches the positions of the black King and the right black Rook into castle-positions.
      * @param king
-     * @param pieces
-     * @param board
+     * @param pieceLayout
      */
-    public void blackShortCastle(Piece king, Piece[][] pieces, Board board){ // Black King Right Black Rook
-        Piece rook = pieces[0][7];
-        board.changePiecePosition(king, 6, 0);
-        board.changePiecePosition(rook, 5, 0);
+    public void blackShortCastle(Piece king, Piece[][] pieceLayout){ // Black King Right Black Rook
+        Piece rook = pieceLayout[0][7];
+        Piece[][] kingChangedLayout = board.updateLayout(pieceLayout, king, 6, 0);
+        Piece[][] castleDoneLayout = board.updateLayout(kingChangedLayout, rook, 5, 0);
+        board.setPieceLayout(castleDoneLayout);
     }
 
 
@@ -217,8 +194,9 @@ public class Castle {
         Tuple<Integer, Integer> tuple37 = new Tuple(3, 7);
         Tuple<Integer, Integer> tuple47 = new Tuple(4, 7);
 
-        return player.setOfAllMoves.contains(tuple17) || player.setOfAllMoves.contains(tuple27) ||
-                player.setOfAllMoves.contains(tuple37) || player.setOfAllMoves.contains(tuple47);
+
+        return playerTwo.setOfAllMoves.contains(tuple17) || playerTwo.setOfAllMoves.contains(tuple27) ||
+                playerTwo.setOfAllMoves.contains(tuple37) || playerTwo.setOfAllMoves.contains(tuple47);
     };
 
 
@@ -234,8 +212,8 @@ public class Castle {
         Tuple<Integer, Integer> tuple57 = new Tuple(5, 7);
         Tuple<Integer, Integer> tuple67 = new Tuple(6, 7);
 
-        return player.setOfAllMoves.contains(tuple47) || player.setOfAllMoves.contains(tuple57) ||
-                player.setOfAllMoves.contains(tuple67);
+        return playerTwo.setOfAllMoves.contains(tuple47) || playerTwo.setOfAllMoves.contains(tuple57) ||
+                playerTwo.setOfAllMoves.contains(tuple67);
 
     };
 
@@ -251,10 +229,12 @@ public class Castle {
         Tuple<Integer, Integer> tuple20 = new Tuple(2, 0);
         Tuple<Integer, Integer> tuple30 = new Tuple(3, 0);
         Tuple<Integer, Integer> tuple40 = new Tuple(4, 0);
+        System.out.println(playerOne.setOfAllMoves.stream().toList());
+        System.out.println("King is supposed to be checked");
 
 
-        return player.setOfAllMoves.contains(tuple10) || player.setOfAllMoves.contains(tuple20) ||
-                player.setOfAllMoves.contains(tuple30) || player.setOfAllMoves.contains(tuple40);
+        return playerOne.setOfAllMoves.contains(tuple10) || playerOne.setOfAllMoves.contains(tuple20) ||
+                playerOne.setOfAllMoves.contains(tuple30) || playerOne.setOfAllMoves.contains(tuple40);
     };
 
     /**
@@ -269,8 +249,8 @@ public class Castle {
         Tuple<Integer, Integer> tuple50 = new Tuple(5, 0);
         Tuple<Integer, Integer> tuple60 = new Tuple(6, 0);
 
-        return player.setOfAllMoves.contains(tuple40) || player.setOfAllMoves.contains(tuple50) ||
-                player.setOfAllMoves.contains(tuple60);
+        return playerOne.setOfAllMoves.contains(tuple40) || playerOne.setOfAllMoves.contains(tuple50) ||
+                playerOne.setOfAllMoves.contains(tuple60);
     };
 
 
@@ -286,7 +266,39 @@ public class Castle {
     }
 
 
+    public boolean isMoveWhiteCastle(int newX, int newY) {
+        return (isWhiteLongCastle(newX, newY) || isWhiteShortCastle(newX, newY));
+    }
 
+    public void performWhiteCastle(Piece piece, int newX, int newY, Piece[][] pieceLayout) {
+        if (isWhiteLongCastle(newX, newY)) {
+            whiteLongCastle(piece, pieceLayout); // Switch the positions of the king and the rook.
+            playerOneHasCastled = true;
+        } else if (isWhiteShortCastle(newX, newY)) {
+            whiteShortCastle(piece, pieceLayout); // Switch the positions of the king and the rook.
+            playerOneHasCastled = true;
+        }
+    }
+    public boolean isMoveBlackCastle(int newX, int newY) {
+        return (isBlackLongCastle(newX, newY) || isBlackShortCastle(newX, newY));
+    }
+
+
+    /**
+     * Method that takes all the aspects into consideration regarding the castle. Are the pre-conditions satisfied?
+     * If so, then complete the castle-move.
+     * @param piece The piece of king
+     * @param pieceLayout The board of pieces
+     **/
+    public void performBlackCastle(Piece piece, int newX, int newY, Piece[][] pieceLayout) {
+        if (isBlackLongCastle(newX, newY)) {
+            blackLongCastle(piece, pieceLayout); // Switch the positions of the king and the rook.
+            playerTwoHasCastled = true;
+        } else if (isBlackShortCastle(newX, newY)) {
+            blackShortCastle(piece, pieceLayout); // Switch the positions of the king and the rook.
+            playerTwoHasCastled = true;
+        }
+    }
 
 
 

@@ -9,8 +9,8 @@ import java.util.Random;
 public class PieceLayoutFactory {
 
     private static String[][] playerOneLayout = {
-            {"Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn",},
-            {"Rook", "Knight", "Bishop", "Queen", "King", "null", "null", "Rook"}};
+            {"Pawn", "Pawn", "Pawn", "null", "Pawn", "Pawn", "Pawn", "Pawn",},
+            {"Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"}};
 
 
     PieceFactory pieceFactory;

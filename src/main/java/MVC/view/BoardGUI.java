@@ -179,9 +179,8 @@ public class BoardGUI implements Observer {
             }
         }
     }
-
-    private void drawSettings() throws IOException {
-
+    public void afterLogicalBoard() {
+        //update(pieceLayout);
     }
 
     /**
@@ -198,5 +197,6 @@ public class BoardGUI implements Observer {
         //drawBoard();
         drawPieces();
     }
+
 
 }

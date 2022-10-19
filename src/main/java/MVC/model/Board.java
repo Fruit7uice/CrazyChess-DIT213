@@ -26,18 +26,18 @@ public class Board implements Observable {
     }
 
 
-    private void updateGameLayout(Piece piece, int newX, int newY){
+    private void updateGameLayout(Piece piece, int newX, int newY, Piece[][] layout){
         int oldX = piece.xPos; // Old x-coords for piece
         int oldY = piece.yPos; // Old y-coords for piece
-        Piece tmp = pieceLayout[oldY][oldX]; // Save a reference for piece
-        pieceLayout[newY][newX] = tmp; // Place saved piece in new slot
-        pieceLayout[oldY][oldX] = null; // Old slot is set to null
+        Piece tmp = layout[oldY][oldX]; // Save a reference for piece
+        layout[newY][newX] = tmp; // Place saved piece in new slot
+        layout[oldY][oldX] = null; // Old slot is set to null
         notifyAllObservers();
     }
 
 
-    public void changePiecePosition(Piece piece, int x, int y){
-            updateGameLayout(piece, x, y);
+    public void changePiecePosition(Piece piece, int x, int y, Piece[][] layout){
+            //updateGameLayout(piece, x, y, layout);
             piece.xPos = x;
             piece.yPos = y;
             piece.hasMoved = true;
@@ -45,8 +45,50 @@ public class Board implements Observable {
             //updateListOfLegalMoves();
     }
 
+    public Piece[][] updateLayout(Piece[][] layout, Piece piece, int newX, int newY){
+        int oldX = piece.xPos;
+        int oldY = piece.yPos;
+        changePiecePosition(piece, newX, newY, layout);
+        layout[oldY][oldX] = null;
+        layout[newY][newX] = piece;
+        return layout;
+    }
+
     public void placePieceAt(Piece p, int x, int y) {
         this.pieceLayout[y][x] = p;
+    }
+
+    public Piece[][] getCopiedLayout(){
+        Piece[][] copy = new Piece[pieceLayout.length][pieceLayout.length];
+        for (int row = 0; row < pieceLayout.length; row++) {
+            for (int col = 0; col < pieceLayout[row].length; col++) {
+                copy[row][col] = pieceLayout[row][col];
+            }
+        }
+        return copy;
+
+    }
+
+    public void setPieceLayout(Piece[][] layout) {
+        this.pieceLayout = layout;
+        notifyAllObservers();
+    }
+
+    public static void printMatrix(Piece[][] pieceLayout){
+        System.out.println("\n {");
+        for (int i = 0; i < pieceLayout.length; i++) {
+            System.out.print("{ ");
+            for (int j = 0; j < pieceLayout[i].length; j++) {
+                if (pieceLayout[i][j] != null){
+                    System.out.print(pieceLayout[i][j].getType() + ", ");
+                }
+                else{
+                    System.out.print(pieceLayout[i][j] + ", ");
+                }
+            }
+            System.out.print("} \n");
+        }
+        System.out.println("}");
     }
 
 
