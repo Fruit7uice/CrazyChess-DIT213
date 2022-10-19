@@ -25,30 +25,17 @@ public class Board implements Observable {
         this.pieceLayout = pieceLayout;
     }
 
-
-    private void updateGameLayout(Piece piece, int newX, int newY, Piece[][] layout){
-        int oldX = piece.xPos; // Old x-coords for piece
-        int oldY = piece.yPos; // Old y-coords for piece
-        Piece tmp = layout[oldY][oldX]; // Save a reference for piece
-        layout[newY][newX] = tmp; // Place saved piece in new slot
-        layout[oldY][oldX] = null; // Old slot is set to null
-        notifyAllObservers();
-    }
-
-
-    public void changePiecePosition(Piece piece, int x, int y, Piece[][] layout){
-            //updateGameLayout(piece, x, y, layout);
+    public void changePiecePosition(Piece piece, int x, int y){
             piece.xPos = x;
             piece.yPos = y;
             piece.hasMoved = true;
             notifyAllObservers();
-            //updateListOfLegalMoves();
     }
 
     public Piece[][] updateLayout(Piece[][] layout, Piece piece, int newX, int newY){
         int oldX = piece.xPos;
         int oldY = piece.yPos;
-        changePiecePosition(piece, newX, newY, layout);
+        changePiecePosition(piece, newX, newY);
         layout[oldY][oldX] = null;
         layout[newY][newX] = piece;
         return layout;
@@ -90,7 +77,6 @@ public class Board implements Observable {
         }
         System.out.println("}");
     }
-
 
     @Override
     public void addObserver(Observer o) {
