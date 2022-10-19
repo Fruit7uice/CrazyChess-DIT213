@@ -3,12 +3,10 @@ package MVC.model;
 import MVC.model.Pieces.MoveHandler;
 import MVC.model.Pieces.Piece;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public class Player {
-    public List<Tuple<Integer, Integer>> playerOneListOfLegalMoves = new ArrayList<Tuple<Integer, Integer>>();
-    public List<Tuple<Integer, Integer>> playerTwoListOfLegalMoves = new ArrayList<Tuple<Integer, Integer>>();
+    public HashSet<Tuple<Integer, Integer>> setOfAllMoves = new HashSet<Tuple<Integer, Integer>>();
 
     public Player(){
 
@@ -19,21 +17,14 @@ public class Player {
      * @param board the current board layout
      */
     public void calcListOfLegalMovesPlayer(Piece[][] board, MoveHandler moveHandler){
-        for (int x = 0; x < board.length; x++) {
-            for (int y = 0; y < board.length; y++) { //loops through the whole board
-                Piece piece = board[x][y];
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) { //loops through the whole board
+                Piece piece = board[row][col];
                 if(piece == null){ // is there a piece on this pos?
                     //if not don't calculate
                 } else{
-                    moveHandler.createListOfLegalMoves(piece, board); //create the pieces list of legal moves
-                    if(piece.isPlayerOne()){
-                        // add the tuples from the pieces list to player ones list
-                        playerOneListOfLegalMoves.addAll(piece.listOfLegalMoves);
-                    }else {
-                        // add the tuples from the pieces list to player twos list
-                        playerTwoListOfLegalMoves.addAll(piece.listOfLegalMoves);
-                    }
-
+                    moveHandler.createSetOfPieceMoves(piece, board); //create the pieces list of legal moves
+                    setOfAllMoves.addAll(piece.setOfMoves);
                 }
             }
 

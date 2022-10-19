@@ -211,23 +211,14 @@ public class Castle {
      * This method in particular correspond to the White Long Castle.
      * @return True if any piece of the opposing player can move to any of these tiles.
      */
-
-
     public boolean pathCheckedWhiteLongCastle(){
         Tuple<Integer, Integer> tuple17 = new Tuple(1, 7);
         Tuple<Integer, Integer> tuple27 = new Tuple(2, 7);
         Tuple<Integer, Integer> tuple37 = new Tuple(3, 7);
         Tuple<Integer, Integer> tuple47 = new Tuple(4, 7);
 
-        for (int i = 0; i < player.playerTwoListOfLegalMoves.size()-1; i++) {
-            if (player.playerTwoListOfLegalMoves.get(i) == tuple17 ||
-                    player.playerTwoListOfLegalMoves.get(i) == tuple27 ||
-                    player.playerTwoListOfLegalMoves.get(i) == tuple37 ||
-                    player.playerTwoListOfLegalMoves.get(i) == tuple47){
-                return true;
-            }
-        }
-        return false;
+        return player.setOfAllMoves.contains(tuple17) || player.setOfAllMoves.contains(tuple27) ||
+                player.setOfAllMoves.contains(tuple37) || player.setOfAllMoves.contains(tuple47);
     };
 
 
@@ -238,21 +229,14 @@ public class Castle {
      * This method in particular correspond to the White Short Castle.
      * @return True if any piece of the opposing player can move to any of these tiles.
      */
-
-
     public boolean pathCheckedWhiteShortCastle(){
         Tuple<Integer, Integer> tuple47 = new Tuple(4, 7);
         Tuple<Integer, Integer> tuple57 = new Tuple(5, 7);
         Tuple<Integer, Integer> tuple67 = new Tuple(6, 7);
 
-        for (int i = 0; i < player.playerTwoListOfLegalMoves.size()-1; i++) {
-            if (player.playerTwoListOfLegalMoves.get(i) == tuple47 ||
-                    player.playerTwoListOfLegalMoves.get(i) == tuple57 ||
-                    player.playerTwoListOfLegalMoves.get(i) == tuple67){
-                return true;
-            }
-        }
-        return false;
+        return player.setOfAllMoves.contains(tuple47) || player.setOfAllMoves.contains(tuple57) ||
+                player.setOfAllMoves.contains(tuple67);
+
     };
 
     /**
@@ -262,23 +246,15 @@ public class Castle {
      * This method in particular correspond to the Black Long Castle.
      * @return True if any piece of the opposing player can move to any of these tiles.
      */
-
-
     public boolean pathCheckedBlackLongCastle(){
         Tuple<Integer, Integer> tuple10 = new Tuple(1, 0);
         Tuple<Integer, Integer> tuple20 = new Tuple(2, 0);
         Tuple<Integer, Integer> tuple30 = new Tuple(3, 0);
         Tuple<Integer, Integer> tuple40 = new Tuple(4, 0);
 
-        for (int i = 0; i < player.playerOneListOfLegalMoves.size()-1; i++) {
-            if (player.playerOneListOfLegalMoves.get(i) == tuple10 ||
-                    player.playerOneListOfLegalMoves.get(i) == tuple20 ||
-                    player.playerOneListOfLegalMoves.get(i) == tuple30 ||
-                    player.playerOneListOfLegalMoves.get(i) == tuple40){
-                return true;
-            }
-        }
-        return false;
+
+        return player.setOfAllMoves.contains(tuple10) || player.setOfAllMoves.contains(tuple20) ||
+                player.setOfAllMoves.contains(tuple30) || player.setOfAllMoves.contains(tuple40);
     };
 
     /**
@@ -288,21 +264,13 @@ public class Castle {
      * This method in particular correspond to the Black Short Castle.
      * @return True if any piece of the opposing player can move to any of these tiles.
      */
-
-
     public boolean pathCheckedBlackShortCastle(){
         Tuple<Integer, Integer> tuple40 = new Tuple(4, 0);
         Tuple<Integer, Integer> tuple50 = new Tuple(5, 0);
         Tuple<Integer, Integer> tuple60 = new Tuple(6, 0);
 
-        for (int i = 0; i < player.playerOneListOfLegalMoves.size()-1; i++) {
-            if(player.playerOneListOfLegalMoves.get(i) == tuple40 ||
-                    player.playerOneListOfLegalMoves.get(i) == tuple50 ||
-                    player.playerOneListOfLegalMoves.get(i) == tuple60){
-                return true;
-            }
-        }
-        return false;
+        return player.setOfAllMoves.contains(tuple40) || player.setOfAllMoves.contains(tuple50) ||
+                player.setOfAllMoves.contains(tuple60);
     };
 
 

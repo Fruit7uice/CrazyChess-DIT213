@@ -1,14 +1,12 @@
 package MVC.model.Pieces;
 
 import MVC.view.MainBoard;
-import MVC.model.PieceFactory;
 import MVC.model.Player;
 import MVC.model.Board;
 import MVC.model.SpecialMoves.Castle;
 import MVC.model.SpecialMoves.PawnCapture;
 import MVC.model.SpecialMoves.Promotion;
 import MVC.model.Tuple;
-import MVC.view.PromotionView;
 
 import java.util.Objects;
 
@@ -17,13 +15,22 @@ import java.util.Objects;
  * @author Alva Johansson
  */
 public class MoveHandler {
+
+    boolean isPlayerOneTurn;
     Board board;
+
+    Player playerOne;
+
+    Player playerTwo;
+
     public MoveHandler(Board board) {
         this.board = board;
         System.out.println();
         this.promotion = new Promotion(board);
         this.pawnCapture = new PawnCapture(this);
         this.castle = new Castle(this);
+        isPlayerOneTurn = true;
+        System.out.println("player turn: " + isPlayerOneTurn);
     }
     Castle castle;
     PawnCapture pawnCapture;
@@ -39,7 +46,7 @@ public class MoveHandler {
      * @author Jeffrey Wolff
      */
     public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout){ // Allowed
-        System.out.println("CHECKING IF MOVE IS ALLOWED");
+        //System.out.println("CHECKING IF MOVE IS ALLOWED");
         //TODO add a check if king.IsInCheck() and if king is checkmate.
         // NewX and NewY cannot be outside board.
         if (newX > MainBoard.WINDOW_WIDTH || newX < 0 || newY > MainBoard.WINDOW_HEIGHT || newY < 0)
@@ -61,7 +68,7 @@ public class MoveHandler {
 
         if(piece.legalMove(newX, newY)){
 
-            System.out.println("Move Was Legal");
+            //System.out.println("Move Was Legal");
             if (isOccupied(newX, newY, pieceLayout)) {//is the tile not occupied
                 if(Objects.equals(piece.getType(), "Pawn")){
                     return false;
@@ -69,10 +76,8 @@ public class MoveHandler {
                 if (isOccupiedByEnemy(newX, newY, piece, pieceLayout)) { //is the piece my enemy?
 
                     if(isPathBlocked(newX,newY,piece,pieceLayout)) {
-                   //     System.out.println("Im here");
                         return false;
                     } else { //path is blocked
-                    //    System.out.println("TRYING TO KILL");
                         killEnemyPiece();
                         return true;
                     }
@@ -103,9 +108,9 @@ public class MoveHandler {
      * @param piece the current piece we are working on
      */
     public void movePiece(int newX, int newY, Piece piece, Piece[][] pieceLayout){
-            piece.listOfLegalMoves.clear();
+            piece.setOfMoves.clear();
             board.changePiecePosition(piece, newX, newY);
-            createListOfLegalMoves(piece, pieceLayout);
+            createSetOfPieceMoves(piece, pieceLayout);
     }
 
     /**
@@ -118,55 +123,69 @@ public class MoveHandler {
      * @author Jeffrey Wolff && Johannes Höher
      */
     public void tryAndCheckMove(int newX, int newY, Piece piece, Piece[][] pieceLayout){
+        int oldX = piece.xPos;
+        int oldY = piece.yPos;
 
         int deltaX = Math.abs(piece.xPos - newX);
-        if (piece.isPlayerOne() && deltaX == 2 && castle.isWhiteLongCastle(newX, newY) &&
-                Objects.equals(piece.getType(), "King")
-                && !hasPlayerOneCastled()){
-            castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the white long castle
-        }
+        if (piece.isPlayerOne() && isPlayerOneTurn) {
 
-        else if (piece.isPlayerOne() && deltaX == 2 && castle.isWhiteShortCastle(newX, newY) &&
-                Objects.equals(piece.getType(), "King")
-                && !hasPlayerOneCastled()){
-            castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the white short castle
-        }
-
-        else if (!piece.isPlayerOne() && deltaX == 2 && castle.isBlackLongCastle(newX, newY) &&
-                Objects.equals(piece.getType(), "King")
-                && !hasPlayerTwoCastled()){
-            castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the black long castle
-        }
-
-        else if (!piece.isPlayerOne() && deltaX == 2 && castle.isBlackShortCastle(newX, newY) &&
-                Objects.equals(piece.getType(), "King")
-                && !hasPlayerTwoCastled()){
-            castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the black short castle
-        }
-
-        else if(Objects.equals(piece.getType(), "Pawn") && piece.isPlayerOne() &&
-                pawnCapture.isPlayerOnePawnCapture(pieceLayout, piece, newX, newY) ){
-            pawnCapture.playerOnePawnCaptures(pieceLayout, piece, newX, newY, board); // White pawn captures an enemy piece
-        }
-
-        else if(Objects.equals(piece.getType(), "Pawn") && !piece.isPlayerOne() &&
-                pawnCapture.isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY) ){
-            pawnCapture.playerTwoPawnCaptures(pieceLayout, piece, newX, newY, board); // Black pawn captures an enemy piece
-
-        }
-
-        else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
-                System.out.println("MOVE WAS ALLOWED");
+            if (deltaX == 2 && castle.isWhiteLongCastle(newX, newY) &&
+                    Objects.equals(piece.getType(), "King")
+                    && !hasPlayerOneCastled()) {
+                castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the white long castle
+            } else if (deltaX == 2 && castle.isWhiteShortCastle(newX, newY) &&
+                    Objects.equals(piece.getType(), "King")
+                    && !hasPlayerOneCastled()) {
+                castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the white short castle
+            }
+            else if(Objects.equals(piece.getType(), "Pawn") &&
+                    pawnCapture.isPlayerOnePawnCapture(pieceLayout, piece, newX, newY) ){
+                pawnCapture.playerOnePawnCaptures(pieceLayout, piece, newX, newY, board); // White pawn captures an enemy piece
+            }
+            else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
+                //System.out.println("MOVE WAS ALLOWED");
                 movePiece(newX, newY, piece, pieceLayout);
+            }
+        }
+        else if (!piece.isPlayerOne() && !isPlayerOneTurn ){
+            if (deltaX == 2 && castle.isBlackLongCastle(newX, newY) &&
+                    Objects.equals(piece.getType(), "King")
+                    && !hasPlayerTwoCastled()) {
+                castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the black long castle
+            } else if (deltaX == 2 && castle.isBlackShortCastle(newX, newY) &&
+                    Objects.equals(piece.getType(), "King")
+                    && !hasPlayerTwoCastled()) {
+                castle.performCastle(piece, newX, newY, pieceLayout, board); // Case for the black short castle
+            }
+            else if(Objects.equals(piece.getType(), "Pawn") &&
+                    pawnCapture.isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY) ){
+                pawnCapture.playerTwoPawnCaptures(pieceLayout, piece, newX, newY, board); // Black pawn captures an enemy piece
+            }
+            else if (isMoveAllowed(newX, newY, piece, pieceLayout)){
+                movePiece(newX, newY, piece, pieceLayout);
+            }
         }
 
         // if not (newX or newY is not equal to my piece current X or current Y)
-        if (!(newX != piece.xPos || newY != piece.yPos)){ // Piece has moved
+        if (!(oldX == piece.xPos && oldY == piece.yPos)){ // Piece has moved
+            //System.out.println("HAS MOVED");
             if (promotion.isPromotable(piece, newY)) {
                 promotion.promote(piece);
             }
+            //**** Have I CHECKED OTHER PLAYER *****
+            /*
+            if (isPlayerOneTurn){
+                playerTwo.isChecked = isKingChecked(playerTwo.king);
+            }
+            else if (!isPlayerOneTurn){
+                playerOne.isChecked = isKingChecked(playerOne.king);
+            }
+            
+             */
 
             //***** Switch turn *****
+            isPlayerOneTurn = !isPlayerOneTurn;
+            System.out.println("Player turn: " + isPlayerOneTurn);
         }
 
     }
@@ -200,15 +219,17 @@ public class MoveHandler {
      * @param piece the current piece
      * @param pieceLayout the current board
      */
-    public void createListOfLegalMoves(Piece piece, Piece[][] pieceLayout){ //[[x,y], [x,y]...
+    public void createSetOfPieceMoves(Piece piece, Piece[][] pieceLayout){ //[[x,y], [x,y]...
+        System.out.println("initial size " + piece.setOfMoves.size());
         for (int y = 0; y < pieceLayout.length; y++) {
             for (int x = 0; x < pieceLayout[y].length; x++) {
                 if(isMoveAllowed(x, y, piece, pieceLayout)) {
                     Tuple<Integer, Integer> tuple = new Tuple(x, y);
-                    piece.listOfLegalMoves.add(tuple);
+                    piece.setOfMoves.add(tuple);
                 }
             }
         }
+        System.out.println("Filled size: " + piece.setOfMoves.size());
     }
 
     /**
@@ -366,15 +387,18 @@ public class MoveHandler {
      * @param pieceLayout current placement of the pieces
      * @return true if the king is checked
      */
+    /*
     public boolean isKingCheck(Player player, Piece king, Piece[][] pieceLayout){
         player.calcListOfLegalMovesPlayer(pieceLayout, this); // creates the lists of legal moves
         Tuple<Integer, Integer> tuple = new Tuple<>(king.xPos, king.yPos);
         if(king.isPlayerOne()){
             return player.playerTwoListOfLegalMoves.contains(tuple);
         } else {
-            return player.playerOneListOfLegalMoves.contains(tuple);
+            return player.setOfAllMoves.contains(tuple);
         }
     }
+
+     */
 
     /**
      *
@@ -383,6 +407,7 @@ public class MoveHandler {
      * @param pieceLayout the current placement of pieces
      * @return true if king is checkmate
      */
+    /*
     public boolean isKingCheckMate(Player player, Piece king, Piece[][] pieceLayout){
         player.calcListOfLegalMovesPlayer(pieceLayout, this);
         if(king.isPlayerOne()){
@@ -392,9 +417,11 @@ public class MoveHandler {
             //[Pair[1,0]!!!, Pair[0,1]!!, Pair[1,1], Pair[1,0]!!, Pair[0,1], Pair[1,1]]
         } else {
            // System.out.println(player.playerOneListOfLegalMoves);
-            return player.playerOneListOfLegalMoves.contains(checkPosAroundKing(player, king));
+            return player.setOfAllMoves.contains(checkPosAroundKing(player, king));
         }
     }
+
+     */
 
     /**
      * checks if the "enemy" players list of legal moves contains any of the positions around the king
@@ -402,6 +429,7 @@ public class MoveHandler {
      * @param king the current player
      * @return true if positions around the king is in the enemy players list of legal moves
      */
+    /*
     private boolean checkPosAroundKing(Player player, Piece king){
         if(king.isPlayerOne()){
             if(king.xPos == 0 && king.yPos == 0){
@@ -499,32 +527,33 @@ public class MoveHandler {
                         && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)) // left upp
                         && player.playerTwoListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
             } else if (king.yPos == 0) {
-                return player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right up
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)); // left up
+                return player.setOfAllMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right up
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)); // left up
             } else if(king.yPos == 7){
-                return player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)) // right down
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
+                return player.setOfAllMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)) // right down
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
             } else{
-                return player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right upp
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)) // left upp
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)) // right down
-                        && player.playerOneListOfLegalMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
+                return player.setOfAllMoves.contains(new Tuple<>(king.xPos, king.yPos)) // king pos
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos + 1, king.yPos)) // right
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos - 1, king.yPos)) // left
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos, king.yPos + 1)) // up
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos, king.yPos - 1)) // down
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos + 1, king.yPos + 1)) // right upp
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos - 1, king.yPos + 1)) // left upp
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos + 1, king.yPos - 1)) // right down
+                        && player.setOfAllMoves.contains(new Tuple<>(king.xPos - 1, king.yPos - 1)); // left down
             }
         }
     }
+     */
 
 
     /**
