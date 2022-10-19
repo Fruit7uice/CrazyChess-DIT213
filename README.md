@@ -15,7 +15,7 @@ _Jeffrey Wolff_
 --------
 **Info**
 
-For this project we chose to implement an application which is our personal take on chess. Our application partly consists of the Classic chess-implementation, and it also consists of a "Crazy" chess-implementation.
+For this project we chose to implement an application which is our personal take on chess. Our application partly consists of the Classic chess-implementation, and it also consists of a "Crazy" chess-implementation(not fully implmented yet).
 
 The classical version is a normal take on chess with classic rules and normal behaviors for the pieces.
 The "Crazy" version of our Chess however, acts a bit differently than the classic one, it consists of an implementation with special rules and behaviors for the pieces.
