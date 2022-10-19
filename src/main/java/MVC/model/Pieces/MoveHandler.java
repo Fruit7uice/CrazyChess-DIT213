@@ -58,6 +58,7 @@ public class MoveHandler {
             return false;
 
         //******** Checking if this move will result in check ************
+        //System.out.println("Check CHECKER:");
         int oldX = piece.xPos;
         int oldY = piece.yPos;
         //temporary move
@@ -68,6 +69,7 @@ public class MoveHandler {
             movePiece(oldX, oldY, piece, pieceLayout); // Undo Move
             return false;
         } else {
+            //System.out.println("CheckChecker end");
             movePiece(oldX, oldY, piece, pieceLayout); // Undo Move
             return isMoveAllowedHelper(newX, newY, piece, pieceLayout);// Time to see if this move will result in being checked
         }
@@ -97,12 +99,10 @@ public class MoveHandler {
     private boolean isMoveAllowedHelper(int newX, int newY, Piece piece, Piece[][] pieceLayout) {
 
         if (piece.legalMove(newX, newY)) {
-            if (Objects.equals(piece.getType(), "Pawn")){
-                System.out.println("Move Was Legal");
-            }
             if (isOccupied(newX, newY, pieceLayout)) {//is the tile not occupied
+                // Special case for pawn. Cannot kill going forward.
                 if (Objects.equals(piece.getType(), "Pawn")) {
-                    //System.out.println("Pawn tries to move");
+                    //System.out.println("Pawn cannot go forward because is occupied");
                     return false;
                 }
                 if (isOccupiedByEnemy(newX, newY, piece, pieceLayout)) { //is the piece my enemy?
@@ -118,7 +118,6 @@ public class MoveHandler {
                 }
 
             } else { // tile is not occupied
-                // System.out.println("Is not occupied");
                 if (isPathBlocked(newX, newY, piece, pieceLayout)) {
                     return false;
                 } else {
@@ -127,7 +126,6 @@ public class MoveHandler {
 
             }
         } else {
-            //System.out.println("Move Was Illegal");
             return false;
         }
     }
@@ -229,13 +227,8 @@ public class MoveHandler {
 
             //***** Switch turn *****
             isPlayerOneTurn = !isPlayerOneTurn;
-            System.out.println("Player turn: " + isPlayerOneTurn);
+            //System.out.println("Player turn: " + isPlayerOneTurn);
         }
-
-        /*
-         */
-
-
     }
 
     boolean isCheckMate(Player player, Piece[][] layout) {
@@ -304,6 +297,7 @@ public class MoveHandler {
      */
     public void updatePiecePossibleMoves(Piece piece, Piece[][] pieceLayout) { //[[x,y], [x,y]...
         piece.setOfMoves.clear();
+        //System.out.println("Piece updating moves below:");
         for (int y = 0; y < pieceLayout.length; y++) {
             for (int x = 0; x < pieceLayout[y].length; x++) {
                 if (isMoveAllowedHelper(x, y, piece, pieceLayout)) {

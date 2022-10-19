@@ -108,7 +108,7 @@ public class Board implements Observable {
         for (Observer observer : observers) {
             observer.update(pieceLayout);
         }
-        System.out.println("All observers has been notified");
+        //System.out.println("All observers has been notified");
     }
 
 }

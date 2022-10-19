@@ -34,17 +34,6 @@ public class Player {
                 if(piece != null){
                     if (piece.isPlayerOne() == this.isPlayerOne){
                         moveHandler.updatePiecePossibleMoves(piece, pieceLayout); //create the pieces list of legal moves
-                        /*
-                        if (piece.isPlayerOne()){
-                            System.out.println("White " + piece.getType() + "'s legal moves is: " + piece.setOfMoves);
-                            System.out.println("Size of White " + piece.getType() + "'s moves is: " + piece.setOfMoves.size());
-                        }
-                        else {
-                            System.out.println("Black " + piece.getType() + "'s legal moves is: " + piece.setOfMoves);
-                            System.out.println("Size of Black " + piece.getType() + "'s moves is: " + piece.setOfMoves.size());
-
-                        }
-                         */
                         possibleMoves.addAll(piece.setOfMoves);
                     }
                 }

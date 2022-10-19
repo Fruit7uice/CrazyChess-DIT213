@@ -9,7 +9,7 @@ import java.util.Random;
 public class PieceLayoutFactory {
 
     private static String[][] playerOneLayout = {
-            {"Pawn", "Pawn", "Pawn", "null", "Pawn", "Pawn", "Pawn", "Pawn",},
+            {"Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn",},
             {"Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"}};
 
 
@@ -40,7 +40,6 @@ public class PieceLayoutFactory {
         Piece[][] pieces = new Piece[8][8];
         ArrayList<Piece> playerTwoPieces = CreatePieceList(p2Layout, false);
         ArrayList<Piece> playerOnePieces = CreatePieceList(p1Layout, true);
-        //System.out.println(playerOnePieces.get(6).getType() + " Position X: " + playerOnePieces.get(8).xPos + " and Y: " + playerOnePieces.get(8).yPos );
         int p1Index = 0;
         int p2Index = 0;
 
