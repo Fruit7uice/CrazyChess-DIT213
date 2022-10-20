@@ -78,7 +78,7 @@ public class MoveHandler {
     }
 
 
-    private boolean isChecked(Piece[][] layout) {
+    public boolean isChecked(Piece[][] layout) { // ändra denna till private eller flytta till separat klass.
         if (isPlayerOneTurn) {
             return isKingChecked(playerOne.king, layout);
         } else {

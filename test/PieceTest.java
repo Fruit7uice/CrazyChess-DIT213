@@ -21,10 +21,11 @@ public class PieceTest {
     Piece rook;
     Piece whitePawn;
     Piece blackPawn;
-    Player player = new Player();
     Piece[][] pieceLayout = new Piece[8][8];
     Board board = new Board(pieceLayout);
     MoveHandler moveHandler = new MoveHandler(board);
+    Player player = new Player(true,moveHandler);
+
 
     @Before
     public void setUp() {
@@ -245,7 +246,7 @@ public class PieceTest {
         pieceLayout[0][5] = king;
         PieceFactory.isPlayerOne = false;
         pieceLayout[4][5] = PieceFactory.createQueen(5,4);
-        assertTrue(moveHandler.isKingCheck(player, king, pieceLayout));
+        assertTrue(moveHandler.isChecked(pieceLayout));
     }
     @Test
     public void kingIsNotChecked(){
@@ -253,9 +254,9 @@ public class PieceTest {
         king  = PieceFactory.createKing(5,0);
         pieceLayout[0][5] = king;
         pieceLayout[4][5] = PieceFactory.createQueen(5,4);
-        assertFalse(moveHandler.isKingCheck(player, king, pieceLayout));
+        assertFalse(moveHandler.isChecked(pieceLayout));
     }
-
+/*
     //-------------------Test king checkmate-------------------------
     @Test
     public void kingIsCheckmate(){
@@ -287,6 +288,7 @@ public class PieceTest {
         pieceLayout[0][7] = PieceFactory.createRook(7,0);
         assertFalse(moveHandler.isKingCheckMate(player, king, pieceLayout));
     }*/
+
 
 }
 
