@@ -77,7 +77,12 @@ public class MoveHandler {
         // If piece can move here without having to check if it is checked.
     }
 
-
+    /**
+     * Checks if the king depending on the turn if it is in check.
+     * @param layout to check.
+     * @return a true if the king in question is checked, false if not.
+     * @author Jeffrey Wolff
+     */
     public boolean isChecked(Piece[][] layout) { // ändra denna till private eller flytta till separat klass.
         if (isPlayerOneTurn) {
             return isKingChecked(playerOne.king, layout);
@@ -143,6 +148,10 @@ public class MoveHandler {
         updateAllPossibleMoves(pieceLayout);
     }
 
+    /**
+     * Updates both players 
+     * @param pieceLayout
+     */
     private void updateAllPossibleMoves(Piece[][] pieceLayout) {
         playerOne.setOfAllMoves.clear();
         playerTwo.setOfAllMoves.clear();
