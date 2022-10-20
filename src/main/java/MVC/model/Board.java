@@ -25,6 +25,12 @@ public class Board implements Observable {
         this.pieceLayout = pieceLayout;
     }
 
+    /**
+     * Changes a piece's x and y position.
+     * @param piece that is going to be changed
+     * @param x coordinate
+     * @param y coordinate
+     */
     public void changePiecePosition(Piece piece, int x, int y){
             piece.xPos = x;
             piece.yPos = y;
@@ -32,6 +38,14 @@ public class Board implements Observable {
             notifyAllObservers();
     }
 
+    /**
+     * Updates the position of the piece in the matrix and also changes the piece's Coordinates.
+     * @param layout a matrix containing pieces
+     * @param piece the piece to be changed
+     * @param newX The new X position
+     * @param newY The new Y position
+     * @return the changed layout
+     */
     public Piece[][] updateLayout(Piece[][] layout, Piece piece, int newX, int newY){
         int oldX = piece.xPos;
         int oldY = piece.yPos;
