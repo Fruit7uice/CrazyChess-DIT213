@@ -55,10 +55,20 @@ public class Board implements Observable {
         return layout;
     }
 
+    /**
+     * Forces a piece to be put at a specified position in the matrix.
+     * @param p is the piece that is forced into the matrix
+     * @param x is the desired column
+     * @param y is the desired row
+     */
     public void placePieceAt(Piece p, int x, int y) {
         this.pieceLayout[y][x] = p;
     }
 
+    /**
+     * Creates a new matrix with the same pieces as the original matrix.
+     * @return the newly created matrix.
+     */
     public Piece[][] getCopiedLayout(){
         Piece[][] copy = new Piece[pieceLayout.length][pieceLayout.length];
         for (int row = 0; row < pieceLayout.length; row++) {
@@ -70,11 +80,19 @@ public class Board implements Observable {
 
     }
 
+    /**
+     * Overwrites the original layout.
+     * @param layout that overwrites.
+     */
     public void setPieceLayout(Piece[][] layout) {
         this.pieceLayout = layout;
         notifyAllObservers();
     }
 
+    /**
+     * Displays the matrix in the Terminal.
+     * @param pieceLayout matrix to be displayed.
+     */
     public static void printMatrix(Piece[][] pieceLayout){
         System.out.println("\n {");
         for (int i = 0; i < pieceLayout.length; i++) {
@@ -92,17 +110,27 @@ public class Board implements Observable {
         System.out.println("}");
     }
 
+    /**
+     * Adds an observer to list.
+     * @param o
+     */
     @Override
     public void addObserver(Observer o) {
         observers.add(o);
     }
 
-
+    /**
+     * Calls for the observers update method.
+     * @param observer to be notified.
+     */
     @Override
     public void notify(Observer observer) {
         observer.update(pieceLayout);
     }
 
+    /**
+     * Loops through list of observers and notifies them.
+     */
     @Override
     public void notifyAllObservers() {
         for (Observer observer : observers) {

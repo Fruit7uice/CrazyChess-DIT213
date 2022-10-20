@@ -181,7 +181,6 @@ public class MoveHandler {
             } else if (isMoveAllowed(newX, newY, piece, copy)) {
                 movePiece(newX, newY, piece, copy);
                 board.setPieceLayout(copy);
-                //updateAllPossibleMoves(copy);
             }
         }
         //********** PLAYER TWO CASES *************
