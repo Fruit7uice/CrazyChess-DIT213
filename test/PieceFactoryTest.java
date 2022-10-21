@@ -58,5 +58,20 @@ public void createBlackRook(){
     assertEquals("Bishop", bishop.getType());
 }
 
+@Test
+    public void createBlackKnight(){
+    PieceFactory.isPlayerOne = false;
+    Piece knight = PieceFactory.createKnight(1,1);
+    assertFalse(knight.isPlayerOne());
+    assertEquals("Knight", knight.getType());
+}
+
+@Test
+    public void createWhiteKnight(){
+    PieceFactory.isPlayerOne = true;
+    Piece knight = PieceFactory.createKnight(1,1);
+    assertTrue(knight.isPlayerOne());
+    assertEquals("Knight", knight.getType());
+}
 
 }
