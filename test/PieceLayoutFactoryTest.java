@@ -9,20 +9,6 @@ import static org.junit.Assert.*;
 public class PieceLayoutFactoryTest {
 
 
-/*    @Test
-    public void testReverse(){
-        PieceLayoutFactory factory = new PieceLayoutFactory();
-        String[][] original = {{"1", "2", "3"},{"4", "5", "6"}};
-        String[][] reversed = {{"4", "5", "6"},{"1", "2", "3"}};
-        String[][] test = factory.reverseLayout(original);
-
-            for (int i = 0; i < reversed.length-1; i++){
-                for (int j = 0; j < reversed[i].length-1; j++){
-                    assertEquals(reversed[i][j], test[i][j]);
-                }
-            }
-    }*/
-
     @Test
     public void testClassic(){
        String[][] test = {{"Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"},
@@ -38,11 +24,13 @@ public class PieceLayoutFactoryTest {
         for(int i = 0; i < 2; i++){
             for(int j = 0; j < created[i].length-1 ; j++){
                 assertEquals(created[i][j].getType(), test[i][j]);
+                assertFalse(created[i][j].isPlayerOne());
             }
         }
         for(int i = created.length-1; i > 5; i--){
             for(int j = 0; j < created[i].length-1 ; j++){
                 assertEquals(created[i][j].getType(), test[i][j]);
+                assertTrue(created[i][j].isPlayerOne());
             }
         }
     }
@@ -58,6 +46,7 @@ public class PieceLayoutFactoryTest {
             for(int j = 0 ; j < layout[i].length;j++){
               bList[index] = layout[i][j].getType();
               index++;
+              assertFalse(layout[i][j].isPlayerOne());
             }
         }
 
@@ -66,6 +55,7 @@ public class PieceLayoutFactoryTest {
             for(int j = 0 ; j < layout[i].length;j++){
                 wList[index] = layout[i][j].getType();
                 index++;
+                assertTrue(layout[i][j].isPlayerOne());
             }
         }
         for(int k = 0; k < bList.length; k++)

@@ -137,7 +137,7 @@ public class PieceLayoutFactory {
     }
 
 
-    public static String[][] reverseLayout(String[][] layout){
+    private static String[][] reverseLayout(String[][] layout){
         int index = 0;
         String[][] reversed = new String[layout.length][layout[0].length];
         for(int i = (layout.length-1) ; i >= 0  ; i--){
