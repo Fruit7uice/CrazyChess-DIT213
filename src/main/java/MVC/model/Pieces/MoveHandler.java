@@ -149,7 +149,7 @@ public class MoveHandler {
     }
 
     /**
-     * Updates both players 
+     * Updates both players
      * @param pieceLayout
      */
     private void updateAllPossibleMoves(Piece[][] pieceLayout) {
@@ -194,8 +194,7 @@ public class MoveHandler {
         }
         //********** PLAYER TWO CASES *************
         else if (!piece.isPlayerOne() && !isPlayerOneTurn) {
-            //System.out.println("MOVE WAS ALLOWED, NOW CHECKING IS KING IS CHECKED.");
-            //System.out.println("BLACKS TURN");
+
             if (deltaX == 2 && Objects.equals(piece.getType(), "King") && castle.isMoveBlackCastle(newX, newY)
                     && castle.isBlackCastleAllowed(playerTwo.king, copy) && !hasPlayerTwoCastled()) {
 
@@ -204,6 +203,7 @@ public class MoveHandler {
                     pawnCapture.isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY)) {
                 pawnCapture.playerTwoPawnCaptures(pieceLayout, piece, newX, newY, board); // Black pawn captures an enemy piece
             } else if (isMoveAllowed(newX, newY, piece, copy)) {
+                //movePiece(oldX, oldY, piece, copy);
                 movePiece(newX, newY, piece, copy);
                 board.setPieceLayout(copy);
             }
