@@ -274,7 +274,8 @@ public class PieceTest {
         //assertTrue(tList.equals(player.playerOneListOfLegalMoves));
         assertTrue(moveHandler.isKingCheckMate(player, king, pieceLayout));
     }
-    /*@Test
+    
+      /*@Test
     public void kingIsNotCheckmate(){
         pieceLayout = new Piece[8][8];
         PieceFactory.isPlayerOne = true;
@@ -286,6 +287,30 @@ public class PieceTest {
         assertFalse(moveHandler.isKingCheckMate(player, king, pieceLayout));
     }*/
 
+
+    //-------------------King Tests---------------------------------
+    @Test
+    public void kingMoveLegal(){
+        pieceLayout = new Piece[8][8];
+        PieceFactory.isPlayerOne = true;
+        king = PieceFactory.createKing(5,5);
+        pieceLayout[5][5] = king;
+        assertTrue(moveHandler.isMoveAllowed(6,6, king, pieceLayout));
+        assertTrue(moveHandler.isMoveAllowed(5,6, king, pieceLayout));
+        assertTrue(moveHandler.isMoveAllowed(4,4, king, pieceLayout));
+
+    }
+    @Test
+    public void kingMoveIllegal(){
+        pieceLayout = new Piece[8][8];
+        PieceFactory.isPlayerOne = true;
+        king = PieceFactory.createKing(5,5);
+        pieceLayout[5][5] = king;
+        assertFalse(moveHandler.isMoveAllowed(5, 7, king, pieceLayout));
+        assertFalse(moveHandler.isMoveAllowed(7, 5, king, pieceLayout));
+        assertFalse(moveHandler.isMoveAllowed(3, 3, king, pieceLayout));
+        assertFalse(moveHandler.isMoveAllowed(3, 5, king, pieceLayout));
+    }
 
 }
 
