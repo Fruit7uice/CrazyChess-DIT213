@@ -46,13 +46,13 @@ public class Board implements Observable {
      * @param newY The new Y position
      * @return the changed layout
      */
-    public Piece[][] updateLayout(Piece[][] layout, Piece piece, int newX, int newY){
+    public void updateLayout(Piece[][] layout, Piece piece, int newX, int newY){
         int oldX = piece.xPos;
         int oldY = piece.yPos;
         changePiecePosition(piece, newX, newY);
         layout[oldY][oldX] = null;
         layout[newY][newX] = piece;
-        return layout;
+        //return layout;
     }
 
     /**

@@ -35,7 +35,7 @@ public class MoveHandler {
         this.playerTwo = new Player(false, this);
 
         this.promotion = new Promotion(board);
-        this.pawnCapture = new PawnCapture(this);
+        this.pawnCapture = new PawnCapture(this, board);
         isPlayerOneTurn = true;
 
         setPlayerKing(playerOne, board.pieceLayout);
@@ -47,35 +47,75 @@ public class MoveHandler {
     /**
      * @param newX        the desired x position
      * @param newY        the desired y position
-     * @param pieceLayout the board that contains the pieces
+     * @param layout the board that contains the pieces
      * @param piece       the current piece we are working on
      * @return true if the piece is allowed to make the desired move
      * @author Jeffrey Wolff
      */
-    public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] pieceLayout) { // Allowed
+    public boolean isMoveAllowed(int newX, int newY, Piece piece, Piece[][] layout) { // Allowed
         // NewX and NewY cannot be outside board.
-        if (newX > MainBoard.WINDOW_WIDTH || newX < 0 || newY > MainBoard.WINDOW_HEIGHT || newY < 0)
+        if (newX > MainBoard.WINDOW_WIDTH || newX < 0 || newY > MainBoard.WINDOW_HEIGHT || newY < 0) {
             return false;
-
+        }
         //******** Checking if this move will result in check ************
-        //System.out.println("Check CHECKER:");
         int oldX = piece.xPos;
         int oldY = piece.yPos;
-        //temporary move
-        movePiece(newX, newY, piece, pieceLayout);
+        Piece[][] copy = board.getCopiedLayout();
 
-        if (isChecked(pieceLayout)) {
+        movePieceInLayout(newX, newY, piece, copy); //temporary move
+
+        if (isChecked(copy)) {
             System.out.println("Move put your king in chess");
-            movePiece(oldX, oldY, piece, pieceLayout); // Undo Move
+            movePieceInLayout(oldX, oldY, piece, layout); // Undo Move
             return false;
         } else {
-            //System.out.println("CheckChecker end");
-            movePiece(oldX, oldY, piece, pieceLayout); // Undo Move
-            return isMoveAllowedHelper(newX, newY, piece, pieceLayout);// Time to see if this move will result in being checked
+            movePieceInLayout(oldX, oldY, piece, copy); // Undo Move
+            //board.changePiecePosition(piece, oldX, oldY);
+            return isMoveAllowedHelper(newX, newY, piece, layout);// Time to see if this move will result in being checked
         }
-        //if (willPutKingInCheck(pieceLayout))
-        // If piece can move here without having to check if it is checked.
     }
+
+
+    /**
+     * A helper function for isMoveAllowed.
+     *
+     * @param newX        New X position in the matrix, which piece wants to move.
+     * @param newY        New Y position in the matrix, which piece wants to move.
+     * @param piece       current piece that has been moved
+     * @param pieceLayout Logical matrix which is worked on
+     * @return if the piece is allowed to go there and if the path is blocked or not.
+     * @author Jeffrey Wolff
+     */
+    private boolean isMoveAllowedHelper(int newX, int newY, Piece piece, Piece[][] pieceLayout) {
+
+        if (piece.legalMove(newX, newY)) {
+            //System.out.println(piece.getType() + " at (" + piece.xPos + "," + piece.yPos + ")" +
+              //      " is allowed to move to (" + newX + "," + newY + ")" );
+            if (isOccupied(newX, newY, pieceLayout)) {
+                // Special case for pawn. Cannot kill going forward.
+                if (Objects.equals(piece.getType(), "Pawn")) {
+                    return false;
+                }
+                if (isOccupiedByEnemy(newX, newY, piece, pieceLayout)) { //is the piece my enemy?
+
+                    if (isPathBlocked(newX, newY, piece, pieceLayout)) {
+                        return false;
+                    } else { //path is blocked
+                        killEnemyPiece();
+                        return true;
+                    }
+                } else { //occupied by teammate
+                    return false;
+                }
+
+            } else { // tile is not occupied
+                return !isPathBlocked(newX, newY, piece, pieceLayout);
+            }
+        } else {
+            return false;
+        }
+    }
+
 
     /**
      * Checks if the king depending on the turn if it is in check.
@@ -92,50 +132,6 @@ public class MoveHandler {
     }
 
     /**
-     * A helper function for isMoveAllowed.
-     *
-     * @param newX        New X position in the matrix, which piece wants to move.
-     * @param newY        New Y position in the matrix, which piece wants to move.
-     * @param piece       current piece that has been moved
-     * @param pieceLayout Logical matrix which is worked on
-     * @return if the piece is allowed to go there and if the path is blocked or not.
-     * @author Jeffrey Wolff
-     */
-    private boolean isMoveAllowedHelper(int newX, int newY, Piece piece, Piece[][] pieceLayout) {
-
-        if (piece.legalMove(newX, newY)) {
-            if (isOccupied(newX, newY, pieceLayout)) {//is the tile not occupied
-                // Special case for pawn. Cannot kill going forward.
-                if (Objects.equals(piece.getType(), "Pawn")) {
-                    //System.out.println("Pawn cannot go forward because is occupied");
-                    return false;
-                }
-                if (isOccupiedByEnemy(newX, newY, piece, pieceLayout)) { //is the piece my enemy?
-
-                    if (isPathBlocked(newX, newY, piece, pieceLayout)) {
-                        return false;
-                    } else { //path is blocked
-                        killEnemyPiece();
-                        return true;
-                    }
-                } else { //occupied by teammate
-                    return false;
-                }
-
-            } else { // tile is not occupied
-                if (isPathBlocked(newX, newY, piece, pieceLayout)) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-            }
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Updates the pieces coordinates if is allowed to make the desired move
      *
      * @param newX  the desired x position
@@ -143,13 +139,14 @@ public class MoveHandler {
      * @param piece Layout the board that contains the pieces
      * @param piece the current piece we are working on
      */
-    public void movePiece(int newX, int newY, Piece piece, Piece[][] pieceLayout) {
+    public void movePieceInLayout(int newX, int newY, Piece piece, Piece[][] pieceLayout) {
         board.updateLayout(pieceLayout, piece, newX, newY);
-        updateAllPossibleMoves(pieceLayout);
+        //updateAllPossibleMoves(pieceLayout);
     }
 
+
     /**
-     * Updates both players
+     * Updates both players possible moves
      * @param pieceLayout
      */
     private void updateAllPossibleMoves(Piece[][] pieceLayout) {
@@ -160,82 +157,76 @@ public class MoveHandler {
         //System.out.println("UPDATED ALL POSSIBLE MOVES");
     }
 
+
     /**
-     * Does vital checks before calling the basic isMoveAllowed. If any of the checks is true, it is handled
-     * elsewhere and  won't call the isMoveAllowed.
+     *
+     *
      *
      * @param newX        New X position in the matrix, which piece wants to move.
      * @param newY        New Y position in the matrix, which piece wants to move.
-     * @param piece       current piece that has been moved.
+     * @param piece       Current piece that has been moved.
      * @param pieceLayout Logical matrix which is worked on.
      * @author Jeffrey Wolff && Johannes Höher
      */
-    public void tryAndCheckMove(int newX, int newY, Piece piece, Piece[][] pieceLayout) {
-        updateAllPossibleMoves(pieceLayout);
+    public void turnHandler(int newX, int newY, Piece piece, Piece[][] pieceLayout) {
         int oldX = piece.xPos;
         int oldY = piece.yPos;
-        //Getting copy of layout to test special cases
-        Piece[][] copy = board.getCopiedLayout();
 
-        int deltaX = Math.abs(piece.xPos - newX);
-
-        //****** PLAYER ONE CASES **************
+        //****** PLAYER ONE **************
         if (piece.isPlayerOne() && isPlayerOneTurn) {
-            if (deltaX == 2 && Objects.equals(piece.getType(), "King") && castle.isMoveWhiteCastle(newX, newY) &&
-                    castle.isWhiteCastleAllowed(playerOne.king, copy) && !hasPlayerOneCastled()) {
-                castle.performWhiteCastle(piece, newX, newY, copy); // also updates piecelayout
-            } else if (Objects.equals(piece.getType(), "Pawn") &&
-                    pawnCapture.isPlayerOnePawnCapture(copy, piece, newX, newY)) {
-                pawnCapture.playerOnePawnCaptures(copy, piece, newX, newY, board); // White pawn captures an enemy piece
-            } else if (isMoveAllowed(newX, newY, piece, copy)) {
-                movePiece(newX, newY, piece, copy);
-                board.setPieceLayout(copy);
-            }
+            tryMove(piece, newX, newY, pieceLayout, playerOne);
         }
-        //********** PLAYER TWO CASES *************
+        //********** PLAYER TWO *************
         else if (!piece.isPlayerOne() && !isPlayerOneTurn) {
-
-            if (deltaX == 2 && Objects.equals(piece.getType(), "King") && castle.isMoveBlackCastle(newX, newY)
-                    && castle.isBlackCastleAllowed(playerTwo.king, copy) && !hasPlayerTwoCastled()) {
-
-                castle.performBlackCastle(piece, newX, newY, copy);
-            } else if (Objects.equals(piece.getType(), "Pawn") &&
-                    pawnCapture.isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY)) {
-                pawnCapture.playerTwoPawnCaptures(pieceLayout, piece, newX, newY, board); // Black pawn captures an enemy piece
-            } else if (isMoveAllowed(newX, newY, piece, copy)) {
-                //movePiece(oldX, oldY, piece, copy);
-                movePiece(newX, newY, piece, copy);
-                board.setPieceLayout(copy);
-            }
+            tryMove(piece, newX, newY, pieceLayout, playerTwo);
         }
 
-        // if not (newX or newY is not equal to my piece current X or current Y)
+        // if a valid move was registered
         if (!(oldX == piece.xPos && oldY == piece.yPos)) { // Piece has moved
             //System.out.println("HAS MOVED");
             if (promotion.isPromotable(piece, newY)) {
                 promotion.promote(piece);
             }
 
-            //*** Check if king is Checked *** UPDATES VALUES
+
+            // Check if king is Checked *** UPDATES VALUES
             if (isPlayerOneTurn) {
-                playerTwo.isChecked = isKingChecked(playerTwo.king, copy);
-                /*
-                if (playerTwo.isChecked && isCheckMate(playerTwo, copy)) {
-                    System.out.println("CheckMate");
-                }
-                 */
+                playerTwo.isChecked = isChecked(pieceLayout);
+
+
             } else {
-                playerOne.isChecked = isKingChecked(playerOne.king, copy);
-                /*
-                if (playerOne.isChecked && isCheckMate(playerOne, copy)) {
-                    System.out.println("CheckMate");
-                }
-                 */
+                playerOne.isChecked = isChecked(pieceLayout);
+
             }
 
+
+            updateAllPossibleMoves(pieceLayout); // Updates list of all possible moves if a move was done
+
             //***** Switch turn *****
-            isPlayerOneTurn = !isPlayerOneTurn;
-            //System.out.println("Player turn: " + isPlayerOneTurn);
+            isPlayerOneTurn = !isPlayerOneTurn; // Switching turn
+        }
+    }
+
+    /**
+     * Will try to move the players piece if it is allowed. Also checks for special moves.
+     * @param piece
+     * @param newX
+     * @param newY
+     * @param pieceLayout
+     * @param player
+     */
+    private void tryMove(Piece piece, int newX, int newY, Piece[][] pieceLayout, Player player) {
+        if (castle.isCastling(player, piece, newX, newY, pieceLayout)) { // is move identified as a Castle and Allowed
+            castle.performCastle(player, piece, newX, newY, pieceLayout);
+        }
+        else if (pawnCapture.isPlayerCapturing(player, piece, newX, newY, pieceLayout)) { // is move identified as a pawn capture and Allowed
+            pawnCapture.performPawnCapture(player, piece, newX, newY, pieceLayout);
+        }
+        else if (isMoveAllowed(newX, newY, piece, pieceLayout)) {
+            movePieceInLayout(newX, newY, piece, pieceLayout);
+            board.setPieceLayout(pieceLayout);
+            System.out.println("Modified pieceLayout:");
+            Board.printMatrix(pieceLayout);
         }
     }
 
@@ -245,12 +236,12 @@ public class MoveHandler {
             int newX = move.getFirst();
             int newY = move.getSecond();
             Piece dummy = new Queen(0, 0, 100, 100, "", "Queen", player.isPlayerOne(), true);
-            movePiece(newX, newY, dummy, layout);
+            movePieceInLayout(newX, newY, dummy, layout);
             if (!isKingChecked(player.king, layout)) {
                 checkMate = false;
                 break;
             }
-            movePiece(0, 0, dummy, layout);
+            movePieceInLayout(0, 0, dummy, layout);
         }
 
         return checkMate;

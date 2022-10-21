@@ -29,8 +29,8 @@ public class SpecialMovesTest {
     Piece[][] pieceLayout = new Piece[8][8];
     Board board = new Board(pieceLayout);
     MoveHandler moveHandler = new MoveHandler(board);
+    PawnCapture pv = new PawnCapture(moveHandler, board);
 
-    PawnCapture pv = new PawnCapture(moveHandler);
     Player playerOne = new Player(true,moveHandler);
     Player playerTwo = new Player(false, moveHandler);
     Castle castle = new Castle(moveHandler,playerOne,playerTwo,board);
@@ -86,8 +86,8 @@ public class SpecialMovesTest {
 
     @Test
     public void castleAfterMoved(){
-        moveHandler.movePiece(5,7,whiteKing,pieceLayout);
-        moveHandler.movePiece(5,6, whiteKing, pieceLayout);
+        moveHandler.movePieceInLayout(5,7,whiteKing,pieceLayout);
+        moveHandler.movePieceInLayout(5,6, whiteKing, pieceLayout);
         assertFalse(castle.isWhiteCastleAllowed(whiteKing,pieceLayout));
     }
 

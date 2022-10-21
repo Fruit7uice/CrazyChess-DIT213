@@ -104,7 +104,7 @@ public class BoardController {
         int newY = (int) calculateNewX(Math.floor(event.getY()) / tileSize); // Index y
         if(onDrag){
             onDrag = false;
-            moveHandler.tryAndCheckMove(newX, newY, piece.getRefPiece(), board.pieceLayout);
+            moveHandler.turnHandler(newX, newY, piece.getRefPiece(), board.pieceLayout);
             //boardGUI.update(board.pieceLayout);
             //boardGUI.afterLogicalBoard();
             //boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
