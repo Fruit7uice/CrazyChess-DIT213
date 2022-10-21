@@ -1,9 +1,8 @@
 package MVC.model.Pieces;
 
 import MVC.model.Tuple;
-import javafx.scene.shape.Rectangle;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashSet;
 
 // remove the javafx stuff.
 
@@ -14,7 +13,7 @@ public abstract class Piece {
     public int height;
 
     private String imagePath;
-    public List<Tuple<Integer, Integer>> listOfLegalMoves = new ArrayList<Tuple<Integer, Integer>>();
+    public HashSet<Tuple<Integer, Integer>> setOfMoves = new HashSet<>();
     private String type;
 
     private boolean isPlayerOne;

@@ -2,7 +2,9 @@
 import MVC.model.Board;
 import MVC.model.PieceFactory;
 import MVC.model.Pieces.*;
+import MVC.model.Player;
 import MVC.model.SpecialMoves.Castle;
+import MVC.model.SpecialMoves.PawnCapture;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -27,8 +29,11 @@ public class SpecialMovesTest {
     Piece[][] pieceLayout = new Piece[8][8];
     Board board = new Board(pieceLayout);
     MoveHandler moveHandler = new MoveHandler(board);
-    */
-/*Castle castle = new Castle();*//*
+
+    PawnCapture pv = new PawnCapture(moveHandler);
+    Player playerOne = new Player(true,moveHandler);
+    Player playerTwo = new Player(false, moveHandler);
+    Castle castle = new Castle(moveHandler,playerOne,playerTwo,board);
 
 
     @Before
@@ -45,43 +50,48 @@ public class SpecialMovesTest {
         pieceLayout[7][4] = whiteKing;
         blackKing = PieceFactory.createKing(4,0);
         pieceLayout[4][0] = blackKing;
+        whitePawn = PieceFactory.createPawn(6,3);
+        pieceLayout[3][6] = whitePawn;
+        blackPawn = PieceFactory.createPawn(1, 4);
+        pieceLayout[4][1] = blackPawn;
     }
 
     @Test
     public void whiteShortCastle(){
         assertFalse(castle.pathCheckedWhiteShortCastle());
         castle.preconditionsWhiteShortCastle(pieceLayout, whiteKing);
-        assertTrue(castle.isCastleAllowed(whiteKing,pieceLayout));
+        assertTrue(castle.isWhiteCastleAllowed(whiteKing,pieceLayout));
     }
 
     @Test
     public void whiteLongCastle(){
         assertFalse(castle.pathCheckedWhiteLongCastle());
         castle.preconditionsWhiteLongCastle(pieceLayout, whiteKing);
-        assertTrue(castle.isCastleAllowed(whiteKing,pieceLayout));
+        assertTrue(castle.isWhiteCastleAllowed(whiteKing,pieceLayout));
     }
 
     @Test
     public void blackShortCastle(){
         assertFalse(castle.pathCheckedBlackShortCastle());
         castle.preconditionsBlackShortCastle(pieceLayout, blackKing);
-        assertTrue(castle.isCastleAllowed(blackKing,pieceLayout));
+        assertTrue(castle.isBlackCastleAllowed(blackKing,pieceLayout));
     }
 
     @Test
     public void blackLongCastle(){
         assertFalse(castle.pathCheckedBlackLongCastle());
         castle.preconditionsBlackLongCastle(pieceLayout, blackKing);
-        assertTrue(castle.isCastleAllowed(blackKing,pieceLayout));
+        assertTrue(castle.isBlackCastleAllowed(blackKing,pieceLayout));
     }
 
     @Test
     public void castleAfterMoved(){
         moveHandler.movePiece(5,7,whiteKing,pieceLayout);
         moveHandler.movePiece(5,6, whiteKing, pieceLayout);
-        assertFalse(castle.isCastleAllowed(whiteKing,pieceLayout));
+        assertFalse(castle.isWhiteCastleAllowed(whiteKing,pieceLayout));
     }
 
+    /*
     // ej klar implementerat än :(
     @Test
     public void castleWhileCheckedPlayerOne(){
@@ -92,7 +102,7 @@ public class SpecialMovesTest {
                     && castle.pathCheckedWhiteShortCastle());
     }
 
-    // ej klar implementerat än :(
+     ej klar implementerat än :(
     @Test
     public void castleWhileCheckedPlayerTwo(){
         Piece queen = PieceFactory.createQueen(4,5);
@@ -112,24 +122,27 @@ public class SpecialMovesTest {
         assertFalse(castle.isCastleAllowed(whiteKing,pieceLayout));
     }
 
+     */
+
     @Test
     public void playerOneHasCastled(){
         PieceFactory.isPlayerOne = true;
         castle.preconditionsWhiteShortCastle(pieceLayout,whiteKing);
         castle.pathCheckedWhiteShortCastle();
-        castle.isCastleAllowed(whiteKing,pieceLayout);
-        castle.performCastle(whiteKing,6,7,pieceLayout,board);
+        castle.isWhiteCastleAllowed(whiteKing,pieceLayout);
+        castle.whiteShortCastle(whiteKing,pieceLayout);
         assertTrue(castle.playerOneHasCastled);
     }
+
     @Test
     public void playerTwoHasCastled(){
         PieceFactory.isPlayerOne = false;
         castle.preconditionsBlackLongCastle(pieceLayout,whiteKing);
         castle.pathCheckedBlackLongCastle();
-        castle.isCastleAllowed(blackKing,pieceLayout);
-        castle.performCastle(blackKing,2,0,pieceLayout,board);
+        castle.isBlackCastleAllowed(blackKing,pieceLayout);
+        castle.blackLongCastle(blackKing,pieceLayout);
         assertTrue(castle.playerTwoHasCastled);
     }
-
+    
 }
 */

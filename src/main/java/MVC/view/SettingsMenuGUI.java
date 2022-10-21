@@ -10,12 +10,16 @@ import java.io.File;
 import java.util.Objects;
 
 public class SettingsMenuGUI extends Application {
+
+    public static Scene savedGame;
     @Override
     public void start(Stage primaryStage) {
+
         try {
             AnchorPane root =
                     FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/SettingsMenuGUI.fxml")));
             primaryStage.setScene(new Scene(root));
+            primaryStage.centerOnScreen();
             primaryStage.show();
             root.requestFocus();
         } catch (Exception e) {
@@ -25,5 +29,9 @@ public class SettingsMenuGUI extends Application {
     }
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public void setSavedGame(Scene scene){
+        savedGame = scene;
     }
 }

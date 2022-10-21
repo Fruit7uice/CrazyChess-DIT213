@@ -18,7 +18,7 @@ public class Tuple<A, B> {
     }
 
     public String toString() {
-        return "Pair[" + fst + "," + snd + "]";
+        return "Tuple[" + fst + "," + snd + "]";
     }
 
     public boolean equals(Object other) {

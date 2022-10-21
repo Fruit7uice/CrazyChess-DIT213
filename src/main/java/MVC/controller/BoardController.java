@@ -2,15 +2,20 @@ package MVC.controller;
 
 import MVC.model.Board;
 import MVC.model.Pieces.MoveHandler;
-
 import MVC.view.BoardGUI;
+import MVC.view.MainBoard;
+import MVC.view.SettingsMenuGUI;
 import MVC.view.WrapperPiece;
+import javafx.event.ActionEvent;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
-import java.util.Objects;
+import java.io.IOException;
 
 import static MVC.view.Tile.tileSize;
 
@@ -58,35 +63,66 @@ public class BoardController {
             g.getChildren().get(i).toFront();
         }
         onDrag = true;
-        int newX = (int) (event.getX() - (tileSize/2));
-        int newY = (int) (event.getY() - (tileSize/2));
+        int newX = (int) calculateNewX(event.getX() - (tileSize/2));
+        int newY = (int) calculateNewY(event.getY() - (tileSize/2));
+
+        boardGUI.drawWrapperPiece(piece, Color.AQUA, Color.AQUA, newX, newY);
 
         //System.out.println("X: " + newX + " Y: " + newY);
-        boardGUI.drawWrapperPiece(piece, Color.AQUA, Color.AQUA, newX, newY);
     }
+
+    double calculateNewX(double x){
+        if (x > MainBoard.WINDOW_WIDTH-tileSize){
+            return MainBoard.WINDOW_WIDTH-tileSize;
+        }
+        else if (x < 0){
+            return 0;
+        }
+        else return x;
+    }
+
+    double calculateNewY(double y){
+        if (y > MainBoard.WINDOW_HEIGHT-tileSize){
+            return MainBoard.WINDOW_HEIGHT-tileSize;
+        }
+        else if (y < 0){
+            return 0;
+        }
+        else return y;
+    }
+
+
+
+
     /**
      * If the release is after a drag event, it will call the MoveHandler class and update the model.
      * @param event is the Mouse Event which is used to get x and y of the mouse position
      * @param piece is the WrapperPiece used to represent the logical Piece
      */
     public void released(MouseEvent event, WrapperPiece piece){
-        int newX = (int) Math.floor(event.getX() / tileSize); // Index x
-        int newY = (int) Math.floor(event.getY() / tileSize); // Index y
+        int newX = (int) Math.floor(calculateNewX(event.getX()) / tileSize); // Index x
+        int newY = (int) calculateNewX(Math.floor(event.getY()) / tileSize); // Index y
         if(onDrag){
             onDrag = false;
             moveHandler.tryAndCheckMove(newX, newY, piece.getRefPiece(), board.pieceLayout);
-            boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
+            //boardGUI.update(board.pieceLayout);
+            //boardGUI.afterLogicalBoard();
+            //boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
         }
 
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
     }
 
-    public void snapPieceToGrid(WrapperPiece piece, int newX, int newY){
-        if (!(piece.getRefPiece().xPos == newX && piece.getRefPiece().yPos == newY)){
-            board.changePiecePosition(piece.getRefPiece(), newX, newY); // Updates board as well
-        }
+    public void settings(ActionEvent e) throws IOException {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
+        stage.centerOnScreen();
+        Scene saved = stage.getScene();
+        SettingsMenuGUI settings = new SettingsMenuGUI();
+        settings.setSavedGame(saved);
+        settings.start(stage);
     }
+
 
 
 

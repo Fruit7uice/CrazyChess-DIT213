@@ -3,9 +3,12 @@ import MVC.model.PieceFactory;
 import MVC.model.Pieces.*;
 
 import MVC.model.Player;
+import MVC.model.Tuple;
 import org.junit.Before;
 import org.junit.Test;
 
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -18,10 +21,11 @@ public class PieceTest {
     Piece rook;
     Piece whitePawn;
     Piece blackPawn;
-    Player player = new Player();
     Piece[][] pieceLayout = new Piece[8][8];
     Board board = new Board(pieceLayout);
     MoveHandler moveHandler = new MoveHandler(board);
+    Player player = new Player(true,moveHandler);
+
 
     @Before
     public void setUp() {
@@ -38,7 +42,6 @@ public class PieceTest {
         pieceLayout[1][3] = blackPawn;
         whitePawn = PieceFactory.createPawn(3,6);
         pieceLayout[6][3] = whitePawn;
-
     }
 
     //-----------------Pawn Tests---------------------------
@@ -133,7 +136,7 @@ public class PieceTest {
         pieceLayout[2][6] = PieceFactory.createPawn(6, 2);
         assertTrue(moveHandler.isMoveAllowed(6, 2, rook, pieceLayout));
     }
-   @Test
+    @Test
     public void rookMovePathBlocked() {
         PieceFactory.isPlayerOne = true;
         pieceLayout[2][6] = PieceFactory.createPawn(6,2);
@@ -176,7 +179,7 @@ public class PieceTest {
         pieceLayout[5][6] = PieceFactory.createPawn(6, 5);
         assertTrue(moveHandler.isMoveAllowed(6, 5, queen, pieceLayout));
     }
-   @Test
+    @Test
     public void queenMovePathBlocked() {
         PieceFactory.isPlayerOne = true;
         pieceLayout[5][6] = PieceFactory.createPawn(6,5);
@@ -243,7 +246,7 @@ public class PieceTest {
         pieceLayout[0][5] = king;
         PieceFactory.isPlayerOne = false;
         pieceLayout[4][5] = PieceFactory.createQueen(5,4);
-        assertTrue(moveHandler.isKingCheck(player, king, pieceLayout));
+        assertTrue(moveHandler.isChecked(pieceLayout));
     }
     @Test
     public void kingIsNotChecked(){
@@ -251,8 +254,42 @@ public class PieceTest {
         king  = PieceFactory.createKing(5,0);
         pieceLayout[0][5] = king;
         pieceLayout[4][5] = PieceFactory.createQueen(5,4);
-        assertFalse(moveHandler.isKingCheck(player, king, pieceLayout));
+        assertFalse(moveHandler.isChecked(pieceLayout));
     }
+/*
+    //-------------------Test king checkmate-------------------------
+    @Test
+    public void kingIsCheckmate(){
+        pieceLayout = new Piece[8][8];
+        PieceFactory.isPlayerOne = true;
+        king  = PieceFactory.createKing(0,0);
+        pieceLayout[0][0] = king;
+        PieceFactory.isPlayerOne = false;
+        pieceLayout[2][0] = PieceFactory.createRook(0,2);
+        pieceLayout[2][2] = PieceFactory.createBishop(2,2);
+        pieceLayout[0][7] = PieceFactory.createRook(7,0);
+        //moveHandler.createListOfLegalMoves(king,pieceLayout);
+        player.calcListOfLegalMovesPlayer(pieceLayout, moveHandler);
+        List<Tuple<Integer, Integer>> tList = king.listOfLegalMoves;
+
+        System.out.println(player.playerOneListOfLegalMoves);
+        System.out.println(tList);
+        //assertTrue(tList.equals(player.playerOneListOfLegalMoves));
+        assertTrue(moveHandler.isKingCheckMate(player, king, pieceLayout));
+    }
+    
+      /*@Test
+    public void kingIsNotCheckmate(){
+        pieceLayout = new Piece[8][8];
+        PieceFactory.isPlayerOne = true;
+        king  = PieceFactory.createKing(0,0);
+        pieceLayout[0][0] = king;
+        PieceFactory.isPlayerOne = false;
+        pieceLayout[2][2] = PieceFactory.createBishop(2,2);
+        pieceLayout[0][7] = PieceFactory.createRook(7,0);
+        assertFalse(moveHandler.isKingCheckMate(player, king, pieceLayout));
+    }*/
+
 
     //-------------------King Tests---------------------------------
     @Test
@@ -277,6 +314,7 @@ public class PieceTest {
         assertFalse(moveHandler.isMoveAllowed(3, 3, king, pieceLayout));
         assertFalse(moveHandler.isMoveAllowed(3, 5, king, pieceLayout));
     }
+
 }
 
 
