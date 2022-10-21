@@ -76,9 +76,9 @@ public class Castle {
      */
     public void whiteLongCastle(Piece king, Piece[][] pieceLayout){ // White king left white rook.
         Piece rook = pieceLayout[7][0];
-        Piece[][] kingChangedLayout = board.updateLayout(pieceLayout, king, 2, 7);
-        Piece[][] castleDoneLayout = board.updateLayout(kingChangedLayout, rook, 3, 7);
-        board.setPieceLayout(castleDoneLayout);
+        board.updateLayout(pieceLayout, king, 2, 7);
+        board.updateLayout(pieceLayout, rook, 3, 7);
+        board.setPieceLayout(pieceLayout);
     }
 
     /**
@@ -88,9 +88,9 @@ public class Castle {
      */
     public void whiteShortCastle(Piece king, Piece[][] pieceLayout){ // White king right white rook.
         Piece rook = pieceLayout[7][7];
-        Piece[][] kingChangedLayout = board.updateLayout(pieceLayout, king, 6, 7);
-        Piece[][] castleDoneLayout = board.updateLayout(kingChangedLayout, rook, 5, 7);
-        board.setPieceLayout(castleDoneLayout);
+        board.updateLayout(pieceLayout, king, 6, 7);
+        board.updateLayout(pieceLayout, rook, 5, 7);
+        board.setPieceLayout(pieceLayout);
     }
 
     /**
@@ -101,9 +101,9 @@ public class Castle {
     public void blackLongCastle(Piece king, Piece[][] pieceLayout){ // Black king left black rook.
         System.out.println("TRYING BLACK LONG CASTLE");
         Piece rook = pieceLayout[0][0];
-        Piece[][] kingChangedLayout = board.updateLayout(pieceLayout, king, 2, 0);
-        Piece[][] castleDoneLayout = board.updateLayout(kingChangedLayout, rook, 3, 0);
-        board.setPieceLayout(castleDoneLayout);
+        board.updateLayout(pieceLayout, king, 2, 0);
+        board.updateLayout(pieceLayout, rook, 3, 0);
+        board.setPieceLayout(pieceLayout);
     }
 
     /**
@@ -113,9 +113,9 @@ public class Castle {
      */
     public void blackShortCastle(Piece king, Piece[][] pieceLayout){ // Black King Right Black Rook
         Piece rook = pieceLayout[0][7];
-        Piece[][] kingChangedLayout = board.updateLayout(pieceLayout, king, 6, 0);
-        Piece[][] castleDoneLayout = board.updateLayout(kingChangedLayout, rook, 5, 0);
-        board.setPieceLayout(castleDoneLayout);
+        board.updateLayout(pieceLayout, king, 6, 0);
+        board.updateLayout(pieceLayout, rook, 5, 0);
+        board.setPieceLayout(pieceLayout);
     }
 
 

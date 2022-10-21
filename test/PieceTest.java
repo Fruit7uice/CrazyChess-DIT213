@@ -3,12 +3,9 @@ import MVC.model.PieceFactory;
 import MVC.model.Pieces.*;
 
 import MVC.model.Player;
-import MVC.model.Tuple;
 import org.junit.Before;
 import org.junit.Test;
 
-
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -105,14 +102,14 @@ public class PieceTest {
     }
     @Test
     public void bishopLegalMoveMadeUpdatePos(){
-        moveHandler.movePiece(0,2, bishop, pieceLayout);
+        moveHandler.movePieceInLayout(0,2, bishop, pieceLayout);
         assertTrue(bishop.xPos == 0 && bishop.yPos == 2);
     }
     @Test
     public void bishopIllegalMoveMadeNotUpdatePos(){
         int startX = bishop.xPos;
         int startY = bishop.yPos;
-        moveHandler.movePiece(0,1, bishop, pieceLayout);
+        moveHandler.movePieceInLayout(0,1, bishop, pieceLayout);
         assertTrue(bishop.xPos == startX && bishop.yPos == startY);
     }
     //-----------------Rook Tests---------------------------
@@ -144,14 +141,14 @@ public class PieceTest {
     }
     @Test
     public void rookLegalMoveMadeUpdatePos(){
-        moveHandler.movePiece(6,0, rook, pieceLayout);
+        moveHandler.movePieceInLayout(6,0, rook, pieceLayout);
         assertTrue(rook.xPos == 6 && rook.yPos == 0);
     }
     @Test
     public void rookIllegalMoveMadeNotUpdatePos(){
         int startX = rook.xPos;
         int startY = rook.yPos;
-        moveHandler.movePiece(5,0, rook, pieceLayout);
+        moveHandler.movePieceInLayout(5,0, rook, pieceLayout);
         assertTrue(rook.xPos == startX && rook.yPos == startY);
     }
     //------------------Queen Tests----------------------------
@@ -187,14 +184,14 @@ public class PieceTest {
     }
     @Test
     public void queenLegalMoveMadeUpdatePos(){
-        moveHandler.movePiece(7,6, queen, pieceLayout);
+        moveHandler.movePieceInLayout(7,6, queen, pieceLayout);
         assertTrue(queen.xPos == 7 && queen.yPos == 6);
     }
     @Test
     public void queenIllegalMoveMadeNotUpdatePos(){
         int startX = queen.xPos;
         int startY = queen.yPos;
-        moveHandler.movePiece(7,4, queen, pieceLayout);
+        moveHandler.movePieceInLayout(7,4, queen, pieceLayout);
         assertTrue(queen.xPos == startX && queen.yPos == startY);
     }
     //------------------Knight Tests----------------------------
@@ -227,14 +224,14 @@ public class PieceTest {
     }
     @Test
     public void knightLegalMoveMadeUpdatePos(){
-        moveHandler.movePiece(3,5, knight, pieceLayout);
+        moveHandler.movePieceInLayout(3,5, knight, pieceLayout);
         assertTrue(knight.xPos == 3 && knight.yPos == 5);
     }
     @Test
     public void knightIllegalMoveMadeNotUpdatePos(){
         int startX = knight.xPos;
         int startY = knight.yPos;
-        moveHandler.movePiece(0,5, knight, pieceLayout);
+        moveHandler.movePieceInLayout(0,5, knight, pieceLayout);
         assertTrue(knight.xPos == startX && knight.yPos == startY);
     }
     //-------------------Test king checked-------------------------
