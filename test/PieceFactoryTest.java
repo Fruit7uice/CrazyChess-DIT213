@@ -90,4 +90,19 @@ public void createBlackRook(){
     assertEquals("Queen", queen.getType());
 }
 
+@Test
+    public void createBlackKing(){
+    PieceFactory.isPlayerOne = false;
+    Piece king = PieceFactory.createKing(1,1);
+    assertFalse(king.isPlayerOne());
+    assertEquals("King", king.getType());
+}
+
+@Test
+    public void createWhiteKing(){
+    PieceFactory.isPlayerOne = true;
+    Piece king = PieceFactory.createKing(1,1);
+    assertTrue(king.isPlayerOne());
+    assertEquals("King", king.getType());
+}
 }
