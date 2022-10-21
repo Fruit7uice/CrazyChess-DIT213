@@ -301,5 +301,25 @@ public class Castle {
     }
 
 
+    public boolean isCastling(Player primaryPlayer, Piece piece, int newX, int newY, Piece[][] layout) {
+        int deltaX = Math.abs(piece.xPos - newX);
+        if (deltaX == 2 && Objects.equals(piece.getType(), "King")){
+            if (primaryPlayer.isPlayerOne()){
+                return (isMoveWhiteCastle(newX, newY) && isWhiteCastleAllowed(primaryPlayer.king, layout));
+            }
+            else {
+                return (isMoveBlackCastle(newX, newY) && isBlackCastleAllowed(playerTwo.king, layout));
+            }
+        }
+        return false;
+    }
 
+    public void performCastle(Player player, Piece piece, int newX, int newY, Piece[][] layout) {
+        if (player.isPlayerOne()){
+            performWhiteCastle(piece, newX, newY, layout);
+        }
+        else{
+            performBlackCastle(piece, newX, newY, layout);
+        }
+    }
 }

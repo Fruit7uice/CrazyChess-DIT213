@@ -171,31 +171,62 @@ public class MoveHandler {
      * @author Jeffrey Wolff && Johannes Höher
      */
     public void tryAndCheckMove(int newX, int newY, Piece piece, Piece[][] pieceLayout) {
-        updateAllPossibleMoves(pieceLayout);
+        //updateAllPossibleMoves(pieceLayout);
         int oldX = piece.xPos;
         int oldY = piece.yPos;
+
+        //****** PLAYER ONE **************
+        if (piece.isPlayerOne() && isPlayerOneTurn) {
+            tryMove(piece, newX, newY, pieceLayout, playerOne);
+        }
+        //********** PLAYER TWO *************
+        else if (!piece.isPlayerOne() && !isPlayerOneTurn) {
+            tryMove(piece, newX, newY, pieceLayout, playerTwo);
+        }
+
+        // if a valid move was registered
+        if (!(oldX == piece.xPos && oldY == piece.yPos)) { // Piece has moved
+            //System.out.println("HAS MOVED");
+            if (promotion.isPromotable(piece, newY)) {
+                promotion.promote(piece);
+            }
+
+            /*
+            // Check if king is Checked *** UPDATES VALUES
+            if (isPlayerOneTurn) {
+                playerTwo.isChecked = isKingChecked(playerTwo.king, copy);
+
+            } else {
+                playerOne.isChecked = isKingChecked(playerOne.king, copy);
+
+            }
+
+             */
+            updateAllPossibleMoves(pieceLayout);
+
+            //***** Switch turn *****
+            isPlayerOneTurn = !isPlayerOneTurn;
+            //System.out.println("Player turn: " + isPlayerOneTurn);
+        }
+    }
+
+    private void tryMove(Piece piece, int newX, int newY, Piece[][] pieceLayout, Player player) {
         //Getting copy of layout to test special cases
         Piece[][] copy = board.getCopiedLayout();
 
-        int deltaX = Math.abs(piece.xPos - newX);
-
-        //****** PLAYER ONE CASES **************
-        if (piece.isPlayerOne() && isPlayerOneTurn) {
-            if (deltaX == 2 && Objects.equals(piece.getType(), "King") && castle.isMoveWhiteCastle(newX, newY) &&
-                    castle.isWhiteCastleAllowed(playerOne.king, copy) && !hasPlayerOneCastled()) {
-                castle.performWhiteCastle(piece, newX, newY, copy); // also updates piecelayout
-            } else if (Objects.equals(piece.getType(), "Pawn") &&
-                    pawnCapture.isPlayerOnePawnCapture(copy, piece, newX, newY)) {
-                pawnCapture.playerOnePawnCaptures(copy, piece, newX, newY, board); // White pawn captures an enemy piece
-            } else if (isMoveAllowed(newX, newY, piece, copy)) {
-                movePiece(newX, newY, piece, copy);
-                board.setPieceLayout(copy);
-            }
+        if (castle.isCastling(player, piece, newX, newY, pieceLayout)) {
+            //castle.performWhiteCastle(piece, newX, newY, copy); // also updates piecelayout
+            castle.performCastle(player, piece, newX, newY, pieceLayout);
+        } else if (Objects.equals(piece.getType(), "Pawn") && pawnCapture.isPlayerOnePawnCapture(copy, piece, newX, newY)) {
+            pawnCapture.playerOnePawnCaptures(copy, piece, newX, newY, board); // White pawn captures an enemy piece
+        } else if (isMoveAllowed(newX, newY, piece, copy)) {
+            movePiece(newX, newY, piece, copy);
+            board.setPieceLayout(copy);
         }
-        //********** PLAYER TWO CASES *************
-        else if (!piece.isPlayerOne() && !isPlayerOneTurn) {
 
-            if (deltaX == 2 && Objects.equals(piece.getType(), "King") && castle.isMoveBlackCastle(newX, newY)
+
+        /*
+        if (deltaX == 2 && Objects.equals(piece.getType(), "King") && castle.isMoveBlackCastle(newX, newY)
                     && castle.isBlackCastleAllowed(playerTwo.king, copy) && !hasPlayerTwoCastled()) {
 
                 castle.performBlackCastle(piece, newX, newY, copy);
@@ -207,36 +238,7 @@ public class MoveHandler {
                 movePiece(newX, newY, piece, copy);
                 board.setPieceLayout(copy);
             }
-        }
-
-        // if not (newX or newY is not equal to my piece current X or current Y)
-        if (!(oldX == piece.xPos && oldY == piece.yPos)) { // Piece has moved
-            //System.out.println("HAS MOVED");
-            if (promotion.isPromotable(piece, newY)) {
-                promotion.promote(piece);
-            }
-
-            //*** Check if king is Checked *** UPDATES VALUES
-            if (isPlayerOneTurn) {
-                playerTwo.isChecked = isKingChecked(playerTwo.king, copy);
-                /*
-                if (playerTwo.isChecked && isCheckMate(playerTwo, copy)) {
-                    System.out.println("CheckMate");
-                }
-                 */
-            } else {
-                playerOne.isChecked = isKingChecked(playerOne.king, copy);
-                /*
-                if (playerOne.isChecked && isCheckMate(playerOne, copy)) {
-                    System.out.println("CheckMate");
-                }
-                 */
-            }
-
-            //***** Switch turn *****
-            isPlayerOneTurn = !isPlayerOneTurn;
-            //System.out.println("Player turn: " + isPlayerOneTurn);
-        }
+         */
     }
 
     boolean isCheckMate(Player player, Piece[][] layout) {
