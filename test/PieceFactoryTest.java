@@ -74,4 +74,5 @@ public void createBlackRook(){
     assertEquals("Knight", knight.getType());
 }
 
+
 }
