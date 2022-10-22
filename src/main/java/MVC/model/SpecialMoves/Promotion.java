@@ -42,21 +42,26 @@ public class Promotion implements Observable {
         if (true){
             PieceFactory.isPlayerOne = p.isPlayerOne();
             Piece queen = PieceFactory.createQueen(p.xPos, p.yPos);
-            board.placePieceAt(queen, p.xPos, p.yPos);
+            Piece[][] layout = board.pieceLayout;
+            board.placePieceAt(queen, p.xPos, p.yPos, layout);
         }
         else if (queenChoice()) {
             Piece queen = PieceFactory.createQueen(p.xPos, p.yPos);
             // update boards piece layout and put newly created piece at the right place.
-            board.placePieceAt(queen, p.xPos,p.yPos);
+            Piece[][] layout = board.pieceLayout;
+            board.placePieceAt(queen, p.xPos, p.yPos, layout);
         } else if (bishopChoice()) {
             Piece bishop = PieceFactory.createBishop(p.xPos, p.yPos);
-            board.placePieceAt(bishop, p.xPos,p.yPos);
+            Piece[][] layout = board.pieceLayout;
+            board.placePieceAt(bishop, p.xPos,p.yPos, layout);
         } else if (knightChoice()) {
             Piece knight = PieceFactory.createKnight(p.xPos, p.yPos);
-            board.placePieceAt(knight, p.xPos,p.yPos);
+            Piece[][] layout = board.pieceLayout;
+            board.placePieceAt(knight, p.xPos,p.yPos, layout);
         } else if (rookChoice()) {
             Piece rook = PieceFactory.createRook(p.xPos, p.yPos);
-            board.placePieceAt(rook, p.xPos,p.yPos);
+            Piece[][] layout = board.pieceLayout;
+            board.placePieceAt(rook, p.xPos,p.yPos, layout);
         }
 
         board.notifyAllObservers();

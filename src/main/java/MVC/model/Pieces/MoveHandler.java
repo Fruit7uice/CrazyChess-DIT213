@@ -62,14 +62,18 @@ public class MoveHandler {
         int oldY = piece.yPos;
         Piece[][] copy = board.getCopiedLayout();
 
-        movePieceInLayout(newX, newY, piece, copy); //temporary move
+        //movePieceInLayout(newX, newY, piece, copy); //temporary move
+        board.changePiecePosWithoutMoving(piece, newX, newY);
+        board.placePieceAt(piece, newX, newY, copy);
 
         if (isChecked(copy)) {
             System.out.println("Move put your king in chess");
-            movePieceInLayout(oldX, oldY, piece, layout); // Undo Move
+            board.changePiecePosWithoutMoving(piece, oldX, oldY);
+            board.placePieceAt(piece, oldX, oldY, copy); // Undo Move
             return false;
         } else {
-            movePieceInLayout(oldX, oldY, piece, copy); // Undo Move
+            board.changePiecePosWithoutMoving(piece, oldX, oldY);
+            board.placePieceAt(piece, oldX, oldY, copy); // Undo Move
             //board.changePiecePosition(piece, oldX, oldY);
             return isMoveAllowedHelper(newX, newY, piece, layout);// Time to see if this move will result in being checked
         }
@@ -187,8 +191,6 @@ public class MoveHandler {
             if (promotion.isPromotable(piece, newY)) {
                 promotion.promote(piece);
             }
-
-
             // Check if king is Checked *** UPDATES VALUES
             if (isPlayerOneTurn) {
                 playerTwo.isChecked = isChecked(pieceLayout);
@@ -198,10 +200,7 @@ public class MoveHandler {
                 playerOne.isChecked = isChecked(pieceLayout);
 
             }
-
-
             updateAllPossibleMoves(pieceLayout); // Updates list of all possible moves if a move was done
-
             //***** Switch turn *****
             isPlayerOneTurn = !isPlayerOneTurn; // Switching turn
         }

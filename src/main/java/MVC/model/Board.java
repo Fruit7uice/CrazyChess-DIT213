@@ -38,6 +38,13 @@ public class Board implements Observable {
             notifyAllObservers();
     }
 
+    public void changePiecePosWithoutMoving(Piece piece, int x, int y){
+        piece.xPos = x;
+        piece.yPos = y;
+        //piece.hasMoved = true;
+        //notifyAllObservers();
+    }
+
     /**
      * Updates the position of the piece in the matrix and also changes the piece's Coordinates.
      * @param layout a matrix containing pieces
@@ -61,8 +68,8 @@ public class Board implements Observable {
      * @param x is the desired column
      * @param y is the desired row
      */
-    public void placePieceAt(Piece p, int x, int y) {
-        this.pieceLayout[y][x] = p;
+    public void placePieceAt(Piece p, int x, int y, Piece[][] layout) {
+        layout[y][x] = p;
     }
 
     /**
