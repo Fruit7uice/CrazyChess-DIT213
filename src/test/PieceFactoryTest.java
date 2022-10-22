@@ -1,9 +1,7 @@
 import MVC.model.PieceFactory;
-import MVC.model.Pieces.*;
-
-import MVC.model.Player;
-import org.junit.Before;
+import MVC.model.Pieces.Piece;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class PieceFactoryTest {
