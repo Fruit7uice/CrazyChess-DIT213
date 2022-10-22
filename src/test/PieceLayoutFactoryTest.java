@@ -1,10 +1,9 @@
-import MVC.model.PieceFactory;
 import MVC.model.PieceLayoutFactory;
-import MVC.model.Pieces.*;
 import MVC.model.Pieces.Piece;
-import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
+
 
 public class PieceLayoutFactoryTest {
 

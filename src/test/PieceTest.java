@@ -1,13 +1,12 @@
 import MVC.model.Board;
 import MVC.model.PieceFactory;
-import MVC.model.Pieces.*;
-
-import MVC.model.Player;
+import MVC.model.Pieces.MoveHandler;
+import MVC.model.Pieces.Piece;
 import org.junit.Before;
 import org.junit.Test;
 
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 
 public class PieceTest {
@@ -21,8 +20,6 @@ public class PieceTest {
     Piece[][] pieceLayout = new Piece[8][8];
     Board board = new Board(pieceLayout);
     MoveHandler moveHandler = new MoveHandler(board);
-    Player player = new Player(true,moveHandler);
-
 
     @Before
     public void setUp() {
@@ -253,40 +250,6 @@ public class PieceTest {
         pieceLayout[4][5] = PieceFactory.createQueen(5,4);
         assertFalse(moveHandler.isChecked(pieceLayout));
     }
-/*
-    //-------------------Test king checkmate-------------------------
-    @Test
-    public void kingIsCheckmate(){
-        pieceLayout = new Piece[8][8];
-        PieceFactory.isPlayerOne = true;
-        king  = PieceFactory.createKing(0,0);
-        pieceLayout[0][0] = king;
-        PieceFactory.isPlayerOne = false;
-        pieceLayout[2][0] = PieceFactory.createRook(0,2);
-        pieceLayout[2][2] = PieceFactory.createBishop(2,2);
-        pieceLayout[0][7] = PieceFactory.createRook(7,0);
-        //moveHandler.createListOfLegalMoves(king,pieceLayout);
-        player.calcListOfLegalMovesPlayer(pieceLayout, moveHandler);
-        List<Tuple<Integer, Integer>> tList = king.listOfLegalMoves;
-
-        System.out.println(player.playerOneListOfLegalMoves);
-        System.out.println(tList);
-        //assertTrue(tList.equals(player.playerOneListOfLegalMoves));
-        assertTrue(moveHandler.isKingCheckMate(player, king, pieceLayout));
-    }
-    
-      /*@Test
-    public void kingIsNotCheckmate(){
-        pieceLayout = new Piece[8][8];
-        PieceFactory.isPlayerOne = true;
-        king  = PieceFactory.createKing(0,0);
-        pieceLayout[0][0] = king;
-        PieceFactory.isPlayerOne = false;
-        pieceLayout[2][2] = PieceFactory.createBishop(2,2);
-        pieceLayout[0][7] = PieceFactory.createRook(7,0);
-        assertFalse(moveHandler.isKingCheckMate(player, king, pieceLayout));
-    }*/
-
 
     //-------------------King Tests---------------------------------
     @Test
