@@ -39,6 +39,7 @@ public class Player {
                 }
             }
         }
+      //  System.out.println(possibleMoves);
         return possibleMoves;
     }
 

@@ -45,10 +45,10 @@ public class MoveHandler {
 
 
     /**
-     * @param newX        the desired x position
-     * @param newY        the desired y position
+     * @param newX   the desired x position
+     * @param newY   the desired y position
      * @param layout the board that contains the pieces
-     * @param piece       the current piece we are working on
+     * @param piece  the current piece we are working on
      * @return true if the piece is allowed to make the desired move
      * @author Jeffrey Wolff
      */
@@ -90,7 +90,7 @@ public class MoveHandler {
 
         if (piece.legalMove(newX, newY)) {
             //System.out.println(piece.getType() + " at (" + piece.xPos + "," + piece.yPos + ")" +
-              //      " is allowed to move to (" + newX + "," + newY + ")" );
+            //      " is allowed to move to (" + newX + "," + newY + ")" );
             if (isOccupied(newX, newY, pieceLayout)) {
                 // Special case for pawn. Cannot kill going forward.
                 if (Objects.equals(piece.getType(), "Pawn")) {
@@ -119,6 +119,7 @@ public class MoveHandler {
 
     /**
      * Checks if the king depending on the turn if it is in check.
+     *
      * @param layout to check.
      * @return a true if the king in question is checked, false if not.
      * @author Jeffrey Wolff
@@ -147,6 +148,7 @@ public class MoveHandler {
 
     /**
      * Updates both players possible moves
+     *
      * @param pieceLayout
      */
     private void updateAllPossibleMoves(Piece[][] pieceLayout) {
@@ -159,9 +161,6 @@ public class MoveHandler {
 
 
     /**
-     *
-     *
-     *
      * @param newX        New X position in the matrix, which piece wants to move.
      * @param newY        New Y position in the matrix, which piece wants to move.
      * @param piece       Current piece that has been moved.
@@ -209,6 +208,7 @@ public class MoveHandler {
 
     /**
      * Will try to move the players piece if it is allowed. Also checks for special moves.
+     *
      * @param piece
      * @param newX
      * @param newY
@@ -218,11 +218,9 @@ public class MoveHandler {
     private void tryMove(Piece piece, int newX, int newY, Piece[][] pieceLayout, Player player) {
         if (castle.isCastling(player, piece, newX, newY, pieceLayout)) { // is move identified as a Castle and Allowed
             castle.performCastle(player, piece, newX, newY, pieceLayout);
-        }
-        else if (pawnCapture.isPlayerCapturing(player, piece, newX, newY, pieceLayout)) { // is move identified as a pawn capture and Allowed
+        } else if (pawnCapture.isPlayerCapturing(player, piece, newX, newY, pieceLayout)) { // is move identified as a pawn capture and Allowed
             pawnCapture.performPawnCapture(player, piece, newX, newY, pieceLayout);
-        }
-        else if (isMoveAllowed(newX, newY, piece, pieceLayout)) {
+        } else if (isMoveAllowed(newX, newY, piece, pieceLayout)) {
             movePieceInLayout(newX, newY, piece, pieceLayout);
             board.setPieceLayout(pieceLayout);
             System.out.println("Modified pieceLayout:");
@@ -250,13 +248,13 @@ public class MoveHandler {
     /**
      * Goes through the opponents list of possible moves and returns wheaten any of those
      * moves resulting coordinates is equal to the kings Position.
+     *
      * @param king
      * @param layout
      * @return
      */
     private boolean isKingChecked(Piece king, Piece[][] layout) {
         Tuple<Integer, Integer> kingPos = new Tuple<>(king.xPos, king.yPos);
-
         if (king.isPlayerOne()) {
             HashSet<Tuple<Integer, Integer>> possibleMoves = playerTwo.updatePlayerPossibleMoves(layout);
             return possibleMoves.contains(kingPos);
@@ -264,6 +262,7 @@ public class MoveHandler {
             HashSet<Tuple<Integer, Integer>> possibleMoves = playerOne.updatePlayerPossibleMoves(layout);
             return possibleMoves.contains(kingPos);
         }
+
     }
 
 
@@ -291,6 +290,7 @@ public class MoveHandler {
 
     /**
      * Updates the piece's set of possible moves
+     *
      * @param piece       the current piece
      * @param pieceLayout the current board
      */
