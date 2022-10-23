@@ -20,7 +20,6 @@ public class PieceTest {
     Piece whitePawn;
     Piece blackPawn;
     Piece[][] pieceLayout = new Piece[8][8];
-    Player player;
     Board board;
     MoveHandler moveHandler;
     @Before
@@ -41,7 +40,6 @@ public class PieceTest {
         pieceLayout[3][4] = wKing;
         whitePawn = PieceFactory.createPawn(3,6);
         pieceLayout[6][3] = whitePawn;
-
         PieceFactory.isPlayerOne = false;
         blackPawn = PieceFactory.createPawn(3,1);
         pieceLayout[1][3] = blackPawn;
@@ -256,15 +254,8 @@ public class PieceTest {
         pieceLayout[0][5] = wKing;
         PieceFactory.isPlayerOne = false;
         pieceLayout[4][5] = PieceFactory.createQueen(5,4);
-
-        player = new Player(true, moveHandler);
-        player.updatePlayerPossibleMoves(pieceLayout);
-        Player player2 = new Player(false, moveHandler);
-        player2.updatePlayerPossibleMoves(pieceLayout);
-        System.out.println(player2.setOfAllMoves);
-        System.out.println(player.setOfAllMoves);
-
-        moveHandler.turnHandler(5,0, queen, pieceLayout);
+        Player player = new Player(true, moveHandler);
+        moveHandler.playerOne.king = wKing;
         assertTrue(moveHandler.isChecked(pieceLayout));
     }
     @Test

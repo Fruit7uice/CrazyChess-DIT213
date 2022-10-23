@@ -22,8 +22,8 @@ public class MoveHandler {
     boolean isPlayerOneTurn;
     Board board;
 
-    Player playerOne;
-    Player playerTwo;
+    public Player playerOne;
+    public Player playerTwo;
 
     Castle castle;
     PawnCapture pawnCapture;
