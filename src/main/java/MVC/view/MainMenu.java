@@ -12,10 +12,9 @@ import javafx.scene.Scene;
 import java.util.Objects;
 
 /**
- * Class that
+ * This class runs the main menu which is connected to the fxml
+ * document MainMenu.fxml, made in SceneBuilder.
  */
-
-
 public class MainMenu extends Application {
     @Override
     public void start(Stage primaryStage) {

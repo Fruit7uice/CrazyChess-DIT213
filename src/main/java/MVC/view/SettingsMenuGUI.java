@@ -14,6 +14,7 @@ import java.util.Objects;
  * document SettingsMenuGui.fxml
  * field savedGame makes saves the current game and makes it possible
  * to return to the same game.
+ * Made in SceneBuilder.
  */
 public class SettingsMenuGUI extends Application {
 

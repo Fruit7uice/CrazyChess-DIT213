@@ -20,6 +20,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class initializes and runs the main board.
+ * The field isCrazy makes a different board if the player chose
+ * to play the game mode "CrazyChess".
+ */
 public class MainBoard extends Application {
     public static int WINDOW_WIDTH = 800;
     public static int WINDOW_HEIGHT = 800;
@@ -57,14 +62,16 @@ public class MainBoard extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        board.notifyAllObservers(); // Notify observers and update their state, which in return notifies gui.
+        // Notify observers and update their state, which in return notifies gui.
+        board.notifyAllObservers();
         stage.setTitle("CrazyChess");
 
-        BorderPane bigContainer = new BorderPane(); // Keeping all object in a layout
-        //bigContainer.setMinSize(stage.getMinWidth(), stage.getMinHeight());
+        // Keeping all object in a layout
+        BorderPane bigContainer = new BorderPane();
 
         // Create and Align Pane
-        GridPane boardContainer = new GridPane(); // keeps board pane
+        // keeps board pane
+        GridPane boardContainer = new GridPane();
         boardContainer.setAlignment(Pos.CENTER);
         // Add board to StackPane
         boardContainer.getChildren().add(boardPane);
