@@ -3,6 +3,10 @@ package MVC.view;
 import MVC.model.Pieces.Piece;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * This class gives a visual representation of the actual
+ * piece on the board
+ */
 public class WrapperPiece extends Rectangle {
 
     Piece refPiece;
