@@ -32,26 +32,54 @@ public class Castle {
         this.board = board;
     }
 
+    /**
+     * This method returns true if the move of the king is of white-long-castle nature, that is the new coordinates
+     * of the king matches towards newX & newY.
+     * @param newX 2
+     * @param newY 7
+     */
 
     public boolean isWhiteLongCastle(int newX, int newY){
         return (newX == 2 && newY == 7);
     }
+
+    /**
+     * This method returns true if the move of the king is of white-short-castle nature, that is the new coordinates
+     * of the king matches towards newX & newY.
+     * @param newX 6
+     * @param newY 7
+     */
+
     public boolean isWhiteShortCastle(int newX, int newY){
         return (newX == 6 && newY == 7);
     }
+
+    /**
+     * This method returns true if the move of the king is of black-long-castle nature, that is the new coordinates
+     * of the king matches towards newX & newY.
+     * @param newX 2
+     * @param newY 0
+     */
     public boolean isBlackLongCastle(int newX, int newY){
         return (newX == 2 && newY == 0);
     }
+
+    /**
+     * This method returns true if the move of the king is of black-short-castle nature, that is the new coordinates
+     * of the king matches towards newX & newY.
+     * @param newX 6
+     * @param newY 0
+     */
     public boolean isBlackShortCastle(int newX, int newY){
         return (newX == 6 && newY == 0);
     }
 
 
     /**
-     * Method that checks so that the preconditions are satisfied before the King can castle with the rook.
+     * Method that checks so that the preconditions are satisfied before the playerTwo-King can castle with the rook.
      * @param king King
      * @param pieceLayout
-     * @return
+     * @return True if the preconditions are satisfied.
      */
 
     public boolean isBlackCastleAllowed(Piece king, Piece[][] pieceLayout){
@@ -59,6 +87,15 @@ public class Castle {
             return true;
         }else return preconditionsBlackShortCastle(pieceLayout, king) && !pathCheckedBlackShortCastle();
     }
+
+
+    /**
+     * Method that checks so that the preconditions are satisfied before the playerOne-King can castle with the rook.
+     * @param king King
+     * @param pieceLayout
+     * @return True if the preconditions are satisfied.
+     */
+
 
     public boolean isWhiteCastleAllowed(Piece king, Piece[][] pieceLayout){
         if(preconditionsWhiteLongCastle(pieceLayout, king) && !pathCheckedWhiteLongCastle()){
@@ -270,6 +307,16 @@ public class Castle {
         return (isWhiteLongCastle(newX, newY) || isWhiteShortCastle(newX, newY));
     }
 
+
+    /**
+     * Method that takes all the aspects into consideration regarding the castle. Are the pre-conditions satisfied?
+     * If so, then complete the white castle-move.
+     * @param piece The piece of king
+     * @param pieceLayout The board of pieces
+     **/
+
+
+
     public void performWhiteCastle(Piece piece, int newX, int newY, Piece[][] pieceLayout) {
         if (isWhiteLongCastle(newX, newY)) {
             whiteLongCastle(piece, pieceLayout); // Switch the positions of the king and the rook.
@@ -279,6 +326,8 @@ public class Castle {
             playerOneHasCastled = true;
         }
     }
+
+
     public boolean isMoveBlackCastle(int newX, int newY) {
         return (isBlackLongCastle(newX, newY) || isBlackShortCastle(newX, newY));
     }
@@ -286,7 +335,7 @@ public class Castle {
 
     /**
      * Method that takes all the aspects into consideration regarding the castle. Are the pre-conditions satisfied?
-     * If so, then complete the castle-move.
+     * If so, then complete the black castle-move.
      * @param piece The piece of king
      * @param pieceLayout The board of pieces
      **/
@@ -313,6 +362,16 @@ public class Castle {
         }
         return false;
     }
+
+
+    /**
+     * Method that is able to perform the different castles.
+     * @param player
+     * @param piece
+     * @param newX
+     * @param newY
+     * @param layout
+     */
 
     public void performCastle(Player player, Piece piece, int newX, int newY, Piece[][] layout) {
         if (player.isPlayerOne()){
