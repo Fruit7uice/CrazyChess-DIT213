@@ -37,6 +37,9 @@ as this will launch the main-menu of the game.
 ----
 **Rules for Chess**
 
+
+
+
 **Basic chess rules**
 In chess, each player takes turns to make a single move. Players cannot choose to skip a turn - they must move a piece. Each chess piece moves in a specific way, and must be moved according to its legal movement.
 
@@ -44,6 +47,10 @@ Except for the knight, which may jump over pieces, pieces cannot move through pi
 
 How to capture pieces
 If a piece lands on a space with an opponent’s piece, that piece is captured and removed from the board. Pieces cannot be placed on the same square as a piece of the same colour. When a piece captures an opponent’s piece, it must finish its current move action and end the player’s turn.
+
+
+
+
 
 **How to capture pieces**
 
@@ -54,4 +61,6 @@ If a piece lands on a space with an opponent’s piece, that piece is captured a
 
 
 
-Source: How to play chess for beginners: setup, moves and basic rules explained - Matt Jarvis Nov. 9, 2021
+
+
+_Source: How to play chess for beginners: setup, moves and basic rules explained - Matt Jarvis Nov. 9, 2021_
