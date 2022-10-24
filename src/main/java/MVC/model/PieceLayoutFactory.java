@@ -1,11 +1,14 @@
 package MVC.model;
 
-import MVC.model.PieceFactory;
 import MVC.model.Pieces.Piece;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * This class creates the layout for the different game modes,
+ * Classic and Crazy chess. 
+ */
 public class PieceLayoutFactory {
 
     private static String[][] playerOneLayout = {
