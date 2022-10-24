@@ -6,6 +6,9 @@ import MVC.model.Pieces.Piece;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class performs operations that have to do with the logical board.
+ */
 
 public class Board implements Observable {
     public static int BOARD_SIZE = 800;
@@ -41,8 +44,6 @@ public class Board implements Observable {
     public void changePiecePosWithoutMoving(Piece piece, int x, int y){
         piece.xPos = x;
         piece.yPos = y;
-        //piece.hasMoved = true;
-        //notifyAllObservers();
     }
 
     /**
@@ -59,7 +60,6 @@ public class Board implements Observable {
         changePiecePosition(piece, newX, newY);
         layout[oldY][oldX] = null;
         layout[newY][newX] = piece;
-        //return layout;
     }
 
     /**
@@ -143,7 +143,6 @@ public class Board implements Observable {
         for (Observer observer : observers) {
             observer.update(pieceLayout);
         }
-        //System.out.println("All observers has been notified");
     }
 
 }
