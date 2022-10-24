@@ -3,15 +3,17 @@ package MVC.model.Pieces;
 import MVC.model.strategies.HorizontalStrategy;
 import MVC.model.strategies.VerticalStrategy;
 /**
+ * This class holds the logic for the Bishop and how it is supposed to be represented in our application.
  * @author Alva Johansson
  */
+
 public class Rook extends Piece{
     public Rook(int xPos, int yPos, int width, int height, String imagePath, String type, boolean isPlayerOne, boolean hasMoved) {
         super(xPos, yPos, width, height, imagePath, type, isPlayerOne, hasMoved);
     }
 
     /**
-     * returns a boolean if a move is legal or not
+     * This method makes sure that the Rook only moves according to its strategy.
      * @param newX the desired x position
      * @param newY the desired y position
      * @return returns a boolean if a move is legal or not

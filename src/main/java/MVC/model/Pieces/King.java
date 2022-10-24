@@ -4,6 +4,11 @@ import MVC.model.strategies.DiagonalStrategy;
 import MVC.model.strategies.HorizontalStrategy;
 import MVC.model.strategies.VerticalStrategy;
 
+
+/**
+ * This class holds the logic for the King and how it is supposed to be represented in our application.
+ */
+
 public class King extends Piece {
 
     public King(int xPos, int yPos, int width, int height, String imagePath, String type, boolean isPlayerOne, boolean hasMoved) {
@@ -12,6 +17,7 @@ public class King extends Piece {
 
 
     /**
+     * This method makes sure that the King only moves according to its strategies.
      * @param newX the desired x position
      * @param newY the desired y position
      * @return returns a boolean if a move is legal or not

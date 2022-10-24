@@ -2,13 +2,18 @@ package MVC.model.Pieces;
 
 import MVC.model.strategies.KnightStrategy;
 
+
+/**
+ * This class holds the logic for the Knight and how it is supposed to be represented in our application.
+ */
+
 public class Knight extends Piece{
     public Knight(int xPos, int yPos, int width, int height, String imagePath, String type, boolean isPlayerOne, boolean hasMoved) {
         super(xPos, yPos, width, height, imagePath, type, isPlayerOne, hasMoved);
     }
 
     /**
-     * returns a boolean if a move is legal or not
+     * This method makes sure that the Knight only moves according to its strategy.
      * @param newX the desired x position
      * @param newY the desired y position
      * @return returns a boolean if a move is legal or not

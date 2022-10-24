@@ -13,6 +13,7 @@ import java.util.Objects;
 
 
 /**
+ * The class of MoveHandler handles the logic revolving around the movement of the pieces.
  * @author Alva Johansson
  * @author Jeffrey Wolff
  * @author Johannes Höher
@@ -45,6 +46,8 @@ public class MoveHandler {
 
 
     /**
+     * This method makes sure that the move of the piece obey the criteria that have been
+     * declared for the given move.
      * @param newX   the desired x position
      * @param newY   the desired y position
      * @param layout the board that contains the pieces
@@ -62,7 +65,6 @@ public class MoveHandler {
         int oldY = piece.yPos;
         Piece[][] copy = board.getCopiedLayout();
 
-        //movePieceInLayout(newX, newY, piece, copy); //temporary move
         board.changePiecePosWithoutMoving(piece, newX, newY);
         board.placePieceAt(piece, newX, newY, copy);
 
@@ -105,7 +107,6 @@ public class MoveHandler {
                     if (isPathBlocked(newX, newY, piece, pieceLayout)) {
                         return false;
                     } else { //path is blocked
-                        killEnemyPiece();
                         return true;
                     }
                 } else { //occupied by teammate
@@ -266,6 +267,7 @@ public class MoveHandler {
 
 
     /**
+     * Method that checks if the tile is occupied or not.
      * @param newX        the desired x position
      * @param newY        the desired y position
      * @param pieceLayout the board that contains the pieces
@@ -276,6 +278,7 @@ public class MoveHandler {
     }
 
     /**
+     * Method that checks if the tile is occupied by an enemy.
      * @param newX        the desired x position
      * @param newY        the desired y position
      * @param pieceLayout the board that the pieces are on??
@@ -307,6 +310,8 @@ public class MoveHandler {
     }
 
     /**
+     * Method that makes sure that no piece is able to "jump" over another piece.
+     * The only piece that is allowed to do so is the Knight.
      * @param newX        the desired x position
      * @param newY        the desired y position
      * @param pieceLayout the pieceLayout that contains the pieces
@@ -330,6 +335,7 @@ public class MoveHandler {
     }
 
     /**
+     * Helper-function for isPathBlocked, checks the horizontal direction.
      * @param newX        the desired x position
      * @param piece       the current piece
      * @param pieceLayout the current pieceLayout that holds the pieces
@@ -361,6 +367,7 @@ public class MoveHandler {
     }
 
     /**
+     * Helper-function for isPathBlocked, checks the vertical direction.
      * @param newY        the desired x position
      * @param piece       the current piece
      * @param pieceLayout the current board that holds the pieces
@@ -390,6 +397,7 @@ public class MoveHandler {
     }
 
     /**
+     * Helper-function for isPathBlocked, checks the diagonal direction.
      * @param newX        the desired x position
      * @param piece       the current piece
      * @param pieceLayout the current board that holds the pieces
@@ -441,27 +449,16 @@ public class MoveHandler {
 
 
     /**
-     * removes an enemy piece from the board when it's killed
+     * This method sets a king to a player.
+     * @param player The player in question, either player one or two.
+     * @param piecesLayout The matrix of pieces
      */
-    public void killEnemyPiece() {
-        //TODO implement this maybe move it to another class
-    }
-
-    public boolean hasPlayerOneCastled() {
-        return castle.playerOneHasCastled;
-    }
-
-    public boolean hasPlayerTwoCastled() {
-        return castle.playerTwoHasCastled;
-    }
-
 
     public void setPlayerKing(Player player, Piece[][] piecesLayout) {
         for (int row = 0; row < piecesLayout.length; row++) {
             for (int col = 0; col < piecesLayout[row].length; col++) {
                 if (piecesLayout[row][col] != null) {
                     Piece p = piecesLayout[row][col];
-                    //System.out.println(p);
                     if (p.getType().equals("King") && p.isPlayerOne() == player.isPlayerOne()) {
                         player.king = p;
                     }

@@ -4,12 +4,18 @@ import MVC.model.strategies.DiagonalStrategy;
 import MVC.model.strategies.HorizontalStrategy;
 import MVC.model.strategies.VerticalStrategy;
 
+
+/**
+ * This class holds the logic for the Queen and how it is supposed to be represented in our application.
+ */
+
 public class Queen extends Piece{
     public Queen(int xPos, int yPos, int width, int height, String imagePath, String type, boolean isPlayerOne, boolean hasMoved) {
         super(xPos, yPos, width, height, imagePath, type, isPlayerOne, hasMoved);
     }
 
     /**
+     * This method makes sure that the Queen only moves according to its strategies.
      * @param newX the desired x position
      * @param newY the desired y position
      * @return returns a boolean if a move is legal or not
