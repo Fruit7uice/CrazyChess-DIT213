@@ -4,7 +4,11 @@ import MVC.model.Tuple;
 
 import java.util.HashSet;
 
-// remove the javafx stuff.
+/**
+ * The class of Piece is a superclass to all the classes that extends it. It acts as a template for how
+ * the subclasses should be defined.
+ */
+
 
 public abstract class Piece {
     public int xPos;

@@ -3,7 +3,7 @@ package MVC.model.Pieces;
 import MVC.model.strategies.DiagonalStrategy;
 
 /**
- * This class holds the logic for the bishop and how it is supposed to be represented in our application.
+ * This class holds the logic for the Bishop and how it is supposed to be represented in our application.
  */
 
 public class Bishop extends Piece{
@@ -13,6 +13,7 @@ public class Bishop extends Piece{
     }
 
     /**
+     * This method makes sure that the Bishop only moves according to its strategy.
      * @param newX the desired x position
      * @param newY the desired y position
      * @return returns a boolean if a move is legal or not
