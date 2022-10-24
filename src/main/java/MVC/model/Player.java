@@ -5,6 +5,11 @@ import MVC.model.Pieces.Piece;
 
 import java.util.HashSet;
 
+/**
+ * This class represents a player and the player's list of
+ * possible moves.
+ * The field king is needed to check which player the king belongs to.
+ */
 public class Player {
 
     private boolean isPlayerOne;
@@ -39,7 +44,6 @@ public class Player {
                 }
             }
         }
-      //  System.out.println(possibleMoves);
         return possibleMoves;
     }
 
