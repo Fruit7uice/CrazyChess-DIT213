@@ -19,6 +19,11 @@ import java.io.IOException;
 
 import static MVC.view.Tile.tileSize;
 
+/**
+ * The class of BoardController acts on events that matches against the input revolving around the graphical board
+ * and then affecting the logical board.
+ */
+
 public class BoardController {
     BoardGUI boardGUI;
     Board board;
@@ -120,9 +125,6 @@ public class BoardController {
         if(onDrag){
             onDrag = false;
             moveHandler.turnHandler(newX, newY, piece.getRefPiece(), board.pieceLayout);
-            //boardGUI.update(board.pieceLayout);
-            //boardGUI.afterLogicalBoard();
-            //boardGUI.drawWrapperAfterIndex(piece, Color.GREEN, Color.rgb(1,1,1,0));
         }
 
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
