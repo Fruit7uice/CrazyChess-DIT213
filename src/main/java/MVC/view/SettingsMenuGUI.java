@@ -5,8 +5,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-
-import java.io.File;
 import java.util.Objects;
 
 /**

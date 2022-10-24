@@ -1,6 +1,5 @@
 package MVC.view;
 
-import MVC.model.Observable;
 import MVC.model.Pieces.Piece;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

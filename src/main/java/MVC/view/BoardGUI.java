@@ -3,20 +3,19 @@ package MVC.view;
 import MVC.controller.BoardController;
 import MVC.model.Observer;
 import MVC.model.Pieces.Piece;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 
-import java.io.IOException;
-import java.util.Objects;
-
 import static MVC.view.Tile.tileSize;
 
-
+/**
+ * This class visually represents the board with coloured tiles and pieces.
+ * The class also updates the visual representation of what happens on the
+ * logical board.
+ */
 public class BoardGUI implements Observer {
 
     private BoardController ctrl;
@@ -82,8 +81,6 @@ public class BoardGUI implements Observer {
         //printMatrix();
     }
 
-
-
     public void drawWrapperPiece(WrapperPiece piece, Color color, Color stroke, int x, int y){
         String path = piece.getRefPiece().getImagePath();
         if(path != "pathOne"){
@@ -124,7 +121,6 @@ public class BoardGUI implements Observer {
         this.ctrl = ctrl;
     }
 
-
     private void addTilesToPane(Tile[][] tiles){
         Group tileGroup = new Group();
         for (int i = 0; i < tiles.length; i++) {
@@ -148,7 +144,6 @@ public class BoardGUI implements Observer {
         appPane.getChildren().add(pieceGroup);
     }
 
-
     /**
      * Updates the pane by first clearing its children and then adding new ones.
      */
@@ -157,7 +152,6 @@ public class BoardGUI implements Observer {
         addTilesToPane(boardTiles); // adds Matrix of tiles to pane
         addPiecesToPane(mirroredLayout); // Adds Matrix of WrapperPieces to pane
     }
-
 
     /**
      * Creates a Graphical copy of the logical Chess Piece layout
@@ -179,9 +173,6 @@ public class BoardGUI implements Observer {
             }
         }
     }
-    public void afterLogicalBoard() {
-        //update(pieceLayout);
-    }
 
     /**
      * Updates the view when called.
@@ -193,8 +184,6 @@ public class BoardGUI implements Observer {
         this.pieceLayout = pieceLayout;
         createNewGraphicalPieceLayout();
         updatePane();
-        //System.out.println("Pane has been updated");
-        //drawBoard();
         drawPieces();
     }
 
