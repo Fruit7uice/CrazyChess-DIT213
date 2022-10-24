@@ -10,6 +10,18 @@ package MVC.model.strategies;
  */
 public class PawnStrategy implements IMoveStrategy {
 
+
+    /**
+     * Method that holds the logic for the move strategy that revolves around the Pawn.
+     * @param startX
+     * @param startY
+     * @param newX
+     * @param newY
+     * @param hasMoved
+     * @param isPlayerOne
+     * @return
+     */
+
     public static boolean move(int startX, int startY, int newX, int newY, boolean hasMoved, boolean isPlayerOne) {
         if (isPlayerOne){
             if (!hasMoved) {// not finished, move logic to another class.
