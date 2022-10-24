@@ -6,6 +6,9 @@ import javafx.scene.shape.Rectangle;
 
 import static MVC.model.Board.BOARD_SIZE;
 
+/**
+ * This class represents how a tile is represented on the board
+ */
 public class Tile extends Rectangle {
 
     public static int tileSize = BOARD_SIZE/8;
