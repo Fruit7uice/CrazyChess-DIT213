@@ -9,6 +9,12 @@ import javafx.scene.Scene;
 import java.io.File;
 import java.util.Objects;
 
+/**
+ * This class runs the settings menu which is connected to the fxml
+ * document SettingsMenuGui.fxml
+ * field savedGame makes saves the current game and makes it possible
+ * to return to the same game.
+ */
 public class SettingsMenuGUI extends Application {
 
     public static Scene savedGame;
