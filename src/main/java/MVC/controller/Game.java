@@ -1,8 +1,6 @@
 package MVC.controller;
 
 import MVC.view.MainMenu;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 
 /**
