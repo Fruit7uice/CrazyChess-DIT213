@@ -2,6 +2,10 @@ package MVC.model.Pieces;
 
 import MVC.model.strategies.DiagonalStrategy;
 
+/**
+ * This class holds the logic for the bishop and how it is supposed to be represented in our application.
+ */
+
 public class Bishop extends Piece{
     public Bishop(int xPos, int yPos, int width, int height, String imagePath, String type, boolean isPlayerOne, boolean hasMoved) {
         super(xPos, yPos, width, height, imagePath, type, isPlayerOne, hasMoved
