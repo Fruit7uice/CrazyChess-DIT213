@@ -1,6 +1,5 @@
 import MVC.model.Board;
 import MVC.model.PieceFactory;
-import MVC.model.Pieces.Knight;
 import MVC.model.Pieces.MoveHandler;
 import MVC.model.Pieces.Piece;
 import MVC.model.Player;
@@ -14,15 +13,6 @@ import java.util.HashSet;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-
-
-/**
- * Gör om testerna då flera fel hittades. Kolla så att testerna går igenom
- * även efter ändringar gjorts i modellen. saknas: tryAndCheckMove i movehandler
- * och lite if else satser. I Castle saknas hälften, se klass Castle.
- */
-
-
 public class SpecialMovesTest {
     Piece leftWhiteRook;
     Piece rightWhiteRook;
@@ -30,8 +20,6 @@ public class SpecialMovesTest {
     Piece rightBlackRook;
     Piece whiteKing;
     Piece blackKing;
-    Piece whitePawn;
-    Piece blackPawn;
     Piece[][] pieceLayout = new Piece[8][8];
     Board board = new Board(pieceLayout);
     MoveHandler moveHandler = new MoveHandler(board);

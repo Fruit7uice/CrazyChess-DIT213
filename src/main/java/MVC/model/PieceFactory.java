@@ -4,7 +4,7 @@ import MVC.model.Pieces.*;
 
 /**
  * This class represents a factory for the pieces of which
- * all of the pieces are created by this factory. 
+ * all of the pieces are created by this factory.
  */
 public class PieceFactory {
 
