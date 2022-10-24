@@ -53,7 +53,7 @@ public class PieceTest {
     }
 
     //-----------------Pawn Tests---------------------------
-/*    @Test
+    @Test
     public void whitePawnMoveLegal() {
         assertTrue(moveHandler.isMoveAllowed(3,4,whitePawn,pieceLayout));
         assertTrue(moveHandler.isMoveAllowed(3,5,whitePawn,pieceLayout));
@@ -66,7 +66,7 @@ public class PieceTest {
         assertTrue(moveHandler.isMoveAllowed(3,2,blackTestPawn,pieceLayout));
         assertTrue(moveHandler.isMoveAllowed(3,3,blackTestPawn,pieceLayout));
     }
-*/
+
     @Test
     public void blackPawnMoveIllegal() {
         PieceFactory.isPlayerOne = false;
