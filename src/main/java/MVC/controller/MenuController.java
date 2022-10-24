@@ -23,6 +23,12 @@ import java.util.Objects;
 public class MenuController {
 
 
+    /**
+     * The method that matches against the input equivalent to pressing the startCrazy-button.
+     * @param e Pressing the startCrazy-button
+     * @throws IOException
+     */
+
     public void startCrazy(ActionEvent e) throws Exception {
         MainBoard.isCrazy = true;
         MainBoard game = new MainBoard();
@@ -30,6 +36,12 @@ public class MenuController {
         stage.close();
         game.runAfterLaunch(stage);
     }
+
+    /**
+     * The method that matches against the input equivalent to pressing the startClassic-button.
+     * @param e Pressing the startClassic-button
+     * @throws IOException
+     */
 
 
     public void startClassic(ActionEvent e) throws Exception {
@@ -40,6 +52,12 @@ public class MenuController {
         game.runAfterLaunch(stage);
 
     }
+
+    /**
+     * The method that matches against the input equivalent to pressing the exitGame-button.
+     * @param e Pressing the exitGame-button
+     * @throws IOException
+     */
 
 
     public void exitGame(ActionEvent e) throws IOException {
