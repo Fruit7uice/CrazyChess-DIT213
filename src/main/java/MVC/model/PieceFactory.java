@@ -2,6 +2,10 @@ package MVC.model;
 
 import MVC.model.Pieces.*;
 
+/**
+ * This class represents a factory for the pieces of which
+ * all of the pieces are created by this factory. 
+ */
 public class PieceFactory {
 
     public static boolean isPlayerOne;

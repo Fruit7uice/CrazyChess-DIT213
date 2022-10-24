@@ -7,7 +7,7 @@ import java.util.Random;
 
 /**
  * This class creates the layout for the different game modes,
- * Classic and Crazy chess. 
+ * Classic and Crazy chess.
  */
 public class PieceLayoutFactory {
 
