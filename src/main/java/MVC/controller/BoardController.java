@@ -71,6 +71,14 @@ public class BoardController {
         //System.out.println("X: " + newX + " Y: " + newY);
     }
 
+
+    /**
+     * Based on the input of the user, this method makes sure that object is not allowed to be dragged out of
+     * the board x-wise.
+     * @param x The location of object.
+     * @return The location of the object if it is within the board.
+     */
+
     double calculateNewX(double x){
         if (x > MainBoard.WINDOW_WIDTH-tileSize){
             return MainBoard.WINDOW_WIDTH-tileSize;
@@ -80,6 +88,13 @@ public class BoardController {
         }
         else return x;
     }
+
+    /**
+     * Based on the input of the user, this method makes sure that object is not allowed to be dragged out of
+     * the board y-wise.
+     * @param y The location of object.
+     * @return The location of the object if it is within the board.
+     */
 
     double calculateNewY(double y){
         if (y > MainBoard.WINDOW_HEIGHT-tileSize){
@@ -112,6 +127,13 @@ public class BoardController {
 
         printMatrix(); // Here for testing and making sure the model is updated when gui sends an event
     }
+
+
+    /**
+     * Method that listens to the event that matches against the button of the settings-wheel.
+     * @param e The event of the pressing the settings-button.
+     * @throws IOException
+     */
 
     public void settings(ActionEvent e) throws IOException {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
