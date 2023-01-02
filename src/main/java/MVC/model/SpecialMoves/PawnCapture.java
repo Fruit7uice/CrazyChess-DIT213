@@ -66,7 +66,7 @@ public class PawnCapture {
      */
     public void playerOnePawnCaptures(Piece[][] pieceLayout, Piece piece, int newX, int newY){
         if(isPlayerOnePawnCapture(pieceLayout, piece, newX, newY)){
-            board.updateLayout(pieceLayout, piece, newX, newY);
+            board.updateLayout(pieceLayout, piece, newX, newY, true);
             board.setPieceLayout(pieceLayout);
         }
     }
@@ -80,7 +80,7 @@ public class PawnCapture {
      */
     public void playerTwoPawnCaptures(Piece[][] pieceLayout, Piece piece, int newX, int newY){
         if (isPlayerTwoPawnCapture(pieceLayout, piece, newX, newY)) {
-            board.updateLayout(pieceLayout, piece, newX, newY);
+            board.updateLayout(pieceLayout, piece, newX, newY, true);
             board.setPieceLayout(pieceLayout);
         }
     }

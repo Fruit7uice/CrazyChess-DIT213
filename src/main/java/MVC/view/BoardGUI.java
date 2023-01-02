@@ -168,6 +168,10 @@ public class BoardGUI implements Observer {
                     wPiece.setOnMouseClicked(event -> ctrl.pressed(wPiece));
                     wPiece.setOnMouseDragged(event -> ctrl.dragged(event, wPiece));
                     wPiece.setOnMouseReleased(event -> ctrl.released(event, wPiece));
+
+
+
+
                     mirroredLayout[row][col] = wPiece;
                 }
             }

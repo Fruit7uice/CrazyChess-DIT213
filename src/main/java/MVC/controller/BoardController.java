@@ -119,7 +119,7 @@ public class BoardController {
      * @param event is the Mouse Event which is used to get x and y of the mouse position
      * @param piece is the WrapperPiece used to represent the logical Piece
      */
-    public void released(MouseEvent event, WrapperPiece piece){
+    public void released(MouseEvent event, WrapperPiece piece)   {
         int newX = (int) Math.floor(calculateNewX(event.getX()) / tileSize); // Index x
         int newY = (int) calculateNewX(Math.floor(event.getY()) / tileSize); // Index y
         if(onDrag){

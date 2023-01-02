@@ -34,6 +34,7 @@ public abstract class Piece {
         this.hasMoved = hasMoved;
     }
 
+
     public String getImagePath() {
         return imagePath;
 

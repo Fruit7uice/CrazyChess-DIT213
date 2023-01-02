@@ -111,10 +111,10 @@ public class Castle {
      * @param king
      * @param pieceLayout
      */
-    public void whiteLongCastle(Piece king, Piece[][] pieceLayout){ // White king left white rook.
+    public void whiteLongCastle(Piece king, Piece[][] pieceLayout)   { // White king left white rook.
         Piece rook = pieceLayout[7][0];
-        board.updateLayout(pieceLayout, king, 2, 7);
-        board.updateLayout(pieceLayout, rook, 3, 7);
+        board.updateLayout(pieceLayout, king, 2, 7, false);
+        board.updateLayout(pieceLayout, rook, 3, 7, false);
         board.setPieceLayout(pieceLayout);
     }
 
@@ -123,10 +123,10 @@ public class Castle {
      * @param king
      * @param pieceLayout
      */
-    public void whiteShortCastle(Piece king, Piece[][] pieceLayout){ // White king right white rook.
+    public void whiteShortCastle(Piece king, Piece[][] pieceLayout)   { // White king right white rook.
         Piece rook = pieceLayout[7][7];
-        board.updateLayout(pieceLayout, king, 6, 7);
-        board.updateLayout(pieceLayout, rook, 5, 7);
+        board.updateLayout(pieceLayout, king, 6, 7, false);
+        board.updateLayout(pieceLayout, rook, 5, 7, false);
         board.setPieceLayout(pieceLayout);
     }
 
@@ -135,11 +135,11 @@ public class Castle {
      * @param king
      * @param pieceLayout
      */
-    public void blackLongCastle(Piece king, Piece[][] pieceLayout){ // Black king left black rook.
+    public void blackLongCastle(Piece king, Piece[][] pieceLayout)   { // Black king left black rook.
         System.out.println("TRYING BLACK LONG CASTLE");
         Piece rook = pieceLayout[0][0];
-        board.updateLayout(pieceLayout, king, 2, 0);
-        board.updateLayout(pieceLayout, rook, 3, 0);
+        board.updateLayout(pieceLayout, king, 2, 0, false);
+        board.updateLayout(pieceLayout, rook, 3, 0, false);
         board.setPieceLayout(pieceLayout);
     }
 
@@ -148,10 +148,10 @@ public class Castle {
      * @param king
      * @param pieceLayout
      */
-    public void blackShortCastle(Piece king, Piece[][] pieceLayout){ // Black King Right Black Rook
+    public void blackShortCastle(Piece king, Piece[][] pieceLayout)   { // Black King Right Black Rook
         Piece rook = pieceLayout[0][7];
-        board.updateLayout(pieceLayout, king, 6, 0);
-        board.updateLayout(pieceLayout, rook, 5, 0);
+        board.updateLayout(pieceLayout, king, 6, 0, false);
+        board.updateLayout(pieceLayout, rook, 5, 0, false);
         board.setPieceLayout(pieceLayout);
     }
 
@@ -317,7 +317,7 @@ public class Castle {
 
 
 
-    public void performWhiteCastle(Piece piece, int newX, int newY, Piece[][] pieceLayout) {
+    public void performWhiteCastle(Piece piece, int newX, int newY, Piece[][] pieceLayout)   {
         if (isWhiteLongCastle(newX, newY)) {
             whiteLongCastle(piece, pieceLayout); // Switch the positions of the king and the rook.
             playerOneHasCastled = true;
@@ -339,7 +339,7 @@ public class Castle {
      * @param piece The piece of king
      * @param pieceLayout The board of pieces
      **/
-    public void performBlackCastle(Piece piece, int newX, int newY, Piece[][] pieceLayout) {
+    public void performBlackCastle(Piece piece, int newX, int newY, Piece[][] pieceLayout)   {
         if (isBlackLongCastle(newX, newY)) {
             blackLongCastle(piece, pieceLayout); // Switch the positions of the king and the rook.
             playerTwoHasCastled = true;
@@ -373,7 +373,7 @@ public class Castle {
      * @param layout
      */
 
-    public void performCastle(Player player, Piece piece, int newX, int newY, Piece[][] layout) {
+    public void performCastle(Player player, Piece piece, int newX, int newY, Piece[][] layout)   {
         if (player.isPlayerOne()){
             performWhiteCastle(piece, newX, newY, layout);
         }

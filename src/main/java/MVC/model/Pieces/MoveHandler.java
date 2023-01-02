@@ -1,5 +1,6 @@
 package MVC.model.Pieces;
 
+import MVC.model.MoveLogger;
 import MVC.view.MainBoard;
 import MVC.model.Player;
 import MVC.model.Board;
@@ -20,24 +21,26 @@ import java.util.Objects;
  */
 public class MoveHandler {
 
-    boolean isPlayerOneTurn;
-    Board board;
 
+    Board board;
+    
     public Player playerOne;
     public Player playerTwo;
+    private final MoveLogger log;
 
     Castle castle;
     PawnCapture pawnCapture;
     Promotion promotion;
 
     public MoveHandler(Board board) {
+        this.log = new MoveLogger();
         this.board = board;
         this.playerOne = new Player(true, this);
         this.playerTwo = new Player(false, this);
 
         this.promotion = new Promotion(board);
         this.pawnCapture = new PawnCapture(this, board);
-        isPlayerOneTurn = true;
+        board.isPlayerOneTurn = true;
 
         setPlayerKing(playerOne, board.pieceLayout);
         setPlayerKing(playerTwo, board.pieceLayout);
@@ -80,6 +83,7 @@ public class MoveHandler {
             return isMoveAllowedHelper(newX, newY, piece, layout);// Time to see if this move will result in being checked
         }
     }
+
 
 
     /**
@@ -130,7 +134,7 @@ public class MoveHandler {
      * @author Jeffrey Wolff
      */
     public boolean isChecked(Piece[][] layout) { // ändra denna till private eller flytta till separat klass.
-        if (isPlayerOneTurn) {
+        if (board.isPlayerOneTurn) {
             return isKingChecked(playerOne.king, layout);
         } else {
             return isKingChecked(playerTwo.king, layout);
@@ -145,8 +149,8 @@ public class MoveHandler {
      * @param piece Layout the board that contains the pieces
      * @param piece the current piece we are working on
      */
-    public void movePieceInLayout(int newX, int newY, Piece piece, Piece[][] pieceLayout) {
-        board.updateLayout(pieceLayout, piece, newX, newY);
+    public void movePieceInLayout(int newX, int newY, Piece piece, Piece[][] pieceLayout)   {
+        board.updateLayout(pieceLayout, piece, newX, newY, true);
         //updateAllPossibleMoves(pieceLayout);
     }
 
@@ -172,16 +176,16 @@ public class MoveHandler {
      * @param pieceLayout Logical matrix which is worked on.
      * @author Jeffrey Wolff && Johannes Höher
      */
-    public void turnHandler(int newX, int newY, Piece piece, Piece[][] pieceLayout) {
+    public void turnHandler(int newX, int newY, Piece piece, Piece[][] pieceLayout)   {
         int oldX = piece.xPos;
         int oldY = piece.yPos;
 
         //****** PLAYER ONE **************
-        if (piece.isPlayerOne() && isPlayerOneTurn) {
+        if (piece.isPlayerOne() && board.isPlayerOneTurn) {
             tryMove(piece, newX, newY, pieceLayout, playerOne);
         }
         //********** PLAYER TWO *************
-        else if (!piece.isPlayerOne() && !isPlayerOneTurn) {
+        else if (!piece.isPlayerOne() && !board.isPlayerOneTurn) {
             tryMove(piece, newX, newY, pieceLayout, playerTwo);
         }
 
@@ -192,7 +196,7 @@ public class MoveHandler {
                 promotion.promote(piece);
             }
             // Check if king is Checked *** UPDATES VALUES
-            if (isPlayerOneTurn) {
+            if (board.isPlayerOneTurn) {
                 playerTwo.isChecked = isChecked(pieceLayout);
 
 
@@ -202,7 +206,7 @@ public class MoveHandler {
             }
             updateAllPossibleMoves(pieceLayout); // Updates list of all possible moves if a move was done
             //***** Switch turn *****
-            isPlayerOneTurn = !isPlayerOneTurn; // Switching turn
+            board.isPlayerOneTurn = !board.isPlayerOneTurn; // Switching turn
         }
     }
 
@@ -215,7 +219,7 @@ public class MoveHandler {
      * @param pieceLayout
      * @param player
      */
-    private void tryMove(Piece piece, int newX, int newY, Piece[][] pieceLayout, Player player) {
+    private void tryMove(Piece piece, int newX, int newY, Piece[][] pieceLayout, Player player)   {
         if (castle.isCastling(player, piece, newX, newY, pieceLayout)) { // is move identified as a Castle and Allowed
             castle.performCastle(player, piece, newX, newY, pieceLayout);
         } else if (pawnCapture.isPlayerCapturing(player, piece, newX, newY, pieceLayout)) { // is move identified as a pawn capture and Allowed
@@ -228,7 +232,7 @@ public class MoveHandler {
         }
     }
 
-    boolean isCheckMate(Player player, Piece[][] layout) {
+    boolean isCheckMate(Player player, Piece[][] layout)   {
         boolean checkMate = true;
         for (Tuple<Integer, Integer> move : player.setOfAllMoves) {
             int newX = move.getFirst();

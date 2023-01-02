@@ -50,6 +50,10 @@ public class SettingsMenuController {
         game.runAfterLaunch(stage);
     }
 
+    public void undoMove(ActionEvent e) throws Exception {
+
+    }
+
     /**
      * The method that matches against the input equivalent to pressing the closeSettingsMenu-button.
      * @param e Pressing the closeSettingsMenu-button

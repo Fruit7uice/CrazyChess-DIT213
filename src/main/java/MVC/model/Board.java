@@ -11,6 +11,8 @@ import java.util.List;
  */
 
 public class Board implements Observable {
+    public boolean isPlayerOneTurn;
+    MoveLogger log = new MoveLogger();
     public static int BOARD_SIZE = 800;
     List<Observer> observers = new ArrayList<>();
     public Piece[][] pieceLayout;
@@ -34,7 +36,7 @@ public class Board implements Observable {
      * @param x coordinate
      * @param y coordinate
      */
-    public void changePiecePosition(Piece piece, int x, int y){
+    public void changePiecePosition(Piece piece, int x, int y)   {
             piece.xPos = x;
             piece.yPos = y;
             piece.hasMoved = true;
@@ -46,6 +48,19 @@ public class Board implements Observable {
         piece.yPos = y;
     }
 
+    public void undoMove()   {
+        if(!log.checkLogEmpty()) {
+            LogEntry entry = log.getLastMove();
+            Piece p = entry.piece;
+            int oldX = entry.x;
+            int oldY = entry.y;
+            updateLayout(pieceLayout, p, oldX, oldY, false);
+            p.hasMoved = entry.hasMoved;
+            isPlayerOneTurn = !isPlayerOneTurn;
+        }
+    }
+
+
     /**
      * Updates the position of the piece in the matrix and also changes the piece's Coordinates.
      * @param layout a matrix containing pieces
@@ -54,12 +69,18 @@ public class Board implements Observable {
      * @param newY The new Y position
      * @return the changed layout
      */
-    public void updateLayout(Piece[][] layout, Piece piece, int newX, int newY){
+    public void updateLayout(Piece[][] layout, Piece piece, int newX, int newY, boolean logMove)   {
         int oldX = piece.xPos;
         int oldY = piece.yPos;
+        boolean firstMove = piece.hasMoved;
         changePiecePosition(piece, newX, newY);
         layout[oldY][oldX] = null;
         layout[newY][newX] = piece;
+        if(logMove){
+            log.logMove(piece, oldX, oldY, firstMove);
+            log.logMove(piece, newX, newY, piece.hasMoved);
+        }
+
     }
 
     /**

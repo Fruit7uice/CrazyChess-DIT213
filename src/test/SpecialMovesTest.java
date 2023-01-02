@@ -30,7 +30,7 @@ public class SpecialMovesTest {
     Castle castle = new Castle(moveHandler,playerOne,playerTwo,board);
 
     @Test
-    public void whiteShortCastle(){
+    public void whiteShortCastle()   {
         PieceFactory.isPlayerOne = true;
         whiteKing = PieceFactory.createKing(4,7);
         rightWhiteRook = PieceFactory.createRook(7,7);
@@ -48,7 +48,7 @@ public class SpecialMovesTest {
     }
 
     @Test
-    public void whiteLongCastle(){
+    public void whiteLongCastle()   {
         PieceFactory.isPlayerOne = true;
         whiteKing = PieceFactory.createKing(4,7);
         leftWhiteRook = PieceFactory.createRook(0,7);
@@ -64,7 +64,7 @@ public class SpecialMovesTest {
     }
 
     @Test
-    public void blackShortCastle(){
+    public void blackShortCastle()   {
         PieceFactory.isPlayerOne = false;
         blackKing = PieceFactory.createKing(4,0);
         leftBlackRook = PieceFactory.createRook(7,0);
@@ -80,7 +80,7 @@ public class SpecialMovesTest {
     }
 
     @Test
-    public void blackLongCastle(){
+    public void blackLongCastle()   {
         PieceFactory.isPlayerOne = false;
         blackKing = PieceFactory.createKing(4,0);
         rightBlackRook = PieceFactory.createRook(0,0);
@@ -96,7 +96,7 @@ public class SpecialMovesTest {
     }
 
     @Test
-    public void whiteCastleAfterMoved(){
+    public void whiteCastleAfterMoved()   {
         PieceFactory.isPlayerOne = true;
         whiteKing = PieceFactory.createKing(4,7);
         leftWhiteRook = PieceFactory.createRook(0,7);

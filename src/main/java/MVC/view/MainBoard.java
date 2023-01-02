@@ -26,7 +26,7 @@ public class MainBoard extends Application {
 
     public static boolean isCrazy;
 
-    Board board;
+    public Board board;
     BoardController controller;
     BoardGUI gui;
     private Pane boardPane;
@@ -85,9 +85,18 @@ public class MainBoard extends Application {
         // Setting Settings button background
         setSettingsBtnBackground(settingsBtn, "/images/SettingsGearWhite.png");
 
+        Button undoBtn = new Button();
+        undoBtn.setOnAction(event -> board.undoMove());
+
+        undoBtn.setMinWidth(75);
+        undoBtn.setMinHeight(75);
+        // Setting Settings button background
+        setSettingsBtnBackground(undoBtn, "/images/UndoButtonWhite.png");
+
         // Add stuff to big Container
         bigContainer.setCenter(boardContainer);
         bigContainer.setRight(settingsBtn);
+        bigContainer.setLeft(undoBtn);
 
         bigContainer.setPrefSize(800, 800);
         Scene scene = new Scene(bigContainer);

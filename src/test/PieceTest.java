@@ -112,7 +112,7 @@ public class PieceTest {
         assertFalse(moveHandler.isMoveAllowed(3, 3, bishop, pieceLayout));
     }
     @Test
-    public void bishopLegalMoveMadeUpdatePos(){
+    public void bishopLegalMoveMadeUpdatePos()   {
         moveHandler.movePieceInLayout(0,2, bishop, pieceLayout);
         assertTrue(bishop.xPos == 0 && bishop.yPos == 2);
     }
@@ -151,7 +151,7 @@ public class PieceTest {
         assertFalse(moveHandler.isMoveAllowed(6, 3, rook, pieceLayout));
     }
     @Test
-    public void rookLegalMoveMadeUpdatePos(){
+    public void rookLegalMoveMadeUpdatePos()   {
         moveHandler.movePieceInLayout(6,0, rook, pieceLayout);
         assertTrue(rook.xPos == 6 && rook.yPos == 0);
     }
@@ -194,7 +194,7 @@ public class PieceTest {
         assertFalse(moveHandler.isMoveAllowed(6, 4, queen, pieceLayout));
     }
     @Test
-    public void queenLegalMoveMadeUpdatePos(){
+    public void queenLegalMoveMadeUpdatePos()   {
         moveHandler.movePieceInLayout(7,6, queen, pieceLayout);
         assertTrue(queen.xPos == 7 && queen.yPos == 6);
     }
@@ -234,7 +234,7 @@ public class PieceTest {
         assertTrue(moveHandler.isMoveAllowed(1, 5, knight, pieceLayout));
     }
     @Test
-    public void knightLegalMoveMadeUpdatePos(){
+    public void knightLegalMoveMadeUpdatePos()   {
         moveHandler.movePieceInLayout(3,5, knight, pieceLayout);
         assertTrue(knight.xPos == 3 && knight.yPos == 5);
     }
