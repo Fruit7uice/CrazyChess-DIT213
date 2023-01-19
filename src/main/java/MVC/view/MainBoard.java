@@ -83,7 +83,7 @@ public class MainBoard extends Application {
         settingsBtn.setMinWidth(75);
         settingsBtn.setMinHeight(75);
         // Setting Settings button background
-        setSettingsBtnBackground(settingsBtn, "/images/SettingsGearWhite.png");
+        setButtonBackground(settingsBtn, "/images/SettingsGearWhite.png");
 
         Button undoBtn = new Button();
         undoBtn.setOnAction(event -> board.undoMove());
@@ -91,7 +91,7 @@ public class MainBoard extends Application {
         undoBtn.setMinWidth(75);
         undoBtn.setMinHeight(75);
         // Setting Settings button background
-        setSettingsBtnBackground(undoBtn, "/images/UndoButtonWhite.png");
+        setButtonBackground(undoBtn, "/images/UndoButtonWhite.png");
 
         // Add stuff to big Container
         bigContainer.setCenter(boardContainer);
@@ -123,7 +123,7 @@ public class MainBoard extends Application {
         pane.setBackground(bGround);
     }
 
-    private void setSettingsBtnBackground(Button settingsBtn, String path) {
+    private void setButtonBackground(Button settingsBtn, String path) {
         Image bgImage = new Image(String.valueOf(getClass().getResource(path)));
         BackgroundImage backgroundImage = new BackgroundImage(
                 bgImage,

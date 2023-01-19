@@ -48,6 +48,9 @@ public class Board implements Observable {
         piece.yPos = y;
     }
 
+    /**
+     * Checks if any moves have been made and then undoes the last one
+     */
     public void undoMove()   {
         if(!log.checkLogEmpty()) {
             LogEntry entry = log.getLastMove();
