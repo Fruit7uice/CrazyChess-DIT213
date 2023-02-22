@@ -27,12 +27,14 @@ public void getLastMove(){
     int newY = pawn.yPos+2;
     boolean firstMove = pawn.hasMoved;
     log.logMove(pawn, oldX, oldY, newX, newY, firstMove);
+    int length = log.getLogLength();
     LogEntry entry = log.getLastMove();
     assertEquals(entry.oldX, oldX);
     assertEquals(entry.oldY, oldY);
     assertEquals(entry.newX, newX);
     assertEquals(entry.newY, newY);
     assertEquals(entry.hasMoved, firstMove);
+    assertEquals(log.getLogLength(), length-1);
 
 
 }
