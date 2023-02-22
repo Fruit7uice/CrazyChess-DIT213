@@ -55,8 +55,8 @@ public class Board implements Observable {
         if(!log.checkLogEmpty()) {
             LogEntry entry = log.getLastMove();
             Piece p = entry.piece;
-            int oldX = entry.x;
-            int oldY = entry.y;
+            int oldX = entry.oldX;
+            int oldY = entry.oldY;
             updateLayout(pieceLayout, p, oldX, oldY, false);
             p.hasMoved = entry.hasMoved;
             isPlayerOneTurn = !isPlayerOneTurn;
@@ -70,18 +70,19 @@ public class Board implements Observable {
      * @param piece the piece to be changed
      * @param newX The new X position
      * @param newY The new Y position
+     * @param logMove boolean value that states if the move should be logged or not
      * @return the changed layout
      */
     public void updateLayout(Piece[][] layout, Piece piece, int newX, int newY, boolean logMove)   {
         int oldX = piece.xPos;
         int oldY = piece.yPos;
-        boolean firstMove = piece.hasMoved;
+        boolean preMove = piece.hasMoved;
         changePiecePosition(piece, newX, newY);
         layout[oldY][oldX] = null;
         layout[newY][newX] = piece;
         if(logMove){
-            log.logMove(piece, oldX, oldY, firstMove);
-            log.logMove(piece, newX, newY, piece.hasMoved);
+            log.logMove(piece, oldX, oldY, newX, newY, preMove);
+
         }
 
     }
